@@ -1,6 +1,4 @@
 # This file does not like to be adapterized!
-# TODO:
-#	perl subpackage
 #
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
@@ -9,7 +7,7 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.76
-Release:	0.5
+Release:	0.6
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -83,17 +81,17 @@ Development files for gaim-remote library.
 %description devel -l pl
 Pliki programistyczne biblioteki gaim-remote.
 
-#%package perl
-#Summary:	Gaim files for perl scripts
-#Summary(pl):	Pliki Gaim dla skryptów perl
-#Group:		Development/Libraries
-#Requires:	%{name} = %{epoch}:%{version}
+%package perl
+Summary:	Gaim files for perl scripts
+Summary(pl):	Pliki Gaim dla skryptów perl
+Group:		Development/Libraries
+Requires:	%{name} = %{epoch}:%{version}
 
-#%description perl
-#Gaim files for perl scripts.
+%description perl
+Gaim files for perl scripts.
 
-#%description perl -l pl
-#Pliki Gaim dla skryptów perl.
+%description perl -l pl
+Pliki Gaim dla skryptów perl.
 
 %prep
 %setup -q 
@@ -110,7 +108,8 @@ rm -f configure.in
 %{__automake}
 %configure \
 	--disable-nas \
-	--enable-nss=no
+	--enable-nss=no \
+	--with-perl-lib=vendor
 
 %{__make}
 
@@ -156,5 +155,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/gaim-remote/remote-socket.h
 %{_includedir}/gaim-remote/remote.h
 
-#%files perl
-#%defattr(644,root,root,755)
+%files perl
+%defattr(644,root,root,755)
+%{perl_vendorarch}/*.pm
+%dir %{perl_vendorarch}/auto/Gaim
+%{perl_vendorarch}/auto/Gaim/*.ix
+%{perl_vendorarch}/auto/Gaim/*.bs
+%attr(755,root,root) %{perl_vendorarch}/auto/Gaim/*.so
