@@ -1,14 +1,7 @@
-diff -Nur gaim-1.1.2-orig/gaim.desktop gaim-1.1.2/gaim.desktop
---- gaim-1.1.2-orig/gaim.desktop	2005-01-20 01:49:12.000000000 +0100
-+++ gaim-1.1.2/gaim.desktop	2005-01-21 19:27:59.505903344 +0100
-@@ -1,13 +1,13 @@
- [Desktop Entry]
- Encoding=UTF-8
- Name=Gaim Internet Messenger
--Name[de]=Gaim Internet Messenger
- Name[da]=Gaim - internet beskeder
-+Name[de]=Gaim Internet Messenger
- Name[fr]=Gaim Messagerie Instantanée
+diff -Nur gaim-1.1.3-orig/gaim.desktop gaim-1.1.3/gaim.desktop
+--- gaim-1.1.3-orig/gaim.desktop	2005-01-23 21:31:17.000000000 +0100
++++ gaim-1.1.3/gaim.desktop	2005-02-18 23:48:36.255373304 +0100
+@@ -7,7 +7,7 @@
  Name[it]=Gaim Internet Messenger
  Name[ko]=게임 메신저
  Name[nl]=Gaim - Expresberichten
@@ -16,21 +9,8 @@ diff -Nur gaim-1.1.2-orig/gaim.desktop gaim-1.1.2/gaim.desktop
 +Name[pl]=Gaim - Komunikator internetowy
  Name[pt]=Mensageiro Instantâneo Gaim
  Name[sl]=Gaim - spletni sel
- GenericName=Internet Messenger
-@@ -22,10 +22,10 @@
- GenericName[sl]=Spletni sel
- Comment=Multi-protocol Messaging Client
- Comment[da]=Multiprotokolsklient til at sende og modtage beskeder
--Comment[it]=Client multiprotocollo per messaggi immediati
-+Comment[de]=Multi-Protokoll Instant Messenger Client
- Comment[es]=Cliente de mensajería instantánea multiprotocolo
- Comment[fr]=Client de messagerie instantanée multiprotocole
--Comment[de]=Multi-Protokoll Instant Messenger Client
-+Comment[it]=Client multiprotocollo per messaggi immediati
- Comment[ko]=다중 프로토콜 메신저
- Comment[nl]=Multi-protocol programma voor expresberichten
- Comment[pl]=Komunikator internetowy obsługujący kilka protokołów
-@@ -36,5 +36,5 @@
+ Name[sv]=Gaim Internet Messenger
+@@ -38,5 +38,5 @@
  Icon=gaim.png
  Terminal=false
  Type=Application
