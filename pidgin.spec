@@ -183,5 +183,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{with doc}
 %files doc
+%defattr(644,root,root,755)
 %doc doc/html/*.{html,png,css}
 %endif
