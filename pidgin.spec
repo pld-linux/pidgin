@@ -9,13 +9,13 @@ Summary(ko):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
-Version:	1.0.1
+Version:	1.0.2
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
-# Source0-md5:	bdf4c814c1d53a4bbac0988732ee7077
+# Source0-md5:	80fbe23c6206ca6c0c62c30d5091d7e4
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-GG-evo.patch
