@@ -9,7 +9,7 @@ Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
-Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	31c2fe5ccfb200d9be317a90fd2a4603
 Patch0:		%{name}-nolibs.patch
 # Patch0:		%{name}-gg_logoff.patch
