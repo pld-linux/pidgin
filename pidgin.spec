@@ -9,7 +9,7 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.79
-Release:	0.2
+Release:	0.3
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -174,7 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgaim-remote.so
 %{_libdir}/libgaim-remote.la
 %dir %{_includedir}/gaim
-%{_includedir}/gaim/*.h
+%{_includedir}/gaim/remote*.h
 
 %files perl
 %defattr(644,root,root,755)
