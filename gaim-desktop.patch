@@ -1,0 +1,10 @@
+diff -Nur gaim-0.78-orig/gaim.desktop gaim-0.78/gaim.desktop
+--- gaim-0.78-orig/gaim.desktop	2004-06-06 10:02:56.801954024 +0200
++++ gaim-0.78/gaim.desktop	2004-06-06 10:03:18.220697880 +0200
+@@ -13,5 +13,5 @@
+ Icon=gaim.png
+ Terminal=false
+ Type=Application
+-Categories=Application;Network;
++Categories=Application;Network;Communication;
+ StartupNotify=true
