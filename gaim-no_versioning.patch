@@ -1,0 +1,99 @@
+diff -urN gaim-0.44.org/src/protocols/icq/Makefile.am gaim-0.44/src/protocols/icq/Makefile.am
+--- gaim-0.44.org/src/protocols/icq/Makefile.am	Fri Sep 21 22:01:42 2001
++++ gaim-0.44/src/protocols/icq/Makefile.am	Fri Sep 21 22:02:18 2001
+@@ -65,6 +65,7 @@
+ pkg_LTLIBRARIES = libicq.la
+ noinst_LIBRARIES =
+ 
++libicq_la_LDFLAGS =	-avoid-version
+ libicq_la_SOURCES =	chatsession.c \
+ 			chatsession.h \
+ 			contacts.c \
+diff -urN gaim-0.44.org/src/protocols/irc/Makefile.am gaim-0.44/src/protocols/irc/Makefile.am
+--- gaim-0.44.org/src/protocols/irc/Makefile.am	Fri Sep 21 22:01:42 2001
++++ gaim-0.44/src/protocols/irc/Makefile.am	Fri Sep 21 22:02:37 2001
+@@ -18,6 +18,7 @@
+ pkg_LTLIBRARIES = libirc.la
+ noinst_LIBRARIES =
+ 
++libirc_la_LDFLAGS = -avoid-version
+ libirc_la_SOURCES = irc.c
+ 
+ endif
+diff -urN gaim-0.44.org/src/protocols/jabber/Makefile.am gaim-0.44/src/protocols/jabber/Makefile.am
+--- gaim-0.44.org/src/protocols/jabber/Makefile.am	Fri Sep 21 22:01:42 2001
++++ gaim-0.44/src/protocols/jabber/Makefile.am	Fri Sep 21 22:02:55 2001
+@@ -55,6 +55,7 @@
+ pkg_LTLIBRARIES = libjabber.la
+ noinst_LIBRARIES =
+ 
++libjabber_la_LDFLAGS = 	-avoid-version
+ libjabber_la_SOURCES = \
+ 			asciitab.h \
+ 			expat.c \
+diff -urN gaim-0.44.org/src/protocols/msn/Makefile.am gaim-0.44/src/protocols/msn/Makefile.am
+--- gaim-0.44.org/src/protocols/msn/Makefile.am	Fri Sep 21 22:01:42 2001
++++ gaim-0.44/src/protocols/msn/Makefile.am	Fri Sep 21 22:03:10 2001
+@@ -18,6 +18,7 @@
+ pkg_LTLIBRARIES = libmsn.la
+ noinst_LIBRARIES =
+ 
++libmsn_la_LDFLAGS = -avoid-version
+ libmsn_la_SOURCES = msn.c md5.c md5.h
+ 
+ endif
+diff -urN gaim-0.44.org/src/protocols/napster/Makefile.am gaim-0.44/src/protocols/napster/Makefile.am
+--- gaim-0.44.org/src/protocols/napster/Makefile.am	Fri Sep 21 22:01:42 2001
++++ gaim-0.44/src/protocols/napster/Makefile.am	Fri Sep 21 22:03:25 2001
+@@ -16,6 +16,7 @@
+ pkg_LTLIBRARIES = libnapster.la
+ noinst_LIBRARIES =
+ 
++libnapster_la_LDFLAGS = -avoid-version
+ libnapster_la_SOURCES = napster.c
+ 
+ endif
+diff -urN gaim-0.44.org/src/protocols/oscar/Makefile.am gaim-0.44/src/protocols/oscar/Makefile.am
+--- gaim-0.44.org/src/protocols/oscar/Makefile.am	Fri Sep 21 22:01:42 2001
++++ gaim-0.44/src/protocols/oscar/Makefile.am	Fri Sep 21 22:03:44 2001
+@@ -44,6 +44,7 @@
+ pkg_LTLIBRARIES = liboscar.la
+ noinst_LIBRARIES =
+ 
++liboscar_la_LDFLAGS =	-avoid-version
+ liboscar_la_SOURCES = 	admin.c		\
+ 			adverts.c	\
+ 			auth.c 		\
+diff -urN gaim-0.44.org/src/protocols/toc/Makefile.am gaim-0.44/src/protocols/toc/Makefile.am
+--- gaim-0.44.org/src/protocols/toc/Makefile.am	Fri Sep 21 22:01:42 2001
++++ gaim-0.44/src/protocols/toc/Makefile.am	Fri Sep 21 22:03:59 2001
+@@ -18,6 +18,7 @@
+ pkg_LTLIBRARIES = libtoc.la
+ noinst_LIBRARIES =
+ 
++libtoc_la_LDFLAGS = -avoid-version
+ libtoc_la_SOURCES = toc.c
+ 
+ endif
+diff -urN gaim-0.44.org/src/protocols/yahoo/Makefile.am gaim-0.44/src/protocols/yahoo/Makefile.am
+--- gaim-0.44.org/src/protocols/yahoo/Makefile.am	Fri Sep 21 22:01:42 2001
++++ gaim-0.44/src/protocols/yahoo/Makefile.am	Fri Sep 21 22:04:16 2001
+@@ -19,6 +19,7 @@
+ pkg_LTLIBRARIES = libyahoo.la
+ noinst_LIBRARIES =
+ 
++libyahoo_la_LDFLAGS = -avoid-version
+ libyahoo_la_SOURCES = \
+ 	buddy.c conn.c internal.h login.c misc.c outgoing.c rxhandlers.c yay.c yay.h
+ 
+diff -urN gaim-0.44.org/src/protocols/zephyr/Makefile.am gaim-0.44/src/protocols/zephyr/Makefile.am
+--- gaim-0.44.org/src/protocols/zephyr/Makefile.am	Fri Sep 21 22:01:42 2001
++++ gaim-0.44/src/protocols/zephyr/Makefile.am	Fri Sep 21 22:04:37 2001
+@@ -80,6 +80,7 @@
+ pkg_LTLIBRARIES = libzephyr.la
+ noinst_LIBRARIES =
+ 
++libzephyr_la_LDFLAGS = 	-avoid-version
+ libzephyr_la_SOURCES = \
+ 			ZAsyncLocate.c \
+ 			ZCkAuth.c \
