@@ -57,7 +57,7 @@ Jabber, Napster, Zephyr, IRC and Gadu-Gadu.
 Gaim pozwala na rozmowy z dowoln± osob± u¿ywaj±c± us³ugi AOL Instant
 Messenger (mo¿na siê zarejestrowaæ pod adresem
 http://www.aim.aol.com/). Program u¿ywa wersji TOC protoko³u AOL wiêc
-Twoja lista kontaktów jest zapisana na serwerze AOL i mo¿e byc
+Twoja lista kontaktów jest zapisana na serwerze AOL i mo¿e byæ
 przes³ana gdziekolwiek. Gaim zawiera wiele udogodnieñ dostêpnych w
 kliencie AOL IM jak równie¿ dodaje w³asne. Gaim umo¿liwia tak¿e dostêp
 do us³ug takich jak Yahoo!, ICQ, MSN, Jabber, Napster, Zephyr, IRC
