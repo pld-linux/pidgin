@@ -93,7 +93,7 @@ gettextize --copy --force
 aclocal -I m4
 autoheader
 autoconf
-automake -a -c
+automake -a -c -f
 %configure \
 	--disable-panel \
 	--enable-esd \
