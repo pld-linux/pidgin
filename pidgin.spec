@@ -1,6 +1,6 @@
 # This file does not like to be adapterized!
 #
-%bcond_with	doc	# generate and include documentation
+%bcond_without	doc	# do not generate and include documentation
 #
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
@@ -9,7 +9,7 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.79
-Release:	0.3
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -22,7 +22,7 @@ URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	evolution-data-server >= 0.0.94-2
+BuildRequires:	evolution-data-server >= 0.0.95
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.2.0
 BuildRequires:	libao-devel
@@ -174,7 +174,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgaim-remote.so
 %{_libdir}/libgaim-remote.la
 %dir %{_includedir}/gaim
-%{_includedir}/gaim/remote*.h
+%{_includedir}/gaim/*.h
+%{_pkgconfigdir}/*
 
 %files perl
 %defattr(644,root,root,755)
