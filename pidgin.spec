@@ -85,8 +85,8 @@ Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
 
 %prep
 %setup -qn %{name}-%{version}
-#%patch0 -p1
-#%patch1 -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 rm -f missing
