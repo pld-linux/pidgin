@@ -1,6 +1,7 @@
 # This file does not like to be adapterized!
 #
-%bcond_without	doc	# do not generate and include documentation
+%bcond_without	doc		# do not generate and include documentation
+%bcond_without	gtkspell	# without gtkspell support
 #
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
@@ -25,6 +26,7 @@ BuildRequires:	automake
 BuildRequires:	evolution-data-server >= 0.0.95
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.2.0
+%{?with_gtkspell:BuildRequires: gtkspell-devel >= 2.0.4}
 BuildRequires:	libao-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel
@@ -51,7 +53,7 @@ Jabber, Napster, Zephyr, IRC and Gadu-Gadu.
 
 %description -l pl
 Gaim pozwala na rozmowy z dowoln± osob± u¿ywaj±c± us³ugi AOL Instant
-Messenger (mo¿na siê zarejstrowaæ pod adresem
+Messenger (mo¿na siê zarejestrowaæ pod adresem
 http://www.aim.aol.com/). Program u¿ywa wersji TOC protoko³u AOL wiêc
 Twoja lista kontaktów jest zapisana na serwerze AOL i mo¿e byc
 przes³ana gdziekolwiek. Gaim zawiera wiele udogodnieñ dostêpnych w
@@ -130,7 +132,8 @@ rm -f configure.in
 %configure \
 	--disable-nas \
 	--enable-nss=no \
-	--with-perl-lib=vendor
+	--with-perl-lib=vendor \
+	%{!?with_gtkspell:--disable-gtkspell}
 
 %{__make}
 %{?with_doc:%{__make} docs}
