@@ -91,7 +91,7 @@ Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
 %build
 rm -f missing
 %{__libtoolize}
-gettextize --copy --force
+%{__gettextize}
 aclocal -I m4
 autoheader
 %{__autoconf}
