@@ -8,7 +8,7 @@ Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
-Source0:	http://belnet.dl.sourceforge.net/sourceforge/gaim/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/sourceforge/gaim/%{name}-%{version}.tar.bz2
 # Patch0:		%{name}-gg_logoff.patch
 # Patch1:		%{name}-am_ac.patch
 # Patch2:		%{name}-tw.patch
