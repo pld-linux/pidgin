@@ -3,12 +3,13 @@ Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(pl):	Klient kompatybilny z programem AOLa 'Instant Messenger'
 Name:		gaim
 Version:	0.45
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Communications
 Group(de):	Applikationen/Kommunikation
 Group(pl):	Aplikacje/Komunikacja
 Source0:	http://prdownloads.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-font-by-locale.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	ORBit-devel
 BuildRequires:	autoconf
@@ -49,6 +50,7 @@ oraz Gadu-Gadu.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 rm  -f missing
