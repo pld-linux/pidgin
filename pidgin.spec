@@ -2,7 +2,7 @@ Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(pl):	Klient kompatybilny z programem AOLa 'Instant Messenger'
 Name:		gaim
 Version:	0.44
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Communications
 Group(de):	Applikationen/Kommunikation
@@ -66,15 +66,19 @@ automake -a -c
 	--enable-esd \
 	--disable-nas \
 	--disable-artsc \
-	--with-gnome
+	--with-gnome \
+	--disable-panel
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
+# NOTE: make ignores gaimdesktopdir set below.
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	gaimdesktopdir=%{_applnkdir}/Network/Communications
+
+mv $RPM_BUILD_ROOT{%{_datadir}/gnome/apps/Internet/gaim.desktop,%{_applnkdir}/Network/Communications}
 	
 gzip -9nf AUTHORS ChangeLog NEWS README* STATUS TODO HACKING \
 	doc/{CREDITS,FAQ}
@@ -87,7 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc {*,doc/*}.gz
-%{_sysconfdir}/CORBA/servers/*
+#%{_sysconfdir}/CORBA/servers/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/gaim
 %attr(755,root,root) %{_libdir}/gaim/*.so
