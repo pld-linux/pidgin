@@ -5,13 +5,15 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.75
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	9935155985c25dfc9b59183de0da3c30
 Patch0:		%{name}-nolibs.patch
+# It's temporary security patch - remember to throw it out when 0.76 appears 
+Patch1:		%{name}-%{version}.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
@@ -81,6 +83,7 @@ Pliki programistyczne biblioteki gaim-remote.
 %prep
 %setup -q 
 %patch0 -p1
+%patch1 
 
 %build
 rm -f configure.in
