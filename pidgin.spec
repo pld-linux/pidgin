@@ -4,13 +4,13 @@ Summary(ko):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
-Version:	0.66
-Release:	0.2
+Version:	0.67
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
-# Source0-md5:	80c52fc8c969a65ea7bbd6444142fe5f
+# Source0-md5:	1b28da4a480e2217f0b653bb95a5e4c5
 Patch0:		%{name}-nolibs.patch
 # Patch0:		%{name}-gg_logoff.patch
 # Patch1:		%{name}-am_ac.patch
@@ -147,7 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README* TODO HACKING doc/{CREDITS,FAQ}
+%doc AUTHORS ChangeLog NEWS README* HACKING doc/{CREDITS,FAQ}
 %attr(755,root,root) %{_bindir}/gaim-remote
 %attr(755,root,root) %{_libdir}/libgaim-remote.so.0.0.0
 %dir %{_libdir}/gaim
