@@ -81,11 +81,11 @@ Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 # Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
 
 %package devel
-Summary:	devel files for gaim remote
-Group:		Applications/Communications
+Summary:	Devel files for gaim remote
+Group:		Development/Librairies
 
 %description devel
-devel files for gaim remote.
+Devel files for gaim remote.
 
 %prep
 %setup -q
@@ -159,6 +159,8 @@ rm -rf $RPM_BUILD_ROOT
 # %{_sysconfdir}/CORBA/servers/*
 
 %files devel
+%defattr(644,root,root,755)
+%dir %{_includedir}/gaim-remote/
 %{_includedir}/gaim-remote/remote-socket.h
 %{_includedir}/gaim-remote/remote.h
 %{_libdir}/*.la
