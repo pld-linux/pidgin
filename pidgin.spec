@@ -1,9 +1,8 @@
-# _with_panel	GNOME panel support
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(pl):	Klient kompatybilny z programem AOLa 'Instant Messenger'
 Name:		gaim
 Version:	0.46
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Communications
 Group(de):	Applikationen/Kommunikation
@@ -21,7 +20,10 @@ BuildRequires:	gtk+-devel >= 1.2.5
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel
+BuildRequires:	gnome-core-devel
+BuildRequires:	gdk-pixbuf-devel
 Requires:	applnk
+Requires:	gaim-ui
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -49,6 +51,34 @@ kliencie AOL IM jak równie¿ dodaje w³asne. Gaim umo¿liwia tak¿e dostêp
 do us³ug takich jak Yahoo!, ICQ, MSN, Jabber, Napster, Zephyr, IRC
 oraz Gadu-Gadu.
 
+%package ui-gtk
+Summary:	gtk+ user interface for gaim
+Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z gtk+
+Group:		Applications/Communications
+Group(de):	Applikationen/Kommunikation
+Group(pl):	Aplikacje/Komunikacja
+Provides:	gaim-ui
+
+%description ui-gtk
+gtk+ user interface for gaim
+
+%description -l pl ui-gtk
+Interfejs u¿ytkownika gaim korzystaj±cy z gtk+
+
+%package ui-gnome
+Summary:	GNOME user interface for gaim (applet)
+Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet)
+Group:		Applications/Communications
+Group(de):	Applikationen/Kommunikation
+Group(pl):	Aplikacje/Komunikacja
+Provides:	gaim-ui
+
+%description ui-gnome
+GNOME user interface for gaim (applet)
+
+%description -l pl ui-gnome
+Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet)
+
 %prep
 %setup -q
 %patch0 -p1
@@ -63,8 +93,18 @@ autoheader
 autoconf
 automake -a -c
 %configure \
-	%{?_with_panel:--enable-panel} \
-	%{?!_with_panel:--disable-panel} \
+	--disable-panel \
+	--enable-esd \
+	--disable-nas \
+	--disable-artsc \
+	--with-gnome
+%{__make}
+mv plugins/iconaway{,_standalone}.so
+mv src/gaim{,_standalone}
+%{__make} clean
+
+%configure \
+	--enable-panel \
 	--enable-esd \
 	--disable-nas \
 	--disable-artsc \
@@ -81,6 +121,10 @@ rm -rf $RPM_BUILD_ROOT
 	distribdesktopdir=%{_applnkdir}/Network/Communications
 
 mv $RPM_BUILD_ROOT{%{_datadir}/gnome/apps/Internet/gaim.desktop,%{_applnkdir}/Network/Communications}
+
+mv $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway{,_applet}.so
+install plugins/iconaway_standalone.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
+install src/gaim_standalone $RPM_BUILD_ROOT%{_bindir}/gaim
 	
 gzip -9nf AUTHORS ChangeLog NEWS README* STATUS TODO HACKING \
 	doc/{CREDITS,FAQ}
@@ -93,10 +137,17 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc {*,doc/*}.gz
-%{?_with_panel:%{_sysconfdir}/CORBA/servers/*}
-%attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/gaim
-%attr(755,root,root) %{_libdir}/gaim/*.so
+%attr(755,root,root) %{_libdir}/gaim/[^i]*.so
 %{_applnkdir}/Network/Communications/*.desktop
 %{_pixmapsdir}/*
 %{_mandir}/man?/*
+
+%files ui-gtk
+%attr(755,root,root) %{_bindir}/gaim
+%attr(755,root,root) %{_libdir}/gaim/iconaway.so
+
+%files ui-gnome
+%attr(755,root,root) %{_bindir}/gaim_applet
+%attr(755,root,root) %{_libdir}/gaim/iconaway_applet.so
+%{_sysconfdir}/CORBA/servers/*
