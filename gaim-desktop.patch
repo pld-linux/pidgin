@@ -1,10 +1,32 @@
-diff -Nur gaim-0.78-orig/gaim.desktop gaim-0.78/gaim.desktop
---- gaim-0.78-orig/gaim.desktop	2004-06-06 10:02:56.801954024 +0200
-+++ gaim-0.78/gaim.desktop	2004-06-06 10:03:18.220697880 +0200
-@@ -13,5 +13,5 @@
+--- gaim-0.80/gaim.desktop~	Sat Jul 24 16:56:49 2004
++++ gaim-0.80/gaim.desktop	Sat Jul 24 16:56:49 2004
+@@ -1,8 +1,8 @@
+ [Desktop Entry]
+ Encoding=UTF-8
+ Name=Gaim Internet Messenger
++Name[da]=Gaim - kvikbeskeder
+ Name[de]=Gaim Internet Messenger
+-Name[dk]=Gaim - kvikbeskeder
+ Name[fr]=Gaim Messagerie Instantanée
+ Name[it]=Gaim Internet Messenger
+ Name[pl]=Komunikator Internetowy Gaim
+@@ -15,10 +15,10 @@
+ GenericName[pt_BR]=Mensageiro da Internet Gaim
+ Comment=Multi-protocol Messaging Client
+ Comment[da]=Multiprotokolsklient til at sende og modtage beskeder
+-Comment[it]=Client multiprotocollo per messaggi immediati
++Comment[de]=Multi-Protokoll Instant Messenger Client
+ Comment[es]=Cliente de mensajería instantánea multiprotocolo
++Comment[it]=Client multiprotocollo per messaggi immediati
+ Comment[fr]=Client de messagerie instantanée multiprotocole
+-Comment[de]=Multi-Protokoll Instant Messenger Client
+ Comment[ko]=다중 프로토콜 메신저
+ Comment[pl]=Komunikator internetowy obsługujący kilka protokołów
+ Comment[pt]=Cliente de mensagens instantâneas multi-protocolo
+@@ -27,5 +27,5 @@
  Icon=gaim.png
  Terminal=false
  Type=Application
 -Categories=Application;Network;
-+Categories=GTK;Network;InstantMessaging;
++Categories=GTK;GNOME;Network;InstantMessaging;
  StartupNotify=true
