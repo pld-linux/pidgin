@@ -1,5 +1,6 @@
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(pl):	Klient kompatybilny z AOL Instant Messenger
+Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.50
 Release:	1
@@ -49,6 +50,13 @@ przes³ana gdziekolwiek. Gaim zawiera wiele udogodnieñ dostêpnych w
 kliencie AOL IM jak równie¿ dodaje w³asne. Gaim umo¿liwia tak¿e dostêp
 do us³ug takich jak Yahoo!, ICQ, MSN, Jabber, Napster, Zephyr, IRC
 oraz Gadu-Gadu.
+
+%description -l pt_BR
+GAIM é um cliente para o AOL Instant Messenger (AIM) que usa o serviço
+tik/toc da AOL. É desenvolvido ativamente e suporta muitas das
+características do cliente da AOL, tendo uma interface similiar.
+Também oferece suporte a outros protocolos, como: ICQ, IRC, Yahoo!,
+MSN, Jabber e Napster.
 
 %package ui-gtk
 Summary:	gtk+ user interface for gaim
