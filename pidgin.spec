@@ -40,6 +40,8 @@ BuildRequires:	graphviz
 %endif
 Requires:	gaim-ui = %{epoch}:%{version}-%{release}
 #Requires:	libao
+# weird: it *should* break after DynaLoader's version change, but it doesn't
+#Requires:	perl(DynaLoader) = %(%{__perl} -MDynaLoader -e 'print DynaLoader->VERSION')
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
