@@ -121,12 +121,12 @@ rm -rf $RPM_BUILD_ROOT
 	gaimdesktopdir=%{_applnkdir}/Network/Communications \
 	distribdesktopdir=%{_applnkdir}/Network/Communications
 
-mv $RPM_BUILD_ROOT{%{_datadir}/gnome/apps/Internet/gaim.desktop,%{_applnkdir}/Network/Communications}
+mv $RPM_BUILD_ROOT{%{_applnkdir}/Internet/gaim.desktop,%{_applnkdir}/Network/Communications}
 
 mv $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway{,_applet}.so
 install plugins/iconaway_standalone.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
 install src/gaim_standalone $RPM_BUILD_ROOT%{_bindir}/gaim
-	
+
 gzip -9nf AUTHORS ChangeLog NEWS README* TODO HACKING \
 	doc/{CREDITS,FAQ}
 
