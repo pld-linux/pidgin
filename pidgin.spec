@@ -17,6 +17,7 @@ BuildRequires:	esound-devel
 BuildRequires:	gtk+-devel >= 1.2.5
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
+BuildRequires:	perl-devel
 Requires:	applnk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -47,18 +48,19 @@ do us³ug takich jak Yahoo!, ICQ oraz IRC.
 %setup -q
 
 %build
-#rm  -f missing
+rm  -f missing
 libtoolize --copy --force
 gettextize --copy --force
 aclocal -I m4
 autoheader
 autoconf
-#automake -a -c
+automake -a -c
 %configure \
-	--enable-gnome \
-	--enable-panel \
-	--disable-perl
-
+	 --enable-panel \
+	--enable-esd \
+	--disable-nas \
+	--disable-artsc \
+	--with-gnome
 %{__make}
 
 %install
