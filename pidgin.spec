@@ -84,7 +84,7 @@ Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 Summary:	Development files for gaim-remote library
 Summary(pl):	Pliki programistyczne biblioteki gaim-remote
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description devel
 Development files for gaim-remote library.
