@@ -1,6 +1,7 @@
---- gaim-0.80/gaim.desktop~	Sat Jul 24 16:56:49 2004
-+++ gaim-0.80/gaim.desktop	Sat Jul 24 16:56:49 2004
-@@ -1,8 +1,8 @@
+diff -urN gaim-0.81.orig/gaim.desktop gaim-0.81/gaim.desktop
+--- gaim-0.81.orig/gaim.desktop	2004-08-15 18:09:44.985685776 +0200
++++ gaim-0.81/gaim.desktop	2004-08-15 18:16:27.463499848 +0200
+@@ -1,24 +1,24 @@
  [Desktop Entry]
  Encoding=UTF-8
  Name=Gaim Internet Messenger
@@ -9,8 +10,15 @@
 -Name[dk]=Gaim - kvikbeskeder
  Name[fr]=Gaim Messagerie Instantanée
  Name[it]=Gaim Internet Messenger
- Name[pl]=Komunikator Internetowy Gaim
-@@ -15,10 +15,10 @@
+-Name[pl]=Komunikator Internetowy Gaim
++Name[pl]=Gaim - komunikator internetowy
+ Name[pt]=Mensageiro Instantâneo Gaim
+ GenericName=Internet Messenger
+ GenericName[fr]=Messagerie instantanée
+ GenericName[it]=Internet Messenger
+-GenericName[pl]=Komunikator Internetowy
++GenericName[pl]=Komunikator internetowy
+ GenericName[pt]=Mensageiro Instantâneo
  GenericName[pt_BR]=Mensageiro da Internet Gaim
  Comment=Multi-protocol Messaging Client
  Comment[da]=Multiprotokolsklient til at sende og modtage beskeder
