@@ -1,0 +1,11 @@
+--- src/Makefile.am.orig	Wed Dec  5 10:38:39 2001
++++ src/Makefile.am	Mon Apr 15 07:19:54 2002
+@@ -71,7 +71,7 @@
+ endif
+ 
+ CFLAGS += $(PERL_CFLAGS)
+-CFLAGS += -DLOCALEDIR=\"$(datadir)/locale\" -DLIBDIR=\"$(libdir)/gaim/\" $(DEBUG_CFLAGS)
++CFLAGS += -I/usr/X11R6/include/gdk-pixbuf-1.0 -DLOCALEDIR=\"$(datadir)/locale\" -DLIBDIR=\"$(libdir)/gaim/\" $(DEBUG_CFLAGS)
+ 
+ LIBS = @LIBS@ $(UI_LIBS) $(SOUND_LIBS) $(STATIC_LINK_LIBS) $(PERL_LIBS) $(XSS_LIBS) $(INTLLIBS) $(DEBUG_LIBS)
+ 
