@@ -90,6 +90,7 @@ Summary(pl):	Pliki programistyczne biblioteki gaim-remote
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	glib2-devel >= 2.0.0
+Requires:	gtk+2-devel >= 1:2.2.0
 
 %description devel
 Development files for gaim-remote library.
