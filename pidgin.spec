@@ -16,6 +16,7 @@ Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	079f3286333ed51cc72c65b5efe1b989
 Patch0:		%{name}-nolibs.patch
+Patch1:		%{name}-desktop.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
@@ -112,6 +113,7 @@ Dokumentacja Gaim dla programistów (format HTML).
 %prep
 %setup -q 
 %patch0 -p1
+%patch1 -p1
 
 %build
 rm -f configure.in
