@@ -1,0 +1,11 @@
+--- gaim-0.64/configure.ac.orig	Mon Jul  7 15:37:56 2003
++++ gaim-0.64/configure.ac	Mon Jul  7 15:57:41 2003
+@@ -44,7 +44,7 @@
+ dnl Check for inet_aton
+ AC_CHECK_FUNC(inet_aton, , [AC_CHECK_LIB(resolv, inet_aton, , 
+ 				         [AC_ERROR(inet_aton not found)])])
+-AC_CHECK_LIB(nsl, gethostent)
++AC_CHECK_FUNC(gethostent, , [AC_CHECK_LIB(nsl, gethostent)])
+ AC_CHECK_FUNC(socket, , 
+               [AC_CHECK_LIB(socket, socket, , [AC_ERROR([socket not found])])])
+ dnl If all goes well, by this point the previous two checks will have
