@@ -11,27 +11,22 @@ License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 # Source0-md5:	8876251a650a8341ca6969a4f5334082
+Patch0:		%{name}-nolibs.patch
 # Patch0:		%{name}-gg_logoff.patch
 # Patch1:		%{name}-am_ac.patch
 # Patch2:		%{name}-tw.patch
 URL:		http://gaim.sourceforge.net/
-BuildRequires:	ORBit-devel
+BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gnome-libs-devel >= 1.2.13
-BuildRequires:	esound-devel
-BuildRequires:	gtk+2-devel >= 2.1.0
 BuildRequires:	gettext-devel
+BuildRequires:	gtk+2-devel >= 2.1.0
+BuildRequires:	libao-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel
-BuildRequires:	gnome-core-devel
-BuildRequires:	gdk-pixbuf-devel
 Requires:	applnk
 Requires:	gaim-ui = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_sysconfdir	/etc/X11/GNOME
-%define		_prefix	/usr/X11R6
 
 %description
 Gaim allows you to talk to anyone using AOL's Instant Messenger
@@ -86,13 +81,11 @@ Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 # Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
 
 %prep
-%setup -qn %{name}-%{version}
-# %patch0 -p1
-# %patch1 -p1
-# %patch2 -p1
+%setup -q
+%patch0 -p1
 
 %build
-rm -f missing
+rm -f configure.in
 %{__libtoolize}
 %{__gettextize}
 %{__aclocal} 
@@ -100,43 +93,33 @@ rm -f missing
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-panel \
-	--enable-esd \
-	--disable-nas \
-	--disable-artsc \
-	--disable-gnome \
-	--with-gtk-prefix=/usr/X11R6 \
-	--with-gdk-pixbuf-config=/usr/X11R6/bin/gdk-pixbuf-config 
-%{__make} 
-mv plugins/.libs/iconaway{,_standalone}.so
-mv src/gaim{,_standalone}
-%{__make} clean
+	--disable-nas
 
-%configure \
-	--enable-panel \
-	--enable-esd \
-	--disable-nas \
-	--disable-artsc \
-	--enable-gnome \
-	--with-gtk-prefix=/usr/X11R6 \
-	--with-gdk-pixbuf-config=/usr/X11R6/bin/gdk-pixbuf-config 
 %{__make}
+
+# no GNOME version of UI now
+#mv plugins/.libs/iconaway{,_standalone}.so
+#mv src/gaim{,_standalone}
+#%{__make} clean
+
+#%%configure \
+#	--enable-panel \
+#	--enable-esd \
+#	--disable-nas \
+#	--disable-artsc \
+#	--enable-gnome
+#
+#%{__make}
 	
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
 
-# NOTE: make ignores gaimdesktopdir set below.
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	gaimdesktopdir=%{_applnkdir}/Network/Communications \
-	distribdesktopdir=%{_applnkdir}/Network/Communications
+	DESTDIR=$RPM_BUILD_ROOT
 
-mv $RPM_BUILD_ROOT{%{_datadir}/applications/gaim.desktop,%{_applnkdir}/Network/Communications}
-
-mv $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway{,_applet}.so
-install plugins/.libs/iconaway.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
-install src/gaim_standalone $RPM_BUILD_ROOT%{_bindir}/gaim
+#mv $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway{,_applet}.so
+#install plugins/.libs/iconaway.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
+#install src/gaim_standalone $RPM_BUILD_ROOT%{_bindir}/gaim
 
 %find_lang %{name} --with-gnome --all-name
 
@@ -147,7 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO HACKING doc/{CREDITS,FAQ}
 %dir %{_libdir}/gaim
-%attr(755,root,root) %{_libdir}/gaim/[^i]*.so
+%attr(755,root,root) %{_libdir}/gaim/[!i]*.so
 %{_pixmapsdir}/*
 %{_mandir}/man?/*
 %{_datadir}/sounds/%{name}/*.wav
@@ -156,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gaim
 %attr(755,root,root) %{_libdir}/gaim/iconaway.so
-%{_applnkdir}/Network/Communications/gaim.desktop
+%{_desktopdir}/gaim.desktop
 
 # %files ui-gnome
 # %defattr(644,root,root,755)
