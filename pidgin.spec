@@ -3,7 +3,7 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.51
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -185,7 +185,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc {*,doc/*}.gz
 %dir %{_libdir}/gaim
 %attr(755,root,root) %{_libdir}/gaim/[^i]*.so
-%{_applnkdir}/Network/Communications/*.desktop
 %{_pixmapsdir}/*
 %{_mandir}/man?/*
 
@@ -193,9 +192,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gaim
 %attr(755,root,root) %{_libdir}/gaim/iconaway.so
+%{_applnkdir}/Network/Communications/gaim.desktop
 
 %files ui-gnome
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gaim_applet
 %attr(755,root,root) %{_libdir}/gaim/iconaway_applet.so
+%{_applnkdir}/Network/Communications/gaim_applet.desktop
 %{_sysconfdir}/CORBA/servers/*
