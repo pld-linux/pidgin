@@ -28,9 +28,7 @@ Requires:	applnk
 Requires:	gaim-ui = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_prefix		/usr/X11R6
 %define		_sysconfdir	/etc/X11/GNOME
-%define		_mandir		%{_prefix}/man
 
 %description
 Gaim allows you to talk to anyone using AOL's Instant Messenger
