@@ -5,7 +5,7 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.66
-Release:	0.1
+Release:	0.2
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -25,7 +25,7 @@ BuildRequires:	libao-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel
 Requires:	applnk
-Requires:	gaim-ui = %{version}
+Requires:	gaim-ui =  %{epoch}:%{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -60,7 +60,7 @@ MSN, Jabber e Napster.
 Summary:	gtk+ user interface for gaim
 Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z gtk+
 Group:		Applications/Communications
-Provides:	gaim-ui = %{version}-%{release}
+Provides:	gaim-ui = %{epoch}:%{version}-%{release}
 
 %description ui-gtk
 gtk+ user interface for gaim.
@@ -72,7 +72,7 @@ Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 # Summary:	GNOME user interface for gaim (applet)
 # Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet)
 # Group:		Applications/Communications
-# Provides:	gaim-ui = %{version}-%{release}
+# Provides:	gaim-ui =  %{epoch}:%{version}-%{release}
 
 # %description ui-gnome
 # GNOME user interface for gaim (applet).
