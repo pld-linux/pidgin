@@ -6,6 +6,7 @@ Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(ko):	AOL ÀÎ½ºÅÏÆ® ¸Ş½ÅÀú¿Í È£È¯µÇ´Â Å¬¶óÀÌ¾ğÆ®
 Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
+Summary(de):	Gaim ist ein Instant Messenger
 Name:		gaim
 Version:	1.2.0
 Release:	1
@@ -69,6 +70,12 @@ tik/toc da AOL. É desenvolvido ativamente e suporta muitas das
 características do cliente da AOL, tendo uma interface similiar.
 Também oferece suporte a outros protocolos, como: ICQ, IRC, Yahoo!,
 MSN, Jabber e Napster.
+
+%description -l de
+Gaim ist ein Instant Messenger der von Mark Spencer ursprünglich für
+unixähnliche Systeme (GNU/Linux, BSD) geschrieben wurde, nun aber auch
+auf Microsoft Windows und Mac OS X lauffähig ist und mit vielen
+Plugins stark erweitert werden kann.
 
 %package ui-gtk
 Summary:	gtk+ user interface for gaim
