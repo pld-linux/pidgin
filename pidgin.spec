@@ -7,21 +7,6 @@ Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
-Group(cs):	Aplikace/Komunikace
-Group(da):	Programmer/Kommunikation
-Group(de):	Applikationen/Kommunikation
-Group(es):	Aplicaciones/Comunicaciones
-Group(fr):	Applications/Transmissions
-Group(is):	Forrit/Samskipti
-Group(it):	Applicazioni/Comunicazioni
-Group(ja):	¥¢¥×¥ê¥±¡¼¥·¥ç¥ó/ÄÌ¿®
-Group(no):	Applikasjoner/Kommunikasjon
-Group(pl):	Aplikacje/Komunikacja
-Group(pt):	Aplicações/Comunicações
-Group(ru):	ğÒÉÌÏÖÅÎÉÑ/ëÏÍÍÕÎÉËÁÃÉÉ
-Group(sl):	Programi/Komunikacije
-Group(sv):	Tillämpningar/Kommunikation
-Group(uk):	ğÒÉËÌÁÄÎ¦ ğÒÏÇÒÁÍÉ/ëÏÍÕÎ¦ËÁÃ¦§
 Source0:	http://prdownloads.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-gg_logoff.patch
 URL:		http://gaim.sourceforge.net/
@@ -76,21 +61,6 @@ MSN, Jabber e Napster.
 Summary:	gtk+ user interface for gaim
 Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z gtk+
 Group:		Applications/Communications
-Group(cs):	Aplikace/Komunikace
-Group(da):	Programmer/Kommunikation
-Group(de):	Applikationen/Kommunikation
-Group(es):	Aplicaciones/Comunicaciones
-Group(fr):	Applications/Transmissions
-Group(is):	Forrit/Samskipti
-Group(it):	Applicazioni/Comunicazioni
-Group(ja):	¥¢¥×¥ê¥±¡¼¥·¥ç¥ó/ÄÌ¿®
-Group(no):	Applikasjoner/Kommunikasjon
-Group(pl):	Aplikacje/Komunikacja
-Group(pt):	Aplicações/Comunicações
-Group(ru):	ğÒÉÌÏÖÅÎÉÑ/ëÏÍÍÕÎÉËÁÃÉÉ
-Group(sl):	Programi/Komunikacije
-Group(sv):	Tillämpningar/Kommunikation
-Group(uk):	ğÒÉËÌÁÄÎ¦ ğÒÏÇÒÁÍÉ/ëÏÍÕÎ¦ËÁÃ¦§
 Provides:	gaim-ui
 
 %description ui-gtk
@@ -103,21 +73,6 @@ Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 Summary:	GNOME user interface for gaim (applet)
 Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet)
 Group:		Applications/Communications
-Group(cs):	Aplikace/Komunikace
-Group(da):	Programmer/Kommunikation
-Group(de):	Applikationen/Kommunikation
-Group(es):	Aplicaciones/Comunicaciones
-Group(fr):	Applications/Transmissions
-Group(is):	Forrit/Samskipti
-Group(it):	Applicazioni/Comunicazioni
-Group(ja):	¥¢¥×¥ê¥±¡¼¥·¥ç¥ó/ÄÌ¿®
-Group(no):	Applikasjoner/Kommunikasjon
-Group(pl):	Aplikacje/Komunikacja
-Group(pt):	Aplicações/Comunicações
-Group(ru):	ğÒÉÌÏÖÅÎÉÑ/ëÏÍÍÕÎÉËÁÃÉÉ
-Group(sl):	Programi/Komunikacije
-Group(sv):	Tillämpningar/Kommunikation
-Group(uk):	ğÒÉËÌÁÄÎ¦ ğÒÏÇÒÁÍÉ/ëÏÍÕÎ¦ËÁÃ¦§
 Provides:	gaim-ui
 
 %description ui-gnome
