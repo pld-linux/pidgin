@@ -1,5 +1,5 @@
 Summary:	A client compatible with AOL's 'Instant Messenger'
-Summary(pl):	Klient kompatybilny z programem AOLa 'Instant Messenger'
+Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Name:		gaim
 Version:	0.46
 Release:	2
