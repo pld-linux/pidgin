@@ -1,11 +1,11 @@
---- gaim-1.0.0/configure.ac.orig	2004-09-18 19:05:08.029391568 +0200
-+++ gaim-1.0.0/configure.ac	2004-09-18 19:06:04.422818464 +0200
+--- gaim-1.1.0-orig/configure.ac        2004-12-03 03:02:25.000000000 +0100
++++ gaim-1.1.0/configure.ac     2004-12-06 20:01:35.638791728 +0100
 @@ -33,7 +33,7 @@
- 	;;
+        ;;
  esac
- 
--ALL_LINGUAS="am bg ca cs da de en_AU en_CA en_GB es fi fr he hi hu it ja ko lt mk nl no pl pt_BR pt ro ru sk sl sr sr@Latn sv vi zh_CN zh_TW"
-+ALL_LINGUAS="am bg ca cs da de en_AU en_CA en_GB es fi fr he hi hu it ja ko lt mk nb nl pl pt_BR pt ro ru sk sl sr sr@Latn sv vi zh_CN zh_TW"
+
+-ALL_LINGUAS="am bg ca cs da de en_AU en_CA en_GB es fi fr he hi hu it ja ko lt mk nl no pl pt_BR pt ro ru sk sl sr sr@Latn sv tr vi zh_CN zh_TW"
++ALL_LINGUAS="am bg ca cs da de en_AU en_CA en_GB es fi fr he hi hu it ja ko lt mk nb nl pl pt_BR pt ro ru sk sl sr sr@Latn sv tr vi zh_CN zh_TW"
  AM_GNU_GETTEXT_VERSION(0.10.40)
  AM_GNU_GETTEXT
- 
+
