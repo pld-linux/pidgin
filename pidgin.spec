@@ -3,22 +3,20 @@ Summary(es):	Klient kompatybilny z programem AOLa 'Instant Messenger'
 Name:		gaim
 Version:	0.11.0pre10
 Release:	1
-Epoch:		0
 License:	GPL
 Group:		Applications/Communications
 Group(de):	Applikationen/Kommunikation
 Group(pl):	Aplikacje/Komunikacja
 Source0:	http://prdownloads.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 URL:		http://gaim.sourceforge.net/
-BuildRequires:	gnome-libs-devel >= 1.2.13
-BuildRequires:	gtk+-devel >= 1.2.5
 BuildRequires:	ORBit-devel
-BuildRequires:	gettext-devel
-BuildRequires:	esound-devel
-BuildRequires:	automake
 BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	gnome-libs-devel >= 1.2.13
+BuildRequires:	esound-devel
+BuildRequires:	gtk+-devel >= 1.2.5
+BuildRequires:	gettext-devel
 BuildRequires:	libtool
-Prereq:		/sbin/ldconfig
 Requires:	applnk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
