@@ -10,7 +10,7 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.80
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -20,13 +20,14 @@ Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-GG-evo.patch
 Patch3:		%{name}-locale_names.patch
+Patch4:		%{name}-po.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	evolution-data-server >= 0.0.95
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2.2.0
+BuildRequires:	gtk+2-devel >= 1:2.2.0
 %{?with_gtkspell:BuildRequires: gtkspell-devel >= 2.0.4}
 BuildRequires:	libao-devel
 BuildRequires:	libtool
@@ -37,8 +38,8 @@ BuildRequires:	xcursor-devel
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
-Requires:	gaim-ui = %{epoch}:%{version}
-Requires:	libao
+Requires:	gaim-ui = %{epoch}:%{version}-%{release}
+#Requires:	libao
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -85,7 +86,8 @@ Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 Summary:	Development files for gaim-remote library
 Summary(pl):	Pliki programistyczne biblioteki gaim-remote
 Group:		Development/Libraries
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	glib2-devel >= 2.0.0
 
 %description devel
 Development files for gaim-remote library.
@@ -97,7 +99,7 @@ Pliki programistyczne biblioteki gaim-remote.
 Summary:	Gaim files for perl scripts
 Summary(pl):	Pliki Gaim dla skryptów perl
 Group:		Development/Libraries
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description perl
 Gaim files for perl scripts.
@@ -124,6 +126,8 @@ Dokumentacja Gaim dla programistów (format HTML).
 %patch3 -p1
 
 mv -f po/{no,nb}.po
+
+%patch4 -p1
 
 %build
 rm -f configure.in
