@@ -1,4 +1,6 @@
 # This file does not like to be adapterized!
+# TODO:
+# - add perl subpackage
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(ko):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl):	Klient kompatybilny z AOL Instant Messenger
