@@ -9,7 +9,7 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.78
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -17,10 +17,12 @@ Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	079f3286333ed51cc72c65b5efe1b989
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
+Patch2:		%{name}-GG-evo.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	evolution-data-server >= 0.0.94-2
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.2.0
 BuildRequires:	libao-devel
@@ -114,6 +116,7 @@ Dokumentacja Gaim dla programistów (format HTML).
 %setup -q 
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 rm -f configure.in
