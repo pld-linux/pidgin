@@ -1,7 +1,7 @@
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Name:		gaim
-Version:	0.49
+Version:	0.50
 Release:	1
 Epoch:		1
 License:	GPL
@@ -123,7 +123,7 @@ mv $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway{,_applet}.so
 install plugins/iconaway_standalone.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
 install src/gaim_standalone $RPM_BUILD_ROOT%{_bindir}/gaim
 	
-gzip -9nf AUTHORS ChangeLog NEWS README* STATUS TODO HACKING \
+gzip -9nf AUTHORS ChangeLog NEWS README* TODO HACKING \
 	doc/{CREDITS,FAQ}
 
 %find_lang %{name} --with-gnome --all-name
