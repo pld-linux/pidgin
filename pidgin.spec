@@ -1,4 +1,7 @@
 # This file does not like to be adapterized!
+###########
+# TODO:
+# - SECURITY: http://securitytracker.com/alerts/2004/Aug/1010872.html
 #
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	gtkspell	# without gtkspell support
