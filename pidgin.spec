@@ -1,5 +1,7 @@
 # This file does not like to be adapterized!
 #
+%bcond_with	doc	# generate and include documentation
+#
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(ko):	AOL ÀÎ½ºÅÏÆ® ¸Þ½ÅÀú¿Í È£È¯µÇ´Â Å¬¶óÀÌ¾ðÆ®
@@ -25,6 +27,10 @@ BuildRequires:	libao-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
+%if %{with doc}
+BuildRequires:	doxygen
+BuildRequires:	graphviz
+%endif
 Requires:	gaim-ui = %{epoch}:%{version}
 Requires:	libao
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -93,6 +99,17 @@ Gaim files for perl scripts.
 %description perl -l pl
 Pliki Gaim dla skryptów perl.
 
+%package doc
+Summary:	Gaim documentation for developers (HTML format)
+Summary(pl):	Dokumentacja Gaim dla programistów (format HTML)
+Group:		Development/Libraries
+
+%description doc
+Gaim documentation for developers (HTML format).
+
+%description doc -l pl
+Dokumentacja Gaim dla programistów (format HTML).
+
 %prep
 %setup -q 
 %patch0 -p1
@@ -112,6 +129,7 @@ rm -f configure.in
 	--with-perl-lib=vendor
 
 %{__make}
+%{?with_doc:%{__make} docs}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -162,3 +180,8 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/auto/Gaim/*.ix
 %{perl_vendorarch}/auto/Gaim/*.bs
 %attr(755,root,root) %{perl_vendorarch}/auto/Gaim/*.so
+
+%if %{with doc}
+%files doc
+%doc doc/html/*.{html,png,css}
+%endif
