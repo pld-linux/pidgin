@@ -12,9 +12,6 @@ Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	604c749f236e3813a1d2341e2e9208bc
 Patch0:		%{name}-nolibs.patch
-# Patch0:		%{name}-gg_logoff.patch
-# Patch1:		%{name}-am_ac.patch
-# Patch2:		%{name}-tw.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
@@ -70,18 +67,6 @@ gtk+ user interface for gaim.
 %description ui-gtk -l pl
 Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 
-# %package ui-gnome
-# Summary:	GNOME user interface for gaim (applet)
-# Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet)
-# Group:		Applications/Communications
-# Provides:	gaim-ui =  %{epoch}:%{version}-%{release}
-
-# %description ui-gnome
-# GNOME user interface for gaim (applet).
-
-# %description ui-gnome -l pl
-# Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
-
 %package devel
 Summary:	Development files for gaim-remote library
 Summary(pl):	Pliki programistyczne biblioteki gaim-remote
@@ -111,29 +96,11 @@ rm -f configure.in
 
 %{__make}
 
-# no GNOME version of UI now
-#mv plugins/.libs/iconaway{,_standalone}.so
-#mv src/gaim{,_standalone}
-#%{__make} clean
-
-#%%configure \
-#	--enable-panel \
-#	--enable-esd \
-#	--disable-nas \
-#	--disable-artsc \
-#	--enable-gnome
-#
-#%{__make}
-
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-#mv $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway{,_applet}.so
-#install plugins/.libs/iconaway.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
-#install src/gaim_standalone $RPM_BUILD_ROOT%{_bindir}/gaim
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/gaim/*.la
 
@@ -162,13 +129,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gaim
 %attr(755,root,root) %{_libdir}/gaim/iconaway.so
 %{_desktopdir}/gaim.desktop
-
-# %files ui-gnome
-# %defattr(644,root,root,755)
-# %attr(755,root,root) %{_bindir}/gaim_applet
-# %attr(755,root,root) %{_libdir}/gaim/iconaway_applet.so
-# %{_applnkdir}/Network/Communications/gaim_applet.desktop
-# %{_sysconfdir}/CORBA/servers/*
 
 %files devel
 %defattr(644,root,root,755)
