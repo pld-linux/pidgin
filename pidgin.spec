@@ -4,13 +4,14 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.59.5
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://belnet.dl.sourceforge.net/sourceforge/gaim/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-gg_logoff.patch
 Patch1:		%{name}-am_ac.patch
+Patch2:		%{name}-tw.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	ORBit-devel
 BuildRequires:	autoconf
@@ -87,11 +88,15 @@ Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
 %setup -qn %{name}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 rm -f missing
 %{__libtoolize}
-%{__gettextize}
+%{__gettextize} --intl
+if [ -f po/Makevars.template ]; then
+	cp po/Makevars.template po/Makevars
+fi
 %{__aclocal} -I m4
 %{__autoheader}
 %{__autoconf}
