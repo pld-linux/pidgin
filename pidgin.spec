@@ -4,12 +4,13 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.55
-Release:	1
-Epoch:		1
+Release:	0.1
+#Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://prdownloads.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-gg_logoff.patch
+Patch1:		%{name}-src-Makefile.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	ORBit-devel
 BuildRequires:	autoconf
@@ -85,6 +86,7 @@ Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p0
 
 %build
 rm  -f missing
@@ -99,8 +101,11 @@ automake -a -c -f
 	--enable-esd \
 	--disable-nas \
 	--disable-artsc \
-	--with-gnome
-%{__make}
+	--with-gnome \
+	--with-gtk-prefix=/usr/X11R6 \
+	--with-gdk-pixbuf-config=/usr/X11R6/bin/gdk-pixbuf-config \
+	--with-gnome-includes=/usr/include/orbit-1.0
+%{__make} 
 mv plugins/iconaway{,_standalone}.so
 mv src/gaim{,_standalone}
 %{__make} clean
@@ -110,9 +115,12 @@ mv src/gaim{,_standalone}
 	--enable-esd \
 	--disable-nas \
 	--disable-artsc \
-	--with-gnome
+	--with-gnome \
+	--with-gtk-prefix=/usr/X11R6 \
+	--with-gdk-pixbuf-config=/usr/X11R6/bin/gdk-pixbuf-config \
+	--with-gnome-includes=/usr/include/orbit-1.0
 %{__make}
-
+	
 %install
 rm -rf $RPM_BUILD_ROOT
 
