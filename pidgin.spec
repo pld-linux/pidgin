@@ -93,10 +93,7 @@ Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
 %build
 rm -f missing
 %{__libtoolize}
-%{__gettextize} --intl
-if [ -f po/Makevars.template ]; then
-	cp po/Makevars.template po/Makevars
-fi
+%{__gettextize}
 %{__aclocal} -I m4
 %{__autoheader}
 %{__autoconf}
@@ -139,9 +136,6 @@ mv $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway{,_applet}.so
 install plugins/iconaway_standalone.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
 install src/gaim_standalone $RPM_BUILD_ROOT%{_bindir}/gaim
 
-gzip -9nf AUTHORS ChangeLog NEWS README* TODO HACKING \
-	doc/{CREDITS,FAQ}
-
 %find_lang %{name} --with-gnome --all-name
 
 %clean
@@ -149,7 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc {*,doc/*}.gz
+%doc AUTHORS ChangeLog NEWS README* TODO HACKING doc/{CREDITS,FAQ}
 %dir %{_libdir}/gaim
 %attr(755,root,root) %{_libdir}/gaim/[^i]*.so
 %{_pixmapsdir}/*
