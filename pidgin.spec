@@ -1,7 +1,7 @@
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Name:		gaim
-Version:	0.47
+Version:	0.48
 Release:	1
 License:	GPL
 Group:		Applications/Communications
