@@ -1,5 +1,5 @@
 Summary:	A client compatible with AOL's 'Instant Messenger'
-Summary(es):	Klient kompatybilny z programem AOLa 'Instant Messenger'
+Summary(pl):	Klient kompatybilny z programem AOLa 'Instant Messenger'
 Name:		gaim
 Version:	0.11.0pre11
 Release:	1
@@ -47,7 +47,7 @@ do us³ug takich jak Yahoo!, ICQ oraz IRC.
 %setup -q
 
 %build
-rm missing
+rm  -f missing
 libtoolize --copy --force
 gettextize --copy --force
 aclocal -I m4
