@@ -1,0 +1,16 @@
+diff -ruN gaim-0.72/configure.ac gaim-0.72./configure.ac
+--- gaim-0.72/configure.ac	2003-11-21 19:29:01.799287856 +0100
++++ gaim-0.72./configure.ac	2003-11-21 19:28:51.178902400 +0100
+@@ -36,9 +36,9 @@
+ AC_FUNC_STRFTIME
+ AC_CHECK_FUNCS(strdup strstr atexit)
+ dnl Checks for getopt in standard library
+-AC_CHECK_FUNCS(getopt_long , ,
+-AC_LIBOBJ(getopt)
+-AC_LIBOBJ(getopt1)) 
++AC_CHECK_FUNCS(getopt_long , ,
++[AC_LIBOBJ(getopt)]
++[AC_LIBOBJ(getopt1)]) 
+  
+ 
+ dnl Check for inet_aton
