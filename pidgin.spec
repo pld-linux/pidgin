@@ -1,5 +1,3 @@
-# This file does not like to be adapterized!
-###########
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	gtkspell	# without gtkspell support
 #
@@ -14,7 +12,7 @@ Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 # Source0-md5:	d4bb61059214cfdbc75f85fe185b0e01
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
@@ -122,7 +120,7 @@ Gaim documentation for developers (HTML format).
 Dokumentacja Gaim dla programistów (format HTML).
 
 %prep
-%setup -q 
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
