@@ -1,0 +1,14 @@
+diff -urN gaim-0.51.org/src/protocols/gg/gg.c gaim-0.51/src/protocols/gg/gg.c
+--- gaim-0.51.org/src/protocols/gg/gg.c	Sat Feb 16 19:47:26 2002
++++ gaim-0.51/src/protocols/gg/gg.c	Sat Feb 16 19:47:48 2002
+@@ -580,9 +580,9 @@
+ 	if (gc->inpa)
+ 		gaim_input_remove(gc->inpa);
+ 	gg_logoff(gd->sess);
++	gd->own_status = GG_STATUS_NOT_AVAIL;
+ 	gg_free_session(gd->sess);
+ 	g_free(gc->proto_data);
+-	gd->own_status = GG_STATUS_NOT_AVAIL;
+ }
+ 
+ static int agg_send_im(struct gaim_connection *gc, char *who, char *msg, int flags)
