@@ -149,10 +149,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man?/*
 
 %files ui-gtk
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gaim
 %attr(755,root,root) %{_libdir}/gaim/iconaway.so
 
 %files ui-gnome
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gaim_applet
 %attr(755,root,root) %{_libdir}/gaim/iconaway_applet.so
 %{_sysconfdir}/CORBA/servers/*
