@@ -102,7 +102,7 @@ Pliki programistyczne biblioteki gaim-remote.
 rm -f configure.in
 %{__libtoolize}
 %{__gettextize}
-%{__aclocal} 
+%{__aclocal}
 %{__autoheader}
 %{__autoconf}
 %{__automake}
@@ -124,7 +124,7 @@ rm -f configure.in
 #	--enable-gnome
 #
 #%{__make}
-	
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
