@@ -3,22 +3,22 @@ Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
-Version:	0.59.8
+Version:	0.60
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
-Source0:	http://belnet.dl.sourceforge.net/sourceforge/gaim/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-gg_logoff.patch
-Patch1:		%{name}-am_ac.patch
-Patch2:		%{name}-tw.patch
+Source0:	http://belnet.dl.sourceforge.net/sourceforge/gaim/%{name}-%{version}.tar.gz
+# Patch0:		%{name}-gg_logoff.patch
+# Patch1:		%{name}-am_ac.patch
+# Patch2:		%{name}-tw.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	ORBit-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gnome-libs-devel >= 1.2.13
 BuildRequires:	esound-devel
-BuildRequires:	gtk+-devel >= 1.2.5
+BuildRequires:	gtk+2-devel >= 2.1.0
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel
@@ -29,6 +29,7 @@ Requires:	gaim-ui = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/X11/GNOME
+%define		_prefix	/usr/X11R6
 
 %description
 Gaim allows you to talk to anyone using AOL's Instant Messenger
@@ -70,29 +71,29 @@ gtk+ user interface for gaim.
 %description ui-gtk -l pl
 Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 
-%package ui-gnome
-Summary:	GNOME user interface for gaim (applet)
-Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet)
-Group:		Applications/Communications
-Provides:	gaim-ui = %{version}-%{release}
+# %package ui-gnome
+# Summary:	GNOME user interface for gaim (applet)
+# Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet)
+# Group:		Applications/Communications
+# Provides:	gaim-ui = %{version}-%{release}
 
-%description ui-gnome
-GNOME user interface for gaim (applet).
+# %description ui-gnome
+# GNOME user interface for gaim (applet).
 
-%description ui-gnome -l pl
-Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
+# %description ui-gnome -l pl
+# Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
 
 %prep
 %setup -qn %{name}-%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+# %patch0 -p1
+# %patch1 -p1
+# %patch2 -p1
 
 %build
 rm -f missing
 %{__libtoolize}
 %{__gettextize}
-%{__aclocal} -I m4
+%{__aclocal} 
 %{__autoheader}
 %{__autoconf}
 %{__automake}
@@ -105,7 +106,7 @@ rm -f missing
 	--with-gtk-prefix=/usr/X11R6 \
 	--with-gdk-pixbuf-config=/usr/X11R6/bin/gdk-pixbuf-config 
 %{__make} 
-mv plugins/iconaway{,_standalone}.so
+mv plugins/.libs/iconaway{,_standalone}.so
 mv src/gaim{,_standalone}
 %{__make} clean
 
@@ -121,6 +122,7 @@ mv src/gaim{,_standalone}
 	
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
 
 # NOTE: make ignores gaimdesktopdir set below.
 %{__make} install \
@@ -128,10 +130,10 @@ rm -rf $RPM_BUILD_ROOT
 	gaimdesktopdir=%{_applnkdir}/Network/Communications \
 	distribdesktopdir=%{_applnkdir}/Network/Communications
 
-mv $RPM_BUILD_ROOT{%{_datadir}/gnome/apps/Internet/gaim.desktop,%{_applnkdir}/Network/Communications}
+mv $RPM_BUILD_ROOT{%{_datadir}/applications/gaim.desktop,%{_applnkdir}/Network/Communications}
 
 mv $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway{,_applet}.so
-install plugins/iconaway_standalone.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
+install plugins/.libs/iconaway.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
 install src/gaim_standalone $RPM_BUILD_ROOT%{_bindir}/gaim
 
 %find_lang %{name} --with-gnome --all-name
@@ -146,6 +148,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/[^i]*.so
 %{_pixmapsdir}/*
 %{_mandir}/man?/*
+%{_datadir}/sounds/%{name}/*.wav
 
 %files ui-gtk
 %defattr(644,root,root,755)
@@ -153,9 +156,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/iconaway.so
 %{_applnkdir}/Network/Communications/gaim.desktop
 
-%files ui-gnome
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/gaim_applet
-%attr(755,root,root) %{_libdir}/gaim/iconaway_applet.so
-%{_applnkdir}/Network/Communications/gaim_applet.desktop
-%{_sysconfdir}/CORBA/servers/*
+# %files ui-gnome
+# %defattr(644,root,root,755)
+# %attr(755,root,root) %{_bindir}/gaim_applet
+# %attr(755,root,root) %{_libdir}/gaim/iconaway_applet.so
+# %{_applnkdir}/Network/Communications/gaim_applet.desktop
+# %{_sysconfdir}/CORBA/servers/*
