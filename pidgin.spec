@@ -81,11 +81,16 @@ Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 # Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
 
 %package devel
-Summary:	Devel files for gaim remote
-Group:		Development/Librairies
+Summary:	Development files for gaim-remote library
+Summary(pl):	Pliki programistyczne biblioteki gaim-remote
+Group:		Development/Libraries
+Requires:	%{name} = %{version}
 
 %description devel
-Devel files for gaim remote.
+Development files for gaim-remote library.
+
+%description devel -l pl
+Pliki programistyczne biblioteki gaim-remote.
 
 %prep
 %setup -q
@@ -128,22 +133,27 @@ rm -rf $RPM_BUILD_ROOT
 #install plugins/.libs/iconaway.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
 #install src/gaim_standalone $RPM_BUILD_ROOT%{_bindir}/gaim
 
+rm -f $RPM_BUILD_ROOT%{_libdir}/gaim/*.la
+
 %find_lang %{name} --with-gnome --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO HACKING doc/{CREDITS,FAQ}
-%dir %{_libdir}/gaim
 %attr(755,root,root) %{_bindir}/gaim-remote
 %attr(755,root,root) %{_libdir}/libgaim-remote.so.0.0.0
+%dir %{_libdir}/gaim
 %attr(755,root,root) %{_libdir}/gaim/[!i]*.so
 %attr(755,root,root) %{_libdir}/gaim/idle*.so
 %{_pixmapsdir}/*
 %{_mandir}/man?/*
-%{_datadir}/sounds/%{name}/*.wav
+%{_datadir}/sounds/%{name}
 
 %files ui-gtk
 %defattr(644,root,root,755)
@@ -160,7 +170,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%dir %{_includedir}/gaim-remote/
+%attr(755,root,root) %{_libdir}/libgaim-remote.so
+%{_libdir}/libgaim-remote.la
+%dir %{_includedir}/gaim-remote
 %{_includedir}/gaim-remote/remote-socket.h
 %{_includedir}/gaim-remote/remote.h
-%{_libdir}/*.la
