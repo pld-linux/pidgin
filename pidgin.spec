@@ -131,6 +131,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README* TODO HACKING doc/{CREDITS,FAQ}
 %dir %{_libdir}/gaim
 %attr(755,root,root) %{_bindir}/gaim-remote
+%attr(755,root,root) %{_libdir}/libgaim-remote.so.0.0.0
+# should be -devel, but....
+%{_includedir}/gaim-remote/remote-socket.h
+%{_includedir}/gaim-remote/remote.h
 %attr(755,root,root) %{_libdir}/gaim/[!i]*.so
 %attr(755,root,root) %{_libdir}/gaim/idle*.so
 %{_pixmapsdir}/*
