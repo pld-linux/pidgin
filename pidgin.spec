@@ -3,13 +3,27 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	0.51
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
+Group(cs):	Aplikace/Komunikace
+Group(da):	Programmer/Kommunikation
 Group(de):	Applikationen/Kommunikation
+Group(es):	Aplicaciones/Comunicaciones
+Group(fr):	Applications/Transmissions
+Group(is):	Forrit/Samskipti
+Group(it):	Applicazioni/Comunicazioni
+Group(ja):	¥¢¥×¥ê¥±¡¼¥·¥ç¥ó/ÄÌ¿®
+Group(no):	Applikasjoner/Kommunikasjon
 Group(pl):	Aplikacje/Komunikacja
+Group(pt):	Aplicações/Comunicações
+Group(ru):	ğÒÉÌÏÖÅÎÉÑ/ëÏÍÍÕÎÉËÁÃÉÉ
+Group(sl):	Programi/Komunikacije
+Group(sv):	Tillämpningar/Kommunikation
+Group(uk):	ğÒÉËÌÁÄÎ¦ ğÒÏÇÒÁÍÉ/ëÏÍÕÎ¦ËÁÃ¦§
 Source0:	http://prdownloads.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-gg_logoff.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	ORBit-devel
 BuildRequires:	autoconf
@@ -62,32 +76,59 @@ MSN, Jabber e Napster.
 Summary:	gtk+ user interface for gaim
 Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z gtk+
 Group:		Applications/Communications
+Group(cs):	Aplikace/Komunikace
+Group(da):	Programmer/Kommunikation
 Group(de):	Applikationen/Kommunikation
+Group(es):	Aplicaciones/Comunicaciones
+Group(fr):	Applications/Transmissions
+Group(is):	Forrit/Samskipti
+Group(it):	Applicazioni/Comunicazioni
+Group(ja):	¥¢¥×¥ê¥±¡¼¥·¥ç¥ó/ÄÌ¿®
+Group(no):	Applikasjoner/Kommunikasjon
 Group(pl):	Aplikacje/Komunikacja
+Group(pt):	Aplicações/Comunicações
+Group(ru):	ğÒÉÌÏÖÅÎÉÑ/ëÏÍÍÕÎÉËÁÃÉÉ
+Group(sl):	Programi/Komunikacije
+Group(sv):	Tillämpningar/Kommunikation
+Group(uk):	ğÒÉËÌÁÄÎ¦ ğÒÏÇÒÁÍÉ/ëÏÍÕÎ¦ËÁÃ¦§
 Provides:	gaim-ui
 
 %description ui-gtk
 gtk+ user interface for gaim.
 
-%description -l pl ui-gtk
+%description ui-gtk -l pl
 Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 
 %package ui-gnome
 Summary:	GNOME user interface for gaim (applet)
 Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet)
 Group:		Applications/Communications
+Group(cs):	Aplikace/Komunikace
+Group(da):	Programmer/Kommunikation
 Group(de):	Applikationen/Kommunikation
+Group(es):	Aplicaciones/Comunicaciones
+Group(fr):	Applications/Transmissions
+Group(is):	Forrit/Samskipti
+Group(it):	Applicazioni/Comunicazioni
+Group(ja):	¥¢¥×¥ê¥±¡¼¥·¥ç¥ó/ÄÌ¿®
+Group(no):	Applikasjoner/Kommunikasjon
 Group(pl):	Aplikacje/Komunikacja
+Group(pt):	Aplicações/Comunicações
+Group(ru):	ğÒÉÌÏÖÅÎÉÑ/ëÏÍÍÕÎÉËÁÃÉÉ
+Group(sl):	Programi/Komunikacije
+Group(sv):	Tillämpningar/Kommunikation
+Group(uk):	ğÒÉËÌÁÄÎ¦ ğÒÏÇÒÁÍÉ/ëÏÍÕÎ¦ËÁÃ¦§
 Provides:	gaim-ui
 
 %description ui-gnome
 GNOME user interface for gaim (applet).
 
-%description -l pl ui-gnome
+%description ui-gnome -l pl
 Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 rm  -f missing
@@ -125,7 +166,7 @@ rm -rf $RPM_BUILD_ROOT
 	gaimdesktopdir=%{_applnkdir}/Network/Communications \
 	distribdesktopdir=%{_applnkdir}/Network/Communications
 
-mv $RPM_BUILD_ROOT{%{_datadir}/gnome/apps/Internet/gaim.desktop,%{_applnkdir}/Network/Communications}
+mv $RPM_BUILD_ROOT{%{_applnkdir}/Internet/gaim.desktop,%{_applnkdir}/Network/Communications}
 
 mv $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway{,_applet}.so
 install plugins/iconaway_standalone.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
