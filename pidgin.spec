@@ -12,6 +12,7 @@ Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	2eb9478126ffc76b9a5f3cbf7cd82062
 Patch0:		%{name}-nolibs.patch
+Patch1:		%{name}-ac.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
@@ -81,6 +82,7 @@ Pliki programistyczne biblioteki gaim-remote.
 %prep
 %setup -q 
 %patch0 -p1
+%patch1 -p1
 
 %build
 rm -f configure.in
@@ -92,7 +94,7 @@ rm -f configure.in
 %{__automake}
 %configure \
 	--disable-nas \
-  --enable-nss=no
+	--enable-nss=no
 
 %{__make}
 
