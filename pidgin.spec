@@ -80,6 +80,13 @@ Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 # %description ui-gnome -l pl
 # Interfejs u¿ytkownika gaim korzystaj±cy z GNOME (applet).
 
+%package devel
+Summary:	devel files for gaim remote
+Group:		Applications/Communications
+
+%description devel
+devel files for gaim remote.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -132,9 +139,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gaim
 %attr(755,root,root) %{_bindir}/gaim-remote
 %attr(755,root,root) %{_libdir}/libgaim-remote.so.0.0.0
-# should be -devel, but....
-%{_includedir}/gaim-remote/remote-socket.h
-%{_includedir}/gaim-remote/remote.h
 %attr(755,root,root) %{_libdir}/gaim/[!i]*.so
 %attr(755,root,root) %{_libdir}/gaim/idle*.so
 %{_pixmapsdir}/*
@@ -153,3 +157,8 @@ rm -rf $RPM_BUILD_ROOT
 # %attr(755,root,root) %{_libdir}/gaim/iconaway_applet.so
 # %{_applnkdir}/Network/Communications/gaim_applet.desktop
 # %{_sysconfdir}/CORBA/servers/*
+
+%files devel
+%{_includedir}/gaim-remote/remote-socket.h
+%{_includedir}/gaim-remote/remote.h
+%{_libdir}/*.la
