@@ -1,3 +1,4 @@
+# This file does not like to be adapterized!
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
@@ -121,7 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 	gaimdesktopdir=%{_applnkdir}/Network/Communications \
 	distribdesktopdir=%{_applnkdir}/Network/Communications
 
-mv $RPM_BUILD_ROOT{%{_applnkdir}/Internet/gaim.desktop,%{_applnkdir}/Network/Communications}
+mv $RPM_BUILD_ROOT{%{_datadir}/gnome/apps/Internet/gaim.desktop,%{_applnkdir}/Network/Communications}
 
 mv $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway{,_applet}.so
 install plugins/iconaway_standalone.so $RPM_BUILD_ROOT%{_libdir}/gaim/iconaway.so
