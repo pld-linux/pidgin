@@ -1,13 +1,15 @@
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(pl):	Klient kompatybilny z programem AOLa 'Instant Messenger'
 Name:		gaim
-Version:	0.43
+Version:	0.44
 Release:	1
 License:	GPL
 Group:		Applications/Communications
 Group(de):	Applikationen/Kommunikation
 Group(pl):	Aplikacje/Komunikacja
 Source0:	http://prdownloads.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-am_ac.patch
+Patch1:		%{name}-no_versioning.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	ORBit-devel
 BuildRequires:	autoconf
@@ -33,7 +35,8 @@ servers and can be retrieved from anywhere. It contains many of the
 same features as AOL's IM client while at the same time incorporating
 many new features. Gaim also contains a multiple connection feature
 which consists of protocol plugins. These plugins allow you to use
-gaim to connect to other chat services such as Yahoo!, ICQ, and IRC.
+gaim to connect to other chat services such as Yahoo!, ICQ, MSN,
+Jabber, Napster, Zephyr and IRC.
 
 %description -l pl
 Gaim pozwala na rozmowy z dowoln± osob± u¿ywaj±c± us³ugi AOL Instant
@@ -42,10 +45,13 @@ http://www.aim.aol.com/). Program u¿ywa wersji TOC protoko³u AOL wiêc
 Twoja lista kontaktów jest zapisana na serwerze AOL i mo¿e byc
 przes³ana gdziekolwiek. Gaim zawiera wiele udogodnieñ dostêpnych w
 kliencie AOL IM jak równie¿ dodaje w³asne. Gaim umo¿liwia tak¿e dostêp
-do us³ug takich jak Yahoo!, ICQ oraz IRC.
+do us³ug takich jak Yahoo!, ICQ, MSN, Jabber, Napster, Zephyr oraz
+IRC.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 rm  -f missing
@@ -56,7 +62,7 @@ autoheader
 autoconf
 automake -a -c
 %configure \
-	 --enable-panel \
+	--enable-panel \
 	--enable-esd \
 	--disable-nas \
 	--disable-artsc \
@@ -71,7 +77,7 @@ rm -rf $RPM_BUILD_ROOT
 	gaimdesktopdir=%{_applnkdir}/Network/Communications
 	
 gzip -9nf AUTHORS ChangeLog NEWS README* STATUS TODO HACKING \
-	doc/{CREDITS,FAQ,PROTOCOL}
+	doc/{CREDITS,FAQ}
 
 %find_lang %{name} --with-gnome --all-name
 
@@ -84,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/CORBA/servers/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/gaim
-%attr(755,root,root) %{_libdir}/gaim/*
+%attr(755,root,root) %{_libdir}/gaim/*.so
 %{_applnkdir}/Network/Communications/*.desktop
 %{_pixmapsdir}/*
 %{_mandir}/man?/*
