@@ -26,7 +26,7 @@ BuildRequires:	libtool
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 Requires:	applnk
-Requires:	gaim-ui =  %{epoch}:%{version}
+Requires:	gaim-ui = %{epoch}:%{version}
 Requires:	libao
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
