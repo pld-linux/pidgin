@@ -1,27 +1,28 @@
 # This file does not like to be adapterized!
 # TODO:
-# - add perl subpackage
+#	perl subpackage
+#
+%include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(ko):	AOL ÀÎ½ºÅÏÆ® ¸Þ½ÅÀú¿Í È£È¯µÇ´Â Å¬¶óÀÌ¾ðÆ®
 Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
-Version:	0.75
-Release:	4
+Version:	0.76
+Release:	0.5
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
-# Source0-md5:	9935155985c25dfc9b59183de0da3c30
+# Source0-md5:	832126135930b4a13537d1270088c2dc
 Patch0:		%{name}-nolibs.patch
-# It's temporary security patch - remember to throw it out when 0.76 appears 
-Patch1:		%{name}-%{version}.patch
+Patch1:		%{name}-missing-file.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2.1.0
+BuildRequires:	gtk+2-devel >= 2.2.0
 BuildRequires:	libao-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel
@@ -82,10 +83,22 @@ Development files for gaim-remote library.
 %description devel -l pl
 Pliki programistyczne biblioteki gaim-remote.
 
+#%package perl
+#Summary:	Gaim files for perl scripts
+#Summary(pl):	Pliki Gaim dla skryptów perl
+#Group:		Development/Libraries
+#Requires:	%{name} = %{epoch}:%{version}
+
+#%description perl
+#Gaim files for perl scripts.
+
+#%description perl -l pl
+#Pliki Gaim dla skryptów perl.
+
 %prep
 %setup -q 
 %patch0 -p1
-%patch1 
+%patch1	-p1
 
 %build
 rm -f configure.in
@@ -142,3 +155,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_includedir}/gaim-remote
 %{_includedir}/gaim-remote/remote-socket.h
 %{_includedir}/gaim-remote/remote.h
+
+#%files perl
+#%defattr(644,root,root,755)
