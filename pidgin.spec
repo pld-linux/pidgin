@@ -130,7 +130,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO HACKING doc/{CREDITS,FAQ}
 %dir %{_libdir}/gaim
+%attr(755,root,root) %{_bindir}/gaim-remote
 %attr(755,root,root) %{_libdir}/gaim/[!i]*.so
+%attr(755,root,root) %{_libdir}/gaim/idle*.so
 %{_pixmapsdir}/*
 %{_mandir}/man?/*
 %{_datadir}/sounds/%{name}/*.wav
