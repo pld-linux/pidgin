@@ -23,10 +23,11 @@
  Comment[ko]=다중 프로토콜 메신저
  Comment[pl]=Komunikator internetowy obsługujący kilka protokołów
  Comment[pt]=Cliente de mensagens instantâneas multi-protocolo
-@@ -27,5 +27,5 @@
+@@ -27,5 +27,6 @@
  Icon=gaim.png
  Terminal=false
  Type=Application
 -Categories=Application;Network;
 +Categories=GTK;GNOME;Network;InstantMessaging;
  StartupNotify=true
++# vi: encoding=utf-8
