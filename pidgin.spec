@@ -30,6 +30,7 @@ BuildRequires:	libao-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-perlprov
 BuildRequires:	xcursor-devel
 %if %{with doc}
 BuildRequires:	doxygen
