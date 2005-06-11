@@ -1,19 +1,39 @@
-diff -Nur gaim-1.1.3-orig/gaim.desktop gaim-1.1.3/gaim.desktop
---- gaim-1.1.3-orig/gaim.desktop	2005-01-23 21:31:17.000000000 +0100
-+++ gaim-1.1.3/gaim.desktop	2005-02-18 23:48:36.255373304 +0100
-@@ -7,7 +7,7 @@
- Name[it]=Gaim Internet Messenger
- Name[ko]=게임 메신저
- Name[nl]=Gaim - Expresberichten
--Name[pl]=Komunikator Internetowy Gaim
-+Name[pl]=Gaim - Komunikator internetowy
- Name[pt]=Mensageiro Instantâneo Gaim
- Name[sl]=Gaim - spletni sel
- Name[sv]=Gaim Internet Messenger
-@@ -38,5 +38,5 @@
+diff -Nur gaim-1.3.1-orig/gaim.desktop gaim-1.3.1/gaim.desktop
+--- gaim-1.3.1-orig/gaim.desktop	2005-06-11 10:15:58.207411504 +0200
++++ gaim-1.3.1/gaim.desktop	2005-06-11 10:17:31.550221240 +0200
+@@ -20,11 +20,11 @@
+ Comment[sl]=Večprotokolni odjemalec za neposredno sporočanje
+ Comment[sq]=Dërgoni mesazhe të atypëratyshëm protokollesh të ndryshëm
+ Comment[sv]=Sänder snabbmeddelande över många protokoll
+-GenericName[cs]=Internet Messenger
+ Comment[zh_CN]=通过多种协议发送即时消息
+ Comment[zh_TW]=透過多種通訊協定發送即時訊息
+ GenericName=Internet Messenger
+ GenericName[ca]=Missatger d'Internet
++GenericName[cs]=Internet Messenger
+ GenericName[da]=Internet beskeder
+ GenericName[es]=Cliente de mensajería de Internet
+ GenericName[fr]=Messagerie internet
+@@ -37,7 +37,6 @@
+ GenericName[pl]=Komunikator Internetowy
+ GenericName[pt_BR]=Mensageiro via Internet
+ GenericName[pt]=Mensageiro Internet
+-Name[cs]=Gaim Internet Messenger
+ GenericName[sl]=Spletni sel
+ GenericName[sq]=Lajmësjellës Internet
+ GenericName[sv]=Meddelandeklient
+@@ -45,6 +44,7 @@
+ GenericName[zh_TW]=網路即時通
+ Name=Gaim Internet Messenger
+ Name[ca]=Missatger d'Internet Gaim
++Name[cs]=Gaim Internet Messenger
+ Name[da]=Gaim - internet beskeder
+ Name[de]=Gaim Internet Messenger
+ Name[es]=Gaim - cliente de mensajería de Internet
+@@ -66,5 +66,6 @@
+ Exec=gaim
  Icon=gaim.png
+ StartupNotify=true
++Categories=GTK;GNOME;Network;InstantMessaging;
  Terminal=false
  Type=Application
--Categories=Application;Network;
-+Categories=GTK;GNOME;Network;InstantMessaging;
- StartupNotify=true
