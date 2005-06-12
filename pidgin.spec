@@ -155,6 +155,9 @@ rm -rf $RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/gaim/*.la
 
+# for future my_MM not supported by glibc yet
+mv -f $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
+
 %find_lang %{name} --with-gnome --all-name
 
 %clean
