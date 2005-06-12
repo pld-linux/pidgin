@@ -1,0 +1,2 @@
+- remove all gettext hacks (all this must be moved to %_gettextize macro)
+  and use new %doc.
