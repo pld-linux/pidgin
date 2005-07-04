@@ -131,16 +131,16 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 %description tcl
 This package gives you ability to extend Gaim functionality with Tcl scripts.
 
-%package plugin-gevolution
-Summary:	Plugin for Evolution integration
+%package plugin-evolution
+Summary:	Plugin for Ximian Evolution integration
 Summary(pl):	Wtyczka do integracji z Evolution
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description plugin-gevolution
-Plugin for Evolution integration.
+%description plugin-evolution
+Provides integration with Ximian Evolution.
 
-%description gevolution -l pl
+%description evolution -l pl
 Wtyczka do integracji z Evolution.
 
 %package plugin-remote
@@ -263,7 +263,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/gaim/tcl.so
 
-%files plugin-gevolution
+%files plugin-evolution
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/gaim/gevolution.so
 
