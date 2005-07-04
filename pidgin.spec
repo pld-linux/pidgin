@@ -1,8 +1,9 @@
 # TODO
-# - separate gevolution plugin (less gnome deps)
-# - more separation? (for example why -perl is separate while -tcl isn't?)
 # - gtkspell as subpackage, rather bcond?
-# - nas, silc/silcclient, kerberos 4 with zephyr support?
+# - nas, silc/silcclient?
+# - kerberos 4 with zephyr support?
+# - external zephyr?
+#   http://packages.qa.debian.org/z/zephyr.html
 #
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	gtkspell	# without gtkspell support
@@ -15,7 +16,7 @@ Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Summary(de):	Gaim ist ein Instant Messenger
 Name:		gaim
 Version:	1.3.1
-Release:	1.3
+Release:	1.7
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -38,7 +39,7 @@ BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-perlprov
 BuildRequires:	tcl-devel
-BuildRequires:	tk
+BuildRequires:	tk-devel
 BuildRequires:	xcursor-devel
 %if %{with doc}
 BuildRequires:	doxygen
@@ -97,15 +98,15 @@ gtk+ user interface for gaim.
 Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
 
 %package devel
-Summary:	Development files for gaim-remote library
+Summary:	Development files for gaim
 Summary(pl):	Pliki programistyczne biblioteki gaim-remote
 Group:		Development/Libraries
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name}-plugin-remote = %{epoch}:%{version}-%{release}
 Requires:	glib2-devel >= 2.0.0
 Requires:	gtk+2-devel >= 1:2.2.0
 
 %description devel
-Development files for gaim-remote library.
+Development files for gaim.
 
 %description devel -l pl
 Pliki programistyczne biblioteki gaim-remote.
@@ -117,22 +118,39 @@ Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description perl
-Gaim files for Perl scripts.
+This package gives you ability to extend Gaim functionality with Perl scripts.
 
 %description perl -l pl
 Pliki Gaim dla skryptów w Perlu.
 
-%package gevolution
+%package tcl
+Summary:	Gaim files for Tcl scripts
+Group:		Libraries
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description tcl
+This package gives you ability to extend Gaim functionality with Tcl scripts.
+
+%package plugin-gevolution
 Summary:	Plugin for Evolution integration
 Summary(pl):	Wtyczka do integracji z Evolution
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description gevolution
+%description plugin-gevolution
 Plugin for Evolution integration.
 
 %description gevolution -l pl
 Wtyczka do integracji z Evolution.
+
+%package plugin-remote
+Summary:	Gaim Remote Control
+Group:		Development/Libraries
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description plugin-remote
+This package gives Gaim the ability to be remote-controlled through third-party
+applications or through the gaim-remote tool.
 
 %package doc
 Summary:	Gaim documentation for developers (HTML format)
@@ -183,19 +201,16 @@ mv -f $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post	plugin-remote -p /sbin/ldconfig
+%postun	plugin-remote -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* HACKING doc/{CREDITS,FAQ}
-%attr(755,root,root) %{_bindir}/gaim-remote
-%attr(755,root,root) %{_libdir}/libgaim-remote.so.0.0.0
 %dir %{_libdir}/gaim
 %attr(755,root,root) %{_libdir}/gaim/autorecon.so
 %attr(755,root,root) %{_libdir}/gaim/docklet.so
 %attr(755,root,root) %{_libdir}/gaim/extplacement.so
-%attr(755,root,root) %{_libdir}/gaim/gaim-remote.so
 %attr(755,root,root) %{_libdir}/gaim/gestures.so
 %attr(755,root,root) %{_libdir}/gaim/history.so
 %attr(755,root,root) %{_libdir}/gaim/idle.so
@@ -215,7 +230,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/ssl-nss.so
 %attr(755,root,root) %{_libdir}/gaim/ssl.so
 %attr(755,root,root) %{_libdir}/gaim/statenotify.so
-%attr(755,root,root) %{_libdir}/gaim/tcl.so
 %attr(755,root,root) %{_libdir}/gaim/ticker.so
 %attr(755,root,root) %{_libdir}/gaim/timestamp.so
 %{_pixmapsdir}/*
@@ -245,9 +259,19 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/auto/Gaim/*.bs
 %attr(755,root,root) %{perl_vendorarch}/auto/Gaim/*.so
 
-%files gevolution
+%files tcl
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/gaim/tcl.so
+
+%files plugin-gevolution
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/gaim/gevolution.so
+
+%files plugin-remote
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gaim-remote
+%attr(755,root,root) %{_libdir}/libgaim-remote.so.0.0.0
+%attr(755,root,root) %{_libdir}/gaim/gaim-remote.so
 
 %if %{with doc}
 %files doc
