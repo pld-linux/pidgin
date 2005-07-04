@@ -113,23 +113,31 @@ Pliki programistyczne biblioteki gaim-remote.
 
 %package perl
 Summary:	Gaim files for Perl scripts
-Summary(pl):	Pliki Gaim dla skryptów w Perlu
+Summary(pl):	Pliki Gaima dla skryptów w Perlu
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description perl
-This package gives you ability to extend Gaim functionality with Perl scripts.
+This package gives you ability to extend Gaim functionality with Perl
+scripts.
 
 %description perl -l pl
-Pliki Gaim dla skryptów w Perlu.
+Ten pakiet daje mo¿liwo¶æ rozszerzania funkcjonalno¶ci Gaima za pomoc±
+skryptów Perla.
 
 %package tcl
 Summary:	Gaim files for Tcl scripts
+Summary(pl):	Pliki Gaima dla skryptów w Tcl-u
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description tcl
-This package gives you ability to extend Gaim functionality with Tcl scripts.
+This package gives you ability to extend Gaim functionality with Tcl
+scripts.
+
+%description tcl -l pl
+Ten pakiet daje mo¿liwo¶æ rozszerzania funkcjonalno¶ci Gaima za pomoc±
+skryptów w Tcl-u.
 
 %package plugin-evolution
 Summary:	Plugin for Ximian Evolution integration
@@ -140,17 +148,22 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 %description plugin-evolution
 Provides integration with Ximian Evolution.
 
-%description evolution -l pl
+%description plugin-evolution -l pl
 Wtyczka do integracji z Evolution.
 
 %package plugin-remote
 Summary:	Gaim Remote Control
-Group:		Development/Libraries
+Summary(pl):	Zdalne sterowanie Gaimem
+Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-remote
-This package gives Gaim the ability to be remote-controlled through third-party
-applications or through the gaim-remote tool.
+This package gives Gaim the ability to be remote-controlled through
+third-party applications or through the gaim-remote tool.
+
+%description plugin-remote -l pl
+Ten pakiet daje mo¿liwo¶æ zdalnego sterowania Gaimem przez inne
+aplikacje albo narzêdzie gaim-remote.
 
 %package doc
 Summary:	Gaim documentation for developers (HTML format)
