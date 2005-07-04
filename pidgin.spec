@@ -1,9 +1,9 @@
 # TODO
-# - gtkspell as subpackage, rather bcond?
 # - nas, silc/silcclient?
 # - kerberos 4 with zephyr support?
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
+# - kill -ui-gtk? (is there any other ui?)
 #
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	gtkspell	# without gtkspell support
