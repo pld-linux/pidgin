@@ -111,29 +111,33 @@ Development files for gaim-remote library.
 Pliki programistyczne biblioteki gaim-remote.
 
 %package perl
-Summary:	Gaim files for perl scripts
-Summary(pl):	Pliki Gaim dla skryptów perl
-Group:		Development/Libraries
+Summary:	Gaim files for Perl scripts
+Summary(pl):	Pliki Gaim dla skryptów w Perlu
+Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description perl
-Gaim files for perl scripts.
+Gaim files for Perl scripts.
 
 %description perl -l pl
-Pliki Gaim dla skryptów perl.
+Pliki Gaim dla skryptów w Perlu.
 
 %package gevolution
 Summary:	Plugin for Evolution integration
-Group:		Development/Libraries
+Summary(pl):	Wtyczka do integracji z Evolution
+Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description gevolution
-Plugin for Evolution integration
+Plugin for Evolution integration.
+
+%description gevolution -l pl
+Wtyczka do integracji z Evolution.
 
 %package doc
 Summary:	Gaim documentation for developers (HTML format)
 Summary(pl):	Dokumentacja Gaim dla programistów (format HTML)
-Group:		Development/Libraries
+Group:		Documentation
 
 %description doc
 Gaim documentation for developers (HTML format).
