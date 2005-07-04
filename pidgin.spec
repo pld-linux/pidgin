@@ -1,5 +1,8 @@
 # TODO
 # - separate gevolution plugin (less gnome deps)
+# - more separation? (for example why -perl is separate while -tcl isn't?)
+# - gtkspell as subpackage, rather bcond?
+# - nas, silc/silcclient, kerberos 4 with zephyr support?
 #
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	gtkspell	# without gtkspell support
@@ -12,7 +15,7 @@ Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Summary(de):	Gaim ist ein Instant Messenger
 Name:		gaim
 Version:	1.3.1
-Release:	1
+Release:	1.3
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -25,7 +28,7 @@ URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	evolution-data-server >= 0.0.95
+BuildRequires:	evolution-data-server-devel >= 0.0.95
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 1:2.2.0
 %{?with_gtkspell:BuildRequires: gtkspell-devel >= 2.0.4}
@@ -34,6 +37,8 @@ BuildRequires:	libtool
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-perlprov
+BuildRequires:	tcl-devel
+BuildRequires:	tk
 BuildRequires:	xcursor-devel
 %if %{with doc}
 BuildRequires:	doxygen
@@ -117,6 +122,14 @@ Gaim files for perl scripts.
 %description perl -l pl
 Pliki Gaim dla skryptów perl.
 
+%package gevolution
+Summary:	Plugin for Evolution integration
+Group:		Development/Libraries
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description gevolution
+Plugin for Evolution integration
+
 %package doc
 Summary:	Gaim documentation for developers (HTML format)
 Summary(pl):	Dokumentacja Gaim dla programistów (format HTML)
@@ -180,7 +193,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/extplacement.so
 %attr(755,root,root) %{_libdir}/gaim/gaim-remote.so
 %attr(755,root,root) %{_libdir}/gaim/gestures.so
-%attr(755,root,root) %{_libdir}/gaim/gevolution.so
 %attr(755,root,root) %{_libdir}/gaim/history.so
 %attr(755,root,root) %{_libdir}/gaim/idle.so
 %attr(755,root,root) %{_libdir}/gaim/libgg.so
@@ -228,6 +240,10 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/auto/Gaim/*.ix
 %{perl_vendorarch}/auto/Gaim/*.bs
 %attr(755,root,root) %{perl_vendorarch}/auto/Gaim/*.so
+
+%files gevolution
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/gaim/gevolution.so
 
 %if %{with doc}
 %files doc
