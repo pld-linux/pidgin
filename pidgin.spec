@@ -16,7 +16,7 @@ Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Summary(de):	Gaim ist ein Instant Messenger
 Name:		gaim
 Version:	1.3.1
-Release:	1.7
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -38,6 +38,7 @@ BuildRequires:	libtool
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-perlprov
+BuildRequires:	rpmbuild(macros) >= 1.177
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 BuildRequires:	xcursor-devel
@@ -175,6 +176,12 @@ Gaim documentation for developers (HTML format).
 
 %description doc -l pl
 Dokumentacja Gaim dla programistów (format HTML).
+
+%triggerpostun -- %{name} < 1:1.3.1-1.10
+%banner -e %{name} <<EOF
+The Ximian Evolution and gaim-remote plugins have been separated to separate packages.
+If you need then please install %{name}-plugin-evolution and %{name}-plugin-remote
+EOF
 
 %prep
 %setup -q
