@@ -1,3 +1,6 @@
+# TODO
+# - separate gevolution plugin (less gnome deps)
+#
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	gtkspell	# without gtkspell support
 #
@@ -172,8 +175,33 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gaim-remote
 %attr(755,root,root) %{_libdir}/libgaim-remote.so.0.0.0
 %dir %{_libdir}/gaim
-%attr(755,root,root) %{_libdir}/gaim/[!pi]*.so
-%attr(755,root,root) %{_libdir}/gaim/idle*.so
+%attr(755,root,root) %{_libdir}/gaim/autorecon.so
+%attr(755,root,root) %{_libdir}/gaim/docklet.so
+%attr(755,root,root) %{_libdir}/gaim/extplacement.so
+%attr(755,root,root) %{_libdir}/gaim/gaim-remote.so
+%attr(755,root,root) %{_libdir}/gaim/gestures.so
+%attr(755,root,root) %{_libdir}/gaim/gevolution.so
+%attr(755,root,root) %{_libdir}/gaim/history.so
+%attr(755,root,root) %{_libdir}/gaim/idle.so
+%attr(755,root,root) %{_libdir}/gaim/libgg.so
+%attr(755,root,root) %{_libdir}/gaim/libirc.so
+%attr(755,root,root) %{_libdir}/gaim/libjabber.so
+%attr(755,root,root) %{_libdir}/gaim/libmsn.so
+%attr(755,root,root) %{_libdir}/gaim/libnapster.so
+%attr(755,root,root) %{_libdir}/gaim/libnovell.so
+%attr(755,root,root) %{_libdir}/gaim/liboscar.so
+%attr(755,root,root) %{_libdir}/gaim/libyahoo.so
+%attr(755,root,root) %{_libdir}/gaim/libzephyr.so
+%attr(755,root,root) %{_libdir}/gaim/notify.so
+%attr(755,root,root) %{_libdir}/gaim/relnot.so
+%attr(755,root,root) %{_libdir}/gaim/spellchk.so
+%attr(755,root,root) %{_libdir}/gaim/ssl-gnutls.so
+%attr(755,root,root) %{_libdir}/gaim/ssl-nss.so
+%attr(755,root,root) %{_libdir}/gaim/ssl.so
+%attr(755,root,root) %{_libdir}/gaim/statenotify.so
+%attr(755,root,root) %{_libdir}/gaim/tcl.so
+%attr(755,root,root) %{_libdir}/gaim/ticker.so
+%attr(755,root,root) %{_libdir}/gaim/timestamp.so
 %{_pixmapsdir}/*
 %{_mandir}/man?/*
 %{_datadir}/sounds/%{name}
