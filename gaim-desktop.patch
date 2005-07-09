@@ -1,39 +1,11 @@
-diff -Nur gaim-1.3.1-orig/gaim.desktop gaim-1.3.1/gaim.desktop
---- gaim-1.3.1-orig/gaim.desktop	2005-06-11 10:15:58.207411504 +0200
-+++ gaim-1.3.1/gaim.desktop	2005-06-11 10:17:31.550221240 +0200
-@@ -20,11 +20,11 @@
- Comment[sl]=Večprotokolni odjemalec za neposredno sporočanje
- Comment[sq]=Dërgoni mesazhe të atypëratyshëm protokollesh të ndryshëm
- Comment[sv]=Sänder snabbmeddelande över många protokoll
--GenericName[cs]=Internet Messenger
- Comment[zh_CN]=通过多种协议发送即时消息
- Comment[zh_TW]=透過多種通訊協定發送即時訊息
- GenericName=Internet Messenger
- GenericName[ca]=Missatger d'Internet
-+GenericName[cs]=Internet Messenger
- GenericName[da]=Internet beskeder
- GenericName[es]=Cliente de mensajería de Internet
- GenericName[fr]=Messagerie internet
-@@ -37,7 +37,6 @@
- GenericName[pl]=Komunikator Internetowy
- GenericName[pt_BR]=Mensageiro via Internet
- GenericName[pt]=Mensageiro Internet
--Name[cs]=Gaim Internet Messenger
- GenericName[sl]=Spletni sel
- GenericName[sq]=Lajmësjellës Internet
- GenericName[sv]=Meddelandeklient
-@@ -45,6 +44,7 @@
- GenericName[zh_TW]=網路即時通
- Name=Gaim Internet Messenger
- Name[ca]=Missatger d'Internet Gaim
-+Name[cs]=Gaim Internet Messenger
- Name[da]=Gaim - internet beskeder
- Name[de]=Gaim Internet Messenger
- Name[es]=Gaim - cliente de mensajería de Internet
-@@ -66,5 +66,6 @@
+diff -ur gaim-1.4.0-o/gaim.desktop gaim-1.4.0/gaim.desktop
+--- gaim-1.4.0-o/gaim.desktop	2005-07-07 09:27:22.000000000 -0600
++++ gaim-1.4.0/gaim.desktop	2005-07-08 18:43:34.000000000 -0600
+@@ -1,6 +1,6 @@
+ [Desktop Entry]
+ Encoding=UTF-8
+-Categories=Application;Network;
++Categories=GTK;GNOME;Network;InstantMessaging;
  Exec=gaim
  Icon=gaim.png
  StartupNotify=true
-+Categories=GTK;GNOME;Network;InstantMessaging;
- Terminal=false
- Type=Application
