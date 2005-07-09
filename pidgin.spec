@@ -15,13 +15,13 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Summary(de):	Gaim ist ein Instant Messenger
 Name:		gaim
-Version:	1.3.1
-Release:	2
+Version:	1.4.0
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
-# Source0-md5:	a76e59c5093773169fbb232782a2f116
+# Source0-md5:	d7717cb771e556012ecd5b7f3bdb02ba
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-GG-evo.patch
