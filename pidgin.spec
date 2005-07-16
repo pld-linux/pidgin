@@ -6,6 +6,7 @@
 # - kill -ui-gtk? (is there any other ui?)
 #
 %bcond_without	doc		# do not generate and include documentation
+%bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
 #
 %include        /usr/lib/rpm/macros.perl
@@ -29,7 +30,7 @@ URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	evolution-data-server-devel >= 0.0.95
+%{?with_evolution:BuildRequires: evolution-data-server-devel >= 0.0.95}
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 1:2.2.0
 %{?with_gtkspell:BuildRequires: gtkspell-devel >= 2.0.4}
@@ -200,6 +201,7 @@ EOF
 	--disable-nas \
 	--enable-nss=no \
 	--with-perl-lib=vendor \
+	%{!?with_evolution:--disable-gevolution}
 	%{!?with_gtkspell:--disable-gtkspell}
 
 %{__make}
@@ -283,9 +285,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/gaim/tcl.so
 
+%if %{with evolution}
 %files plugin-evolution
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/gaim/gevolution.so
+%endif
 
 %files plugin-remote
 %defattr(644,root,root,755)
