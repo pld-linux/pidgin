@@ -1,11 +1,11 @@
-diff -ur gaim-1.4.0-o/gaim.desktop gaim-1.4.0/gaim.desktop
---- gaim-1.4.0-o/gaim.desktop	2005-07-07 09:27:22.000000000 -0600
-+++ gaim-1.4.0/gaim.desktop	2005-07-08 18:43:34.000000000 -0600
+diff -aurN gaim-2.0.0.orig/gaim.desktop gaim-2.0.0/gaim.desktop
+--- gaim-2.0.0.orig/gaim.desktop	2005-06-06 03:40:46.000000000 +0200
++++ gaim-2.0.0/gaim.desktop	2005-08-02 21:51:57.000000000 +0200
 @@ -1,6 +1,6 @@
  [Desktop Entry]
  Encoding=UTF-8
 -Categories=Application;Network;
 +Categories=GTK;GNOME;Network;InstantMessaging;
- Exec=gaim
- Icon=gaim.png
- StartupNotify=true
+ Comment=Send instant messages over multiple protocols
+ Comment[da]=Send beskeder over flere protokoller
+ Comment[de]=Multi-Protokoll Instant Messenger Client
