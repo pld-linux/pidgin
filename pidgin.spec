@@ -9,6 +9,7 @@
 %bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
 #
+%define		snap	20050802
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(ko):	AOL 인스턴트 메신저와 호환되는 클라이언트
@@ -16,16 +17,18 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Summary(de):	Gaim ist ein Instant Messenger
 Name:		gaim
-Version:	1.4.0
-Release:	2
+Version:	2.0.0
+Release:	0.%{snap}.1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
-Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
-# Source0-md5:	d7717cb771e556012ecd5b7f3bdb02ba
+Source0:	%{name}-%{version}-%{snap}.tar.bz2
+# Source0-md5:	9f4e08cb3853cab9cc0350f5d8ff6b24
+#Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-GG-evo.patch
+Patch3:		%{name}-DESTDIR.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
@@ -189,11 +192,12 @@ EOF
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
+./setup-gettext
 %{__libtoolize}
-%{__gettextize}
-%{__aclocal}
+%{__aclocal} -I m4macros
 %{__autoheader}
 %{__autoconf}
 %{__automake}
@@ -215,13 +219,13 @@ rm -rf $RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/gaim/*.la
 
-# for future my_MM not supported by glibc yet
-mv -f $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
-
 %find_lang %{name} --with-gnome --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post	perl -p /sbin/ldconfig
+%postun	perl -p /sbin/ldconfig
 
 %post	plugin-remote -p /sbin/ldconfig
 %postun	plugin-remote -p /sbin/ldconfig
@@ -233,6 +237,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/autorecon.so
 %attr(755,root,root) %{_libdir}/gaim/docklet.so
 %attr(755,root,root) %{_libdir}/gaim/extplacement.so
+%attr(755,root,root) %{_libdir}/gaim/gaimrc.so
 %attr(755,root,root) %{_libdir}/gaim/gestures.so
 %attr(755,root,root) %{_libdir}/gaim/history.so
 %attr(755,root,root) %{_libdir}/gaim/idle.so
@@ -243,8 +248,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/libnapster.so
 %attr(755,root,root) %{_libdir}/gaim/libnovell.so
 %attr(755,root,root) %{_libdir}/gaim/liboscar.so
+%attr(755,root,root) %{_libdir}/gaim/libsametime.so
 %attr(755,root,root) %{_libdir}/gaim/libyahoo.so
 %attr(755,root,root) %{_libdir}/gaim/libzephyr.so
+%attr(755,root,root) %{_libdir}/gaim/musicmessaging.so
 %attr(755,root,root) %{_libdir}/gaim/notify.so
 %attr(755,root,root) %{_libdir}/gaim/relnot.so
 %attr(755,root,root) %{_libdir}/gaim/spellchk.so
@@ -254,9 +261,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/statenotify.so
 %attr(755,root,root) %{_libdir}/gaim/ticker.so
 %attr(755,root,root) %{_libdir}/gaim/timestamp.so
-%{_pixmapsdir}/*
-%{_mandir}/man?/*
 %{_datadir}/sounds/%{name}
+%{_mandir}/man?/*
+%{_pixmapsdir}/*
 
 %files ui-gtk
 %defattr(644,root,root,755)
@@ -267,6 +274,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgaim-remote.so
+%{_aclocaldir}/*.m4
 %{_libdir}/libgaim-remote.la
 %dir %{_includedir}/gaim
 %{_includedir}/gaim/*.h
@@ -275,6 +283,7 @@ rm -rf $RPM_BUILD_ROOT
 %files perl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/gaim/perl.so
+%attr(755,root,root) %{_libdir}/libgaimperl.so
 %{perl_vendorarch}/*.pm
 %dir %{perl_vendorarch}/auto/Gaim
 %{perl_vendorarch}/auto/Gaim/*.ix
