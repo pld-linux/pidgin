@@ -1,0 +1,12 @@
+diff -aurN gaim-2.0.0.orig/plugins/perl/Makefile.am gaim-2.0.0/plugins/perl/Makefile.am
+--- gaim-2.0.0.orig/plugins/perl/Makefile.am	2005-07-22 21:47:26.000000000 +0200
++++ gaim-2.0.0/plugins/perl/Makefile.am	2005-08-02 22:32:51.000000000 +0200
+@@ -113,7 +113,7 @@
+ 		$(MAKE) install; \
+ 		cd ..; \
+ 	done
+-	cp libgaimperl.so $(libdir)
++	cp libgaimperl.so $(DESTDIR)$(libdir)
+ 
+ # Evil Hack (TM)
+ uninstall-local:
