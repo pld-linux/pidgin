@@ -3,13 +3,12 @@
 # - kerberos 4 with zephyr support?
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
-# - kill -ui-gtk? (is there any other ui?)
 #
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
 #
-%define		snap	20050802
+%define		_pre	beta1
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(ko):	AOL ÀÎ½ºÅÏÆ® ¸Þ½ÅÀú¿Í È£È¯µÇ´Â Å¬¶óÀÌ¾ðÆ®
@@ -18,17 +17,16 @@ Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Summary(de):	Gaim ist ein Instant Messenger
 Name:		gaim
 Version:	2.0.0
-Release:	0.%{snap}.1
+Release:	0.%{_pre}.1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
-Source0:	%{name}-%{version}-%{snap}.tar.bz2
-# Source0-md5:	9f4e08cb3853cab9cc0350f5d8ff6b24
+Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}%{_pre}.tar.bz2
+# Source0-md5:	15d2c460112af93ceff4818f29f6c1b8
 #Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-GG-evo.patch
-Patch3:		%{name}-DESTDIR.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
@@ -37,6 +35,7 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 1:2.2.0
 %{?with_gtkspell:BuildRequires: gtkspell-devel >= 2.0.4}
+BuildRequires:	howl-devel
 BuildRequires:	libao-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel
@@ -50,10 +49,11 @@ BuildRequires:	xcursor-devel
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
-Requires:	gaim-ui = %{epoch}:%{version}-%{release}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 #Requires:	libao
 # weird: it *should* break after DynaLoader's version change, but it doesn't
 #Requires:	perl(DynaLoader) = %(%{__perl} -MDynaLoader -e 'print DynaLoader->VERSION')
+Obsoletes:	gaim-ui
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -90,23 +90,23 @@ unixähnliche Systeme (GNU/Linux, BSD) geschrieben wurde, nun aber auch
 auf Microsoft Windows und Mac OS X lauffähig ist und mit vielen
 Plugins stark erweitert werden kann.
 
-%package ui-gtk
-Summary:	gtk+ user interface for gaim
-Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z gtk+
-Group:		Applications/Communications
-Provides:	gaim-ui = %{epoch}:%{version}-%{release}
+%package libs
+Summary:	Gaim client library
+Summary(pl):	Biblioteka klienta Gaim
+Group:		Libraries
+Epoch:		1
 
-%description ui-gtk
-gtk+ user interface for gaim.
+%description libs
+Gaim client library.
 
-%description ui-gtk -l pl
-Interfejs u¿ytkownika gaim korzystaj±cy z gtk+.
+%description libs -l pl
+Biblioteka klienta Gaim.
 
 %package devel
-Summary:	Development files for gaim
-Summary(pl):	Pliki programistyczne biblioteki gaim-remote
+Summary:	Development files for Gaim client library
+Summary(pl):	Pliki programistyczne biblioteki klienta Gaim
 Group:		Development/Libraries
-Requires:	%{name}-plugin-remote = %{epoch}:%{version}-%{release}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	glib2-devel >= 2.0.0
 Requires:	gtk+2-devel >= 1:2.2.0
 
@@ -188,11 +188,10 @@ If you need then please install %{name}-plugin-evolution and %{name}-plugin-remo
 EOF
 
 %prep
-%setup -q
+%setup -qn %{name}-%{version}%{_pre}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 ./setup-gettext
@@ -224,31 +223,29 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gaim/*.la
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	perl -p /sbin/ldconfig
-%postun	perl -p /sbin/ldconfig
-
-%post	plugin-remote -p /sbin/ldconfig
-%postun	plugin-remote -p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* HACKING doc/{CREDITS,FAQ}
+%attr(755,root,root) %{_bindir}/gaim
 %dir %{_libdir}/gaim
-%attr(755,root,root) %{_libdir}/gaim/autorecon.so
 %attr(755,root,root) %{_libdir}/gaim/docklet.so
 %attr(755,root,root) %{_libdir}/gaim/extplacement.so
 %attr(755,root,root) %{_libdir}/gaim/gaimrc.so
 %attr(755,root,root) %{_libdir}/gaim/gestures.so
 %attr(755,root,root) %{_libdir}/gaim/history.so
+%attr(755,root,root) %{_libdir}/gaim/iconaway.so
 %attr(755,root,root) %{_libdir}/gaim/idle.so
+%attr(755,root,root) %{_libdir}/gaim/libbonjour.so
 %attr(755,root,root) %{_libdir}/gaim/libgg.so
 %attr(755,root,root) %{_libdir}/gaim/libirc.so
 %attr(755,root,root) %{_libdir}/gaim/libjabber.so
 %attr(755,root,root) %{_libdir}/gaim/libmsn.so
-%attr(755,root,root) %{_libdir}/gaim/libnapster.so
 %attr(755,root,root) %{_libdir}/gaim/libnovell.so
 %attr(755,root,root) %{_libdir}/gaim/liboscar.so
-%attr(755,root,root) %{_libdir}/gaim/libsametime.so
+%attr(755,root,root) %{_libdir}/gaim/libsimple.so
 %attr(755,root,root) %{_libdir}/gaim/libyahoo.so
 %attr(755,root,root) %{_libdir}/gaim/libzephyr.so
 %attr(755,root,root) %{_libdir}/gaim/musicmessaging.so
@@ -263,27 +260,27 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/timestamp.so
 %{_datadir}/sounds/%{name}
 %{_mandir}/man?/*
+
+%{_desktopdir}/gaim.desktop
 %{_pixmapsdir}/*
 
-%files ui-gtk
+%files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/gaim
-%attr(755,root,root) %{_libdir}/gaim/iconaway.so
-%{_desktopdir}/gaim.desktop
+%attr(755,root,root) %{_libdir}/libgaim-client.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libgaim-remote.so
+%attr(755,root,root) %{_libdir}/libgaim-client.so
 %{_aclocaldir}/*.m4
-%{_libdir}/libgaim-remote.la
+%{_libdir}/libgaim-client.la
 %dir %{_includedir}/gaim
 %{_includedir}/gaim/*.h
 %{_pkgconfigdir}/*
 
 %files perl
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/gaim/libgaimperl.so
 %attr(755,root,root) %{_libdir}/gaim/perl.so
-%attr(755,root,root) %{_libdir}/libgaimperl.so
 %{perl_vendorarch}/*.pm
 %dir %{perl_vendorarch}/auto/Gaim
 %{perl_vendorarch}/auto/Gaim/*.ix
@@ -302,9 +299,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files plugin-remote
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/gaim-remote
-%attr(755,root,root) %{_libdir}/libgaim-remote.so.0.0.0
-%attr(755,root,root) %{_libdir}/gaim/gaim-remote.so
+%attr(755,root,root) %{_bindir}/gaim-remote.py
 
 %if %{with doc}
 %files doc
