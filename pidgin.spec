@@ -16,13 +16,13 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Summary(de):	Gaim ist ein Instant Messenger
 Name:		gaim
-Version:	1.5.0
-Release:	2
+Version:	2.0.0beta1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
-# Source0-md5:	9205321ac11fad271c90f2f0d7c5e7ce
+# Source0-md5:	15d2c460112af93ceff4818f29f6c1b8
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-GG-evo.patch
@@ -186,9 +186,9 @@ EOF
 
 %prep
 %setup -q
-%patch0 -p1
+#%patch0 -p1
 %patch1 -p1
-%patch2 -p1
+#%patch2 -p1
 
 %build
 %{__libtoolize}
@@ -230,7 +230,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* HACKING doc/{CREDITS,FAQ}
 %dir %{_libdir}/gaim
-%attr(755,root,root) %{_libdir}/gaim/autorecon.so
+%attr(755,root,root) %{_bindir}/gaim-client-example
+%attr(755,root,root) %{_bindir}/gaim-notifications-example.py
+%attr(755,root,root) %{_bindir}/gaim-remote.py
+%attr(755,root,root) %{_bindir}/gaim-send
+%attr(755,root,root) %{_bindir}/gaim-send-async
+%{_prefix}/lib/gaim/dbus-example.so
+%{_prefix}/lib/gaim/gaimrc.so
+%{_prefix}/lib/gaim/musicmessaging.so
 %attr(755,root,root) %{_libdir}/gaim/docklet.so
 %attr(755,root,root) %{_libdir}/gaim/extplacement.so
 %attr(755,root,root) %{_libdir}/gaim/gestures.so
@@ -239,8 +246,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/libgg.so
 %attr(755,root,root) %{_libdir}/gaim/libirc.so
 %attr(755,root,root) %{_libdir}/gaim/libjabber.so
+%{_prefix}/lib/gaim/libbonjour.so
+%{_prefix}/lib/gaim/libgaimperl.so
+%{_prefix}/lib/gaim/libsimple.so
 %attr(755,root,root) %{_libdir}/gaim/libmsn.so
-%attr(755,root,root) %{_libdir}/gaim/libnapster.so
 %attr(755,root,root) %{_libdir}/gaim/libnovell.so
 %attr(755,root,root) %{_libdir}/gaim/liboscar.so
 %attr(755,root,root) %{_libdir}/gaim/libyahoo.so
@@ -254,9 +263,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/statenotify.so
 %attr(755,root,root) %{_libdir}/gaim/ticker.so
 %attr(755,root,root) %{_libdir}/gaim/timestamp.so
+%attr(755,root,root) %{_prefix}/lib/libgaim-client.so.0.0.0
 %{_pixmapsdir}/*
 %{_mandir}/man?/*
 %{_datadir}/sounds/%{name}
+%{_datadir}/dbus-1/services/gaim.service
 
 %files ui-gtk
 %defattr(644,root,root,755)
@@ -266,11 +277,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libgaim-remote.so
-%{_libdir}/libgaim-remote.la
+#%attr(755,root,root) %{_libdir}/libgaim-remote.so
+#%{_libdir}/libgaim-remote.la
+%{_prefix}/lib/libgaim-client.la
 %dir %{_includedir}/gaim
 %{_includedir}/gaim/*.h
 %{_pkgconfigdir}/*
+%{_aclocaldir}/gaim.m4
 
 %files perl
 %defattr(644,root,root,755)
@@ -293,9 +306,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files plugin-remote
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/gaim-remote
-%attr(755,root,root) %{_libdir}/libgaim-remote.so.0.0.0
-%attr(755,root,root) %{_libdir}/gaim/gaim-remote.so
+#%attr(755,root,root) %{_bindir}/gaim-remote
+#%attr(755,root,root) %{_libdir}/libgaim-remote.so.0.0.0
+#%attr(755,root,root) %{_libdir}/gaim/gaim-remote.so
 
 %if %{with doc}
 %files doc
