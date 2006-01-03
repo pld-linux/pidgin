@@ -7,6 +7,7 @@
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
+%bcond_without	dbus	# without dbus (for gaim-remote and others)
 #
 %define		_pre	beta1
 %include        /usr/lib/rpm/macros.perl
@@ -17,7 +18,7 @@ Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Summary(de):	Gaim ist ein Instant Messenger
 Name:		gaim
 Version:	2.0.0
-Release:	0.%{_pre}.1
+Release:	0.%{_pre}.2
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -32,7 +33,7 @@ URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	dbus-glib-devel >= 0.35
+%{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.35}
 %{?with_evolution:BuildRequires: evolution-data-server-devel >= 0.0.95}
 BuildRequires:	gettext-devel
 BuildRequires:	gettext-autopoint
@@ -208,6 +209,7 @@ EOF
 	--disable-nas \
 	--enable-nss=no \
 	--with-perl-lib=vendor \
+	%{?with_dbus:--enable-dbus --with-dbus-session-dir=/usr/share/dbus-1} \
 	%{!?with_evolution:--disable-gevolution} \
 	%{!?with_gtkspell:--disable-gtkspell}
 
@@ -223,6 +225,7 @@ rm -rf $RPM_BUILD_ROOT
 rm -f $RPM_BUILD_ROOT%{_libdir}/gaim/*.la
 
 %find_lang %{name} --with-gnome --all-name
+rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Gaim/.packlist}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -252,7 +255,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/libsimple.so
 %attr(755,root,root) %{_libdir}/gaim/libyahoo.so
 %attr(755,root,root) %{_libdir}/gaim/libzephyr.so
-%attr(755,root,root) %{_libdir}/gaim/musicmessaging.so
 %attr(755,root,root) %{_libdir}/gaim/notify.so
 %attr(755,root,root) %{_libdir}/gaim/relnot.so
 %attr(755,root,root) %{_libdir}/gaim/spellchk.so
@@ -262,6 +264,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/statenotify.so
 %attr(755,root,root) %{_libdir}/gaim/ticker.so
 %attr(755,root,root) %{_libdir}/gaim/timestamp.so
+%if %{with dbus}
+%attr(755,root,root) %{_libdir}/gaim/musicmessaging.so
+%endif
 %{_datadir}/sounds/%{name}
 %{_mandir}/man?/*
 
@@ -270,13 +275,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
+%if %{with dbus}
 %attr(755,root,root) %{_libdir}/libgaim-client.so.*.*.*
+%endif
 
 %files devel
 %defattr(644,root,root,755)
+%if %{with dbus}
 %attr(755,root,root) %{_libdir}/libgaim-client.so
-%{_aclocaldir}/*.m4
 %{_libdir}/libgaim-client.la
+%endif
+%{_aclocaldir}/*.m4
 %dir %{_includedir}/gaim
 %{_includedir}/gaim/*.h
 %{_pkgconfigdir}/*
@@ -301,9 +310,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/gevolution.so
 %endif
 
+%if %{with dbus}
 %files plugin-remote
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gaim-remote.py
+%endif
 
 %if %{with doc}
 %files doc
