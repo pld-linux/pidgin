@@ -35,6 +35,7 @@ BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.35
 %{?with_evolution:BuildRequires: evolution-data-server-devel >= 0.0.95}
 BuildRequires:	gettext-devel
+BuildRequires:	gettext-autopoint
 BuildRequires:	gtk+2-devel >= 1:2.2.0
 %{?with_gtkspell:BuildRequires: gtkspell-devel >= 2.0.4}
 BuildRequires:	howl-devel
