@@ -256,6 +256,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/libyahoo.so
 %attr(755,root,root) %{_libdir}/gaim/libzephyr.so
 %attr(755,root,root) %{_libdir}/gaim/notify.so
+%attr(755,root,root) %{_libdir}/gaim/psychic.so
 %attr(755,root,root) %{_libdir}/gaim/relnot.so
 %attr(755,root,root) %{_libdir}/gaim/spellchk.so
 %attr(755,root,root) %{_libdir}/gaim/ssl-gnutls.so
@@ -264,8 +265,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/statenotify.so
 %attr(755,root,root) %{_libdir}/gaim/ticker.so
 %attr(755,root,root) %{_libdir}/gaim/timestamp.so
-%{_prefix}/lib/gaim/psychic.so
-%{_prefix}/lib/gaim/timestamp_format.so
+%attr(755,root,root) %{_libdir}/gaim/timestamp_format.so
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/gaim/musicmessaging.so
 %attr(755,root,root) %{_bindir}/gaim-send
