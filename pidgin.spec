@@ -9,7 +9,7 @@
 %bcond_without	gtkspell	# without gtkspell support
 %bcond_without	dbus	# without dbus (for gaim-remote and others)
 #
-%define		_pre	beta1
+%define		_pre	beta2
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(ko):	AOL 인스턴트 메신저와 호환되는 클라이언트
@@ -23,7 +23,7 @@ Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}%{_pre}.tar.bz2
-# Source0-md5:	15d2c460112af93ceff4818f29f6c1b8
+# Source0-md5:	f01c99b4556bde703a81d8ac16ebe6ab
 #Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
@@ -264,8 +264,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/statenotify.so
 %attr(755,root,root) %{_libdir}/gaim/ticker.so
 %attr(755,root,root) %{_libdir}/gaim/timestamp.so
+%{_prefix}/lib/gaim/psychic.so
+%{_prefix}/lib/gaim/timestamp_format.so
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/gaim/musicmessaging.so
+%attr(755,root,root) %{_bindir}/gaim-send
+%attr(755,root,root) %{_bindir}/gaim-send-async
+%{_datadir}/dbus-1/gaim.service
 %endif
 %{_datadir}/sounds/%{name}
 %{_mandir}/man?/*
