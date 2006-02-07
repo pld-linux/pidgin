@@ -12,10 +12,10 @@
 %define		_pre	beta2
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
+Summary(de):	Gaim ist ein Instant Messenger
 Summary(ko):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
-Summary(de):	Gaim ist ein Instant Messenger
 Name:		gaim
 Version:	2.0.0
 Release:	0.%{_pre}.2
@@ -29,16 +29,17 @@ Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-GG-evo.patch
 Patch3:		%{name}-va.patch
+Patch4:		%{name}-dbus-dir.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.35}
-%{?with_evolution:BuildRequires: evolution-data-server-devel >= 0.0.95}
-BuildRequires:	gettext-devel
+%{?with_evolution:BuildRequires:	evolution-data-server-devel >= 0.0.95}
 BuildRequires:	gettext-autopoint
+BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 1:2.2.0
-%{?with_gtkspell:BuildRequires: gtkspell-devel >= 2.0.4}
+%{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.4}
 BuildRequires:	howl-devel
 BuildRequires:	libao-devel
 BuildRequires:	libtool
@@ -197,6 +198,7 @@ EOF
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 ./setup-gettext
@@ -226,6 +228,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gaim/*.la
 
 %find_lang %{name} --with-gnome --all-name
 rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Gaim/.packlist}
+
+rm $RPM_BUILD_ROOT{%{_bindir}/{gaim-client-example,gaim-notifications-example.py},%{_libdir}/gaim/dbus-example.so}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
