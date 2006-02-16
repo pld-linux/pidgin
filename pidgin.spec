@@ -209,7 +209,7 @@ EOF
 	--disable-nas \
 	--enable-nss=no \
 	--with-perl-lib=vendor \
-	%{?with_dbus:--enable-dbus --with-dbus-session-dir=/usr/share/dbus-1} \
+	%{?with_dbus:--enable-dbus --with-dbus-session-dir=/usr/share/dbus-1/services} \
 	%{!?with_evolution:--disable-gevolution} \
 	%{!?with_gtkspell:--disable-gtkspell}
 
