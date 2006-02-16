@@ -40,7 +40,7 @@ BuildRequires:	gettext-autopoint
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 1:2.2.0
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.4}
-BuildRequires:	howl-devel
+BuildRequires:	mdns-howl-devel
 BuildRequires:	libao-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel
@@ -49,13 +49,11 @@ BuildRequires:	rpm-perlprov
 BuildRequires:	rpmbuild(macros) >= 1.177
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
-BuildRequires:	xcursor-devel
 %if %{with doc}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-#Requires:	libao
 # weird: it *should* break after DynaLoader's version change, but it doesn't
 #Requires:	perl(DynaLoader) = %(%{__perl} -MDynaLoader -e 'print DynaLoader->VERSION')
 Obsoletes:	gaim-ui
