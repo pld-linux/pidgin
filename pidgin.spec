@@ -272,7 +272,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/musicmessaging.so
 %attr(755,root,root) %{_bindir}/gaim-send
 %attr(755,root,root) %{_bindir}/gaim-send-async
-%{_datadir}/dbus-1/gaim.service
+%{_datadir}/dbus-1/services/gaim.service
 %endif
 %{_datadir}/sounds/%{name}
 %{_mandir}/man?/*
