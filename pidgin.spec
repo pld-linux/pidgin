@@ -7,7 +7,7 @@
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
-%bcond_without	dbus	# without dbus (for gaim-remote and others)
+%bcond_with	dbus		# without dbus (for gaim-remote and others)
 #
 %define		_pre	beta2
 %include        /usr/lib/rpm/macros.perl
@@ -210,6 +210,7 @@ EOF
 	--enable-nss=no \
 	--with-perl-lib=vendor \
 	%{?with_dbus:--enable-dbus --with-dbus-session-dir=/usr/share/dbus-1/services} \
+	%{!?with_dbus:--disable-dbus} \
 	%{!?with_evolution:--disable-gevolution} \
 	%{!?with_gtkspell:--disable-gtkspell}
 
@@ -227,7 +228,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gaim/*.la
 %find_lang %{name} --with-gnome --all-name
 rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Gaim/.packlist}
 
+%if %{with dbus}
 rm $RPM_BUILD_ROOT{%{_bindir}/{gaim-client-example,gaim-notifications-example.py},%{_libdir}/gaim/dbus-example.so}
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
