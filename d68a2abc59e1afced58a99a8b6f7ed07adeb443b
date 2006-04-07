@@ -1,0 +1,2 @@
+- 2.0.0beta3, re-enabled dbus (works at last), added libgadu patch
+  removed va patch (already included)
