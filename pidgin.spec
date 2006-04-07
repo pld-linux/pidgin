@@ -4,12 +4,12 @@
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
 #
+%bcond_without	dbus		# without dbus (for gaim-remote and others)
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
-%bcond_with	dbus		# without dbus (for gaim-remote and others)
 #
-%define		_pre	beta2
+%define		_pre	beta3
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(de):	Gaim ist ein Instant Messenger
@@ -18,18 +18,18 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	2.0.0
-Release:	0.%{_pre}.2
+Release:	0.%{_pre}.1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}%{_pre}.tar.bz2
-# Source0-md5:	f01c99b4556bde703a81d8ac16ebe6ab
+# Source0-md5:	c077655e4dd251cf22c406777c985a74
 #Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-GG-evo.patch
-Patch3:		%{name}-va.patch
-Patch4:		%{name}-dbus-dir.patch
+Patch3:		%{name}-dbus-dir.patch
+Patch4:		%{name}-libgadu.patch
 URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
@@ -42,6 +42,7 @@ BuildRequires:	gtk+2-devel >= 1:2.2.0
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.4}
 BuildRequires:	mdns-howl-devel
 BuildRequires:	libao-devel
+BuildRequires:	libgadu-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
@@ -199,7 +200,7 @@ EOF
 %patch4 -p1
 
 %build
-./setup-gettext
+
 %{__libtoolize}
 %{__aclocal} -I m4macros
 %{__autoheader}
