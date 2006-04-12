@@ -1,11 +1,9 @@
-diff -aurN gaim-2.0.0beta1.orig/gaim.desktop gaim-2.0.0beta1/gaim.desktop
---- gaim-2.0.0beta1.orig/gaim.desktop	2005-10-30 18:23:15.000000000 +0100
-+++ gaim-2.0.0beta1/gaim.desktop	2005-12-19 15:21:32.000000000 +0100
-@@ -1,6 +1,6 @@
- [Desktop Entry]
- Encoding=UTF-8
--Categories=Application;Network;
-+Categories=GTK;GNOME;Network;InstantMessaging;
- Exec=gaim
- Icon=gaim.png
+diff -aurN gaim-2.0.0.orig/gaim.desktop.in gaim-2.0.0/gaim.desktop.in
+--- gaim-2.0.0.orig/gaim.desktop.in	2006-02-08 08:44:22.000000000 +0100
++++ gaim-2.0.0/gaim.desktop.in	2006-03-10 21:18:24.531725112 +0100
+@@ -8,4 +8,4 @@
  StartupNotify=true
+ Terminal=false
+ Type=Application
+-Categories=Application;Network;
++Categories=GTK;Network;InstantMessaging;
