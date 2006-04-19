@@ -92,6 +92,7 @@ Summary:	gtk+ user interface for gaim
 Summary(pl):	Interfejs u¿ytkownika gaim korzystaj±cy z gtk+
 Group:		Applications/Communications
 Provides:	gaim-ui = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description ui-gtk
 gtk+ user interface for gaim.
