@@ -225,6 +225,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/gaim/*.la
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca_ES@valencian,my_MM}
 
 %find_lang %{name} --with-gnome --all-name
 rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Gaim/.packlist}
