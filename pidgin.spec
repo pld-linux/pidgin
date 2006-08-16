@@ -35,7 +35,7 @@ URL:		http://gaim.sourceforge.net/
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{?with_dbus:BuildRequires:	dbus-devel >= 0.71}
+%{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
 %{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.7.91}
 BuildRequires:	gettext-autopoint
 BuildRequires:	gettext-devel
