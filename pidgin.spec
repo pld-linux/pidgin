@@ -9,7 +9,7 @@
 %bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
 #
-%define		_pre	beta3
+%define		_pre	beta3.1
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(de):	Gaim ist ein Instant Messenger
@@ -18,12 +18,12 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	2.0.0
-Release:	0.%{_pre}.2
+Release:	1.%{_pre}.1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}%{_pre}.tar.bz2
-# Source0-md5:	c077655e4dd251cf22c406777c985a74
+# Source0-md5:	202b9e6ee5171da90de14230b3037dc1
 #Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
