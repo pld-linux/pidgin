@@ -9,7 +9,7 @@
 %bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
 #
-%define		_pre	beta3.1
+%define		_pre	beta4
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(de):	Gaim ist ein Instant Messenger
@@ -23,30 +23,33 @@ Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}%{_pre}.tar.bz2
-# Source0-md5:	202b9e6ee5171da90de14230b3037dc1
+# Source0-md5:	ddf49cb3f95febdd26bf2214875446e6
 #Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-GG-evo.patch
 Patch3:		%{name}-dbus-dir.patch
 Patch4:		%{name}-libgadu.patch
-Patch5:		%{name}-libadd.patch
 URL:		http://gaim.sourceforge.net/
+BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
-%{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.7.91}
+%{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
 BuildRequires:	gettext-autopoint
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 1:2.10.1
+BuildRequires:	gnutls-devel
+BuildRequires:	gstreamer-devel >= 0.10.10
+BuildRequires:	gtk+2-devel >= 2:2.10.6
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.11}
 BuildRequires:	mdns-howl-devel
-BuildRequires:	libao-devel
 BuildRequires:	libgadu-devel
 BuildRequires:	libtool
+BuildRequires:	libxml2-devel >= 2.6.26
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
+BuildRequires:	python-modules
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpmbuild(macros) >= 1.177
 BuildRequires:	tcl-devel
@@ -55,6 +58,7 @@ BuildRequires:	tk-devel
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
+Requires(post,preun):	GConf2 >= 2.16.0
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 # weird: it *should* break after DynaLoader's version change, but it doesn't
 #Requires:	perl(DynaLoader) = %(%{__perl} -MDynaLoader -e 'print DynaLoader->VERSION')
@@ -112,7 +116,7 @@ Summary:	Development files for Gaim client library
 Summary(pl):	Pliki programistyczne biblioteki klienta Gaim
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	gtk+2-devel >= 1:2.10.1
+Requires:	gtk+2-devel >= 2:2.10.6
 
 %description devel
 Development files for gaim.
@@ -198,7 +202,6 @@ EOF
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %build
 %{__libtoolize}
@@ -224,31 +227,44 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/gaim/*.la
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca_ES@valencian,my_MM}
+rm -f $RPM_BUILD_ROOT%{_libdir}/gaim/{,private}/*.la
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,ca_ES@valencian,my_MM}
 
-%find_lang %{name} --with-gnome --all-name
-rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Gaim/.packlist}
+%find_lang %{name} --with-gnome
+rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Gaim/{,GtkUI}/.packlist}
 
 %if %{with dbus}
-rm $RPM_BUILD_ROOT{%{_bindir}/{gaim-client-example,gaim-notifications-example.py},%{_libdir}/gaim/dbus-example.so}
+rm $RPM_BUILD_ROOT{%{_bindir}/gaim-client-example,%{_libdir}/gaim/dbus-example.so}
 %endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%gconf_schema_install gaim.schemas
+
+%preun
+%gconf_schema_uninstall gaim.schemas
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README* HACKING doc/{CREDITS,FAQ}
+%doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO PROGRAMMING_NOTES README* doc/FAQ
 %attr(755,root,root) %{_bindir}/gaim
+%attr(755,root,root) %{_bindir}/gaim-text
+%attr(755,root,root) %{_bindir}/gaim-url-handler
 %dir %{_libdir}/gaim
+%dir %{_libdir}/gaim/private
+%attr(755,root,root) %{_libdir}/gaim/cap.so
 %attr(755,root,root) %{_libdir}/gaim/docklet.so
 %attr(755,root,root) %{_libdir}/gaim/extplacement.so
 %attr(755,root,root) %{_libdir}/gaim/gaimrc.so
 %attr(755,root,root) %{_libdir}/gaim/gestures.so
+%attr(755,root,root) %{_libdir}/gaim/gntgf.so
+%attr(755,root,root) %{_libdir}/gaim/gnthistory.so
+%attr(755,root,root) %{_libdir}/gaim/gntlastlog.so
 %attr(755,root,root) %{_libdir}/gaim/history.so
 %attr(755,root,root) %{_libdir}/gaim/iconaway.so
 %attr(755,root,root) %{_libdir}/gaim/idle.so
@@ -259,12 +275,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/libmsn.so
 %attr(755,root,root) %{_libdir}/gaim/libnovell.so
 %attr(755,root,root) %{_libdir}/gaim/liboscar.so
+%attr(755,root,root) %{_libdir}/gaim/libqq.so
 %attr(755,root,root) %{_libdir}/gaim/libsimple.so
 %attr(755,root,root) %{_libdir}/gaim/libyahoo.so
 %attr(755,root,root) %{_libdir}/gaim/libzephyr.so
+%attr(755,root,root) %{_libdir}/gaim/log_reader.so
 %attr(755,root,root) %{_libdir}/gaim/notify.so
 %attr(755,root,root) %{_libdir}/gaim/psychic.so
 %attr(755,root,root) %{_libdir}/gaim/relnot.so
+%attr(755,root,root) %{_libdir}/gaim/s.so
 %attr(755,root,root) %{_libdir}/gaim/spellchk.so
 %attr(755,root,root) %{_libdir}/gaim/ssl-gnutls.so
 %attr(755,root,root) %{_libdir}/gaim/ssl-nss.so
@@ -279,6 +298,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gaim-send-async
 %{_datadir}/dbus-1/services/gaim.service
 %endif
+%{_sysconfdir}/gconf/schemas/gaim.schemas
 %{_datadir}/sounds/%{name}
 %{_mandir}/man?/*
 
@@ -287,6 +307,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libgaim.so.*.*.*
+%attr(755,root,root) %{_libdir}/libgnt.so.*.*.*
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/libgaim-client.so.*.*.*
 %endif
@@ -295,22 +317,35 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/libgaim-client.so
+%attr(755,root,root) %{_libdir}/libgaim.so
+%attr(755,root,root) %{_libdir}/libgnt.so
 %{_libdir}/libgaim-client.la
+%{_libdir}/libgaim.la
+%{_libdir}/libgnt.la
 %endif
 %{_aclocaldir}/*.m4
 %dir %{_includedir}/gaim
+%dir %{_includedir}/gaim/gnt
+%dir %{_includedir}/gnt
 %{_includedir}/gaim/*.h
+%{_includedir}/gaim/gnt/*.h
+%{_includedir}/gnt/*.h
 %{_pkgconfigdir}/*
 
 %files perl
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/gaim/libgaimperl.so
+%attr(755,root,root) %{_libdir}/gaim/private/libgaimperl.so
 %attr(755,root,root) %{_libdir}/gaim/perl.so
 %{perl_vendorarch}/*.pm
 %dir %{perl_vendorarch}/auto/Gaim
 %{perl_vendorarch}/auto/Gaim/*.ix
 %{perl_vendorarch}/auto/Gaim/*.bs
+%dir %{perl_vendorarch}/auto/Gaim/GtkUI
+%{perl_vendorarch}/auto/Gaim/GtkUI/*.bs
+%dir %{perl_vendorarch}/Gaim
+%{perl_vendorarch}/Gaim/*.pm
 %attr(755,root,root) %{perl_vendorarch}/auto/Gaim/*.so
+%attr(755,root,root) %{perl_vendorarch}/auto/Gaim/GtkUI/*.so
 
 %files tcl
 %defattr(644,root,root,755)
@@ -325,7 +360,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with dbus}
 %files plugin-remote
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/gaim-remote.py
+%attr(755,root,root) %{_bindir}/gaim-remote
 %endif
 
 %if %{with doc}
