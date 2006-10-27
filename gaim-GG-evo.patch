@@ -1,6 +1,6 @@
-diff -aurN gaim-2.0.0.orig/plugins/gevolution/add_buddy_dialog.c gaim-2.0.0/plugins/gevolution/add_buddy_dialog.c
---- gaim-2.0.0.orig/plugins/gevolution/add_buddy_dialog.c	2005-07-03 08:42:16.000000000 +0200
-+++ gaim-2.0.0/plugins/gevolution/add_buddy_dialog.c	2005-08-02 22:01:50.000000000 +0200
+diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/add_buddy_dialog.c gaim-2.0.0/gtk/plugins/gevolution/add_buddy_dialog.c
+--- gaim-2.0.0.orig/gtk/plugins/gevolution/add_buddy_dialog.c	2005-07-03 08:42:16.000000000 +0200
++++ gaim-2.0.0/gtk/plugins/gevolution/add_buddy_dialog.c	2005-08-02 22:01:50.000000000 +0200
 @@ -291,16 +291,17 @@
  	{
  		EContact *contact = E_CONTACT(c->data);
@@ -71,9 +71,9 @@ diff -aurN gaim-2.0.0.orig/plugins/gevolution/add_buddy_dialog.c gaim-2.0.0/plug
  			add_ims(dialog, contact, name, msns,    "prpl-msn");
  			add_ims(dialog, contact, name, icqs,    "prpl-oscar");
  			add_ims(dialog, contact, name, novells, "prpl-novell");
-diff -aurN gaim-2.0.0.orig/plugins/gevolution/gevolution.c gaim-2.0.0/plugins/gevolution/gevolution.c
---- gaim-2.0.0.orig/plugins/gevolution/gevolution.c	2005-07-18 09:26:08.000000000 +0200
-+++ gaim-2.0.0/plugins/gevolution/gevolution.c	2005-08-02 22:02:54.000000000 +0200
+diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/gevolution.c gaim-2.0.0/gtk/plugins/gevolution/gevolution.c
+--- gaim-2.0.0.orig/gtk/plugins/gevolution/gevolution.c	2005-07-18 09:26:08.000000000 +0200
++++ gaim-2.0.0/gtk/plugins/gevolution/gevolution.c	2005-08-02 22:02:54.000000000 +0200
 @@ -112,6 +112,7 @@
  	update_ims_from_contact(contact, name, "prpl-oscar",  E_CONTACT_IM_AIM);
  	update_ims_from_contact(contact, name, "prpl-jabber", E_CONTACT_IM_JABBER);
@@ -82,9 +82,9 @@ diff -aurN gaim-2.0.0.orig/plugins/gevolution/gevolution.c gaim-2.0.0/plugins/ge
  	update_ims_from_contact(contact, name, "prpl-msn",    E_CONTACT_IM_MSN);
  	update_ims_from_contact(contact, name, "prpl-oscar",  E_CONTACT_IM_ICQ);
  	update_ims_from_contact(contact, name, "prpl-novell", E_CONTACT_IM_GROUPWISE);
-diff -aurN gaim-2.0.0.orig/plugins/gevolution/gevo-util.c gaim-2.0.0/plugins/gevolution/gevo-util.c
---- gaim-2.0.0.orig/plugins/gevolution/gevo-util.c	2005-07-03 08:42:16.000000000 +0200
-+++ gaim-2.0.0/plugins/gevolution/gevo-util.c	2005-08-02 22:03:43.000000000 +0200
+diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/gevo-util.c gaim-2.0.0/gtk/plugins/gevolution/gevo-util.c
+--- gaim-2.0.0.orig/gtk/plugins/gevolution/gevo-util.c	2005-07-03 08:42:16.000000000 +0200
++++ gaim-2.0.0/gtk/plugins/gevolution/gevo-util.c	2005-08-02 22:03:43.000000000 +0200
 @@ -110,6 +110,8 @@
  		protocol_field = E_CONTACT_IM_MSN;
  	else if (!strcmp(protocol_id, "prpl-yahoo"))
@@ -94,9 +94,9 @@ diff -aurN gaim-2.0.0.orig/plugins/gevolution/gevo-util.c gaim-2.0.0/plugins/gev
  	else if (!strcmp(protocol_id, "prpl-jabber"))
  		protocol_field = E_CONTACT_IM_JABBER;
  	else if (!strcmp(protocol_id, "prpl-novell"))
-diff -aurN gaim-2.0.0.orig/plugins/gevolution/new_person_dialog.c gaim-2.0.0/plugins/gevolution/new_person_dialog.c
---- gaim-2.0.0.orig/plugins/gevolution/new_person_dialog.c	2005-07-03 08:42:16.000000000 +0200
-+++ gaim-2.0.0/plugins/gevolution/new_person_dialog.c	2005-08-02 22:04:18.000000000 +0200
+diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/new_person_dialog.c gaim-2.0.0/gtk/plugins/gevolution/new_person_dialog.c
+--- gaim-2.0.0.orig/gtk/plugins/gevolution/new_person_dialog.c	2005-07-03 08:42:16.000000000 +0200
++++ gaim-2.0.0/gtk/plugins/gevolution/new_person_dialog.c	2005-08-02 22:04:18.000000000 +0200
 @@ -150,6 +150,8 @@
  		}
  		else if (!strcmp(im_service, "prpl-yahoo"))
@@ -106,9 +106,9 @@ diff -aurN gaim-2.0.0.orig/plugins/gevolution/new_person_dialog.c gaim-2.0.0/plu
  		else if (!strcmp(im_service, "prpl-jabber"))
  			field = E_CONTACT_IM_JABBER;
  		else if (!strcmp(im_service, "prpl-msn"))
-diff -aurN gaim-2.0.0.orig/src/gtkblist.c gaim-2.0.0/src/gtkblist.c
---- gaim-2.0.0.orig/src/gtkblist.c	2005-07-21 07:49:42.000000000 +0200
-+++ gaim-2.0.0/src/gtkblist.c	2005-08-02 22:09:51.000000000 +0200
+diff -aurN gaim-2.0.0.orig/gtk/gtkblist.c gaim-2.0.0/gtk/gtkblist.c
+--- gaim-2.0.0.orig/gtk/gtkblist.c	2005-07-21 07:49:42.000000000 +0200
++++ gaim-2.0.0/gtk/gtkblist.c	2005-08-02 22:09:51.000000000 +0200
 @@ -1702,12 +1702,13 @@
  {
  	char *temp_vcard;

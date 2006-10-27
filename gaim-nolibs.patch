@@ -3,12 +3,12 @@ diff -aurN gaim-2.0.0beta1.orig/configure.ac gaim-2.0.0beta1/configure.ac
 +++ gaim-2.0.0beta1/configure.ac	2005-12-19 15:14:20.000000000 +0100
 @@ -65,8 +65,8 @@
  dnl Check for inet_aton
- AC_CHECK_FUNC(inet_aton, , [AC_CHECK_LIB(resolv, inet_aton, , 
+ AC_CHECK_FUNC(inet_aton, , [AC_CHECK_LIB(resolv, inet_aton, ,
  				         [AC_ERROR(inet_aton not found)])])
 -AC_CHECK_LIB(resolv, __res_query)
 -AC_CHECK_LIB(nsl, gethostent)
 +AC_CHECK_FUNC(resolv, ,[AC_CHECK_LIB(resolv, __res_query)])
 +AC_CHECK_FUNC(gethostent, , [AC_CHECK_LIB(nsl, gethostent)])
- AC_CHECK_FUNC(socket, , 
+ AC_CHECK_FUNC(socket, ,
                [AC_CHECK_LIB(socket, socket, , [AC_ERROR([socket not found])])])
  dnl If all goes well, by this point the previous two checks will have
