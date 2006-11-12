@@ -9,7 +9,7 @@
 %bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
 #
-%define		_pre	beta4
+%define		_pre	beta5
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(de):	Gaim ist ein Instant Messenger
@@ -23,7 +23,7 @@ Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}%{_pre}.tar.bz2
-# Source0-md5:	ddf49cb3f95febdd26bf2214875446e6
+# Source0-md5:	84099216123de25402fa7e904ceca437
 #Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-desktop.patch
@@ -258,7 +258,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gaim
 %dir %{_libdir}/gaim/private
 %attr(755,root,root) %{_libdir}/gaim/cap.so
-%attr(755,root,root) %{_libdir}/gaim/docklet.so
+#%attr(755,root,root) %{_libdir}/gaim/docklet.so
 %attr(755,root,root) %{_libdir}/gaim/extplacement.so
 %attr(755,root,root) %{_libdir}/gaim/gaimrc.so
 %attr(755,root,root) %{_libdir}/gaim/gestures.so
