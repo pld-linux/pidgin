@@ -8,6 +8,7 @@
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
+%bcond_without	text		# don't build text UI
 #
 %define		_pre	beta5
 %include        /usr/lib/rpm/macros.perl
@@ -18,7 +19,7 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	2.0.0
-Release:	1.%{_pre}.1
+Release:	1.%{_pre}.2
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -54,6 +55,7 @@ BuildRequires:	rpm-perlprov
 BuildRequires:	rpmbuild(macros) >= 1.177
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
+%{?with_text:BuildRequires:	ncurses-ext-devel}
 %if %{with doc}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
@@ -216,7 +218,8 @@ EOF
 	%{?with_dbus:--enable-dbus --with-dbus-session-dir=/usr/share/dbus-1/services} \
 	%{!?with_dbus:--disable-dbus} \
 	%{!?with_evolution:--disable-gevolution} \
-	%{!?with_gtkspell:--disable-gtkspell}
+	%{!?with_gtkspell:--disable-gtkspell} \
+	--%{?with_text:en}%{!?with_text:dis}able-consoleui
 
 %{__make}
 %{?with_doc:%{__make} docs}
@@ -253,7 +256,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO PROGRAMMING_NOTES README* doc/FAQ
 %attr(755,root,root) %{_bindir}/gaim
-%attr(755,root,root) %{_bindir}/gaim-text
+%{?with_text:%attr(755,root,root) %{_bindir}/gaim-text}
 %attr(755,root,root) %{_bindir}/gaim-url-handler
 %dir %{_libdir}/gaim
 %dir %{_libdir}/gaim/private
