@@ -4,13 +4,14 @@
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
 #
+%bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without dbus (for gaim-remote and others)
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
 %bcond_without	text		# don't build text UI
 #
-%define		_pre	beta5
+%define		_pre	beta6
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(de):	Gaim ist ein Instant Messenger
@@ -19,15 +20,14 @@ Summary(pl):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	2.0.0
-Release:	1.%{_pre}.2
+Release:	1.%{_pre}.1
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}%{_pre}.tar.bz2
-# Source0-md5:	84099216123de25402fa7e904ceca437
+# Source0-md5:	404dcec261f911bcb56f69e5ea192583
 #Source0:	http://dl.sourceforge.net/gaim/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nolibs.patch
-Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-GG-evo.patch
 Patch3:		%{name}-dbus-dir.patch
 Patch4:		%{name}-libgadu.patch
@@ -56,6 +56,9 @@ BuildRequires:	rpmbuild(macros) >= 1.177
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 %{?with_text:BuildRequires:	ncurses-ext-devel}
+%if %{with cap}
+BuildRequires:	sqlite3-devel >= 3.3
+%endif
 %if %{with doc}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
@@ -200,7 +203,6 @@ EOF
 %prep
 %setup -qn %{name}-%{version}%{_pre}
 %patch0 -p1
-%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -215,6 +217,7 @@ EOF
 	--disable-nas \
 	--enable-nss=no \
 	--with-perl-lib=vendor \
+	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
 	%{?with_dbus:--enable-dbus --with-dbus-session-dir=/usr/share/dbus-1/services} \
 	%{!?with_dbus:--disable-dbus} \
 	%{!?with_evolution:--disable-gevolution} \
@@ -256,18 +259,22 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO PROGRAMMING_NOTES README* doc/FAQ
 %attr(755,root,root) %{_bindir}/gaim
-%{?with_text:%attr(755,root,root) %{_bindir}/gaim-text}
-%attr(755,root,root) %{_bindir}/gaim-url-handler
 %dir %{_libdir}/gaim
 %dir %{_libdir}/gaim/private
+%if %{with cap}
 %attr(755,root,root) %{_libdir}/gaim/cap.so
+%endif
 #%attr(755,root,root) %{_libdir}/gaim/docklet.so
 %attr(755,root,root) %{_libdir}/gaim/extplacement.so
 %attr(755,root,root) %{_libdir}/gaim/gaimrc.so
 %attr(755,root,root) %{_libdir}/gaim/gestures.so
+%if %{with text}
+%attr(755,root,root) %{_bindir}/gaim-text
 %attr(755,root,root) %{_libdir}/gaim/gntgf.so
 %attr(755,root,root) %{_libdir}/gaim/gnthistory.so
 %attr(755,root,root) %{_libdir}/gaim/gntlastlog.so
+%attr(755,root,root) %{_libdir}/gaim/s.so
+%endif
 %attr(755,root,root) %{_libdir}/gaim/history.so
 %attr(755,root,root) %{_libdir}/gaim/iconaway.so
 %attr(755,root,root) %{_libdir}/gaim/idle.so
@@ -286,7 +293,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/notify.so
 %attr(755,root,root) %{_libdir}/gaim/psychic.so
 %attr(755,root,root) %{_libdir}/gaim/relnot.so
-%attr(755,root,root) %{_libdir}/gaim/s.so
 %attr(755,root,root) %{_libdir}/gaim/spellchk.so
 %attr(755,root,root) %{_libdir}/gaim/ssl-gnutls.so
 %attr(755,root,root) %{_libdir}/gaim/ssl-nss.so
@@ -296,6 +302,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/timestamp.so
 %attr(755,root,root) %{_libdir}/gaim/timestamp_format.so
 %if %{with dbus}
+%attr(755,root,root) %{_bindir}/gaim-url-handler
 %attr(755,root,root) %{_libdir}/gaim/musicmessaging.so
 %attr(755,root,root) %{_bindir}/gaim-send
 %attr(755,root,root) %{_bindir}/gaim-send-async
@@ -311,7 +318,9 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgaim.so.*.*.*
+%if %{with text}
 %attr(755,root,root) %{_libdir}/libgnt.so.*.*.*
+%endif
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/libgaim-client.so.*.*.*
 %endif
@@ -321,19 +330,21 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/libgaim-client.so
 %attr(755,root,root) %{_libdir}/libgaim.so
-%attr(755,root,root) %{_libdir}/libgnt.so
 %{_libdir}/libgaim-client.la
 %{_libdir}/libgaim.la
-%{_libdir}/libgnt.la
 %endif
 %{_aclocaldir}/*.m4
 %dir %{_includedir}/gaim
+%{_includedir}/gaim/*.h
+%{_pkgconfigdir}/*
+%if %{with text}
+%attr(755,root,root) %{_libdir}/libgnt.so
+%{_libdir}/libgnt.la
 %dir %{_includedir}/gaim/gnt
 %dir %{_includedir}/gnt
-%{_includedir}/gaim/*.h
 %{_includedir}/gaim/gnt/*.h
 %{_includedir}/gnt/*.h
-%{_pkgconfigdir}/*
+%endif
 
 %files perl
 %defattr(644,root,root,755)
