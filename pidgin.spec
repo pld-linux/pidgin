@@ -14,10 +14,10 @@
 %define		_pre	beta6
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
-Summary(de):	Gaim ist ein Instant Messenger
-Summary(ko):	AOL ÀÎ½ºÅÏÆ® ¸Þ½ÅÀú¿Í È£È¯µÇ´Â Å¬¶óÀÌ¾ðÆ®
-Summary(pl):	Klient kompatybilny z AOL Instant Messenger
-Summary(pt_BR):	Um cliente para o AOL Instant Messenger (AIM)
+Summary(de.UTF-8):   Gaim ist ein Instant Messenger
+Summary(ko.UTF-8):   AOL ì¸ìŠ¤í„´íŠ¸ ë©”ì‹ ì €ì™€ í˜¸í™˜ë˜ëŠ” í´ë¼ì´ì–¸íŠ¸
+Summary(pl.UTF-8):   Klient kompatybilny z AOL Instant Messenger
+Summary(pt_BR.UTF-8):   Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	2.0.0
 Release:	1.%{_pre}.1
@@ -81,44 +81,44 @@ which consists of protocol plugins. These plugins allow you to use
 gaim to connect to other chat services such as Yahoo!, ICQ, MSN,
 Jabber, Napster, Zephyr, IRC and Gadu-Gadu.
 
-%description -l pl
-Gaim pozwala na rozmowy z dowoln± osob± u¿ywaj±c± us³ugi AOL Instant
-Messenger (mo¿na siê zarejestrowaæ pod adresem
-http://www.aim.aol.com/). Program u¿ywa wersji TOC protoko³u AOL wiêc
-Twoja lista kontaktów jest zapisana na serwerze AOL i mo¿e byæ
-przes³ana gdziekolwiek. Gaim zawiera wiele udogodnieñ dostêpnych w
-kliencie AOL IM jak równie¿ dodaje w³asne. Gaim umo¿liwia tak¿e dostêp
-do us³ug takich jak Yahoo!, ICQ, MSN, Jabber, Napster, Zephyr, IRC
+%description -l pl.UTF-8
+Gaim pozwala na rozmowy z dowolnÄ… osobÄ… uÅ¼ywajÄ…cÄ… usÅ‚ugi AOL Instant
+Messenger (moÅ¼na siÄ™ zarejestrowaÄ‡ pod adresem
+http://www.aim.aol.com/). Program uÅ¼ywa wersji TOC protokoÅ‚u AOL wiÄ™c
+Twoja lista kontaktÃ³w jest zapisana na serwerze AOL i moÅ¼e byÄ‡
+przesÅ‚ana gdziekolwiek. Gaim zawiera wiele udogodnieÅ„ dostÄ™pnych w
+kliencie AOL IM jak rÃ³wnieÅ¼ dodaje wÅ‚asne. Gaim umoÅ¼liwia takÅ¼e dostÄ™p
+do usÅ‚ug takich jak Yahoo!, ICQ, MSN, Jabber, Napster, Zephyr, IRC
 oraz Gadu-Gadu.
 
-%description -l pt_BR
-GAIM é um cliente para o AOL Instant Messenger (AIM) que usa o serviço
-tik/toc da AOL. É desenvolvido ativamente e suporta muitas das
-características do cliente da AOL, tendo uma interface similiar.
-Também oferece suporte a outros protocolos, como: ICQ, IRC, Yahoo!,
+%description -l pt_BR.UTF-8
+GAIM Ã© um cliente para o AOL Instant Messenger (AIM) que usa o serviÃ§o
+tik/toc da AOL. Ã‰ desenvolvido ativamente e suporta muitas das
+caracterÃ­sticas do cliente da AOL, tendo uma interface similiar.
+TambÃ©m oferece suporte a outros protocolos, como: ICQ, IRC, Yahoo!,
 MSN, Jabber e Napster.
 
-%description -l de
-Gaim ist ein Instant Messenger der von Mark Spencer ursprünglich für
-unixähnliche Systeme (GNU/Linux, BSD) geschrieben wurde, nun aber auch
-auf Microsoft Windows und Mac OS X lauffähig ist und mit vielen
+%description -l de.UTF-8
+Gaim ist ein Instant Messenger der von Mark Spencer ursprÃ¼nglich fÃ¼r
+unixÃ¤hnliche Systeme (GNU/Linux, BSD) geschrieben wurde, nun aber auch
+auf Microsoft Windows und Mac OS X lauffÃ¤hig ist und mit vielen
 Plugins stark erweitert werden kann.
 
 %package libs
 Summary:	Gaim client library
-Summary(pl):	Biblioteka klienta Gaim
+Summary(pl.UTF-8):   Biblioteka klienta Gaim
 Group:		Libraries
 Epoch:		1
 
 %description libs
 Gaim client library.
 
-%description libs -l pl
+%description libs -l pl.UTF-8
 Biblioteka klienta Gaim.
 
 %package devel
 Summary:	Development files for Gaim client library
-Summary(pl):	Pliki programistyczne biblioteki klienta Gaim
+Summary(pl.UTF-8):   Pliki programistyczne biblioteki klienta Gaim
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	gtk+2-devel >= 2:2.10.6
@@ -126,12 +126,12 @@ Requires:	gtk+2-devel >= 2:2.10.6
 %description devel
 Development files for gaim.
 
-%description devel -l pl
+%description devel -l pl.UTF-8
 Pliki programistyczne biblioteki gaim-remote.
 
 %package perl
 Summary:	Gaim files for Perl scripts
-Summary(pl):	Pliki Gaima dla skryptów w Perlu
+Summary(pl.UTF-8):   Pliki Gaima dla skryptÃ³w w Perlu
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -139,13 +139,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package gives you ability to extend Gaim functionality with Perl
 scripts.
 
-%description perl -l pl
-Ten pakiet daje mo¿liwo¶æ rozszerzania funkcjonalno¶ci Gaima za pomoc±
-skryptów Perla.
+%description perl -l pl.UTF-8
+Ten pakiet daje moÅ¼liwoÅ›Ä‡ rozszerzania funkcjonalnoÅ›ci Gaima za pomocÄ…
+skryptÃ³w Perla.
 
 %package tcl
 Summary:	Gaim files for Tcl scripts
-Summary(pl):	Pliki Gaima dla skryptów w Tcl-u
+Summary(pl.UTF-8):   Pliki Gaima dla skryptÃ³w w Tcl-u
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -153,25 +153,25 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package gives you ability to extend Gaim functionality with Tcl
 scripts.
 
-%description tcl -l pl
-Ten pakiet daje mo¿liwo¶æ rozszerzania funkcjonalno¶ci Gaima za pomoc±
-skryptów w Tcl-u.
+%description tcl -l pl.UTF-8
+Ten pakiet daje moÅ¼liwoÅ›Ä‡ rozszerzania funkcjonalnoÅ›ci Gaima za pomocÄ…
+skryptÃ³w w Tcl-u.
 
 %package plugin-evolution
 Summary:	Plugin for Ximian Evolution integration
-Summary(pl):	Wtyczka do integracji z Evolution
+Summary(pl.UTF-8):   Wtyczka do integracji z Evolution
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-evolution
 Provides integration with Ximian Evolution.
 
-%description plugin-evolution -l pl
+%description plugin-evolution -l pl.UTF-8
 Wtyczka do integracji z Evolution.
 
 %package plugin-remote
 Summary:	Gaim Remote Control
-Summary(pl):	Zdalne sterowanie Gaimem
+Summary(pl.UTF-8):   Zdalne sterowanie Gaimem
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -179,20 +179,20 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package gives Gaim the ability to be remote-controlled through
 third-party applications or through the gaim-remote tool.
 
-%description plugin-remote -l pl
-Ten pakiet daje mo¿liwo¶æ zdalnego sterowania Gaimem przez inne
-aplikacje albo narzêdzie gaim-remote.
+%description plugin-remote -l pl.UTF-8
+Ten pakiet daje moÅ¼liwoÅ›Ä‡ zdalnego sterowania Gaimem przez inne
+aplikacje albo narzÄ™dzie gaim-remote.
 
 %package doc
 Summary:	Gaim documentation for developers (HTML format)
-Summary(pl):	Dokumentacja Gaim dla programistów (format HTML)
+Summary(pl.UTF-8):   Dokumentacja Gaim dla programistÃ³w (format HTML)
 Group:		Documentation
 
 %description doc
 Gaim documentation for developers (HTML format).
 
-%description doc -l pl
-Dokumentacja Gaim dla programistów (format HTML).
+%description doc -l pl.UTF-8
+Dokumentacja Gaim dla programistÃ³w (format HTML).
 
 %triggerpostun -- %{name} < 1:1.3.1-1.10
 %banner -e %{name} <<EOF
