@@ -11,10 +11,10 @@
 #
 %include        /usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
-Summary(ko.UTF-8):   AOL 인스턴트 메신저와 호환되는 클라이언트
-Summary(pl.UTF-8):   Klient kompatybilny z AOL Instant Messenger
-Summary(pt_BR.UTF-8):   Um cliente para o AOL Instant Messenger (AIM)
-Summary(de.UTF-8):   Gaim ist ein Instant Messenger
+Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
+Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
+Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
+Summary(de.UTF-8):	Gaim ist ein Instant Messenger
 Name:		gaim
 Version:	1.5.0
 Release:	3
@@ -89,7 +89,7 @@ Plugins stark erweitert werden kann.
 
 %package ui-gtk
 Summary:	gtk+ user interface for gaim
-Summary(pl.UTF-8):   Interfejs użytkownika gaim korzystający z gtk+
+Summary(pl.UTF-8):	Interfejs użytkownika gaim korzystający z gtk+
 Group:		Applications/Communications
 Provides:	gaim-ui = %{epoch}:%{version}-%{release}
 Requires:	%{name} = %{epoch}:%{version}-%{release}
@@ -102,7 +102,7 @@ Interfejs użytkownika gaim korzystający z gtk+.
 
 %package devel
 Summary:	Development files for gaim
-Summary(pl.UTF-8):   Pliki programistyczne biblioteki gaim-remote
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki gaim-remote
 Group:		Development/Libraries
 Requires:	%{name}-plugin-remote = %{epoch}:%{version}-%{release}
 Requires:	glib2-devel >= 2.0.0
@@ -116,7 +116,7 @@ Pliki programistyczne biblioteki gaim-remote.
 
 %package perl
 Summary:	Gaim files for Perl scripts
-Summary(pl.UTF-8):   Pliki Gaima dla skryptów w Perlu
+Summary(pl.UTF-8):	Pliki Gaima dla skryptów w Perlu
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -130,7 +130,7 @@ skryptów Perla.
 
 %package tcl
 Summary:	Gaim files for Tcl scripts
-Summary(pl.UTF-8):   Pliki Gaima dla skryptów w Tcl-u
+Summary(pl.UTF-8):	Pliki Gaima dla skryptów w Tcl-u
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -144,7 +144,7 @@ skryptów w Tcl-u.
 
 %package plugin-evolution
 Summary:	Plugin for Ximian Evolution integration
-Summary(pl.UTF-8):   Wtyczka do integracji z Evolution
+Summary(pl.UTF-8):	Wtyczka do integracji z Evolution
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -156,7 +156,7 @@ Wtyczka do integracji z Evolution.
 
 %package plugin-remote
 Summary:	Gaim Remote Control
-Summary(pl.UTF-8):   Zdalne sterowanie Gaimem
+Summary(pl.UTF-8):	Zdalne sterowanie Gaimem
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -170,7 +170,7 @@ aplikacje albo narzędzie gaim-remote.
 
 %package doc
 Summary:	Gaim documentation for developers (HTML format)
-Summary(pl.UTF-8):   Dokumentacja Gaim dla programistów (format HTML)
+Summary(pl.UTF-8):	Dokumentacja Gaim dla programistów (format HTML)
 Group:		Documentation
 
 %description doc
