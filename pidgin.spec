@@ -20,7 +20,7 @@ Summary(pl.UTF-8):   Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):   Um cliente para o AOL Instant Messenger (AIM)
 Name:		gaim
 Version:	2.0.0
-Release:	1.%{_pre}.1
+Release:	1.%{_pre}.2
 Epoch:		1
 License:	GPL
 Group:		Applications/Communications
@@ -262,8 +262,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gaim
 %dir %{_libdir}/gaim/private
 %if %{with cap}
+%attr(755,root,root) %{_libdir}/gaim/autoaccept.so
+%attr(755,root,root) %{_libdir}/gaim/autoreply.so
+%attr(755,root,root) %{_libdir}/gaim/buddynote.so
 %attr(755,root,root) %{_libdir}/gaim/cap.so
 %endif
+%attr(755,root,root) %{_libdir}/gaim/convcolors.so
 #%attr(755,root,root) %{_libdir}/gaim/docklet.so
 %attr(755,root,root) %{_libdir}/gaim/extplacement.so
 %attr(755,root,root) %{_libdir}/gaim/gaimrc.so
@@ -278,19 +282,26 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/history.so
 %attr(755,root,root) %{_libdir}/gaim/iconaway.so
 %attr(755,root,root) %{_libdir}/gaim/idle.so
+%attr(755,root,root) %{_libdir}/gaim/libaim.so
 %attr(755,root,root) %{_libdir}/gaim/libbonjour.so
 %attr(755,root,root) %{_libdir}/gaim/libgg.so
+%attr(755,root,root) %{_libdir}/gaim/libicq.so
 %attr(755,root,root) %{_libdir}/gaim/libirc.so
 %attr(755,root,root) %{_libdir}/gaim/libjabber.so
 %attr(755,root,root) %{_libdir}/gaim/libmsn.so
 %attr(755,root,root) %{_libdir}/gaim/libnovell.so
 %attr(755,root,root) %{_libdir}/gaim/liboscar.so
+%attr(755,root,root) %{_libdir}/gaim/liboscar.so.*
 %attr(755,root,root) %{_libdir}/gaim/libqq.so
+%attr(755,root,root) %{_libdir}/gaim/libsametime.so
 %attr(755,root,root) %{_libdir}/gaim/libsimple.so
 %attr(755,root,root) %{_libdir}/gaim/libyahoo.so
 %attr(755,root,root) %{_libdir}/gaim/libzephyr.so
 %attr(755,root,root) %{_libdir}/gaim/log_reader.so
+%attr(755,root,root) %{_libdir}/gaim/markerline.so
+%attr(755,root,root) %{_libdir}/gaim/newline.so
 %attr(755,root,root) %{_libdir}/gaim/notify.so
+%attr(755,root,root) %{_libdir}/gaim/offlinemsg.so
 %attr(755,root,root) %{_libdir}/gaim/psychic.so
 %attr(755,root,root) %{_libdir}/gaim/relnot.so
 %attr(755,root,root) %{_libdir}/gaim/spellchk.so
@@ -301,6 +312,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/ticker.so
 %attr(755,root,root) %{_libdir}/gaim/timestamp.so
 %attr(755,root,root) %{_libdir}/gaim/timestamp_format.so
+%attr(755,root,root) %{_libdir}/gaim/xmppconsole.so
 %if %{with dbus}
 %attr(755,root,root) %{_bindir}/gaim-url-handler
 %attr(755,root,root) %{_libdir}/gaim/musicmessaging.so
