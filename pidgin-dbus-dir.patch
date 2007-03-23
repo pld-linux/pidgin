@@ -1,0 +1,14 @@
+diff -aurN gaim-2.0.0beta3.orig/configure.ac gaim-2.0.0beta3/configure.ac
+--- gaim-2.0.0beta3.orig/configure.ac	2006-03-26 09:45:35.000000000 +0200
++++ gaim-2.0.0beta3/configure.ac	2006-04-07 23:09:18.526190784 +0200
+@@ -689,10 +689,6 @@
+ if test x"$enable_dbus" = "xyes" ; then 
+	AC_MSG_CHECKING([location of the D-Bus services directory])
+	if ! test -z "$with_dbus_services" ; then
+-		if ! test -d "$with_dbus_services" ; then
+-			AC_MSG_ERROR([$with_dbus_services does not exist, if this is the correct location please make sure that it exists.])
+-		fi
+-
+		DBUS_SERVICES_DIR="$with_dbus_services"
+	else
+		if test x"$prefix" = x"NONE" ; then
