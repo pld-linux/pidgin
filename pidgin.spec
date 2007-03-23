@@ -36,6 +36,7 @@ BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bind-devel
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
 %{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
 BuildRequires:	gettext-autopoint
@@ -44,6 +45,7 @@ BuildRequires:	gnutls-devel
 BuildRequires:	gstreamer-devel >= 0.10.10
 BuildRequires:	gtk+2-devel >= 2:2.10.6
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.11}
+BuildRequires:	intltool
 BuildRequires:	mdns-howl-devel
 BuildRequires:	libgadu-devel
 BuildRequires:	libtool
