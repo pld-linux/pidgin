@@ -9,6 +9,7 @@
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	evolution	# compile without the Gaim-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
+%bcond_without	meanwhile	# without meanwhile support
 %bcond_without	text		# don't build text UI
 #
 %define		_pre	beta6
@@ -47,6 +48,7 @@ BuildRequires:	gtk+2-devel >= 2:2.10.6
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.11}
 BuildRequires:	intltool
 BuildRequires:	mdns-howl-devel
+%{?with_meanwhile:BuildRequires:	meanwhile-devel}
 BuildRequires:	libgadu-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.26
@@ -54,6 +56,7 @@ BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	python-modules
 BuildRequires:	rpm-perlprov
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.177
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
@@ -295,7 +298,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gaim/liboscar.so
 %attr(755,root,root) %{_libdir}/gaim/liboscar.so.*
 %attr(755,root,root) %{_libdir}/gaim/libqq.so
-%attr(755,root,root) %{_libdir}/gaim/libsametime.so
+%{?with_meanwhile:%attr(755,root,root) %{_libdir}/gaim/libsametime.so}
 %attr(755,root,root) %{_libdir}/gaim/libsimple.so
 %attr(755,root,root) %{_libdir}/gaim/libyahoo.so
 %attr(755,root,root) %{_libdir}/gaim/libzephyr.so
