@@ -56,6 +56,7 @@ BuildRequires:	python-modules
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.177
+BuildRequires:	silc-toolkit-devel
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 %{?with_text:BuildRequires:	ncurses-ext-devel}
@@ -213,7 +214,7 @@ EOF
 %{__libtoolize}
 %{__aclocal} -I m4macros
 %{__autoheader}
-%{__autoconf} || :
+%{__autoconf}
 %{__automake}
 %configure \
 	--disable-nas \
