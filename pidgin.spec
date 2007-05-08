@@ -1,5 +1,5 @@
 # TODO
-# - files not updated
+# - cleanup files; make some subpackages? move libs to proper packages
 # - nas, silc/silcclient?
 # - kerberos 4 with zephyr support?
 # - external zephyr?
@@ -30,6 +30,7 @@ Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
+Patch3:     %{name}-autoconf.patch
 URL:		http://www.pidgin.im/
 BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	audiofile-devel
@@ -209,6 +210,7 @@ EOF
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
@@ -250,10 +252,10 @@ rm $RPM_BUILD_ROOT%{_bindir}/purple-client-example
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%gconf_schema_install pidgin.schemas
+%gconf_schema_install purple.schemas
 
 %preun
-%gconf_schema_uninstall pidgin.schemas
+%gconf_schema_uninstall purlple.schemas
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
@@ -262,91 +264,106 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO PROGRAMMING_NOTES README* doc/FAQ
 %attr(755,root,root) %{_bindir}/pidgin
+%attr(755,root,root) %{_bindir}/finch
+%attr(755,root,root) %{_bindir}/purple-remote
+%attr(755,root,root) %{_bindir}/purple-send
+%attr(755,root,root) %{_bindir}/purple-send-async
+%attr(755,root,root) %{_bindir}/purple-url-handler
+%attr(755,root,root) %{_libdir}/libpurple.so.*
+%attr(755,root,root) %{_libdir}/libpurple-client.so.*
 %dir %{_libdir}/pidgin
-%dir %{_libdir}/pidgin/private
+#%dir %{_libdir}/pidgin/private
 %if %{with cap}
-%attr(755,root,root) %{_libdir}/pidgin/autoaccept.so
-%attr(755,root,root) %{_libdir}/pidgin/autoreply.so
-%attr(755,root,root) %{_libdir}/pidgin/buddynote.so
+%attr(755,root,root) %{_libdir}/purple-2/autoaccept.so
+#%attr(755,root,root) %{_libdir}/pidgin/autoreply.so
+%attr(755,root,root) %{_libdir}/purple-2/buddynote.so
 %attr(755,root,root) %{_libdir}/pidgin/cap.so
 %endif
 %attr(755,root,root) %{_libdir}/pidgin/convcolors.so
+%attr(755,root,root) %{_libdir}/purple-2/dbus-example.so
 #%attr(755,root,root) %{_libdir}/pidgin/docklet.so
 %attr(755,root,root) %{_libdir}/pidgin/extplacement.so
 %attr(755,root,root) %{_libdir}/pidgin/pidginrc.so
 %attr(755,root,root) %{_libdir}/pidgin/gestures.so
 %if %{with text}
-%attr(755,root,root) %{_bindir}/pidgin-text
-%attr(755,root,root) %{_libdir}/pidgin/gntgf.so
-%attr(755,root,root) %{_libdir}/pidgin/gnthistory.so
-%attr(755,root,root) %{_libdir}/pidgin/gntlastlog.so
-%attr(755,root,root) %{_libdir}/pidgin/s.so
+#%attr(755,root,root) %{_bindir}/pidgin-text
+%dir %{_libdir}/finch
+%dir %{_libdir}/purple-2
+%attr(755,root,root) %{_libdir}/finch/gntclipboard.so
+%attr(755,root,root) %{_libdir}/finch/gntgf.so
+%attr(755,root,root) %{_libdir}/finch/gnthistory.so
+%attr(755,root,root) %{_libdir}/finch/gntlastlog.so
+%attr(755,root,root) %{_libdir}/finch/s.so
 %endif
 %attr(755,root,root) %{_libdir}/pidgin/history.so
 %attr(755,root,root) %{_libdir}/pidgin/iconaway.so
-%attr(755,root,root) %{_libdir}/pidgin/idle.so
-%attr(755,root,root) %{_libdir}/pidgin/libaim.so
-%attr(755,root,root) %{_libdir}/pidgin/libbonjour.so
-%attr(755,root,root) %{_libdir}/pidgin/libgg.so
-%attr(755,root,root) %{_libdir}/pidgin/libicq.so
-%attr(755,root,root) %{_libdir}/pidgin/libirc.so
-%attr(755,root,root) %{_libdir}/pidgin/libjabber.so
-%attr(755,root,root) %{_libdir}/pidgin/libmsn.so
-%attr(755,root,root) %{_libdir}/pidgin/libnovell.so
-%attr(755,root,root) %{_libdir}/pidgin/liboscar.so
-%attr(755,root,root) %{_libdir}/pidgin/liboscar.so.*
-%attr(755,root,root) %{_libdir}/pidgin/libqq.so
-%{?with_meanwhile:%attr(755,root,root) %{_libdir}/pidgin/libsametime.so}
-%attr(755,root,root) %{_libdir}/pidgin/libsimple.so
-%attr(755,root,root) %{_libdir}/pidgin/libyahoo.so
-%attr(755,root,root) %{_libdir}/pidgin/libzephyr.so
-%attr(755,root,root) %{_libdir}/pidgin/log_reader.so
+%attr(755,root,root) %{_libdir}/purple-2/idle.so
+%attr(755,root,root) %{_libdir}/purple-2/joinpart.so
+%attr(755,root,root) %{_libdir}/purple-2/libaim.so
+%attr(755,root,root) %{_libdir}/purple-2/libbonjour.so
+%attr(755,root,root) %{_libdir}/purple-2/libgg.so
+%attr(755,root,root) %{_libdir}/purple-2/libicq.so
+%attr(755,root,root) %{_libdir}/purple-2/libirc.so
+%attr(755,root,root) %{_libdir}/purple-2/libjabber.so.*
+%attr(755,root,root) %{_libdir}/purple-2/libmsn.so
+%attr(755,root,root) %{_libdir}/purple-2/libnovell.so
+#%attr(755,root,root) %{_libdir}/pidgin/liboscar.so
+%attr(755,root,root) %{_libdir}/purple-2/liboscar.so.*
+%attr(755,root,root) %{_libdir}/purple-2/libqq.so
+%{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
+%attr(755,root,root) %{_libdir}/purple-2/libsimple.so
+%attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
+%attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
+%attr(755,root,root) %{_libdir}/purple-2/libzephyr.so
+%attr(755,root,root) %{_libdir}/purple-2/log_reader.so
 %attr(755,root,root) %{_libdir}/pidgin/markerline.so
-%attr(755,root,root) %{_libdir}/pidgin/newline.so
+%attr(755,root,root) %{_libdir}/purple-2/newline.so
 %attr(755,root,root) %{_libdir}/pidgin/notify.so
-%attr(755,root,root) %{_libdir}/pidgin/offlinemsg.so
-%attr(755,root,root) %{_libdir}/pidgin/psychic.so
+%attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
+%attr(755,root,root) %{_libdir}/purple-2/psychic.so
 %attr(755,root,root) %{_libdir}/pidgin/relnot.so
 %attr(755,root,root) %{_libdir}/pidgin/spellchk.so
-%attr(755,root,root) %{_libdir}/pidgin/ssl-gnutls.so
-%attr(755,root,root) %{_libdir}/pidgin/ssl-nss.so
-%attr(755,root,root) %{_libdir}/pidgin/ssl.so
-%attr(755,root,root) %{_libdir}/pidgin/statenotify.so
+%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so
+%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so
+%attr(755,root,root) %{_libdir}/purple-2/ssl.so
+%attr(755,root,root) %{_libdir}/purple-2/statenotify.so
+%attr(755,root,root) %{_libdir}/purple-2/tcl.so
 %attr(755,root,root) %{_libdir}/pidgin/ticker.so
 %attr(755,root,root) %{_libdir}/pidgin/timestamp.so
 %attr(755,root,root) %{_libdir}/pidgin/timestamp_format.so
 %attr(755,root,root) %{_libdir}/pidgin/xmppconsole.so
 %if %{with dbus}
-%attr(755,root,root) %{_bindir}/pidgin-url-handler
+#%attr(755,root,root) %{_bindir}/pidgin-url-handler
 %attr(755,root,root) %{_libdir}/pidgin/musicmessaging.so
-%attr(755,root,root) %{_bindir}/pidgin-send
-%attr(755,root,root) %{_bindir}/pidgin-send-async
-%{_datadir}/dbus-1/services/pidgin.service
+#%attr(755,root,root) %{_bindir}/pidgin-send
+#%attr(755,root,root) %{_bindir}/pidgin-send-async
+#%{_datadir}/dbus-1/services/pidgin.service
 %endif
-%{_sysconfdir}/gconf/schemas/pidgin.schemas
+%{_sysconfdir}/gconf/schemas/purple.schemas
 %{_datadir}/sounds/%{name}
 %{_mandir}/man?/*
 
 %{_desktopdir}/pidgin.desktop
 %{_pixmapsdir}/*
+%{_iconsdir}/hicolor/*/apps/pidgin.*
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpidgin.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libpidgin.so.*.*.*
 %if %{with text}
 %attr(755,root,root) %{_libdir}/libgnt.so.*.*.*
 %endif
 %if %{with dbus}
-%attr(755,root,root) %{_libdir}/libpidgin-client.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libpidgin-client.so.*.*.*
 %endif
 
 %files devel
 %defattr(644,root,root,755)
 %if %{with dbus}
-%attr(755,root,root) %{_libdir}/libpidgin-client.so
-%attr(755,root,root) %{_libdir}/libpidgin.so
-%{_libdir}/libpidgin-client.la
-%{_libdir}/libpidgin.la
+#%attr(755,root,root) %{_libdir}/libpidgin-client.so
+#%attr(755,root,root) %{_libdir}/libpidgin.so
+#%{_libdir}/libpidgin-client.la
+#%{_libdir}/libpidgin.la
 %endif
 %{_aclocaldir}/*.m4
 %dir %{_includedir}/pidgin
@@ -355,30 +372,38 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with text}
 %attr(755,root,root) %{_libdir}/libgnt.so
 %{_libdir}/libgnt.la
-%dir %{_includedir}/pidgin/gnt
+#%dir %{_includedir}/pidgin/gnt
 %dir %{_includedir}/gnt
-%{_includedir}/pidgin/gnt/*.h
+%dir %{_includedir}/finch
+%dir %{_includedir}/libpurple
+#%{_includedir}/pidgin/gnt/*.h
 %{_includedir}/gnt/*.h
+%{_includedir}/finch/*.h
+%{_includedir}/libpurple/*.h
 %endif
 
 %files perl
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/pidgin/private/libpidginperl.so
-%attr(755,root,root) %{_libdir}/pidgin/perl.so
+#%attr(755,root,root) %{_libdir}/pidgin/private/libpidginperl.so
+%attr(755,root,root) %{_libdir}/purple-2/perl.so
 %{perl_vendorarch}/*.pm
 %dir %{perl_vendorarch}/auto/Pidgin
-%{perl_vendorarch}/auto/Pidgin/*.ix
+%dir %{perl_vendorarch}/auto/Purple
+#%{perl_vendorarch}/auto/Pidgin/*.ix
 %{perl_vendorarch}/auto/Pidgin/*.bs
-%dir %{perl_vendorarch}/auto/Pidgin/GtkUI
-%{perl_vendorarch}/auto/Pidgin/GtkUI/*.bs
-%dir %{perl_vendorarch}/Pidgin
-%{perl_vendorarch}/Pidgin/*.pm
+%{perl_vendorarch}/auto/Purple/*.ix
+%{perl_vendorarch}/auto/Purple/*.bs
+%{perl_vendorarch}/auto/Purple/Purple.so
+#%dir %{perl_vendorarch}/auto/Pidgin/GtkUI
+#%{perl_vendorarch}/auto/Pidgin/GtkUI/*.bs
+#%dir %{perl_vendorarch}/Pidgin
+#%{perl_vendorarch}/Pidgin/*.pm
 %attr(755,root,root) %{perl_vendorarch}/auto/Pidgin/*.so
-%attr(755,root,root) %{perl_vendorarch}/auto/Pidgin/GtkUI/*.so
+#%attr(755,root,root) %{perl_vendorarch}/auto/Pidgin/GtkUI/*.so
 
 %files tcl
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/pidgin/tcl.so
+#%attr(755,root,root) %{_libdir}/pidgin/tcl.so
 
 %if %{with evolution}
 %files plugin-evolution
@@ -389,7 +414,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with dbus}
 %files plugin-remote
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/pidgin-remote
+#%attr(755,root,root) %{_bindir}/pidgin-remote
 %endif
 
 %if %{with doc}
