@@ -69,7 +69,7 @@ BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
 Requires(post,preun):	GConf2 >= 2.16.0
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
 # weird: it *should* break after DynaLoader's version change, but it doesn't
 #Requires:	perl(DynaLoader) = %(%{__perl} -MDynaLoader -e 'print DynaLoader->VERSION')
 Obsoletes:	gaim-ui
@@ -92,13 +92,13 @@ Messenger (można się zarejestrować pod adresem
 http://www.aim.aol.com/). Program używa wersji TOC protokołu AOL więc
 Twoja lista kontaktów jest zapisana na serwerze AOL i może być
 przesłana gdziekolwiek. Pidgin zawiera wiele udogodnień dostępnych w
-kliencie AOL IM jak również dodaje własne. Pidgin umożliwia także dostęp
-do usług takich jak Yahoo!, ICQ, MSN, Jabber, Napster, Zephyr, IRC
-oraz Gadu-Gadu.
+kliencie AOL IM jak również dodaje własne. Pidgin umożliwia także
+dostęp do usług takich jak Yahoo!, ICQ, MSN, Jabber, Napster, Zephyr,
+IRC oraz Gadu-Gadu.
 
 %description -l pt_BR.UTF-8
-GAIM é um cliente para o AOL Instant Messenger (AIM) que usa o serviço
-tik/toc da AOL. É desenvolvido ativamente e suporta muitas das
+Pidgin é um cliente para o AOL Instant Messenger (AIM) que usa o
+serviço tik/toc da AOL. É desenvolvido ativamente e suporta muitas das
 características do cliente da AOL, tendo uma interface similiar.
 Também oferece suporte a outros protocolos, como: ICQ, IRC, Yahoo!,
 MSN, Jabber e Napster.
@@ -111,62 +111,61 @@ Plugins stark erweitert werden kann.
 
 %package libs
 Summary:	Pidgin client library
-Summary(pl.UTF-8):   Biblioteka klienta Pidgin
+Summary(pl.UTF-8):   Biblioteka klienta Pidgina
 Group:		Libraries
-Epoch:		1
 
 %description libs
 Pidgin client library.
 
 %description libs -l pl.UTF-8
-Biblioteka klienta Pidgin.
+Biblioteka klienta Pidgina.
 
 %package devel
 Summary:	Development files for Pidgin client library
-Summary(pl.UTF-8):   Pliki programistyczne biblioteki klienta Pidgin
+Summary(pl.UTF-8):   Pliki programistyczne biblioteki klienta Pidgina
 Group:		Development/Libraries
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
 Requires:	gtk+2-devel >= 2:2.10.6
 
 %description devel
-Development files for pidgin.
+Development files for Pidgin.
 
 %description devel -l pl.UTF-8
-Pliki programistyczne biblioteki pidgin-remote.
+Pliki programistyczne biblioteki Pidgina.
 
 %package perl
 Summary:	Pidgin files for Perl scripts
 Summary(pl.UTF-8):   Pliki Pidgina dla skryptów w Perlu
 Group:		Libraries
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description perl
-This package gives you ability to extend Pidgin functionality with Perl
-scripts.
+This package gives you ability to extend Pidgin functionality with
+Perl scripts.
 
 %description perl -l pl.UTF-8
-Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za pomocą
-skryptów Perla.
+Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za
+pomocą skryptów Perla.
 
 %package tcl
 Summary:	Pidgin files for Tcl scripts
 Summary(pl.UTF-8):   Pliki Pidgina dla skryptów w Tcl-u
 Group:		Libraries
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description tcl
 This package gives you ability to extend Pidgin functionality with Tcl
 scripts.
 
 %description tcl -l pl.UTF-8
-Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za pomocą
-skryptów w Tcl-u.
+Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za
+pomocą skryptów w Tcl-u.
 
 %package plugin-evolution
 Summary:	Plugin for Ximian Evolution integration
 Summary(pl.UTF-8):   Wtyczka do integracji z Evolution
 Group:		Libraries
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description plugin-evolution
 Provides integration with Ximian Evolution.
@@ -178,7 +177,7 @@ Wtyczka do integracji z Evolution.
 Summary:	Pidgin Remote Control
 Summary(pl.UTF-8):   Zdalne sterowanie Pidginem
 Group:		Libraries
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description plugin-remote
 This package gives Pidgin the ability to be remote-controlled through
@@ -190,16 +189,16 @@ aplikacje albo narzędzie pidgin-remote.
 
 %package doc
 Summary:	Pidgin documentation for developers (HTML format)
-Summary(pl.UTF-8):   Dokumentacja Pidgin dla programistów (format HTML)
+Summary(pl.UTF-8):   Dokumentacja Pidgina dla programistów (format HTML)
 Group:		Documentation
 
 %description doc
 Pidgin documentation for developers (HTML format).
 
 %description doc -l pl.UTF-8
-Dokumentacja Pidgin dla programistów (format HTML).
+Dokumentacja Pidgina dla programistów (format HTML).
 
-%triggerpostun -- %{name} < 1:1.3.1-1.10
+%triggerpostun -- gaim < 1:1.3.1-1.10
 %banner -e %{name} <<EOF
 The Ximian Evolution and pidgin-remote plugins have been separated to separate packages.
 If you need then please install %{name}-plugin-evolution and %{name}-plugin-remote
