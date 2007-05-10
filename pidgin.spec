@@ -264,14 +264,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO PROGRAMMING_NOTES README* doc/FAQ
 %attr(755,root,root) %{_bindir}/pidgin
 %attr(755,root,root) %{_bindir}/finch
-%attr(755,root,root) %{_bindir}/purple-remote
-%attr(755,root,root) %{_bindir}/purple-send
-%attr(755,root,root) %{_bindir}/purple-send-async
-%attr(755,root,root) %{_bindir}/purple-url-handler
-%attr(755,root,root) %{_libdir}/libpurple.so.*
-%attr(755,root,root) %{_libdir}/libpurple-client.so.*
 %dir %{_libdir}/pidgin
-#%dir %{_libdir}/pidgin/private
 %if %{with cap}
 %attr(755,root,root) %{_libdir}/purple-2/autoaccept.so
 #%attr(755,root,root) %{_libdir}/pidgin/autoreply.so
@@ -279,23 +272,32 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/pidgin/cap.so
 %endif
 %attr(755,root,root) %{_libdir}/pidgin/convcolors.so
-%attr(755,root,root) %{_libdir}/purple-2/dbus-example.so
 #%attr(755,root,root) %{_libdir}/pidgin/docklet.so
 %attr(755,root,root) %{_libdir}/pidgin/extplacement.so
 %attr(755,root,root) %{_libdir}/pidgin/pidginrc.so
 %attr(755,root,root) %{_libdir}/pidgin/gestures.so
+%attr(755,root,root) %{_libdir}/pidgin/history.so
+%attr(755,root,root) %{_libdir}/pidgin/iconaway.so
+#%attr(755,root,root) %{_libdir}/pidgin/liboscar.so
+%attr(755,root,root) %{_libdir}/pidgin/markerline.so
+%attr(755,root,root) %{_libdir}/pidgin/notify.so
+%attr(755,root,root) %{_libdir}/pidgin/relnot.so
+%attr(755,root,root) %{_libdir}/pidgin/spellchk.so
+%attr(755,root,root) %{_libdir}/pidgin/ticker.so
+%attr(755,root,root) %{_libdir}/pidgin/timestamp.so
+%attr(755,root,root) %{_libdir}/pidgin/timestamp_format.so
+%attr(755,root,root) %{_libdir}/pidgin/xmppconsole.so
 %if %{with text}
 #%attr(755,root,root) %{_bindir}/pidgin-text
 %dir %{_libdir}/finch
-%dir %{_libdir}/purple-2
 %attr(755,root,root) %{_libdir}/finch/gntclipboard.so
 %attr(755,root,root) %{_libdir}/finch/gntgf.so
 %attr(755,root,root) %{_libdir}/finch/gnthistory.so
 %attr(755,root,root) %{_libdir}/finch/gntlastlog.so
 %attr(755,root,root) %{_libdir}/finch/s.so
 %endif
-%attr(755,root,root) %{_libdir}/pidgin/history.so
-%attr(755,root,root) %{_libdir}/pidgin/iconaway.so
+%dir %{_libdir}/purple-2
+%attr(755,root,root) %{_libdir}/purple-2/dbus-example.so
 %attr(755,root,root) %{_libdir}/purple-2/idle.so
 %attr(755,root,root) %{_libdir}/purple-2/joinpart.so
 %attr(755,root,root) %{_libdir}/purple-2/libaim.so
@@ -306,7 +308,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/libjabber.so.*
 %attr(755,root,root) %{_libdir}/purple-2/libmsn.so
 %attr(755,root,root) %{_libdir}/purple-2/libnovell.so
-#%attr(755,root,root) %{_libdir}/pidgin/liboscar.so
 %attr(755,root,root) %{_libdir}/purple-2/liboscar.so.*
 %attr(755,root,root) %{_libdir}/purple-2/libqq.so
 %{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
@@ -315,27 +316,18 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
 %attr(755,root,root) %{_libdir}/purple-2/libzephyr.so
 %attr(755,root,root) %{_libdir}/purple-2/log_reader.so
-%attr(755,root,root) %{_libdir}/pidgin/markerline.so
 %attr(755,root,root) %{_libdir}/purple-2/newline.so
-%attr(755,root,root) %{_libdir}/pidgin/notify.so
 %attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
 %attr(755,root,root) %{_libdir}/purple-2/psychic.so
-%attr(755,root,root) %{_libdir}/pidgin/relnot.so
-%attr(755,root,root) %{_libdir}/pidgin/spellchk.so
 %attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so
 %attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so
 %attr(755,root,root) %{_libdir}/purple-2/ssl.so
 %attr(755,root,root) %{_libdir}/purple-2/statenotify.so
-%attr(755,root,root) %{_libdir}/purple-2/tcl.so
-%attr(755,root,root) %{_libdir}/pidgin/ticker.so
-%attr(755,root,root) %{_libdir}/pidgin/timestamp.so
-%attr(755,root,root) %{_libdir}/pidgin/timestamp_format.so
-%attr(755,root,root) %{_libdir}/pidgin/xmppconsole.so
 %if %{with dbus}
-#%attr(755,root,root) %{_bindir}/pidgin-url-handler
+%attr(755,root,root) %{_bindir}/purple-url-handler
+%attr(755,root,root) %{_bindir}/purple-send
+%attr(755,root,root) %{_bindir}/purple-send-async
 %attr(755,root,root) %{_libdir}/pidgin/musicmessaging.so
-#%attr(755,root,root) %{_bindir}/pidgin-send
-#%attr(755,root,root) %{_bindir}/pidgin-send-async
 #%{_datadir}/dbus-1/services/pidgin.service
 %endif
 %{_sysconfdir}/gconf/schemas/purple.schemas
@@ -348,21 +340,23 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_libdir}/libpidgin.so.*.*.*
+%if %{with dbus}
+%attr(755,root,root) %{_libdir}/libpurple.so.*.*.*
+%attr(755,root,root) %{_libdir}/libpurple-client.so.*.*.*
+%endif
 %if %{with text}
 %attr(755,root,root) %{_libdir}/libgnt.so.*.*.*
-%endif
-%if %{with dbus}
-#%attr(755,root,root) %{_libdir}/libpidgin-client.so.*.*.*
 %endif
 
 %files devel
 %defattr(644,root,root,755)
 %if %{with dbus}
-#%attr(755,root,root) %{_libdir}/libpidgin-client.so
-#%attr(755,root,root) %{_libdir}/libpidgin.so
-#%{_libdir}/libpidgin-client.la
-#%{_libdir}/libpidgin.la
+%attr(755,root,root) %{_libdir}/libpurple.so
+%attr(755,root,root) %{_libdir}/libpurple-client.so
+%{_libdir}/libpurple.la
+%{_libdir}/libpurple-client.la
+%dir %{_includedir}/libpurple
+%{_includedir}/libpurple/*.h
 %endif
 %{_aclocaldir}/*.m4
 %dir %{_includedir}/pidgin
@@ -374,16 +368,13 @@ rm -rf $RPM_BUILD_ROOT
 #%dir %{_includedir}/pidgin/gnt
 %dir %{_includedir}/gnt
 %dir %{_includedir}/finch
-%dir %{_includedir}/libpurple
 #%{_includedir}/pidgin/gnt/*.h
 %{_includedir}/gnt/*.h
 %{_includedir}/finch/*.h
-%{_includedir}/libpurple/*.h
 %endif
 
 %files perl
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_libdir}/pidgin/private/libpidginperl.so
 %attr(755,root,root) %{_libdir}/purple-2/perl.so
 %{perl_vendorarch}/*.pm
 %dir %{perl_vendorarch}/auto/Pidgin
@@ -402,7 +393,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files tcl
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_libdir}/pidgin/tcl.so
+%attr(755,root,root) %{_libdir}/purple-2/tcl.so
 
 %if %{with evolution}
 %files plugin-evolution
@@ -413,7 +404,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with dbus}
 %files plugin-remote
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/pidgin-remote
+%attr(755,root,root) %{_bindir}/purple-remote
 %endif
 
 %if %{with doc}
