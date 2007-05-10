@@ -1,0 +1,14 @@
+diff -urN pidgin-2.0.0/configure.ac pidgin-2.0.0.new/configure.ac
+--- pidgin-2.0.0/configure.ac	2007-05-04 07:20:33.000000000 +0200
++++ pidgin-2.0.0.new/configure.ac	2007-05-08 22:31:56.289354220 +0200
+@@ -1939,8 +1939,8 @@
+ dnl # Check for check
+ dnl #######################################################################
+ PKG_CHECK_MODULES(CHECK,[check >= 0.9.4],:,[
+-					ifdef([AM_PATH_CHECK],
+-					[AM_PATH_CHECK(0.8.2,:,:)],
++					ifdef([PKG_CHECK_MODULES],
++					[PKG_CHECK_MODULES(CHECK,0.8.2,:,:)],
+ 					[AC_MSG_RESULT([no, testing is disabled])])
+ 				  ])
+ AM_CONDITIONAL(HAVE_CHECK, [test "x$CHECK_LIBS" != "x"])
