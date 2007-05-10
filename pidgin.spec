@@ -5,6 +5,7 @@
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
 # - obsoletes for gaim
+# - port to silc 1.1 or package silc 1.0
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without dbus (for pidgin-remote and others)
@@ -13,6 +14,7 @@
 %bcond_without	gtkspell	# without gtkspell support
 %bcond_without	meanwhile	# without meanwhile support
 %bcond_without	text		# don't build text UI
+%bcond_with 	silc		# Build with SILC libraries
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
@@ -57,7 +59,7 @@ BuildRequires:	python-modules
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.177
-BuildRequires:	silc-toolkit-devel
+%{?with_silc:BuildRequires:	silc-toolkit-devel < 1.1}
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 %{?with_text:BuildRequires:	ncurses-ext-devel}
@@ -221,6 +223,8 @@ EOF
 	--disable-nas \
 	--enable-nss=no \
 	--with-perl-lib=vendor \
+	--with-silc-includes=%{?with_silc:yes}%{!?with_silc:no} \
+	--with-silc-libs=%{?with_silc:yes}%{!?with_silc:no} \
 	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
 	%{?with_dbus:--enable-dbus --with-dbus-session-dir=/usr/share/dbus-1/services} \
 	%{!?with_dbus:--disable-dbus} \
@@ -261,7 +265,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO PROGRAMMING_NOTES README* doc/FAQ
+%doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO README*
 %attr(755,root,root) %{_bindir}/pidgin
 %attr(755,root,root) %{_bindir}/finch
 %dir %{_libdir}/pidgin
