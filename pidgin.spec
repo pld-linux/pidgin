@@ -254,7 +254,7 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_install purple.schemas
 
 %preun
-%gconf_schema_uninstall purlple.schemas
+%gconf_schema_uninstall purple.schemas
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
