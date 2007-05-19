@@ -6,13 +6,16 @@
 #   http://packages.qa.debian.org/z/zephyr.html
 # - obsoletes for gaim
 # - port to silc 1.1 or package silc 1.0
+# - move mono related files to -libs?
 #
 %bcond_without	cap		# without Contact Availability Prediction
+%bcond_without	cyrus_sasl	# disable Cyrus SASL support
 %bcond_without	dbus		# without dbus (for pidgin-remote and others)
 %bcond_without	doc		# do not generate and include documentation
 %bcond_without	evolution	# compile without the Pidgin-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
 %bcond_without	meanwhile	# without meanwhile support
+%bcond_without	dotnet		# build with mono support
 %bcond_without	text		# don't build text UI
 %bcond_with 	silc		# Build with SILC libraries
 #
@@ -24,7 +27,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.0.0
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -38,7 +41,9 @@ BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	avahi-compat-howl-devel
 BuildRequires:	bind-devel
+%{?with_cyrus_sasl:BuildRequires:	cyrus-sasl-devel}
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
 %{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
 BuildRequires:	gettext-autopoint
@@ -48,11 +53,11 @@ BuildRequires:	gstreamer-devel >= 0.10.10
 BuildRequires:	gtk+2-devel >= 2:2.10.6
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.11}
 BuildRequires:	intltool
-BuildRequires:	mdns-howl-devel
 %{?with_meanwhile:BuildRequires:	meanwhile-devel}
 BuildRequires:	libgadu-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.26
+%{?with_dotnet:BuildRequires:	mono-devel}
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	python-modules
@@ -226,10 +231,12 @@ EOF
 	--with-silc-includes=%{?with_silc:yes}%{!?with_silc:no} \
 	--with-silc-libs=%{?with_silc:yes}%{!?with_silc:no} \
 	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
+	%{?with_cyrus_sasl:--enable-cyrus-sasl} \
 	%{?with_dbus:--enable-dbus --with-dbus-session-dir=/usr/share/dbus-1/services} \
 	%{!?with_dbus:--disable-dbus} \
 	%{!?with_evolution:--disable-gevolution} \
 	%{!?with_gtkspell:--disable-gtkspell} \
+	%{?with_dotnet:--enable-mono} \
 	--%{?with_text:en}%{!?with_text:dis}able-consoleui
 
 %{__make}
@@ -275,6 +282,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/buddynote.so
 %attr(755,root,root) %{_libdir}/pidgin/cap.so
 %endif
+%if %{with_dotnet}
+%attr(755,root,root) %{_libdir}/purple-2/*.dll
+%attr(755,root,root) %{_libdir}/purple-2/mono.so
+%endif 
 %attr(755,root,root) %{_libdir}/pidgin/convcolors.so
 #%attr(755,root,root) %{_libdir}/pidgin/docklet.so
 %attr(755,root,root) %{_libdir}/pidgin/extplacement.so
