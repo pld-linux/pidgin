@@ -35,7 +35,7 @@ Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
-Patch3:     %{name}-autoconf.patch
+Patch3:		%{name}-autoconf.patch
 URL:		http://www.pidgin.im/
 BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	audiofile-devel
@@ -282,7 +282,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/buddynote.so
 %attr(755,root,root) %{_libdir}/pidgin/cap.so
 %endif
-%if %{with_dotnet}
+%if %{with dotnet}
 %attr(755,root,root) %{_libdir}/purple-2/*.dll
 %attr(755,root,root) %{_libdir}/purple-2/mono.so
 %endif 
