@@ -76,6 +76,7 @@ BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
 Requires(post,preun):	GConf2 >= 2.16.0
+%{?with_sasl:Requires(hint):    cyrus-sasl-digest-md5}
 Requires:	%{name}-libs = %{version}-%{release}
 # weird: it *should* break after DynaLoader's version change, but it doesn't
 #Requires:	perl(DynaLoader) = %(%{__perl} -MDynaLoader -e 'print DynaLoader->VERSION')
