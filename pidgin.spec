@@ -26,12 +26,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.0.1
-Release:	0.2
+Version:	2.0.2
+Release:	0.1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	51062e232c1ba5429d8be43623983fdf
+# Source0-md5:	613a357b2b1e030433fdfa680483d00f
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
@@ -292,6 +292,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/pidgin/extplacement.so
 %attr(755,root,root) %{_libdir}/pidgin/pidginrc.so
 %attr(755,root,root) %{_libdir}/pidgin/gestures.so
+%attr(755,root,root) %{_libdir}/pidgin/gtkbuddynote.so
 %attr(755,root,root) %{_libdir}/pidgin/history.so
 %attr(755,root,root) %{_libdir}/pidgin/iconaway.so
 #%attr(755,root,root) %{_libdir}/pidgin/liboscar.so
@@ -400,6 +401,7 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/auto/Purple/*.ix
 %{perl_vendorarch}/auto/Purple/*.bs
 %{perl_vendorarch}/auto/Purple/Purple.so
+%{perl_vendorarch}/auto/Purple/.packlist
 #%dir %{perl_vendorarch}/auto/Pidgin/GtkUI
 #%{perl_vendorarch}/auto/Pidgin/GtkUI/*.bs
 #%dir %{perl_vendorarch}/Pidgin
