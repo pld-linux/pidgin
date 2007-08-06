@@ -26,12 +26,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.0.2
+Version:	2.1.0
 Release:	0.1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	613a357b2b1e030433fdfa680483d00f
+# Source0-md5:	83f44bf9c076595967f7374c50250176
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
@@ -53,11 +53,12 @@ BuildRequires:	gstreamer-devel >= 0.10.10
 BuildRequires:	gtk+2-devel >= 2:2.10.6
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.11}
 BuildRequires:	intltool
-%{?with_meanwhile:BuildRequires:	meanwhile-devel}
 BuildRequires:	libgadu-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.26
+%{?with_meanwhile:BuildRequires:	meanwhile-devel}
 %{?with_dotnet:BuildRequires:	mono-devel}
+%{?with_text:BuildRequires:	ncurses-ext-devel}
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	python-modules
@@ -67,7 +68,6 @@ BuildRequires:	rpmbuild(macros) >= 1.177
 %{?with_silc:BuildRequires:	silc-toolkit-devel < 1.1}
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
-%{?with_text:BuildRequires:	ncurses-ext-devel}
 %if %{with cap}
 BuildRequires:	sqlite3-devel >= 3.3
 %endif
@@ -75,8 +75,8 @@ BuildRequires:	sqlite3-devel >= 3.3
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
-Requires(post,preun):	GConf2 >= 2.16.0
 %{?with_sasl:Requires(hint):    cyrus-sasl-digest-md5}
+Requires(post,preun):	GConf2 >= 2.16.0
 Requires:	%{name}-libs = %{version}-%{release}
 # weird: it *should* break after DynaLoader's version change, but it doesn't
 #Requires:	perl(DynaLoader) = %(%{__perl} -MDynaLoader -e 'print DynaLoader->VERSION')
@@ -119,7 +119,7 @@ Plugins stark erweitert werden kann.
 
 %package libs
 Summary:	Pidgin client library
-Summary(pl.UTF-8):   Biblioteka klienta Pidgina
+Summary(pl.UTF-8):	Biblioteka klienta Pidgina
 Group:		Libraries
 
 %description libs
@@ -130,7 +130,7 @@ Biblioteka klienta Pidgina.
 
 %package devel
 Summary:	Development files for Pidgin client library
-Summary(pl.UTF-8):   Pliki programistyczne biblioteki klienta Pidgina
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki klienta Pidgina
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	gtk+2-devel >= 2:2.10.6
@@ -143,7 +143,7 @@ Pliki programistyczne biblioteki Pidgina.
 
 %package perl
 Summary:	Pidgin files for Perl scripts
-Summary(pl.UTF-8):   Pliki Pidgina dla skryptów w Perlu
+Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Perlu
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -157,7 +157,7 @@ pomocą skryptów Perla.
 
 %package tcl
 Summary:	Pidgin files for Tcl scripts
-Summary(pl.UTF-8):   Pliki Pidgina dla skryptów w Tcl-u
+Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Tcl-u
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -171,7 +171,7 @@ pomocą skryptów w Tcl-u.
 
 %package plugin-evolution
 Summary:	Plugin for Ximian Evolution integration
-Summary(pl.UTF-8):   Wtyczka do integracji z Evolution
+Summary(pl.UTF-8):	Wtyczka do integracji z Evolution
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -183,7 +183,7 @@ Wtyczka do integracji z Evolution.
 
 %package plugin-remote
 Summary:	Pidgin Remote Control
-Summary(pl.UTF-8):   Zdalne sterowanie Pidginem
+Summary(pl.UTF-8):	Zdalne sterowanie Pidginem
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -197,7 +197,7 @@ aplikacje albo narzędzie pidgin-remote.
 
 %package doc
 Summary:	Pidgin documentation for developers (HTML format)
-Summary(pl.UTF-8):   Dokumentacja Pidgina dla programistów (format HTML)
+Summary(pl.UTF-8):	Dokumentacja Pidgina dla programistów (format HTML)
 Group:		Documentation
 
 %description doc
@@ -233,14 +233,14 @@ EOF
 	--with-silc-libs=%{?with_silc:yes}%{!?with_silc:no} \
 	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
 	%{?with_sasl:--enable-cyrus-sasl} \
-	%{?with_dbus:--enable-dbus --with-dbus-session-dir=/usr/share/dbus-1/services} \
+%{?with_dbus:--enable-dbus --with-dbus-session-dir=%{_datadir}/dbus-1/services} \
 	%{!?with_dbus:--disable-dbus} \
 	%{!?with_evolution:--disable-gevolution} \
 	%{!?with_gtkspell:--disable-gtkspell} \
 	%{?with_dotnet:--enable-mono} \
 	--%{?with_text:en}%{!?with_text:dis}able-consoleui
 
-%{__make}
+%{__make} -j1
 %{?with_doc:%{__make} docs}
 
 %install
@@ -286,7 +286,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with dotnet}
 %attr(755,root,root) %{_libdir}/purple-2/*.dll
 %attr(755,root,root) %{_libdir}/purple-2/mono.so
-%endif 
+%endif
 %attr(755,root,root) %{_libdir}/pidgin/convcolors.so
 #%attr(755,root,root) %{_libdir}/pidgin/docklet.so
 %attr(755,root,root) %{_libdir}/pidgin/extplacement.so
@@ -311,7 +311,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/finch/gntgf.so
 %attr(755,root,root) %{_libdir}/finch/gnthistory.so
 %attr(755,root,root) %{_libdir}/finch/gntlastlog.so
-%attr(755,root,root) %{_libdir}/finch/s.so
+%attr(755,root,root) %{_libdir}/gnt/*.so
 %endif
 %dir %{_libdir}/purple-2
 %attr(755,root,root) %{_libdir}/purple-2/dbus-example.so
@@ -327,7 +327,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/libnovell.so
 %attr(755,root,root) %{_libdir}/purple-2/liboscar.so.*
 %attr(755,root,root) %{_libdir}/purple-2/libqq.so
-%{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
+%attr(755,root,root) %{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
 %attr(755,root,root) %{_libdir}/purple-2/libsimple.so
 %attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
 %attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
@@ -400,7 +400,7 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/auto/Pidgin/*.bs
 %{perl_vendorarch}/auto/Purple/*.ix
 %{perl_vendorarch}/auto/Purple/*.bs
-%{perl_vendorarch}/auto/Purple/Purple.so
+%attr(755,root,root) %{perl_vendorarch}/auto/Purple/Purple.so
 %{perl_vendorarch}/auto/Purple/.packlist
 #%dir %{perl_vendorarch}/auto/Pidgin/GtkUI
 #%{perl_vendorarch}/auto/Pidgin/GtkUI/*.bs
