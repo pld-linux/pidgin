@@ -311,6 +311,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/finch/gntgf.so
 %attr(755,root,root) %{_libdir}/finch/gnthistory.so
 %attr(755,root,root) %{_libdir}/finch/gntlastlog.so
+%dir %{_libdir}/gnt
 %attr(755,root,root) %{_libdir}/gnt/*.so
 %endif
 %dir %{_libdir}/purple-2
