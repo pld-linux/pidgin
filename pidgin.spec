@@ -328,7 +328,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/libnovell.so
 %attr(755,root,root) %{_libdir}/purple-2/liboscar.so.*
 %attr(755,root,root) %{_libdir}/purple-2/libqq.so
-%attr(755,root,root) %{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
+%{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
 %attr(755,root,root) %{_libdir}/purple-2/libsimple.so
 %attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
 %attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
