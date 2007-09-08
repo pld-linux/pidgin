@@ -26,12 +26,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.1.0
+Version:	2.1.1
 Release:	0.1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	83f44bf9c076595967f7374c50250176
+# Source0-md5:	eb29fecb2f3a6d4790f47ce8e658c07c
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
@@ -250,7 +250,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/pidgin/{,private}/*.la
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,ca_ES@valencian,my_MM}
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,ca_ES@valencian,my_MM,ps}
 
 %find_lang %{name} --with-gnome
 rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Pidgin/{,GtkUI}/.packlist}
@@ -349,7 +349,7 @@ rm -rf $RPM_BUILD_ROOT
 #%{_datadir}/dbus-1/services/pidgin.service
 %endif
 %{_sysconfdir}/gconf/schemas/purple.schemas
-%{_datadir}/sounds/%{name}
+%{_datadir}/sounds/purple
 %{_mandir}/man?/*
 
 %{_desktopdir}/pidgin.desktop
