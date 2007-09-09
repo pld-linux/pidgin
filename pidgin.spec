@@ -19,6 +19,9 @@
 %bcond_without	text		# don't build text UI
 %bcond_with 	silc		# Build with SILC libraries
 #
+%ifarch i386
+%undefine	with_dotnet
+%endif
 %include	/usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(de.UTF-8):	Pidgin ist ein Instant Messenger
