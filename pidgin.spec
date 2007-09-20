@@ -7,6 +7,7 @@
 # - obsoletes for gaim
 # - move mono related files to -libs?
 # - unpackaged certificates /usr/share/purple/ca-certs/*_CA.pem
+# - add NetworkManager support
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without dbus (for pidgin-remote and others)
@@ -17,7 +18,7 @@
 %bcond_without	meanwhile	# without meanwhile support
 %bcond_without	sasl		# disable SASL support
 %bcond_without	text		# don't build text UI
-%bcond_with 	silc		# Build with SILC libraries
+%bcond_without 	silc		# Build without SILC libraries
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
@@ -27,7 +28,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.2.0
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -232,6 +233,7 @@ EOF
 	--disable-nas \
 	--enable-nss=no \
 	--with-perl-lib=vendor \
+%{!?with_silc:--with-silc-includes=not_existent_directory} \
 	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
 	%{?with_sasl:--enable-cyrus-sasl} \
 %{?with_dbus:--enable-dbus --with-dbus-session-dir=%{_datadir}/dbus-1/services} \
