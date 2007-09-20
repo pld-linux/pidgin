@@ -281,7 +281,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO README*
 %attr(755,root,root) %{_bindir}/pidgin
-%attr(755,root,root) %{_bindir}/finch
 %dir %{_libdir}/pidgin
 %if %{with cap}
 %attr(755,root,root) %{_libdir}/purple-2/autoaccept.so
@@ -311,7 +310,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/pidgin/timestamp_format.so
 %attr(755,root,root) %{_libdir}/pidgin/xmppconsole.so
 %if %{with text}
-#%attr(755,root,root) %{_bindir}/pidgin-text
+%attr(755,root,root) %{_bindir}/finch
 %dir %{_libdir}/finch
 %attr(755,root,root) %{_libdir}/finch/gntclipboard.so
 %attr(755,root,root) %{_libdir}/finch/gntgf.so
@@ -321,7 +320,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gnt/*.so
 %endif
 %dir %{_libdir}/purple-2
-%attr(755,root,root) %{_libdir}/purple-2/dbus-example.so
+%{?with_dbus:%attr(755,root,root) %{_libdir}/purple-2/dbus-example.so}
 %attr(755,root,root) %{_libdir}/purple-2/idle.so
 %attr(755,root,root) %{_libdir}/purple-2/joinpart.so
 %attr(755,root,root) %{_libdir}/purple-2/libaim.so
