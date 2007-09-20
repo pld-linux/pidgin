@@ -72,6 +72,7 @@ BuildRequires:	tk-devel
 BuildRequires:	sqlite3-devel >= 3.3
 %endif
 BuildRequires:	xorg-lib-libSM-devel
+BuildRequires:	xorg-lib-libXScrnSaver-devel
 %if %{with doc}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
