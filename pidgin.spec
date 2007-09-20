@@ -282,10 +282,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO README*
 %attr(755,root,root) %{_bindir}/pidgin
 %dir %{_libdir}/pidgin
-%if %{with cap}
 %attr(755,root,root) %{_libdir}/purple-2/autoaccept.so
-#%attr(755,root,root) %{_libdir}/pidgin/autoreply.so
 %attr(755,root,root) %{_libdir}/purple-2/buddynote.so
+%if %{with cap}
+#%attr(755,root,root) %{_libdir}/pidgin/autoreply.so
 %attr(755,root,root) %{_libdir}/pidgin/cap.so
 %endif
 %if %{with dotnet}
@@ -365,8 +365,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%if %{with dbus}
 %attr(755,root,root) %{_libdir}/libpurple.so.*.*.*
+%if %{with dbus}
 %attr(755,root,root) %{_libdir}/libpurple-client.so.*.*.*
 %endif
 %if %{with text}
@@ -375,14 +375,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%if %{with dbus}
 %attr(755,root,root) %{_libdir}/libpurple.so
-%attr(755,root,root) %{_libdir}/libpurple-client.so
 %{_libdir}/libpurple.la
+%if %{with dbus}
+%attr(755,root,root) %{_libdir}/libpurple-client.so
 %{_libdir}/libpurple-client.la
+%endif
 %dir %{_includedir}/libpurple
 %{_includedir}/libpurple/*.h
-%endif
 %{_aclocaldir}/*.m4
 %dir %{_includedir}/pidgin
 %{_includedir}/pidgin/*.h
