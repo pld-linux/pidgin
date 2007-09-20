@@ -71,6 +71,7 @@ BuildRequires:	tk-devel
 %if %{with cap}
 BuildRequires:	sqlite3-devel >= 3.3
 %endif
+BuildRequires:	xorg-lib-libSM-devel
 %if %{with doc}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
