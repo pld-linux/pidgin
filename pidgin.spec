@@ -5,8 +5,8 @@
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
 # - obsoletes for gaim
-# - port to silc 1.1 or package silc 1.0
 # - move mono related files to -libs?
+# - unpackaged certificates /usr/share/purple/ca-certs/*_CA.pem
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without dbus (for pidgin-remote and others)
@@ -66,7 +66,7 @@ BuildRequires:	rpm-perlprov
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.177
 BuildRequires:	startup-notification-devel
-%{?with_silc:BuildRequires:	silc-toolkit-devel < 1.1}
+%{?with_silc:BuildRequires:	silc-toolkit-devel >= 1.1}
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 %if %{with cap}
@@ -232,8 +232,6 @@ EOF
 	--disable-nas \
 	--enable-nss=no \
 	--with-perl-lib=vendor \
-	--with-silc-includes=%{?with_silc:yes}%{!?with_silc:no} \
-	--with-silc-libs=%{?with_silc:yes}%{!?with_silc:no} \
 	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
 	%{?with_sasl:--enable-cyrus-sasl} \
 %{?with_dbus:--enable-dbus --with-dbus-session-dir=%{_datadir}/dbus-1/services} \
@@ -252,7 +250,10 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+rm -f $RPM_BUILD_ROOT%{_libdir}/finch/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/gnt/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/pidgin/{,private}/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/*.la
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,ca_ES@valencian,my_MM,ps}
 
 %find_lang %{name} --with-gnome
@@ -328,10 +329,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/libirc.so
 %attr(755,root,root) %{_libdir}/purple-2/libjabber.so.*
 %attr(755,root,root) %{_libdir}/purple-2/libmsn.so
+%attr(755,root,root) %{_libdir}/purple-2/libmyspace.so
 %attr(755,root,root) %{_libdir}/purple-2/libnovell.so
 %attr(755,root,root) %{_libdir}/purple-2/liboscar.so.*
 %attr(755,root,root) %{_libdir}/purple-2/libqq.so
 %{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
+%{?with_silc:%attr(755,root,root) %{_libdir}/purple-2/libsilcpurple.so}
 %attr(755,root,root) %{_libdir}/purple-2/libsimple.so
 %attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
 %attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
