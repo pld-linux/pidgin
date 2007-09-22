@@ -243,7 +243,7 @@ EOF
 	%{?with_dotnet:--enable-mono} \
 	--%{?with_text:en}%{!?with_text:dis}able-consoleui
 
-%{__make}
+%{__make} -j1
 %{?with_doc:%{__make} docs}
 
 %install
