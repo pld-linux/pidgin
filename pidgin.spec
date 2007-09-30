@@ -42,7 +42,7 @@ BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	avahi-compat-howl-devel
+BuildRequires:	avahi-devel
 BuildRequires:	bind-devel
 %{?with_sasl:BuildRequires:	cyrus-sasl-devel}
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
