@@ -1,12 +1,12 @@
-diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/add_buddy_dialog.c gaim-2.0.0/gtk/plugins/gevolution/add_buddy_dialog.c
---- gaim-2.0.0.orig/gtk/plugins/gevolution/add_buddy_dialog.c	2005-07-03 08:42:16.000000000 +0200
-+++ gaim-2.0.0/gtk/plugins/gevolution/add_buddy_dialog.c	2005-08-02 22:01:50.000000000 +0200
-@@ -291,16 +291,17 @@
+diff -urN gaim-0.78.orig/plugins/gevolution/add_buddy_dialog.c gaim-0.78/plugins/gevolution/add_buddy_dialog.c
+--- gaim-0.78.orig/plugins/gevolution/add_buddy_dialog.c	2004-06-02 14:21:12.152999696 +0200
++++ gaim-0.78/plugins/gevolution/add_buddy_dialog.c	2004-06-02 14:35:31.623340344 +0200
+@@ -334,18 +334,19 @@
  	{
  		EContact *contact = E_CONTACT(c->data);
  		const char *name;
--		GList *aims, *jabbers, *yahoos, *msns, *icqs, *novells;
-+		GList *aims, *jabbers, *yahoos, *gadugadus, *msns, *icqs, *novells;
+-		GList *aims, *jabbers, *yahoos, *msns, *icqs;
++		GList *aims, *jabbers, *yahoos, *gadugadus, *msns, *icqs;
  
  		name = e_contact_get_const(contact, E_CONTACT_FULL_NAME);
  
@@ -15,35 +15,47 @@ diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/add_buddy_dialog.c gaim-2.0.0/
 -		yahoos  = e_contact_get(contact, E_CONTACT_IM_YAHOO);
 -		msns    = e_contact_get(contact, E_CONTACT_IM_MSN);
 -		icqs    = e_contact_get(contact, E_CONTACT_IM_ICQ);
--		novells = e_contact_get(contact, E_CONTACT_IM_GROUPWISE);
-+		aims    	= e_contact_get(contact, E_CONTACT_IM_AIM);
-+		jabbers		= e_contact_get(contact, E_CONTACT_IM_JABBER);
-+		yahoos		= e_contact_get(contact, E_CONTACT_IM_YAHOO);
-+		gadugadus	= e_contact_get(contact, E_CONTACT_IM_GADUGADU);
-+		msns		= e_contact_get(contact, E_CONTACT_IM_MSN);
-+		icqs		= e_contact_get(contact, E_CONTACT_IM_ICQ);
-+		novells		= e_contact_get(contact, E_CONTACT_IM_GROUPWISE);
++		aims       = e_contact_get(contact, E_CONTACT_IM_AIM);
++		jabbers    = e_contact_get(contact, E_CONTACT_IM_JABBER);
++		yahoos     = e_contact_get(contact, E_CONTACT_IM_YAHOO);
++		gadugadus  = e_contact_get(contact, E_CONTACT_IM_GADUGADU);
++		msns       = e_contact_get(contact, E_CONTACT_IM_MSN);
++		icqs       = e_contact_get(contact, E_CONTACT_IM_ICQ);
  
  		if (aims == NULL && jabbers == NULL && yahoos == NULL &&
- 			msns == NULL && icqs == NULL && novells == NULL)
-@@ -319,6 +320,7 @@
- 			add_ims(dialog, contact, name, aims,    "prpl-oscar");
- 			add_ims(dialog, contact, name, jabbers, "prpl-jabber");
- 			add_ims(dialog, contact, name, yahoos,  "prpl-yahoo");
+-			msns == NULL && icqs == NULL)
++			msns == NULL && icqs == NULL && gadugadus == NULL)
+ 		{
+ 			GtkTreeIter iter;
+ 
+@@ -358,11 +359,12 @@
+ 		}
+ 		else
+ 		{
+-			add_ims(dialog, contact, name, aims,    "prpl-oscar");
+-			add_ims(dialog, contact, name, jabbers, "prpl-jabber");
+-			add_ims(dialog, contact, name, yahoos,  "prpl-yahoo");
+-			add_ims(dialog, contact, name, msns,    "prpl-msn");
+-			add_ims(dialog, contact, name, icqs,    "prpl-oscar");
++			add_ims(dialog, contact, name, aims,       "prpl-oscar");
++			add_ims(dialog, contact, name, jabbers,    "prpl-jabber");
++			add_ims(dialog, contact, name, yahoos,     "prpl-yahoo");
 +			add_ims(dialog, contact, name, gadugadus,  "prpl-gg");
- 			add_ims(dialog, contact, name, msns,    "prpl-msn");
- 			add_ims(dialog, contact, name, icqs,    "prpl-oscar");
- 			add_ims(dialog, contact, name, novells, "prpl-novell");
-@@ -363,7 +365,7 @@
++			add_ims(dialog, contact, name, msns,       "prpl-msn");
++			add_ims(dialog, contact, name, icqs,       "prpl-oscar");
+ 		}
+ 	}
+ 
+@@ -388,7 +390,7 @@
  	{
  		EContact *contact = E_CONTACT(l->data);
  		const char *name;
--		GList *aims, *jabbers, *yahoos, *msns, *icqs, *novells;
-+		GList *aims, *jabbers, *yahoos, *gadugadus, *msns, *icqs, *novells;
+-		GList *aims, *jabbers, *yahoos, *msns, *icqs;
++		GList *aims, *jabbers, *yahoos, *gadugadus, *msns, *icqs;
  
  		name = e_contact_get_const(contact, E_CONTACT_FULL_NAME);
  
-@@ -373,12 +375,13 @@
+@@ -398,14 +400,15 @@
  			continue;
  		}
  
@@ -52,40 +64,62 @@ diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/add_buddy_dialog.c gaim-2.0.0/
 -		yahoos  = e_contact_get(contact, E_CONTACT_IM_YAHOO);
 -		msns    = e_contact_get(contact, E_CONTACT_IM_MSN);
 -		icqs    = e_contact_get(contact, E_CONTACT_IM_ICQ);
--		novells = e_contact_get(contact, E_CONTACT_IM_GROUPWISE);
-+		aims		= e_contact_get(contact, E_CONTACT_IM_AIM);
-+		jabbers		= e_contact_get(contact, E_CONTACT_IM_JABBER);
-+		yahoos		= e_contact_get(contact, E_CONTACT_IM_YAHOO);
-+		gadugadus	= e_contact_get(contact, E_CONTACT_IM_GADUGADU);
-+		msns		= e_contact_get(contact, E_CONTACT_IM_MSN);
-+		icqs		= e_contact_get(contact, E_CONTACT_IM_ICQ);
-+		novells		= e_contact_get(contact, E_CONTACT_IM_GROUPWISE);
++		aims        = e_contact_get(contact, E_CONTACT_IM_AIM);
++		jabbers     = e_contact_get(contact, E_CONTACT_IM_JABBER);
++		yahoos      = e_contact_get(contact, E_CONTACT_IM_YAHOO);
++		gadugadus   = e_contact_get(contact, E_CONTACT_IM_GADUGADU);
++		msns        = e_contact_get(contact, E_CONTACT_IM_MSN);
++		icqs        = e_contact_get(contact, E_CONTACT_IM_ICQ);
  
  		if (aims == NULL && jabbers == NULL && yahoos == NULL &&
- 			msns == NULL && icqs == NULL && novells == NULL)
-@@ -397,6 +400,7 @@
- 			add_ims(dialog, contact, name, aims,    "prpl-oscar");
- 			add_ims(dialog, contact, name, jabbers, "prpl-jabber");
- 			add_ims(dialog, contact, name, yahoos,  "prpl-yahoo");
+-			msns == NULL && icqs == NULL)
++			msns == NULL && icqs == NULL && gadugadus == NULL)
+ 		{
+ 			GtkTreeIter iter;
+ 
+@@ -418,11 +421,12 @@
+ 		}
+ 		else
+ 		{
+-			add_ims(dialog, contact, name, aims,    "prpl-oscar");
+-			add_ims(dialog, contact, name, jabbers, "prpl-jabber");
+-			add_ims(dialog, contact, name, yahoos,  "prpl-yahoo");
+-			add_ims(dialog, contact, name, msns,    "prpl-msn");
+-			add_ims(dialog, contact, name, icqs,    "prpl-oscar");
++			add_ims(dialog, contact, name, aims,       "prpl-oscar");
++			add_ims(dialog, contact, name, jabbers,    "prpl-jabber");
++			add_ims(dialog, contact, name, yahoos,     "prpl-yahoo");
 +			add_ims(dialog, contact, name, gadugadus,  "prpl-gg");
- 			add_ims(dialog, contact, name, msns,    "prpl-msn");
- 			add_ims(dialog, contact, name, icqs,    "prpl-oscar");
- 			add_ims(dialog, contact, name, novells, "prpl-novell");
-diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/gevolution.c gaim-2.0.0/gtk/plugins/gevolution/gevolution.c
---- gaim-2.0.0.orig/gtk/plugins/gevolution/gevolution.c	2005-07-18 09:26:08.000000000 +0200
-+++ gaim-2.0.0/gtk/plugins/gevolution/gevolution.c	2005-08-02 22:02:54.000000000 +0200
-@@ -112,6 +112,7 @@
- 	update_ims_from_contact(contact, name, "prpl-oscar",  E_CONTACT_IM_AIM);
- 	update_ims_from_contact(contact, name, "prpl-jabber", E_CONTACT_IM_JABBER);
- 	update_ims_from_contact(contact, name, "prpl-yahoo",  E_CONTACT_IM_YAHOO);
++			add_ims(dialog, contact, name, msns,       "prpl-msn");
++			add_ims(dialog, contact, name, icqs,       "prpl-oscar");
+ 		}
+ 	}
+ }
+diff -urN gaim-0.78.orig/plugins/gevolution/gevolution.c gaim-0.78/plugins/gevolution/gevolution.c
+--- gaim-0.78.orig/plugins/gevolution/gevolution.c	2004-06-02 14:21:12.153999544 +0200
++++ gaim-0.78/plugins/gevolution/gevolution.c	2004-06-02 14:37:47.552675944 +0200
+@@ -102,11 +102,12 @@
+ 
+ 	name = e_contact_get_const(contact, E_CONTACT_FULL_NAME);
+ 
+-	update_ims_from_contact(contact, name, "prpl-oscar",  E_CONTACT_IM_AIM);
+-	update_ims_from_contact(contact, name, "prpl-jabber", E_CONTACT_IM_JABBER);
+-	update_ims_from_contact(contact, name, "prpl-yahoo",  E_CONTACT_IM_YAHOO);
+-	update_ims_from_contact(contact, name, "prpl-msn",    E_CONTACT_IM_MSN);
+-	update_ims_from_contact(contact, name, "prpl-oscar",  E_CONTACT_IM_ICQ);
++	update_ims_from_contact(contact, name, "prpl-oscar",  E_CONTACT_IM_AIM);
++	update_ims_from_contact(contact, name, "prpl-jabber", E_CONTACT_IM_JABBER);
++	update_ims_from_contact(contact, name, "prpl-yahoo",  E_CONTACT_IM_YAHOO);
 +	update_ims_from_contact(contact, name, "prpl-gg",     E_CONTACT_IM_GADUGADU);
- 	update_ims_from_contact(contact, name, "prpl-msn",    E_CONTACT_IM_MSN);
- 	update_ims_from_contact(contact, name, "prpl-oscar",  E_CONTACT_IM_ICQ);
- 	update_ims_from_contact(contact, name, "prpl-novell", E_CONTACT_IM_GROUPWISE);
-diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/gevo-util.c gaim-2.0.0/gtk/plugins/gevolution/gevo-util.c
---- gaim-2.0.0.orig/gtk/plugins/gevolution/gevo-util.c	2005-07-03 08:42:16.000000000 +0200
-+++ gaim-2.0.0/gtk/plugins/gevolution/gevo-util.c	2005-08-02 22:03:43.000000000 +0200
-@@ -110,6 +110,8 @@
++	update_ims_from_contact(contact, name, "prpl-msn",    E_CONTACT_IM_MSN);
++	update_ims_from_contact(contact, name, "prpl-oscar",  E_CONTACT_IM_ICQ);
+ }
+ 
+ static void
+diff -urN gaim-0.78.orig/plugins/gevolution/gevo-util.c gaim-0.78/plugins/gevolution/gevo-util.c
+--- gaim-0.78.orig/plugins/gevolution/gevo-util.c	2004-06-02 14:21:12.171996808 +0200
++++ gaim-0.78/plugins/gevolution/gevo-util.c	2004-06-02 14:36:36.564467792 +0200
+@@ -116,6 +116,8 @@
  		protocol_field = E_CONTACT_IM_MSN;
  	else if (!strcmp(protocol_id, "prpl-yahoo"))
  		protocol_field = E_CONTACT_IM_YAHOO;
@@ -93,11 +127,11 @@ diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/gevo-util.c gaim-2.0.0/gtk/plu
 +		protocol_field = E_CONTACT_IM_GADUGADU;
  	else if (!strcmp(protocol_id, "prpl-jabber"))
  		protocol_field = E_CONTACT_IM_JABBER;
- 	else if (!strcmp(protocol_id, "prpl-novell"))
-diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/new_person_dialog.c gaim-2.0.0/gtk/plugins/gevolution/new_person_dialog.c
---- gaim-2.0.0.orig/gtk/plugins/gevolution/new_person_dialog.c	2005-07-03 08:42:16.000000000 +0200
-+++ gaim-2.0.0/gtk/plugins/gevolution/new_person_dialog.c	2005-08-02 22:04:18.000000000 +0200
-@@ -150,6 +150,8 @@
+ 
+diff -urN gaim-0.78.orig/plugins/gevolution/new_person_dialog.c gaim-0.78/plugins/gevolution/new_person_dialog.c
+--- gaim-0.78.orig/plugins/gevolution/new_person_dialog.c	2004-06-02 14:21:12.171996808 +0200
++++ gaim-0.78/plugins/gevolution/new_person_dialog.c	2004-06-02 14:38:35.239426456 +0200
+@@ -160,6 +160,8 @@
  		}
  		else if (!strcmp(im_service, "prpl-yahoo"))
  			field = E_CONTACT_IM_YAHOO;
@@ -106,10 +140,10 @@ diff -aurN gaim-2.0.0.orig/gtk/plugins/gevolution/new_person_dialog.c gaim-2.0.0
  		else if (!strcmp(im_service, "prpl-jabber"))
  			field = E_CONTACT_IM_JABBER;
  		else if (!strcmp(im_service, "prpl-msn"))
-diff -aurN gaim-2.0.0.orig/gtk/gtkblist.c gaim-2.0.0/gtk/gtkblist.c
---- gaim-2.0.0.orig/gtk/gtkblist.c	2005-07-21 07:49:42.000000000 +0200
-+++ gaim-2.0.0/gtk/gtkblist.c	2005-08-02 22:09:51.000000000 +0200
-@@ -1702,12 +1702,13 @@
+diff -urN gaim-0.78.orig/src/gtkblist.c gaim-0.78/src/gtkblist.c
+--- gaim-0.78.orig/src/gtkblist.c	2004-06-02 14:21:13.721761208 +0200
++++ gaim-0.78/src/gtkblist.c	2004-06-02 14:26:49.642693464 +0200
+@@ -1539,12 +1539,13 @@
  {
  	char *temp_vcard;
  	char *s, *c;
@@ -119,17 +153,17 @@ diff -aurN gaim-2.0.0.orig/gtk/gtkblist.c gaim-2.0.0/gtk/gtkblist.c
 -	GList *yahoos  = NULL;
 -	GList *msns    = NULL;
 -	GList *jabbers = NULL;
-+	char *alias      = NULL;
-+	GList *aims      = NULL;
-+	GList *icqs      = NULL;
-+	GList *yahoos    = NULL;
-+	GList *gadugadus = NULL;
-+	GList *msns      = NULL;
-+	GList *jabbers   = NULL;
++	char *alias    	  = NULL;
++	GList *aims       = NULL;
++	GList *icqs       = NULL;
++	GList *yahoos     = NULL;
++	GList *gadugadus  = NULL;
++	GList *msns    	  = NULL;
++	GList *jabbers 	  = NULL;
  
  	s = temp_vcard = g_strdup(vcard);
  
-@@ -1747,7 +1748,7 @@
+@@ -1584,7 +1585,7 @@
  			alias = g_strdup(value);
  		else if (!strcmp(field, "X-AIM") || !strcmp(field, "X-ICQ") ||
  				 !strcmp(field, "X-YAHOO") || !strcmp(field, "X-MSN") ||
@@ -138,16 +172,16 @@ diff -aurN gaim-2.0.0.orig/gtk/gtkblist.c gaim-2.0.0/gtk/gtkblist.c
  		{
  			char **values = g_strsplit(value, ":", 0);
  			char **im;
-@@ -1760,6 +1761,8 @@
+@@ -1597,6 +1598,8 @@
  					icqs = g_list_append(icqs, g_strdup(*im));
  				else if (!strcmp(field, "X-YAHOO"))
  					yahoos = g_list_append(yahoos, g_strdup(*im));
 +				else if (!strcmp(field, "X-GADUGADU"))
-+					gadugadus = g_list_append(gadugadus, g_strdup(*im));
++					gadugadus = g_list_append(gadugadus, g_strdup(*im));	
  				else if (!strcmp(field, "X-MSN"))
  					msns = g_list_append(msns, g_strdup(*im));
  				else if (!strcmp(field, "X-JABBER"))
-@@ -1773,7 +1776,7 @@
+@@ -1610,7 +1613,7 @@
  	g_free(temp_vcard);
  
  	if (aims == NULL && icqs == NULL && yahoos == NULL &&
@@ -156,7 +190,7 @@ diff -aurN gaim-2.0.0.orig/gtk/gtkblist.c gaim-2.0.0/gtk/gtkblist.c
  	{
  		if (alias != NULL)
  			g_free(alias);
-@@ -1781,11 +1784,12 @@
+@@ -1618,11 +1621,12 @@
  		return FALSE;
  	}
  
