@@ -67,8 +67,8 @@ BuildRequires:	python-modules
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.177
-BuildRequires:	startup-notification-devel
 %{?with_silc:BuildRequires:	silc-toolkit-devel >= 1.1}
+BuildRequires:	startup-notification-devel
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 %if %{with cap}
