@@ -1,0 +1,2 @@
+- Suggests: cyrus-sasl-digetst-md5; won't connect to PLD's jabber
+  without it
