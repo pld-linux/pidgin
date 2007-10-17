@@ -211,12 +211,6 @@ Pidgin documentation for developers (HTML format).
 %description doc -l pl.UTF-8
 Dokumentacja Pidgina dla programistów (format HTML).
 
-%triggerpostun -- gaim < 1:1.3.1-1.10
-%banner -e %{name} <<EOF
-The Ximian Evolution and pidgin-remote plugins have been separated to separate packages.
-If you need then please install %{name}-plugin-evolution and %{name}-plugin-remote
-EOF
-
 %prep
 %setup -q
 %patch0 -p1
@@ -225,6 +219,13 @@ EOF
 %patch3 -p1
 
 %build
+%if %{with dotnet}
+if [ ! -f /proc/cpuinfo ]; then
+	echo >&2 "Mono requires /proc to be mounted."
+	exit 1
+fi
+%endif
+
 %{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4macros
@@ -235,10 +236,10 @@ EOF
 	--disable-nas \
 	--enable-nss=no \
 	--with-perl-lib=vendor \
-%{!?with_silc:--with-silc-includes=not_existent_directory} \
+	%{!?with_silc:--with-silc-includes=not_existent_directory} \
 	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
 	%{?with_sasl:--enable-cyrus-sasl} \
-%{?with_dbus:--enable-dbus --with-dbus-session-dir=%{_datadir}/dbus-1/services} \
+	%{?with_dbus:--enable-dbus --with-dbus-session-dir=%{_datadir}/dbus-1/services} \
 	%{!?with_dbus:--disable-dbus} \
 	%{!?with_evolution:--disable-gevolution} \
 	%{!?with_gtkspell:--disable-gtkspell} \
@@ -278,6 +279,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
+
+%triggerpostun -- gaim < 1:1.3.1-1.10
+%banner -e %{name} <<EOF
+The Ximian Evolution and pidgin-remote plugins have been separated to separate packages.
+If you need then please install %{name}-plugin-evolution and %{name}-plugin-remote
+EOF
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
