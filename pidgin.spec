@@ -4,11 +4,9 @@
 # - kerberos 4 with zephyr support?
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
-# - obsoletes for gaim
 # - move mono related files to -libs?
-# - unpackaged certificates /usr/share/purple/ca-certs/*_CA.pem
 # - add NetworkManager support
-# - something missing glitz-devel R (AC):
+# - something missing glitz-devel R:
 #$ grep libglitz.la /usr/lib64/*.la -l|xargs rpm -qf|sort -u
 #evolution-data-server-devel-1.6.3-3
 #gimp-devel-2.2.13-1
@@ -91,11 +89,8 @@ BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
 %{?with_sasl:Requires(hint):    cyrus-sasl-digest-md5}
-Requires(post,preun):	GConf2 >= 2.16.0
+Requires(post,preun):	GConf2 >= 2.14.0
 Requires:	%{name}-libs = %{version}-%{release}
-# weird: it *should* break after DynaLoader's version change, but it doesn't
-#Requires:	perl(DynaLoader) = %(%{__perl} -MDynaLoader -e 'print DynaLoader->VERSION')
-Obsoletes:	gaim-ui
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -273,6 +268,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,ca_ES@valencian,my_MM,ps}
 
 %find_lang %{name} --with-gnome
 rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Pidgin/{,GtkUI}/.packlist}
+rm -rf $RPM_BUILD_ROOT%{_datadir}/purple/ca-certs
 
 %if %{with dbus}
 rm $RPM_BUILD_ROOT%{_bindir}/purple-client-example
@@ -290,12 +286,6 @@ rm -rf $RPM_BUILD_ROOT
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
 
-%triggerpostun -- gaim < 1:1.3.1-1.10
-%banner -e %{name} <<EOF
-The Ximian Evolution and pidgin-remote plugins have been separated to separate packages.
-If you need then please install %{name}-plugin-evolution and %{name}-plugin-remote
-EOF
-
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO README*
@@ -304,7 +294,6 @@ EOF
 %attr(755,root,root) %{_libdir}/purple-2/autoaccept.so
 %attr(755,root,root) %{_libdir}/purple-2/buddynote.so
 %if %{with cap}
-#%attr(755,root,root) %{_libdir}/pidgin/autoreply.so
 %attr(755,root,root) %{_libdir}/pidgin/cap.so
 %endif
 %if %{with dotnet}
@@ -312,14 +301,12 @@ EOF
 %attr(755,root,root) %{_libdir}/purple-2/mono.so
 %endif
 %attr(755,root,root) %{_libdir}/pidgin/convcolors.so
-#%attr(755,root,root) %{_libdir}/pidgin/docklet.so
 %attr(755,root,root) %{_libdir}/pidgin/extplacement.so
 %attr(755,root,root) %{_libdir}/pidgin/pidginrc.so
 %attr(755,root,root) %{_libdir}/pidgin/gestures.so
 %attr(755,root,root) %{_libdir}/pidgin/gtkbuddynote.so
 %attr(755,root,root) %{_libdir}/pidgin/history.so
 %attr(755,root,root) %{_libdir}/pidgin/iconaway.so
-#%attr(755,root,root) %{_libdir}/pidgin/liboscar.so
 %attr(755,root,root) %{_libdir}/pidgin/markerline.so
 %attr(755,root,root) %{_libdir}/pidgin/notify.so
 %attr(755,root,root) %{_libdir}/pidgin/relnot.so
@@ -372,7 +359,6 @@ EOF
 %attr(755,root,root) %{_bindir}/purple-send
 %attr(755,root,root) %{_bindir}/purple-send-async
 %attr(755,root,root) %{_libdir}/pidgin/musicmessaging.so
-#%{_datadir}/dbus-1/services/pidgin.service
 %endif
 %{_sysconfdir}/gconf/schemas/purple.schemas
 %{_datadir}/sounds/purple
@@ -409,10 +395,8 @@ EOF
 %if %{with text}
 %attr(755,root,root) %{_libdir}/libgnt.so
 %{_libdir}/libgnt.la
-#%dir %{_includedir}/pidgin/gnt
 %dir %{_includedir}/gnt
 %dir %{_includedir}/finch
-#%{_includedir}/pidgin/gnt/*.h
 %{_includedir}/gnt/*.h
 %{_includedir}/finch/*.h
 %endif
@@ -423,18 +407,12 @@ EOF
 %{perl_vendorarch}/*.pm
 %dir %{perl_vendorarch}/auto/Pidgin
 %dir %{perl_vendorarch}/auto/Purple
-#%{perl_vendorarch}/auto/Pidgin/*.ix
 %{perl_vendorarch}/auto/Pidgin/*.bs
 %{perl_vendorarch}/auto/Purple/*.ix
 %{perl_vendorarch}/auto/Purple/*.bs
 %attr(755,root,root) %{perl_vendorarch}/auto/Purple/Purple.so
 %{perl_vendorarch}/auto/Purple/.packlist
-#%dir %{perl_vendorarch}/auto/Pidgin/GtkUI
-#%{perl_vendorarch}/auto/Pidgin/GtkUI/*.bs
-#%dir %{perl_vendorarch}/Pidgin
-#%{perl_vendorarch}/Pidgin/*.pm
 %attr(755,root,root) %{perl_vendorarch}/auto/Pidgin/*.so
-#%attr(755,root,root) %{perl_vendorarch}/auto/Pidgin/GtkUI/*.so
 
 %files tcl
 %defattr(644,root,root,755)
