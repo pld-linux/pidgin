@@ -8,6 +8,16 @@
 # - move mono related files to -libs?
 # - unpackaged certificates /usr/share/purple/ca-certs/*_CA.pem
 # - add NetworkManager support
+# - something missing glitz-devel R (AC):
+#$ grep libglitz.la /usr/lib64/*.la -l|xargs rpm -qf|sort -u
+#evolution-data-server-devel-1.6.3-3
+#gimp-devel-2.2.13-1
+#gtk+2-devel-2.8.20-1
+#libbonoboui-devel-2.14.0-2
+#libglade2-devel-2.6.0-2
+#libgnomecanvas-devel-2.14.0-1
+#libgnomeui-devel-2.14.1-3
+#pango-devel-1.12.4-1
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without dbus (for pidgin-remote and others)
@@ -28,7 +38,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.2.1
-Release:	0.2
+Release:	1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -38,20 +48,20 @@ Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
 Patch3:		%{name}-autoconf.patch
 URL:		http://www.pidgin.im/
-BuildRequires:	GConf2-devel >= 2.16.0
+BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	avahi-devel
 BuildRequires:	bind-devel
 %{?with_sasl:BuildRequires:	cyrus-sasl-devel}
-%{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
-%{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
+%{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.62}
+%{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.6.3}
 BuildRequires:	gettext-autopoint
 BuildRequires:	gettext-devel
 BuildRequires:	gnutls-devel
 BuildRequires:	gstreamer-devel >= 0.10.10
-BuildRequires:	gtk+2-devel >= 2:2.10.6
+BuildRequires:	gtk+2-devel >= 2:2.8.20
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.11}
 BuildRequires:	intltool
 BuildRequires:	libgadu-devel
