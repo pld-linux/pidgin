@@ -1,0 +1,4 @@
+- version 2.0.0 beta6
+- bcond --without cap
+- removed -desktop.patch (+- applied)
+- update %files (so it can be built using misc --without)
