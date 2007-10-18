@@ -1,0 +1,32 @@
+diff -aurN gaim-2.0.0.orig/configure.ac gaim-2.0.0/configure.ac
+--- gaim-2.0.0.orig/configure.ac	2006-03-08 22:25:19.000000000 +0100
++++ gaim-2.0.0/configure.ac	2006-03-10 21:51:36.233940352 +0100
+@@ -631,28 +631,9 @@
+ 	AC_MSG_CHECKING(for libgadu GPL compatibility)
+ 	CPPFLAGS_save="$CPPFLAGS"
+ 	CPPFLAGS="$CPPFLAGS $GADU_CFLAGS"
+-	AC_TRY_COMPILE([#include <libgadu.h>], [
+-#ifdef __GG_LIBGADU_HAVE_OPENSSL
+-#error "libgadu is not compatible with the GPL when compiled with OpenSSL support."
+-#endif
+-	], [
+ 		AC_MSG_RESULT(yes)
+ 		AC_DEFINE([HAVE_LIBGADU], [1],
+			[Define to 1 if you have libgadu.])
+-	], [
+-		AC_MSG_RESULT(no)
+-		echo
+-		echo
+-		echo "libgadu is not compatible with the GPL when compiled with OpenSSL support."
+-		echo "Please recompile libgadu using:"
+-		echo "./autogen.sh --disable-libgadu-openssl --disable-static --enable-shared"
+-		echo "Then rerun this ./configure"
+-		echo
+-		echo
+-		GADU_LIBS=""
+-		GADU_CFLAGS=""
+-		gadu_libs=no
+-	])
+ 	CPPFLAGS="$CPPFLAGS_save"
+ fi
+ 
