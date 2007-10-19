@@ -41,7 +41,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.2.1
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -150,7 +150,7 @@ Summary:	Development files for Pidgin client library
 Summary(pl.UTF-8):	Pliki programistyczne biblioteki klienta Pidgina
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	gtk+2-devel >= 2:2.10.6
+Requires:	gtk+2-devel >= 2:2.8.20
 
 %description devel
 Development files for Pidgin.
