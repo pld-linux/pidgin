@@ -1,5 +1,8 @@
 # TODO
-# - cleanup files; make some subpackages? move libs to proper packages
+# - cleanup files; move libs to proper packages
+# - subpackages for
+#  - different protocols (like koptete)
+#  - huge deps (mono...)
 # - nas, silc/silcclient?
 # - kerberos 4 with zephyr support?
 # - external zephyr?
