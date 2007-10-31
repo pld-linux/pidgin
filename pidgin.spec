@@ -10,7 +10,7 @@
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without dbus (for pidgin-remote and others)
 %bcond_without	doc		# do not generate and include documentation
-%bcond_without	dotnet		# build with mono support
+%bcond_with	dotnet		# build with mono support
 %bcond_without	evolution	# compile without the Pidgin-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
 %bcond_without	meanwhile	# without meanwhile support
@@ -26,7 +26,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.2.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
