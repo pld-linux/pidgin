@@ -20,6 +20,11 @@
 %bcond_without	sasl		# disable SASL support
 %bcond_without	text		# don't build text UI
 %bcond_without 	silc		# Build without SILC libraries
+
+# plain i386 is not supported; mono uses cmpxchg/xadd which require i486
+%ifarch i386
+%undefine	with_dotnet
+%endif
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
