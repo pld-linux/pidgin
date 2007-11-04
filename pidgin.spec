@@ -29,7 +29,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.2.2
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -140,6 +140,7 @@ Summary(pl.UTF-8):	Pliki programistyczne biblioteki klienta Pidgina
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	gtk+2-devel >= 2:2.10.6
+Obsoletes:	gaim-devel
 
 %description devel
 Development files for Pidgin.
@@ -152,6 +153,7 @@ Summary:	Pidgin files for Perl scripts
 Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Perlu
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	gaim-perl
 
 %description perl
 This package gives you ability to extend Pidgin functionality with
@@ -166,6 +168,7 @@ Summary:	Pidgin files for Tcl scripts
 Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Tcl-u
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	gaim-tcl
 
 %description tcl
 This package gives you ability to extend Pidgin functionality with Tcl
@@ -180,6 +183,7 @@ Summary:	Plugin for Ximian Evolution integration
 Summary(pl.UTF-8):	Wtyczka do integracji z Evolution
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	gaim-plugin-evolution
 
 %description plugin-evolution
 Provides integration with Ximian Evolution.
@@ -192,6 +196,7 @@ Summary:	Pidgin Remote Control
 Summary(pl.UTF-8):	Zdalne sterowanie Pidginem
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	gaim-plugin-remote
 
 %description plugin-remote
 This package gives Pidgin the ability to be remote-controlled through
@@ -205,6 +210,7 @@ aplikacje albo narzędzie pidgin-remote.
 Summary:	Pidgin documentation for developers (HTML format)
 Summary(pl.UTF-8):	Dokumentacja Pidgina dla programistów (format HTML)
 Group:		Documentation
+Obsoletes:	gaim-doc
 
 %description doc
 Pidgin documentation for developers (HTML format).
