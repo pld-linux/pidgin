@@ -92,6 +92,10 @@ Requires:	%{name}-libs = %{version}-%{release}
 Obsoletes:	gaim
 Obsoletes:	gaim-ui
 Obsoletes:	gaim-ui-gtk
+# discontinued gaim plugins
+Obsoletes:	gaim-encryption
+Obsoletes:	gaim-plugin-tlen
+Obsoletes:	gaim-plugin-xmms-remote
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
