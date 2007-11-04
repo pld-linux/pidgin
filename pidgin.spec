@@ -1,26 +1,19 @@
 # TODO
-# - cleanup files; make some subpackages? move libs to proper packages
+# - cleanup files; move libs to proper packages
+# - subpackages for
+#  - different protocols (like koptete)
+#  - huge deps (mono...)
 # - nas, silc/silcclient?
 # - kerberos 4 with zephyr support?
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
 # - move mono related files to -libs?
 # - add NetworkManager support
-# - something missing glitz-devel R:
-#$ grep libglitz.la /usr/lib64/*.la -l|xargs rpm -qf|sort -u
-#evolution-data-server-devel-1.6.3-3
-#gimp-devel-2.2.13-1
-#gtk+2-devel-2.8.20-1
-#libbonoboui-devel-2.14.0-2
-#libglade2-devel-2.6.0-2
-#libgnomecanvas-devel-2.14.0-1
-#libgnomeui-devel-2.14.1-3
-#pango-devel-1.12.4-1
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without dbus (for pidgin-remote and others)
 %bcond_without	doc		# do not generate and include documentation
-%bcond_without	dotnet		# build with mono support
+%bcond_with	dotnet		# build with mono support
 %bcond_without	evolution	# compile without the Pidgin-Evolution plugin
 %bcond_without	gtkspell	# without gtkspell support
 %bcond_without	meanwhile	# without meanwhile support
@@ -40,12 +33,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.2.1
-Release:	4
+Version:	2.2.2
+Release:	3
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	f1703430d4b8ffc96b493fc36cd46131
+# Source0-md5:	7c8fc5a55959b84c6e4c57a11bc0707a
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
@@ -151,6 +144,7 @@ Summary(pl.UTF-8):	Pliki programistyczne biblioteki klienta Pidgina
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	gtk+2-devel >= 2:2.8.20
+Obsoletes:	gaim-devel
 
 %description devel
 Development files for Pidgin.
@@ -163,6 +157,7 @@ Summary:	Pidgin files for Perl scripts
 Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Perlu
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	gaim-perl
 
 %description perl
 This package gives you ability to extend Pidgin functionality with
@@ -177,6 +172,7 @@ Summary:	Pidgin files for Tcl scripts
 Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Tcl-u
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	gaim-tcl
 
 %description tcl
 This package gives you ability to extend Pidgin functionality with Tcl
@@ -191,6 +187,7 @@ Summary:	Plugin for Ximian Evolution integration
 Summary(pl.UTF-8):	Wtyczka do integracji z Evolution
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	gaim-plugin-evolution
 
 %description plugin-evolution
 Provides integration with Ximian Evolution.
@@ -203,6 +200,7 @@ Summary:	Pidgin Remote Control
 Summary(pl.UTF-8):	Zdalne sterowanie Pidginem
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	gaim-plugin-remote
 
 %description plugin-remote
 This package gives Pidgin the ability to be remote-controlled through
@@ -216,6 +214,7 @@ aplikacje albo narzędzie pidgin-remote.
 Summary:	Pidgin documentation for developers (HTML format)
 Summary(pl.UTF-8):	Dokumentacja Pidgina dla programistów (format HTML)
 Group:		Documentation
+Obsoletes:	gaim-doc
 
 %description doc
 Pidgin documentation for developers (HTML format).
