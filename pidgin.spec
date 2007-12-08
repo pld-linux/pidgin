@@ -33,12 +33,13 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.2.2
-Release:	4
+Version:	2.3.0
+Release:	1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	7c8fc5a55959b84c6e4c57a11bc0707a
+# Source0-md5:	0456e63358c8be7a905f9a8ca6494088
+Source1:	doxy2devhelp.xsl
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
@@ -235,6 +236,7 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %patch3 -p1
 
 %build
+cp %{SOURCE1} ./
 %if %{with dotnet}
 if [ ! -f /proc/cpuinfo ]; then
 	echo >&2 "Mono requires /proc to be mounted."
@@ -351,6 +353,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/libnovell.so
 %attr(755,root,root) %{_libdir}/purple-2/liboscar.so.*
 %attr(755,root,root) %{_libdir}/purple-2/libqq.so
+%attr(755,root,root) %{_libdir}/purple-2/libjabber.so
+%attr(755,root,root) %{_libdir}/purple-2/liboscar.so
+      
 %{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
 %{?with_silc:%attr(755,root,root) %{_libdir}/purple-2/libsilcpurple.so}
 %attr(755,root,root) %{_libdir}/purple-2/libsimple.so
