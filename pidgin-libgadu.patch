@@ -1,0 +1,32 @@
+--- pidgin-2.3.0/configure.ac2	2007-12-08 19:18:44.000000000 +0100
++++ pidgin-2.3.0/configure.ac	2007-12-08 19:19:15.000000000 +0100
+@@ -902,29 +902,9 @@
+ 	AC_MSG_CHECKING(for libgadu GPL compatibility)
+ 	CPPFLAGS_save="$CPPFLAGS"
+ 	CPPFLAGS="$CPPFLAGS $GADU_CFLAGS"
+-	AC_TRY_COMPILE([#include <libgadu.h>], [
+-#if defined(__GG_LIBGADU_HAVE_OPENSSL) || defined(GG_CONFIG_HAVE_OPENSSL)
+-#error "libgadu is not compatible with the GPL when compiled with OpenSSL support."
+-#endif
+-	], [
+ 		AC_MSG_RESULT(yes)
+ 		AC_DEFINE([HAVE_LIBGADU], [1],
+ 			[Define to 1 if you have libgadu.])
+-	], [
+-		AC_MSG_RESULT(no)
+-		echo
+-		echo
+-		echo "libgadu is not compatible with the GPL when compiled with OpenSSL support."
+-		echo "To compile against system libgadu, please recompile libgadu using:"
+-		echo "./autogen.sh --disable-libgadu-openssl --disable-static --enable-shared"
+-		echo "Then rerun this ./configure"
+-		echo
+-		echo "Falling back to using our own copy of libgadu"
+-		echo
+-		GADU_LIBS=""
+-		GADU_CFLAGS=""
+-		gadu_libs=no
+-	])
+ 	CPPFLAGS="$CPPFLAGS_save"
+ fi
+ 
