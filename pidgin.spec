@@ -386,19 +386,19 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpurple.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpurple.so.0
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/libpurple-client.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpurple-client.so.0
 %endif
 %if %{with text}
 %attr(755,root,root) %{_libdir}/libgnt.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgnt.so.0
 %endif
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpurple.so
-%attr(755,root,root) %{_libdir}/libgnt.so.0
-%attr(755,root,root) %{_libdir}/libpurple-client.so.0
-%attr(755,root,root) %{_libdir}/libpurple.so.0
 %{_libdir}/libpurple.la
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/libpurple-client.so
