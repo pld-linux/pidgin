@@ -400,23 +400,26 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpurple.so
 %{_libdir}/libpurple.la
+%dir %{_includedir}/libpurple
+%{_includedir}/libpurple/*.h
+%dir %{_includedir}/pidgin
+%{_includedir}/pidgin/*.h
+%{_pkgconfigdir}/pidgin.pc
+%{_pkgconfigdir}/purple.pc
+%{_aclocaldir}/purple.m4
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/libpurple-client.so
 %{_libdir}/libpurple-client.la
 %endif
-%dir %{_includedir}/libpurple
-%{_includedir}/libpurple/*.h
-%{_aclocaldir}/*.m4
-%dir %{_includedir}/pidgin
-%{_includedir}/pidgin/*.h
-%{_pkgconfigdir}/*
 %if %{with text}
 %attr(755,root,root) %{_libdir}/libgnt.so
 %{_libdir}/libgnt.la
-%dir %{_includedir}/gnt
 %dir %{_includedir}/finch
-%{_includedir}/gnt/*.h
 %{_includedir}/finch/*.h
+%dir %{_includedir}/gnt
+%{_includedir}/gnt/*.h
+%{_pkgconfigdir}/finch.pc
+%{_pkgconfigdir}/gnt.pc
 %endif
 
 %files perl
