@@ -33,12 +33,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.3.1
+Version:	2.4.0
 Release:	1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	0a593c2c343d5b854bd2cd2be7542f40
+# Source0-md5:	d03ac2695d5b5304f86812ffd6ba0053
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
@@ -332,6 +332,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/finch/gntgf.so
 %attr(755,root,root) %{_libdir}/finch/gnthistory.so
 %attr(755,root,root) %{_libdir}/finch/gntlastlog.so
+%attr(755,root,root) %{_libdir}/finch/grouping.so
 %dir %{_libdir}/gnt
 %attr(755,root,root) %{_libdir}/gnt/*.so
 %endif
@@ -384,34 +385,40 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpurple.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpurple.so.0
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/libpurple-client.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpurple-client.so.0
 %endif
 %if %{with text}
 %attr(755,root,root) %{_libdir}/libgnt.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgnt.so.0
 %endif
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpurple.so
 %{_libdir}/libpurple.la
+%dir %{_includedir}/libpurple
+%{_includedir}/libpurple/*.h
+%dir %{_includedir}/pidgin
+%{_includedir}/pidgin/*.h
+%{_pkgconfigdir}/pidgin.pc
+%{_pkgconfigdir}/purple.pc
+%{_aclocaldir}/purple.m4
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/libpurple-client.so
 %{_libdir}/libpurple-client.la
 %endif
-%dir %{_includedir}/libpurple
-%{_includedir}/libpurple/*.h
-%{_aclocaldir}/*.m4
-%dir %{_includedir}/pidgin
-%{_includedir}/pidgin/*.h
-%{_pkgconfigdir}/*
 %if %{with text}
 %attr(755,root,root) %{_libdir}/libgnt.so
 %{_libdir}/libgnt.la
-%dir %{_includedir}/gnt
 %dir %{_includedir}/finch
-%{_includedir}/gnt/*.h
 %{_includedir}/finch/*.h
+%dir %{_includedir}/gnt
+%{_includedir}/gnt/*.h
+%{_pkgconfigdir}/finch.pc
+%{_pkgconfigdir}/gnt.pc
 %endif
 
 %files perl
