@@ -1,0 +1,2 @@
+- ver. 2.2.1 [fixes CVE-2007-4996]
+- BR: mono-csharps (bcond dotnet needs mcs)
