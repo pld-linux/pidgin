@@ -34,7 +34,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.4.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -257,7 +257,7 @@ fi
 	%{?with_sasl:--enable-cyrus-sasl} \
 	%{?with_dbus:--enable-dbus --with-dbus-session-dir=%{_datadir}/dbus-1/services} \
 	%{!?with_dbus:--disable-dbus} \
-	%{!?with_evolution:--disable-gevolution} \
+	--%{?with_evolution:en}%{!?with_evolution:dis}able-gevolution \
 	%{!?with_gtkspell:--disable-gtkspell} \
 	%{?with_dotnet:--enable-mono} \
 	--%{?with_text:en}%{!?with_text:dis}able-consoleui
