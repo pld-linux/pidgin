@@ -256,7 +256,7 @@ fi
 	%{?with_sasl:--enable-cyrus-sasl} \
 	%{?with_dbus:--enable-dbus --with-dbus-session-dir=%{_datadir}/dbus-1/services} \
 	%{!?with_dbus:--disable-dbus} \
-	%{!?with_evolution:--disable-gevolution} \
+	--%{?with_evolution:en}%{!?with_evolution:dis}able-gevolution \
 	%{!?with_gtkspell:--disable-gtkspell} \
 	%{?with_dotnet:--enable-mono} \
 	--%{?with_text:en}%{!?with_text:dis}able-consoleui
