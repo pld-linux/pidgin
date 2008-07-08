@@ -33,12 +33,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.4.1
+Version:	2.4.3
 Release:	1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	ff015bb8bbdcc6a9b4ac954c355179d7
+# Source0-md5:	9e4a5f4ebda16a51fe91ec610286810a
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
@@ -231,7 +231,7 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+#%patch3 -p1
 
 %build
 %if %{with dotnet}
@@ -325,6 +325,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/pidgin/timestamp.so
 %attr(755,root,root) %{_libdir}/pidgin/timestamp_format.so
 %attr(755,root,root) %{_libdir}/pidgin/xmppconsole.so
+%attr(755,root,root) %{_libdir}/pidgin/sendbutton.so
 %if %{with text}
 %attr(755,root,root) %{_bindir}/finch
 %dir %{_libdir}/finch
