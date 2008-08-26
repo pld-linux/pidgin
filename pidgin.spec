@@ -11,7 +11,7 @@
 # - add NetworkManager support
 #
 %bcond_without	cap		# without Contact Availability Prediction
-%bcond_without	dbus		# without dbus (for pidgin-remote and others)
+%bcond_without	dbus		# without D-BUS (for pidgin-remote and others)
 %bcond_without	doc		# do not generate and include documentation
 %bcond_with	dotnet		# build with mono support
 %bcond_without	evolution	# compile without the Pidgin-Evolution plugin
@@ -20,6 +20,11 @@
 %bcond_without	sasl		# disable SASL support
 %bcond_without	text		# don't build text UI
 %bcond_without 	silc		# Build without SILC libraries
+%bcond_with 	nm			# NetworkManager support (requires D-Bus)
+
+%if %{without dbus}
+%undefine	with_nm
+%endif
 
 # plain i386 is not supported; mono uses cmpxchg/xadd which require i486
 %ifarch i386
@@ -33,22 +38,24 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.4.3
+Version:	2.5.0
 Release:	1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	9e4a5f4ebda16a51fe91ec610286810a
+# Source0-md5:	71df6633794de30e57827848cfb61996
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
 Patch3:		%{name}-autoconf.patch
 URL:		http://www.pidgin.im/
 BuildRequires:	GConf2-devel >= 2.14.0
+%{?with_nm:BuildRequires:	NetworkManager-devel}
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	avahi-devel
+BuildRequires:	nss-devel
 BuildRequires:	bind-devel
 %{?with_sasl:BuildRequires:	cyrus-sasl-devel}
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.62}
@@ -248,20 +255,23 @@ fi
 %{__autoconf}
 %{__automake}
 %configure \
+	--disable-gnutls \
 	--disable-nas \
-	--enable-nss=no \
+	--enable-nss \
+	%{?with_doc:--enable-dot --enable-devhelp} \
 	--with-perl-lib=vendor \
 	%{!?with_silc:--with-silc-includes=not_existent_directory} \
 	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
 	%{?with_sasl:--enable-cyrus-sasl} \
 	%{?with_dbus:--enable-dbus --with-dbus-session-dir=%{_datadir}/dbus-1/services} \
 	%{!?with_dbus:--disable-dbus} \
+	--%{?with_nm:en}%{!?with_nm:dis}able-nm \
 	--%{?with_evolution:en}%{!?with_evolution:dis}able-gevolution \
 	%{!?with_gtkspell:--disable-gtkspell} \
 	%{?with_dotnet:--enable-mono} \
 	--%{?with_text:en}%{!?with_text:dis}able-consoleui
 
-%{__make} -j1
+%{__make}
 %{?with_doc:%{__make} docs}
 
 %install
@@ -354,7 +364,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/libqq.so
 %attr(755,root,root) %{_libdir}/purple-2/libjabber.so
 %attr(755,root,root) %{_libdir}/purple-2/liboscar.so
-      
+
 %{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
 %{?with_silc:%attr(755,root,root) %{_libdir}/purple-2/libsilcpurple.so}
 %attr(755,root,root) %{_libdir}/purple-2/libsimple.so
