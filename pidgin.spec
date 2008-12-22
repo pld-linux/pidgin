@@ -38,12 +38,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.5.2
-Release:	2
+Version:	2.5.3
+Release:	1
 License:	GPL
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	4a712f6fd3d2e25c07ccff1fc350c6ea
+# Source0-md5:	4abc4ce9e1ad62bbf098f05f305147d7
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
@@ -376,7 +376,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/newline.so
 %attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
 %attr(755,root,root) %{_libdir}/purple-2/psychic.so
-%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so
+#%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so
 %attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so
 %attr(755,root,root) %{_libdir}/purple-2/ssl.so
 %attr(755,root,root) %{_libdir}/purple-2/statenotify.so
