@@ -15,12 +15,13 @@
 %bcond_without	doc		# do not generate and include documentation
 %bcond_with	dotnet		# build with mono support
 %bcond_without	evolution	# compile without the Pidgin-Evolution plugin
+%bcond_with	gnutls		# use GnuTLS instead of NSS
 %bcond_without	gtkspell	# without gtkspell support
 %bcond_without	meanwhile	# without meanwhile support
 %bcond_without	sasl		# disable SASL support
 %bcond_without	text		# don't build text UI
 %bcond_without 	silc		# Build without SILC libraries
-%bcond_without 	nm			# NetworkManager support (requires D-Bus)
+%bcond_without 	nm		# NetworkManager support (requires D-Bus)
 
 %if %{without dbus}
 %undefine	with_nm
@@ -62,7 +63,7 @@ BuildRequires:	bind-devel
 %{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
 BuildRequires:	gettext-autopoint
 BuildRequires:	gettext-devel
-BuildRequires:	gnutls-devel
+%{?with_gnutls:BuildRequires:	gnutls-devel}
 BuildRequires:	gstreamer-devel >= 0.10.10
 BuildRequires:	gtk+2-devel >= 2:2.10.6
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.11}
@@ -74,6 +75,7 @@ BuildRequires:	libxml2-devel >= 2.6.26
 %{?with_dotnet:BuildRequires:	mono-csharp}
 %{?with_dotnet:BuildRequires:	mono-devel}
 %{?with_text:BuildRequires:	ncurses-ext-devel}
+%{!?with_gnutls:BuildRequires:	nss-devel}
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	python-modules
@@ -256,9 +258,9 @@ fi
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-gnutls \
+	%{!?with_gnutls:--disable-gnutls} \
+	%{?with_gnutls:--disable-nss} \
 	--disable-nas \
-	--enable-nss \
 	%{?with_doc:--enable-dot --enable-devhelp} \
 	--with-perl-lib=vendor \
 	%{!?with_silc:--with-silc-includes=not_existent_directory} \
@@ -376,8 +378,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/newline.so
 %attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
 %attr(755,root,root) %{_libdir}/purple-2/psychic.so
-#%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so
-%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so
+%{?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so}
+%{!?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so}
 %attr(755,root,root) %{_libdir}/purple-2/ssl.so
 %attr(755,root,root) %{_libdir}/purple-2/statenotify.so
 %if %{with dbus}
