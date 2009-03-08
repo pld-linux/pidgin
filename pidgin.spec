@@ -98,6 +98,7 @@ BuildRequires:	graphviz
 %{?with_sasl:Requires(hint):    cyrus-sasl-digest-md5}
 Requires(post,preun):	GConf2 >= 2.16.0
 Requires:	%{name}-libs = %{version}-%{release}
+Suggests:	enchant-myspell
 Obsoletes:	gaim
 Obsoletes:	gaim-ui
 Obsoletes:	gaim-ui-gtk
