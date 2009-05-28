@@ -42,7 +42,7 @@ Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	972101ca88a2ad338aad1fc4be5e1a8c
+# Source0-md5:	75bf724a61047eaaecad869ab452e475
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
