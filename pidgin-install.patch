@@ -1,0 +1,12 @@
+diff -urN pidgin-2.5.6/pidgin/Makefile.am pidgin-2.5.6.new/pidgin/Makefile.am
+--- pidgin-2.5.6/pidgin/Makefile.am	2009-04-28 20:09:27.000000000 +0200
++++ pidgin-2.5.6.new/pidgin/Makefile.am	2009-05-27 23:46:31.612875950 +0200
+@@ -132,8 +132,6 @@
+ 	gtkcellrendererprogress.h \
+ 	gtkcellview.h \
+ 	gtkcellviewmenuitem.h \
+-	gtkcellview.h \
+-	gtkcellviewmenuitem.h \
+ 	gtkcertmgr.h \
+ 	pidgincombobox.h \
+ 	gtkconn.h \
