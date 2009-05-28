@@ -3,12 +3,10 @@
 # - subpackages for
 #  - different protocols (like koptete)
 #  - huge deps (mono...)
-# - nas, silc/silcclient?
 # - kerberos 4 with zephyr support?
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
 # - move mono related files to -libs?
-# - add NetworkManager support
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without D-BUS (for pidgin-remote and others)
@@ -39,29 +37,27 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.5.5
+Version:	2.5.6
 Release:	1
-License:	GPL
+License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
 # Source0-md5:	972101ca88a2ad338aad1fc4be5e1a8c
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
-Patch3:		%{name}-autoconf.patch
+Patch3:		%{name}-install.patch
 URL:		http://www.pidgin.im/
 BuildRequires:	GConf2-devel >= 2.16.0
 %{?with_nm:BuildRequires:	NetworkManager-devel}
-BuildRequires:	audiofile-devel
-BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake >= 1:1.9
 BuildRequires:	avahi-devel
-BuildRequires:	nss-devel
-BuildRequires:	bind-devel
+BuildRequires:	avahi-glib-devel
+BuildRequires:	check >= 0.9.4
 %{?with_sasl:BuildRequires:	cyrus-sasl-devel}
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
 %{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
-BuildRequires:	gettext-autopoint
 BuildRequires:	gettext-devel
 %{?with_gnutls:BuildRequires:	gnutls-devel}
 BuildRequires:	gstreamer-devel >= 0.10.10
@@ -71,19 +67,22 @@ BuildRequires:	intltool
 BuildRequires:	libgadu-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.26
-%{?with_meanwhile:BuildRequires:	meanwhile-devel}
+%{?with_meanwhile:BuildRequires:	meanwhile-devel >= 1.0.0}
 %{?with_dotnet:BuildRequires:	mono-csharp}
 %{?with_dotnet:BuildRequires:	mono-devel}
 %{?with_text:BuildRequires:	ncurses-ext-devel}
-%{!?with_gnutls:BuildRequires:	nss-devel}
+%if %{without gnutls}
+BuildRequires:	nspr-devel
+BuildRequires:	nss-devel
+%endif
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
-BuildRequires:	python-modules
+BuildRequires:	python-modules >= 1:2.4
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.177
+BuildRequires:	rpmbuild(macros) >= 1.311
 %{?with_silc:BuildRequires:	silc-toolkit-devel >= 1.1}
-BuildRequires:	startup-notification-devel
+BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 %if %{with cap}
@@ -96,8 +95,10 @@ BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
 %{?with_sasl:Requires(hint):    cyrus-sasl-digest-md5}
+Requires(post,postun):	gtk+2
 Requires(post,preun):	GConf2 >= 2.16.0
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	hicolor-icon-theme
 Suggests:	enchant-myspell
 Obsoletes:	gaim
 Obsoletes:	gaim-ui
@@ -242,7 +243,7 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-#%patch3 -p1
+%patch3 -p1
 
 %build
 %if %{with dotnet}
@@ -259,16 +260,15 @@ fi
 %{__autoconf}
 %{__automake}
 %configure \
-	%{!?with_gnutls:--disable-gnutls} \
-	%{?with_gnutls:--disable-nss} \
+	%{!?with_gnutls:--enable-gnutls=no} \
+	%{?with_gnutls:--enable-nss=no} \
 	--disable-nas \
 	%{?with_doc:--enable-dot --enable-devhelp} \
 	--with-perl-lib=vendor \
 	%{!?with_silc:--with-silc-includes=not_existent_directory} \
 	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
 	%{?with_sasl:--enable-cyrus-sasl} \
-	%{?with_dbus:--enable-dbus --with-dbus-session-dir=%{_datadir}/dbus-1/services} \
-	%{!?with_dbus:--disable-dbus} \
+	--%{?with_dbus:en}%{!?with_dbus:dis}able-dbus \
 	--%{?with_nm:en}%{!?with_nm:dis}able-nm \
 	--%{?with_evolution:en}%{!?with_evolution:dis}able-gevolution \
 	%{!?with_gtkspell:--disable-gtkspell} \
@@ -288,7 +288,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/finch/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnt/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/pidgin/{,private}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/*.la
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,ca_ES@valencian,my_MM,ps}
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,ca_ES@valencian,my_MM}
 
 %find_lang %{name} --with-gnome
 rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Pidgin/{,GtkUI}/.packlist}
@@ -303,9 +303,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %gconf_schema_install purple.schemas
+%update_icon_cache hicolor
 
 %preun
 %gconf_schema_uninstall purple.schemas
+
+%postun
+%update_icon_cache hicolor
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
@@ -414,10 +418,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpurple.so
 %{_libdir}/libpurple.la
-%dir %{_includedir}/libpurple
-%{_includedir}/libpurple/*.h
-%dir %{_includedir}/pidgin
-%{_includedir}/pidgin/*.h
+%{_includedir}/libpurple
+%{_includedir}/pidgin
 %{_pkgconfigdir}/pidgin.pc
 %{_pkgconfigdir}/purple.pc
 %{_aclocaldir}/purple.m4
@@ -428,10 +430,8 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with text}
 %attr(755,root,root) %{_libdir}/libgnt.so
 %{_libdir}/libgnt.la
-%dir %{_includedir}/finch
-%{_includedir}/finch/*.h
-%dir %{_includedir}/gnt
-%{_includedir}/gnt/*.h
+%{_includedir}/finch
+%{_includedir}/gnt
 %{_pkgconfigdir}/finch.pc
 %{_pkgconfigdir}/gnt.pc
 %endif
