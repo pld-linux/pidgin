@@ -33,16 +33,17 @@
 %include	/usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(de.UTF-8):	Pidgin ist ein Instant Messenger
+Summary(hu.UTF-8):	Az AOL 'Instant Messenger'-ével kompatibilis kliens
 Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.5.7
+Version:	2.5.8
 Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	9ced7b5a025a8cf6fa412aee74e51e06
+# Source0-md5:	c207407dca71c6357c82135875e472f0
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
@@ -120,6 +121,17 @@ which consists of protocol plugins. These plugins allow you to use
 pidgin to connect to other chat services such as Yahoo!, ICQ, MSN,
 Jabber, Napster, Zephyr, IRC and Gadu-Gadu.
 
+%description -l hu.UTF-8
+A Pidgin-nel beszélhetsz bárkivel, aki az AOL Instant Messenger
+szolgáltatását használja (a http://www.aim.aol.com oldalon
+íratkozhatsz fel). Az AOL protokoll TOC verzióját használja, így a
+partnerlistád az AOL szerverein tárolják, így bárhonnan hozzáférhetsz.
+Sok szolgáltatását tartalmazza az AOL IM kliensének, sőt néhány új
+lehetőséget is tartalmaz. A Pidgin több kapcsolódási lehetőséggel
+rendelkezik, amely a pluginoknak köszönhető. Ezen pluginok
+segítségével a következő szerverekhez csatlakozhatsz: Yahoo!, ICQ,
+MSN, Jabber, Napster, Zephyr, IRC és Gadu-Gadu.
+
 %description -l pl.UTF-8
 Pidgin pozwala na rozmowy z dowolną osobą używającą usługi AOL Instant
 Messenger (można się zarejestrować pod adresem
@@ -151,6 +163,9 @@ Group:		Libraries
 %description libs
 Pidgin client library.
 
+%description libs -l hu.UTF-8
+Pidgin kliens könyvtár.
+
 %description libs -l pl.UTF-8
 Biblioteka klienta Pidgina.
 
@@ -165,11 +180,15 @@ Obsoletes:	gaim-devel
 %description devel
 Development files for Pidgin.
 
+%description devel -l hu.UTF-8
+Fejléc fájlok Pidginhez.
+
 %description devel -l pl.UTF-8
 Pliki programistyczne biblioteki Pidgina.
 
 %package perl
 Summary:	Pidgin files for Perl scripts
+Summary(hu.UTF-8):	Pidgin fájlok Perl szkriptekhez
 Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Perlu
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
@@ -179,12 +198,17 @@ Obsoletes:	gaim-perl
 This package gives you ability to extend Pidgin functionality with
 Perl scripts.
 
+%description perl -l hu.UTF-8
+Ezzel a csomaggal lehetőséged nyílik a Pidgin lehetőségeit bővíteni
+Perl szkriptekkel.
+
 %description perl -l pl.UTF-8
 Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za
 pomocą skryptów Perla.
 
 %package tcl
 Summary:	Pidgin files for Tcl scripts
+Summary(hu.UTF-8):	Pidgin fájlok Tcl szkriptekhez
 Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Tcl-u
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
@@ -194,12 +218,17 @@ Obsoletes:	gaim-tcl
 This package gives you ability to extend Pidgin functionality with Tcl
 scripts.
 
+%description tcl -l hu.UTF-8
+Ezzel a csomaggal lehetőséged nyílik a Pidgin lehetőségeit bővíteni
+Tcl szkriptekkel.
+
 %description tcl -l pl.UTF-8
 Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za
 pomocą skryptów w Tcl-u.
 
 %package plugin-evolution
 Summary:	Plugin for Ximian Evolution integration
+Summary(hu.UTF-8):	Plugin az Evolution-ba beépítéséhez
 Summary(pl.UTF-8):	Wtyczka do integracji z Evolution
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
@@ -208,11 +237,15 @@ Obsoletes:	gaim-plugin-evolution
 %description plugin-evolution
 Provides integration with Ximian Evolution.
 
+%description plugin-evolution -l hu.UTF-8
+Plugin az Evolution-ba beépítéséhez.
+
 %description plugin-evolution -l pl.UTF-8
 Wtyczka do integracji z Evolution.
 
 %package plugin-remote
 Summary:	Pidgin Remote Control
+Summary(hu.UTF-8):	Pidgin távoli irányítása
 Summary(pl.UTF-8):	Zdalne sterowanie Pidginem
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
@@ -222,18 +255,26 @@ Obsoletes:	gaim-plugin-remote
 This package gives Pidgin the ability to be remote-controlled through
 third-party applications or through the pidgin-remote tool.
 
+%description plugin-remote -l hu.UTF-8
+Ezzel a csomaggal lehetőséged nyílik a Pidgint távolról irányítani
+külső alkalmazásokkal vagy a pidgin-remote eszközzel.
+
 %description plugin-remote -l pl.UTF-8
 Ten pakiet daje możliwość zdalnego sterowania Pidginem przez inne
 aplikacje albo narzędzie pidgin-remote.
 
 %package doc
 Summary:	Pidgin documentation for developers (HTML format)
+Summary(hu.UTF-8):	Pidgin dokumentáció fejlesztőknek (HTML formában)
 Summary(pl.UTF-8):	Dokumentacja Pidgina dla programistów (format HTML)
 Group:		Documentation
 Obsoletes:	gaim-doc
 
 %description doc
 Pidgin documentation for developers (HTML format).
+
+%description doc -l hu.UTF-8
+Pidgin dokumentáció fejlesztőknek (HTML formátumban).
 
 %description doc -l pl.UTF-8
 Dokumentacja Pidgina dla programistów (format HTML).
