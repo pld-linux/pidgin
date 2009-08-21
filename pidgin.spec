@@ -38,16 +38,15 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.5.8
+Version:	2.6.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	c207407dca71c6357c82135875e472f0
+# Source0-md5:	306b6b60aefa9c5d5bffb08c576aa955
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
-Patch3:		%{name}-install.patch
 URL:		http://www.pidgin.im/
 BuildRequires:	GConf2-devel >= 2.16.0
 %{?with_nm:BuildRequires:	NetworkManager-devel}
@@ -59,6 +58,7 @@ BuildRequires:	check >= 0.9.4
 %{?with_sasl:BuildRequires:	cyrus-sasl-devel}
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
 %{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
+BuildRequires:	farsight2-devel
 BuildRequires:	gettext-devel
 %{?with_gnutls:BuildRequires:	gnutls-devel}
 BuildRequires:	gstreamer-devel >= 0.10.10
@@ -284,7 +284,6 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 %if %{with dotnet}
@@ -303,9 +302,7 @@ fi
 %configure \
 	%{!?with_gnutls:--enable-gnutls=no} \
 	%{?with_gnutls:--enable-nss=no} \
-	--disable-nas \
 	%{?with_doc:--enable-dot --enable-devhelp} \
-	--with-perl-lib=vendor \
 	%{!?with_silc:--with-silc-includes=not_existent_directory} \
 	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
 	%{?with_sasl:--enable-cyrus-sasl} \
@@ -385,6 +382,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/pidgin/timestamp_format.so
 %attr(755,root,root) %{_libdir}/pidgin/xmppconsole.so
 %attr(755,root,root) %{_libdir}/pidgin/sendbutton.so
+%{_libdir}/pidgin/themeedit.so
+%{_libdir}/pidgin/xmppdisco.so
 %if %{with text}
 %attr(755,root,root) %{_bindir}/finch
 %dir %{_libdir}/finch
@@ -395,6 +394,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/finch/grouping.so
 %dir %{_libdir}/gnt
 %attr(755,root,root) %{_libdir}/gnt/*.so
+%attr(755,root,root) %{_libdir}/finch/gnttinyurl.so
 %endif
 %dir %{_libdir}/purple-2
 %{?with_dbus:%attr(755,root,root) %{_libdir}/purple-2/dbus-example.so}
@@ -420,6 +420,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
 %attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
 %attr(755,root,root) %{_libdir}/purple-2/libzephyr.so
+%{_libdir}/purple-2/libyahoojp.so
+%{_libdir}/purple-2/libymsg.so
+%{_libdir}/purple-2/libymsg.so.0
+%{_libdir}/purple-2/libymsg.so.0.0.0
 %attr(755,root,root) %{_libdir}/purple-2/log_reader.so
 %attr(755,root,root) %{_libdir}/purple-2/newline.so
 %attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
@@ -480,15 +484,16 @@ rm -rf $RPM_BUILD_ROOT
 %files perl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/perl.so
-%{perl_vendorarch}/*.pm
-%dir %{perl_vendorarch}/auto/Pidgin
-%dir %{perl_vendorarch}/auto/Purple
-%{perl_vendorarch}/auto/Pidgin/*.bs
-%{perl_vendorarch}/auto/Purple/*.ix
-%{perl_vendorarch}/auto/Purple/*.bs
-%attr(755,root,root) %{perl_vendorarch}/auto/Purple/Purple.so
-%{perl_vendorarch}/auto/Purple/.packlist
-%attr(755,root,root) %{perl_vendorarch}/auto/Pidgin/*.so
+%{_libdir}/pidgin/perl/*.pm
+%dir %{_libdir}/pidgin/perl/auto/Pidgin
+%{_libdir}/pidgin/perl/auto/Pidgin/*.bs
+%attr(755,root,root) %{_libdir}/pidgin/perl/auto/Pidgin/*.so
+%{_libdir}/purple-2/perl/*.pm
+%dir %{_libdir}/purple-2/perl/auto
+%dir %{_libdir}/purple-2/perl/auto/Purple
+%{_libdir}/purple-2/perl/auto/Purple/*.bs
+%{_libdir}/purple-2/perl/auto/Purple/*.ix
+%attr(755,root,root) %{_libdir}/purple-2/perl/auto/Purple/*.so
 
 %files tcl
 %defattr(644,root,root,755)
