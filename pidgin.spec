@@ -485,10 +485,13 @@ rm -rf $RPM_BUILD_ROOT
 %files perl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/perl.so
+%dir %{_libdir}/pidgin/perl
 %{_libdir}/pidgin/perl/*.pm
+%dir %{_libdir}/pidgin/perl/auto
 %dir %{_libdir}/pidgin/perl/auto/Pidgin
 %{_libdir}/pidgin/perl/auto/Pidgin/*.bs
 %attr(755,root,root) %{_libdir}/pidgin/perl/auto/Pidgin/*.so
+%dir %{_libdir}/purple-2/perl
 %{_libdir}/purple-2/perl/*.pm
 %dir %{_libdir}/purple-2/perl/auto
 %dir %{_libdir}/purple-2/perl/auto/Purple
