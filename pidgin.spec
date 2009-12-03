@@ -39,7 +39,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.6.4
-Release:	0.9
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -263,6 +263,14 @@ külső alkalmazásokkal vagy a pidgin-remote eszközzel.
 Ten pakiet daje możliwość zdalnego sterowania Pidginem przez inne
 aplikacje albo narzędzie pidgin-remote.
 
+%package protocol-mtix
+Summary:	MTix protocol support for pidgin
+Group:		Applications/Communications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description protocol-mtix
+MTix protocol support for pidgin.
+
 %package doc
 Summary:	Pidgin documentation for developers (HTML format)
 Summary(hu.UTF-8):	Pidgin dokumentáció fejlesztőknek (HTML formában)
@@ -327,6 +335,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnt/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/pidgin/{,private}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/*.la
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,ca_ES@valencian,my_MM}
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
 
 %find_lang %{name} --with-gnome
 rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Pidgin/{,GtkUI}/.packlist}
@@ -514,6 +523,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/purple-remote
 %endif
+
+%files protocol-mtix
+%defattr(644,root,root,755)
+%{_libdir}/purple-2/libmxit.so
 
 %if %{with doc}
 %files doc
