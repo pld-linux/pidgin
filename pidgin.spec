@@ -50,6 +50,7 @@ Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
 URL:		http://www.pidgin.im/
+BuildRequires:	GConf2
 BuildRequires:	GConf2-devel >= 2.16.0
 %{?with_nm:BuildRequires:	NetworkManager-devel}
 BuildRequires:	autoconf >= 2.50
@@ -68,6 +69,7 @@ BuildRequires:	gtk+2-devel >= 2:2.10.6
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.11}
 BuildRequires:	intltool
 BuildRequires:	libgadu-devel
+BuildRequires:	libidn-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.26
 %{?with_meanwhile:BuildRequires:	meanwhile-devel >= 1.0.0}
@@ -615,8 +617,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
 %{_libdir}/purple-2/libyahoojp.so
 %{_libdir}/purple-2/libymsg.so
-%{_libdir}/purple-2/libymsg.so.0
-%{_libdir}/purple-2/libymsg.so.0.0.0
+%attr(755,root,root) %{_libdir}/purple-2/libymsg.so.0
+%attr(755,root,root) %{_libdir}/purple-2/libymsg.so.0.0.0
 
 %if %{with doc}
 %files doc
