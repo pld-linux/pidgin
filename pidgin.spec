@@ -38,6 +38,7 @@ Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-libgadu.patch
 Patch3:		%{name}-autoconf.patch
 URL:		http://www.pidgin.im/
+BuildRequires:	GConf2
 BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
@@ -55,6 +56,7 @@ BuildRequires:	gtk+2-devel >= 2:2.10.6
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.11}
 BuildRequires:	intltool
 BuildRequires:	libgadu-devel
+BuildRequires:	libidn-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.26
 %{?with_meanwhile:BuildRequires:	meanwhile-devel}
