@@ -7,6 +7,8 @@
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
 # - move mono related files to -libs?
+# - subpackage libpurple and it's plugins
+#   http://developer.pidgin.im/wiki/WhatIsLibpurple
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without D-BUS (for pidgin-remote and others)
