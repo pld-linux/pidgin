@@ -39,7 +39,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.6.4
-Release:	1
+Release:	1.1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -263,6 +263,38 @@ külső alkalmazásokkal vagy a pidgin-remote eszközzel.
 Ten pakiet daje możliwość zdalnego sterowania Pidginem przez inne
 aplikacje albo narzędzie pidgin-remote.
 
+%package protocol-irc
+Summary:	Yahoo protocol support for IRC
+Group:		Applications/Communications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description protocol-irc
+IRC protocol support for pidgin.
+
+%package protocol-icq
+Summary:	Yahoo protocol support for ICQ
+Group:		Applications/Communications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description protocol-icq
+ICQ protocol support for pidgin.
+
+%package protocol-jabber
+Summary:	Jabber protocol support for pidgin
+Group:		Applications/Communications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description protocol-jabber
+Jabber protocol support for pidgin.
+
+%package protocol-msn
+Summary:	MSN protocol support for pidgin
+Group:		Applications/Communications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description protocol-msn
+MSN protocol support for pidgin.
+
 %package protocol-mtix
 Summary:	MTix protocol support for pidgin
 Group:		Applications/Communications
@@ -270,6 +302,38 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description protocol-mtix
 MTix protocol support for pidgin.
+
+%package protocol-myspace
+Summary:	MySpace protocol support for pidgin
+Group:		Applications/Communications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description protocol-myspace
+MySpace protocol support for pidgin.
+
+%package protocol-qq
+Summary:	QQ protocol support for pidgin
+Group:		Applications/Communications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description protocol-qq
+QQ protocol support for pidgin.
+
+%package protocol-yahoo
+Summary:	Yahoo protocol support for pidgin
+Group:		Applications/Communications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description protocol-yahoo
+Yahoo protocol support for pidgin.
+
+%package protocol-xmpp
+Summary:	XMPP protocol support for pidgin
+Group:		Applications/Communications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description protocol-xmpp
+XMPP protocol support for pidgin.
 
 %package doc
 Summary:	Pidgin documentation for developers (HTML format)
@@ -413,27 +477,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/purple-2/libaim.so
 %attr(755,root,root) %{_libdir}/purple-2/libbonjour.so
 %attr(755,root,root) %{_libdir}/purple-2/libgg.so
-%attr(755,root,root) %{_libdir}/purple-2/libicq.so
-%attr(755,root,root) %{_libdir}/purple-2/libirc.so
-%attr(755,root,root) %{_libdir}/purple-2/libjabber.so.*
-%attr(755,root,root) %{_libdir}/purple-2/libmsn.so
-%attr(755,root,root) %{_libdir}/purple-2/libmyspace.so
 %attr(755,root,root) %{_libdir}/purple-2/libnovell.so
 %attr(755,root,root) %{_libdir}/purple-2/liboscar.so.*
-%attr(755,root,root) %{_libdir}/purple-2/libqq.so
-%attr(755,root,root) %{_libdir}/purple-2/libjabber.so
 %attr(755,root,root) %{_libdir}/purple-2/liboscar.so
 
 %{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
 %{?with_silc:%attr(755,root,root) %{_libdir}/purple-2/libsilcpurple.so}
 %attr(755,root,root) %{_libdir}/purple-2/libsimple.so
-%attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
-%attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
 %attr(755,root,root) %{_libdir}/purple-2/libzephyr.so
-%{_libdir}/purple-2/libyahoojp.so
-%{_libdir}/purple-2/libymsg.so
-%{_libdir}/purple-2/libymsg.so.0
-%{_libdir}/purple-2/libymsg.so.0.0.0
 %attr(755,root,root) %{_libdir}/purple-2/log_reader.so
 %attr(755,root,root) %{_libdir}/purple-2/newline.so
 %attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
@@ -524,9 +575,46 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/purple-remote
 %endif
 
+%files protocol-irc
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libirc.so
+
+%files protocol-icq
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libicq.so
+
+%files protocol-jabber
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libjabber.so.*
+%attr(755,root,root) %{_libdir}/purple-2/libjabber.so
+
+%files protocol-msn
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libmsn.so
+
+%files protocol-myspace
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libmyspace.so
+
 %files protocol-mtix
 %defattr(644,root,root,755)
-%{_libdir}/purple-2/libmxit.so
+%attr(755,root,root) %{_libdir}/purple-2/libmxit.so
+
+%files protocol-qq
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libqq.so
+
+%files protocol-xmpp
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
+
+%files protocol-yahoo
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
+%{_libdir}/purple-2/libyahoojp.so
+%{_libdir}/purple-2/libymsg.so
+%{_libdir}/purple-2/libymsg.so.0
+%{_libdir}/purple-2/libymsg.so.0.0.0
 
 %if %{with doc}
 %files doc
