@@ -267,76 +267,76 @@ külső alkalmazásokkal vagy a pidgin-remote eszközzel.
 Ten pakiet daje możliwość zdalnego sterowania Pidginem przez inne
 aplikacje albo narzędzie pidgin-remote.
 
-%package protocol-irc
+%package -n libpurple-protocol-irc
 Summary:	Yahoo protocol support for IRC
 Group:		Applications/Communications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description protocol-irc
+%description -n libpurple-protocol-irc
 IRC protocol support for pidgin.
 
-%package protocol-icq
+%package -n libpurple-protocol-icq
 Summary:	Yahoo protocol support for ICQ
 Group:		Applications/Communications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description protocol-icq
+%description -n libpurple-protocol-icq
 ICQ protocol support for pidgin.
 
-%package protocol-jabber
+%package -n libpurple-protocol-jabber
 Summary:	Jabber protocol support for pidgin
 Group:		Applications/Communications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description protocol-jabber
+%description -n libpurple-protocol-jabber
 Jabber protocol support for pidgin.
 
-%package protocol-msn
+%package -n libpurple-protocol-msn
 Summary:	MSN protocol support for pidgin
 Group:		Applications/Communications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description protocol-msn
+%description -n libpurple-protocol-msn
 MSN protocol support for pidgin.
 
-%package protocol-mtix
+%package -n libpurple-protocol-mtix
 Summary:	MTix protocol support for pidgin
 Group:		Applications/Communications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description protocol-mtix
+%description -n libpurple-protocol-mtix
 MTix protocol support for pidgin.
 
-%package protocol-myspace
+%package -n libpurple-protocol-myspace
 Summary:	MySpace protocol support for pidgin
 Group:		Applications/Communications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description protocol-myspace
+%description -n libpurple-protocol-myspace
 MySpace protocol support for pidgin.
 
-%package protocol-qq
+%package -n libpurple-protocol-qq
 Summary:	QQ protocol support for pidgin
 Group:		Applications/Communications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description protocol-qq
+%description -n libpurple-protocol-qq
 QQ protocol support for pidgin.
 
-%package protocol-yahoo
+%package -n libpurple-protocol-yahoo
 Summary:	Yahoo protocol support for pidgin
 Group:		Applications/Communications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description protocol-yahoo
+%description -n libpurple-protocol-yahoo
 Yahoo protocol support for pidgin.
 
-%package protocol-xmpp
+%package -n libpurple-protocol-xmpp
 Summary:	XMPP protocol support for pidgin
 Group:		Applications/Communications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description protocol-xmpp
+%description -n libpurple-protocol-xmpp
 XMPP protocol support for pidgin.
 
 %package doc
@@ -579,40 +579,40 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/purple-remote
 %endif
 
-%files protocol-irc
+%files -n libpurple-protocol-irc
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libirc.so
 
-%files protocol-icq
+%files -n libpurple-protocol-icq
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libicq.so
 
-%files protocol-jabber
+%files -n libpurple-protocol-jabber
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libjabber.so.*
 %attr(755,root,root) %{_libdir}/purple-2/libjabber.so
 
-%files protocol-msn
+%files -n libpurple-protocol-msn
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libmsn.so
 
-%files protocol-myspace
+%files -n libpurple-protocol-myspace
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libmyspace.so
 
-%files protocol-mtix
+%files -n libpurple-protocol-mtix
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libmxit.so
 
-%files protocol-qq
+%files -n libpurple-protocol-qq
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libqq.so
 
-%files protocol-xmpp
+%files -n libpurple-protocol-xmpp
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
 
-%files protocol-yahoo
+%files -n libpurple-protocol-yahoo
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
 %{_libdir}/purple-2/libyahoojp.so
