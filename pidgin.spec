@@ -9,6 +9,7 @@
 # - move mono related files to -libs?
 # - subpackage libpurple and it's plugins
 #   http://developer.pidgin.im/wiki/WhatIsLibpurple
+# - update pl description
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without D-BUS (for pidgin-remote and others)
@@ -104,11 +105,9 @@ Requires(post,postun):	gtk+2
 Requires(post,preun):	GConf2 >= 2.16.0
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	hicolor-icon-theme
+Requires:	libpurple-protocol
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
 Suggests:	enchant-myspell
-Suggests:	libpurple-protocol-icq
-Suggests:	libpurple-protocol-irc
-Suggests:	libpurple-protocol-jabber
-Suggests:	libpurple-protocol-msn
 Obsoletes:	gaim
 Obsoletes:	gaim-ui
 Obsoletes:	gaim-ui-gtk
@@ -129,6 +128,8 @@ which consists of protocol plugins. These plugins allow you to use
 pidgin to connect to other chat services such as Yahoo!, ICQ, MSN,
 Jabber, Napster, Zephyr, IRC and Gadu-Gadu.
 
+The protocols are shipped by libpurple-protocol-foo.
+
 %description -l hu.UTF-8
 A Pidgin-nel beszélhetsz bárkivel, aki az AOL Instant Messenger
 szolgáltatását használja (a http://www.aim.aol.com oldalon
@@ -139,6 +140,8 @@ lehetőséget is tartalmaz. A Pidgin több kapcsolódási lehetőséggel
 rendelkezik, amely a pluginoknak köszönhető. Ezen pluginok
 segítségével a következő szerverekhez csatlakozhatsz: Yahoo!, ICQ,
 MSN, Jabber, Napster, Zephyr, IRC és Gadu-Gadu.
+
+A protokollokat a libpurple-protocol-foo csomagok szállítják.
 
 %description -l pl.UTF-8
 Pidgin pozwala na rozmowy z dowolną osobą używającą usługi AOL Instant
@@ -271,10 +274,18 @@ külső alkalmazásokkal vagy a pidgin-remote eszközzel.
 Ten pakiet daje możliwość zdalnego sterowania Pidginem przez inne
 aplikacje albo narzędzie pidgin-remote.
 
+%package -n libpurple-protocol-dir
+Summary:	The directory of protocols
+Group:		Applications/Communications
+
+%description -n libpurple-protocol-dir
+The directory of protocols.
+
 %package -n libpurple-protocol-irc
 Summary:	Yahoo protocol support for IRC
 Group:		Applications/Communications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-irc
 IRC protocol support for pidgin.
@@ -282,7 +293,8 @@ IRC protocol support for pidgin.
 %package -n libpurple-protocol-icq
 Summary:	Yahoo protocol support for ICQ
 Group:		Applications/Communications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-icq
 ICQ protocol support for pidgin.
@@ -290,7 +302,8 @@ ICQ protocol support for pidgin.
 %package -n libpurple-protocol-jabber
 Summary:	Jabber protocol support for pidgin
 Group:		Applications/Communications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-jabber
 Jabber protocol support for pidgin.
@@ -298,7 +311,8 @@ Jabber protocol support for pidgin.
 %package -n libpurple-protocol-msn
 Summary:	MSN protocol support for pidgin
 Group:		Applications/Communications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-msn
 MSN protocol support for pidgin.
@@ -306,7 +320,8 @@ MSN protocol support for pidgin.
 %package -n libpurple-protocol-mtix
 Summary:	MTix protocol support for pidgin
 Group:		Applications/Communications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-mtix
 MTix protocol support for pidgin.
@@ -314,7 +329,8 @@ MTix protocol support for pidgin.
 %package -n libpurple-protocol-myspace
 Summary:	MySpace protocol support for pidgin
 Group:		Applications/Communications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-myspace
 MySpace protocol support for pidgin.
@@ -322,7 +338,8 @@ MySpace protocol support for pidgin.
 %package -n libpurple-protocol-qq
 Summary:	QQ protocol support for pidgin
 Group:		Applications/Communications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-qq
 QQ protocol support for pidgin.
@@ -330,7 +347,8 @@ QQ protocol support for pidgin.
 %package -n libpurple-protocol-yahoo
 Summary:	Yahoo protocol support for pidgin
 Group:		Applications/Communications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-yahoo
 Yahoo protocol support for pidgin.
@@ -338,7 +356,8 @@ Yahoo protocol support for pidgin.
 %package -n libpurple-protocol-xmpp
 Summary:	XMPP protocol support for pidgin
 Group:		Applications/Communications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-xmpp
 XMPP protocol support for pidgin.
@@ -423,6 +442,11 @@ rm -rf $RPM_BUILD_ROOT
 %post
 %gconf_schema_install purple.schemas
 %update_icon_cache hicolor
+if [ "$1" = 1 ]; then
+%banner %{name} -e <<-EOF
+	Please do not forget to install libpurple-protocols what do you need!
+EOF
+fi
 
 %preun
 %gconf_schema_uninstall purple.schemas
@@ -478,7 +502,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gnt/*.so
 %attr(755,root,root) %{_libdir}/finch/gnttinyurl.so
 %endif
-%dir %{_libdir}/purple-2
 %{?with_dbus:%attr(755,root,root) %{_libdir}/purple-2/dbus-example.so}
 %attr(755,root,root) %{_libdir}/purple-2/idle.so
 %attr(755,root,root) %{_libdir}/purple-2/joinpart.so
@@ -582,6 +605,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/purple-remote
 %endif
+
+%files -n libpurple-protocol-dir
+%defattr(644,root,root,755)
+%dir %{_libdir}/purple-2
 
 %files -n libpurple-protocol-irc
 %defattr(644,root,root,755)
