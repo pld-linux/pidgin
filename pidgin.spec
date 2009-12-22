@@ -105,6 +105,10 @@ Requires(post,preun):	GConf2 >= 2.16.0
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	hicolor-icon-theme
 Suggests:	enchant-myspell
+Suggests:	libpurple-protocol-icq
+Suggests:	libpurple-protocol-irc
+Suggests:	libpurple-protocol-jabber
+Suggests:	libpurple-protocol-msn
 Obsoletes:	gaim
 Obsoletes:	gaim-ui
 Obsoletes:	gaim-ui-gtk
