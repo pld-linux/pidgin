@@ -1,7 +1,7 @@
 # TODO
 # - cleanup files; move libs to proper packages
 # - subpackages for
-#  - different protocols (like koptete)
+#  - different protocols (like koptete) - working, needs some more protocol
 #  - huge deps (mono...)
 # - kerberos 4 with zephyr support?
 # - external zephyr?
@@ -354,13 +354,13 @@ Provides:	libpurple-protocol
 Yahoo protocol support for pidgin.
 
 %package -n libpurple-protocol-xmpp
-Summary:	XMPP protocol support for pidgin
+Summary:	XMPP protocol support for pidgin (e.g. GTalk)
 Group:		Applications/Communications
 Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-xmpp
-XMPP protocol support for pidgin.
+XMPP protocol support for pidgin (e.g. GTalk).
 
 %package doc
 Summary:	Pidgin documentation for developers (HTML format)
