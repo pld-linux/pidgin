@@ -281,6 +281,34 @@ Group:		Applications/Communications
 %description -n libpurple-protocol-dir
 The directory of protocols.
 
+%package -n libpurple-protocol-aim
+Summary:	Yahoo protocol support for AIM
+Group:		Applications/Communications
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
+
+%description -n libpurple-protocol-aim
+AIM protocol support for pidgin.
+
+%package -n libpurple-protocol-bonjour
+Summary:	Yahoo protocol support for Bonjour
+Group:		Applications/Communications
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
+
+%description -n libpurple-protocol-bonjour
+Bonjour protocol support for pidgin.
+
+%package -n libpurple-protocol-gg
+Summary:	Yahoo protocol support for Gadu-Gadu
+Group:		Applications/Communications
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
+
+%description -n libpurple-protocol-gg
+Gadu-Gadu protocol support for pidgin.
+
+
 %package -n libpurple-protocol-irc
 Summary:	Yahoo protocol support for IRC
 Group:		Applications/Communications
@@ -344,6 +372,15 @@ Provides:	libpurple-protocol
 %description -n libpurple-protocol-qq
 QQ protocol support for pidgin.
 
+%package -n libpurple-protocol-sametime
+Summary:	Sametime protocol support for pidgin
+Group:		Applications/Communications
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
+
+%description -n libpurple-protocol-sametime
+Sametime protocol support for pidgin.
+
 %package -n libpurple-protocol-yahoo
 Summary:	Yahoo protocol support for pidgin
 Group:		Applications/Communications
@@ -361,6 +398,15 @@ Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-xmpp
 XMPP protocol support for pidgin (e.g. GTalk).
+
+%package -n libpurple-protocol-zephyr
+Summary:	Zephyr protocol support for pidgin
+Group:		Applications/Communications
+Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Provides:	libpurple-protocol
+
+%description -n libpurple-protocol-zephyr
+Zephyr protocol support for pidgin.
 
 %package doc
 Summary:	Pidgin documentation for developers (HTML format)
@@ -505,17 +551,12 @@ fi
 %{?with_dbus:%attr(755,root,root) %{_libdir}/purple-2/dbus-example.so}
 %attr(755,root,root) %{_libdir}/purple-2/idle.so
 %attr(755,root,root) %{_libdir}/purple-2/joinpart.so
-%attr(755,root,root) %{_libdir}/purple-2/libaim.so
-%attr(755,root,root) %{_libdir}/purple-2/libbonjour.so
-%attr(755,root,root) %{_libdir}/purple-2/libgg.so
 %attr(755,root,root) %{_libdir}/purple-2/libnovell.so
 %attr(755,root,root) %{_libdir}/purple-2/liboscar.so.*
 %attr(755,root,root) %{_libdir}/purple-2/liboscar.so
 
-%{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
 %{?with_silc:%attr(755,root,root) %{_libdir}/purple-2/libsilcpurple.so}
 %attr(755,root,root) %{_libdir}/purple-2/libsimple.so
-%attr(755,root,root) %{_libdir}/purple-2/libzephyr.so
 %attr(755,root,root) %{_libdir}/purple-2/log_reader.so
 %attr(755,root,root) %{_libdir}/purple-2/newline.so
 %attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
@@ -610,6 +651,18 @@ fi
 %defattr(644,root,root,755)
 %dir %{_libdir}/purple-2
 
+%files -n libpurple-protocol-aim
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libaim.so
+
+%files -n libpurple-protocol-bonjour
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libbonjour.so
+
+%files -n libpurple-protocol-gg
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libgg.so
+
 %files -n libpurple-protocol-irc
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libirc.so
@@ -639,9 +692,17 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libqq.so
 
+%files -n libpurple-protocol-sametime
+%defattr(644,root,root,755)
+%{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
+
 %files -n libpurple-protocol-xmpp
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
+
+%files -n libpurple-protocol-zephyr
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libzephyr.so
 
 %files -n libpurple-protocol-yahoo
 %defattr(644,root,root,755)
