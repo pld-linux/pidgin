@@ -1,4 +1,5 @@
 # TODO
+# - fix build with libpng 1.4
 # - cleanup files; move libs to proper packages
 # - subpackages for
 #  - different protocols (like koptete) - working, needs some more protocol
@@ -42,7 +43,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.6.5
-Release:	1
+Release:	1.1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
