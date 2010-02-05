@@ -68,7 +68,7 @@ BuildRequires:	gettext-devel
 %{?with_gnutls:BuildRequires:	gnutls-devel}
 BuildRequires:	gstreamer-devel >= 0.10.10
 BuildRequires:	gtk+2-devel >= 2:2.10.6
-%{?with_gtkspell:BuildRequires:	gtkspell-devel >= 2.0.11}
+%{?with_gtkspell:BuildRequires:	gtkspell-devel >= 1:2.0.16-2}
 BuildRequires:	intltool
 BuildRequires:	libgadu-devel
 BuildRequires:	libidn-devel
