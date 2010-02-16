@@ -42,7 +42,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.6.5
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -471,7 +471,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/finch/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnt/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/pidgin/{,private}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/*.la
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,ca_ES@valencian,my_MM}
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia}
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
 
 %find_lang %{name} --with-gnome
