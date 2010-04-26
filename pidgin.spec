@@ -31,6 +31,7 @@
 %endif
 
 %define		gtk2_ver	2.10.6
+%define		glib_ver	%(v=$(pkg-config --modversion glib-2.0 2>/dev/null | cut -d. -f 1,2); echo ${v:-ERROR})
 
 %include	/usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
@@ -41,7 +42,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.6.6
-Release:	1.2
+Release:	1.3
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -185,6 +186,7 @@ Summary:	libpurple library for IM clients like Pidgin and Finch
 Group:		Applications/Networking
 %{?with_sasl:Requires:	cyrus-sasl-digest-md5}
 %{?with_sasl:Requires:	cyrus-sasl-plain}
+Requires:	glib2 >= 1:%{glib_ver}
 
 %description -n libpurple
 libpurple contains the core IM support for IM clients such as Pidgin
@@ -198,7 +200,6 @@ QQ, Lotus Sametime, SILC, Simple and Zephyr.
 Summary:	Development headers, documentation, and libraries for libpurple
 Group:		Applications/Networking
 Requires:	libpurple = %{version}-%{release}
-Requires:	pkgconfig
 %if %{with dbus}
 Requires:	dbus-devel >= 0.60
 %endif
