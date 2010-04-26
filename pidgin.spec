@@ -1,15 +1,11 @@
 # TODO
-# - cleanup files; move libs to proper packages
 # - subpackages for
-#  - different protocols (like koptete) - working, needs some more protocol
+#  - different protocols (like kopete) - working, needs some more protocol packages
 #  - huge deps (mono...)
 # - kerberos 4 with zephyr support?
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
-# - move mono related files to -libs?
-# - subpackage libpurple and it's plugins
-#   http://developer.pidgin.im/wiki/WhatIsLibpurple
-# - update pl description
+# - update pl descriptions
 # - restore e-d-s if http://developer.pidgin.im/ticket/10852 fixed
 #
 %bcond_without	cap		# without Contact Availability Prediction
@@ -21,7 +17,7 @@
 %bcond_without	gtkspell	# without gtkspell support
 %bcond_without	meanwhile	# without meanwhile support
 %bcond_without	sasl		# disable SASL support
-%bcond_without	text		# don't build text UI
+%bcond_without	text		# don't build text UI (finch)
 %bcond_without 	silc		# Build without SILC libraries
 %bcond_without 	nm		# NetworkManager support (requires D-Bus)
 
@@ -34,6 +30,8 @@
 %undefine	with_dotnet
 %endif
 
+%define		gtk2_ver	2.10.6
+
 %include	/usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(de.UTF-8):	Pidgin ist ein Instant Messenger
@@ -43,7 +41,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.6.6
-Release:	1
+Release:	1.2
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -67,7 +65,7 @@ BuildRequires:	farsight2-devel
 BuildRequires:	gettext-devel
 %{?with_gnutls:BuildRequires:	gnutls-devel}
 BuildRequires:	gstreamer-devel >= 0.10.10
-BuildRequires:	gtk+2-devel >= 2:2.10.6
+BuildRequires:	gtk+2-devel >= 2:%{gtk2_ver}
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 1:2.0.16-2}
 BuildRequires:	intltool
 BuildRequires:	libgadu-devel
@@ -101,13 +99,11 @@ BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
-%{?with_sasl:Requires(hint):    cyrus-sasl-digest-md5}
 Requires(post,postun):	gtk+2
 Requires(post,preun):	GConf2 >= 2.16.0
-Requires:	%{name}-libs = %{version}-%{release}
 Requires:	hicolor-icon-theme
+Requires:	libpurple = %{version}-%{release}
 Requires:	libpurple-protocol
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
 Suggests:	enchant-myspell
 Obsoletes:	gaim
 Obsoletes:	gaim-ui
@@ -167,26 +163,12 @@ unixähnliche Systeme (GNU/Linux, BSD) geschrieben wurde, nun aber auch
 auf Microsoft Windows und Mac OS X lauffähig ist und mit vielen
 Plugins stark erweitert werden kann.
 
-%package libs
-Summary:	Pidgin client library
-Summary(pl.UTF-8):	Biblioteka klienta Pidgina
-Group:		Libraries
-
-%description libs
-Pidgin client library.
-
-%description libs -l hu.UTF-8
-Pidgin kliens könyvtár.
-
-%description libs -l pl.UTF-8
-Biblioteka klienta Pidgina.
-
 %package devel
 Summary:	Development files for Pidgin client library
 Summary(pl.UTF-8):	Pliki programistyczne biblioteki klienta Pidgina
 Group:		Development/Libraries
-Requires:	%{name}-libs = %{version}-%{release}
-Requires:	gtk+2-devel >= 2:2.10.6
+Requires:	gtk+2-devel >= 2:%{gtk2_ver}
+Requires:	libpurple-devel = %{version}-%{release}
 Obsoletes:	gaim-devel
 
 %description devel
@@ -198,12 +180,96 @@ Fejléc fájlok Pidginhez.
 %description devel -l pl.UTF-8
 Pliki programistyczne biblioteki Pidgina.
 
+%package -n libpurple
+Summary:	libpurple library for IM clients like Pidgin and Finch
+Group:		Applications/Networking
+%{?with_sasl:Requires:	cyrus-sasl-digest-md5}
+%{?with_sasl:Requires:	cyrus-sasl-plain}
+
+%description -n libpurple
+libpurple contains the core IM support for IM clients such as Pidgin
+and Finch.
+
+libpurple supports a variety of messaging protocols including AIM,
+MSN, Yahoo!, Jabber, Bonjour, Gadu-Gadu, ICQ, IRC, Novell Groupwise,
+QQ, Lotus Sametime, SILC, Simple and Zephyr.
+
+%package -n libpurple-devel
+Summary:	Development headers, documentation, and libraries for libpurple
+Group:		Applications/Networking
+Requires:	libpurple = %{version}-%{release}
+Requires:	pkgconfig
+%if %{with dbus}
+Requires:	dbus-devel >= 0.60
+%endif
+Requires:	dbus-glib-devel >= 0.70
+
+%description -n libpurple-devel
+The libpurple-devel package contains the header files, developer
+documentation, and libraries required for development of libpurple
+based instant messaging clients or plugins for any libpurple based
+client.
+
+%package -n libpurple-perl
+Summary:	Perl scripting support for libpurple
+Group:		Applications/Networking
+Requires:	libpurple = %{version}-%{release}
+
+%description -n libpurple-perl
+Perl plugin loader for libpurple. This package will allow you to write
+or use libpurple plugins written in the Perl programming language.
+
+%package -n libpurple-tcl
+Summary:	Tcl scripting support for libpurple
+Summary(hu.UTF-8):	Pidgin fájlok Tcl szkriptekhez
+Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Tcl-u
+Group:		Libraries
+Requires:	libpurple = %{version}-%{release}
+Obsoletes:	gaim-tcl
+Obsoletes:	pidgin-tcl
+
+%description -n libpurple-tcl
+Tcl plugin loader for libpurple. This package will allow you to write
+or use libpurple plugins written in the Tcl programming language.
+
+%description -n libpurple-tcl -l hu.UTF-8
+Ezzel a csomaggal lehetőséged nyílik a Pidgin lehetőségeit bővíteni
+Tcl szkriptekkel.
+
+%description -n libpurple-tcl -l pl.UTF-8
+Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za
+pomocą skryptów w Tcl-u.
+
+%package -n finch
+Summary:	A text-based user interface for Pidgin
+Group:		Applications/Networking
+Requires:	libpurple = %{version}-%{release}
+
+%description -n finch
+A text-based user interface for using libpurple. This can be run from
+a standard text console or from a terminal within X Windows. It uses
+ncurses and our homegrown gnt library for drawing windows and text.
+
+%package -n finch-devel
+Summary:	Headers etc. for finch stuffs
+Group:		Applications/Networking
+Requires:	finch = %{version}-%{release}
+Requires:	libpurple-devel = %{version}-%{release}
+Requires:	ncurses-devel
+Requires:	pkgconfig
+
+%description -n finch-devel
+The finch-devel package contains the header files, developer
+documentation, and libraries required for development of Finch scripts
+and plugins.
+
 %package perl
 Summary:	Pidgin files for Perl scripts
 Summary(hu.UTF-8):	Pidgin fájlok Perl szkriptekhez
 Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Perlu
 Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
+Requires:	libpurple-perl = %{version}-%{release}
 Obsoletes:	gaim-perl
 
 %description perl
@@ -217,26 +283,6 @@ Perl szkriptekkel.
 %description perl -l pl.UTF-8
 Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za
 pomocą skryptów Perla.
-
-%package tcl
-Summary:	Pidgin files for Tcl scripts
-Summary(hu.UTF-8):	Pidgin fájlok Tcl szkriptekhez
-Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Tcl-u
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-Obsoletes:	gaim-tcl
-
-%description tcl
-This package gives you ability to extend Pidgin functionality with Tcl
-scripts.
-
-%description tcl -l hu.UTF-8
-Ezzel a csomaggal lehetőséged nyílik a Pidgin lehetőségeit bővíteni
-Tcl szkriptekkel.
-
-%description tcl -l pl.UTF-8
-Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za
-pomocą skryptów w Tcl-u.
 
 %package plugin-evolution
 Summary:	Plugin for Ximian Evolution integration
@@ -275,17 +321,10 @@ külső alkalmazásokkal vagy a pidgin-remote eszközzel.
 Ten pakiet daje możliwość zdalnego sterowania Pidginem przez inne
 aplikacje albo narzędzie pidgin-remote.
 
-%package -n libpurple-protocol-dir
-Summary:	The directory of protocols
-Group:		Applications/Communications
-
-%description -n libpurple-protocol-dir
-The directory of protocols.
-
 %package -n libpurple-protocol-aim
 Summary:	Yahoo protocol support for AIM
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-aim
@@ -294,7 +333,7 @@ AIM protocol support for pidgin.
 %package -n libpurple-protocol-bonjour
 Summary:	Yahoo protocol support for Bonjour
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-bonjour
@@ -303,7 +342,7 @@ Bonjour protocol support for pidgin.
 %package -n libpurple-protocol-gg
 Summary:	Yahoo protocol support for Gadu-Gadu
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-gg
@@ -313,7 +352,7 @@ Gadu-Gadu protocol support for pidgin.
 %package -n libpurple-protocol-irc
 Summary:	Yahoo protocol support for IRC
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-irc
@@ -322,7 +361,7 @@ IRC protocol support for pidgin.
 %package -n libpurple-protocol-icq
 Summary:	Yahoo protocol support for ICQ
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-icq
@@ -331,7 +370,7 @@ ICQ protocol support for pidgin.
 %package -n libpurple-protocol-jabber
 Summary:	Jabber protocol support for pidgin
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-jabber
@@ -340,7 +379,7 @@ Jabber protocol support for pidgin.
 %package -n libpurple-protocol-msn
 Summary:	MSN protocol support for pidgin
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-msn
@@ -349,7 +388,7 @@ MSN protocol support for pidgin.
 %package -n libpurple-protocol-mtix
 Summary:	MTix protocol support for pidgin
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-mtix
@@ -358,7 +397,7 @@ MTix protocol support for pidgin.
 %package -n libpurple-protocol-myspace
 Summary:	MySpace protocol support for pidgin
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-myspace
@@ -367,7 +406,7 @@ MySpace protocol support for pidgin.
 %package -n libpurple-protocol-qq
 Summary:	QQ protocol support for pidgin
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-qq
@@ -376,7 +415,7 @@ QQ protocol support for pidgin.
 %package -n libpurple-protocol-sametime
 Summary:	Sametime protocol support for pidgin
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-sametime
@@ -385,7 +424,7 @@ Sametime protocol support for pidgin.
 %package -n libpurple-protocol-yahoo
 Summary:	Yahoo protocol support for pidgin
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-yahoo
@@ -394,7 +433,7 @@ Yahoo protocol support for pidgin.
 %package -n libpurple-protocol-xmpp
 Summary:	XMPP protocol support for pidgin (e.g. GTalk)
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-xmpp
@@ -403,7 +442,7 @@ XMPP protocol support for pidgin (e.g. GTalk).
 %package -n libpurple-protocol-zephyr
 Summary:	Zephyr protocol support for pidgin
 Group:		Applications/Communications
-Requires:	libpurple-protocol-dir = %{epoch}:%{version}-%{release}
+Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-zephyr
@@ -464,6 +503,7 @@ fi
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -472,7 +512,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/finch/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnt/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/pidgin/{,private}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/*.la
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia}
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/ca@valencia
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
 
@@ -483,6 +523,13 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/purple/ca-certs
 %if %{with dbus}
 rm $RPM_BUILD_ROOT%{_bindir}/purple-client-example
 %endif
+
+# no svg icons
+rm $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/pidgin.svg
+rm -r $RPM_BUILD_ROOT%{_pixmapsdir}/pidgin/*/scalable
+
+# rm windows icons
+rm $RPM_BUILD_ROOT%{_pixmapsdir}/pidgin/tray/*/*.ico
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -502,22 +549,19 @@ fi
 %postun
 %update_icon_cache hicolor
 
-%post	libs -p /sbin/ldconfig
-%postun	libs -p /sbin/ldconfig
+%post	-n libpurple -p /sbin/ldconfig
+%postun	-n libpurple -p /sbin/ldconfig
+
+%post	-n finch	-p /sbin/ldconfig
+%postun	-n finch	-p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO README*
 %attr(755,root,root) %{_bindir}/pidgin
 %dir %{_libdir}/pidgin
-%attr(755,root,root) %{_libdir}/purple-2/autoaccept.so
-%attr(755,root,root) %{_libdir}/purple-2/buddynote.so
 %if %{with cap}
 %attr(755,root,root) %{_libdir}/pidgin/cap.so
-%endif
-%if %{with dotnet}
-%attr(755,root,root) %{_libdir}/purple-2/*.dll
-%attr(755,root,root) %{_libdir}/purple-2/mono.so
 %endif
 %attr(755,root,root) %{_libdir}/pidgin/convcolors.so
 %attr(755,root,root) %{_libdir}/pidgin/extplacement.so
@@ -536,95 +580,63 @@ fi
 %attr(755,root,root) %{_libdir}/pidgin/vvconfig.so
 %attr(755,root,root) %{_libdir}/pidgin/xmppconsole.so
 %attr(755,root,root) %{_libdir}/pidgin/sendbutton.so
-%{_libdir}/pidgin/themeedit.so
-%{_libdir}/pidgin/xmppdisco.so
-%if %{with text}
-%attr(755,root,root) %{_bindir}/finch
-%dir %{_libdir}/finch
-%attr(755,root,root) %{_libdir}/finch/gntclipboard.so
-%attr(755,root,root) %{_libdir}/finch/gntgf.so
-%attr(755,root,root) %{_libdir}/finch/gnthistory.so
-%attr(755,root,root) %{_libdir}/finch/gntlastlog.so
-%attr(755,root,root) %{_libdir}/finch/grouping.so
-%dir %{_libdir}/gnt
-%attr(755,root,root) %{_libdir}/gnt/*.so
-%attr(755,root,root) %{_libdir}/finch/gnttinyurl.so
-%endif
-%{?with_dbus:%attr(755,root,root) %{_libdir}/purple-2/dbus-example.so}
-%attr(755,root,root) %{_libdir}/purple-2/idle.so
-%attr(755,root,root) %{_libdir}/purple-2/joinpart.so
-%attr(755,root,root) %{_libdir}/purple-2/libnovell.so
-%attr(755,root,root) %{_libdir}/purple-2/liboscar.so.*
-%attr(755,root,root) %{_libdir}/purple-2/liboscar.so
-
-%{?with_silc:%attr(755,root,root) %{_libdir}/purple-2/libsilcpurple.so}
-%attr(755,root,root) %{_libdir}/purple-2/libsimple.so
-%attr(755,root,root) %{_libdir}/purple-2/log_reader.so
-%attr(755,root,root) %{_libdir}/purple-2/newline.so
-%attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
-%attr(755,root,root) %{_libdir}/purple-2/psychic.so
-%{?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so}
-%{!?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so}
-%attr(755,root,root) %{_libdir}/purple-2/ssl.so
-%attr(755,root,root) %{_libdir}/purple-2/statenotify.so
+%attr(755,root,root) %{_libdir}/pidgin/themeedit.so
+%attr(755,root,root) %{_libdir}/pidgin/xmppdisco.so
 %if %{with dbus}
-%attr(755,root,root) %{_bindir}/purple-url-handler
-%attr(755,root,root) %{_bindir}/purple-send
-%attr(755,root,root) %{_bindir}/purple-send-async
 %attr(755,root,root) %{_libdir}/pidgin/musicmessaging.so
 %endif
-%{_sysconfdir}/gconf/schemas/purple.schemas
-%{_datadir}/sounds/purple
-%{_mandir}/man?/*
+%{_mandir}/man1/pidgin.1*
 
 %{_desktopdir}/pidgin.desktop
-%{_pixmapsdir}/*
-%{_iconsdir}/hicolor/*/apps/pidgin.*
+%{_pixmapsdir}/pidgin
+%{_iconsdir}/hicolor/*/apps/pidgin.png
 
-%files libs
+%files -n libpurple
 %defattr(644,root,root,755)
+%doc libpurple/purple-notifications-example
+%dir %{_sysconfdir}/purple
+%{_sysconfdir}/gconf/schemas/purple.schemas
 %attr(755,root,root) %{_libdir}/libpurple.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libpurple.so.0
 %if %{with dbus}
 %attr(755,root,root) %{_libdir}/libpurple-client.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libpurple-client.so.0
 %endif
-%if %{with text}
-%attr(755,root,root) %{_libdir}/libgnt.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgnt.so.0
+%dir %{_libdir}/purple-2
+%attr(755,root,root) %{_libdir}/purple-2/autoaccept.so
+%attr(755,root,root) %{_libdir}/purple-2/buddynote.so
+%attr(755,root,root) %{_libdir}/purple-2/idle.so
+%attr(755,root,root) %{_libdir}/purple-2/joinpart.so
+%attr(755,root,root) %{_libdir}/purple-2/libnovell.so
+%attr(755,root,root) %{_libdir}/purple-2/liboscar.so.*
+%attr(755,root,root) %{_libdir}/purple-2/liboscar.so
+%attr(755,root,root) %{_libdir}/purple-2/libsimple.so
+%attr(755,root,root) %{_libdir}/purple-2/log_reader.so
+%attr(755,root,root) %{_libdir}/purple-2/newline.so
+%attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
+%attr(755,root,root) %{_libdir}/purple-2/psychic.so
+%attr(755,root,root) %{_libdir}/purple-2/ssl.so
+%attr(755,root,root) %{_libdir}/purple-2/statenotify.so
+%if %{with dotnet}
+%attr(755,root,root) %{_libdir}/purple-2/*.dll
+%attr(755,root,root) %{_libdir}/purple-2/mono.so
 %endif
+%{?with_dbus:%attr(755,root,root) %{_libdir}/purple-2/dbus-example.so}
+%{?with_silc:%attr(755,root,root) %{_libdir}/purple-2/libsilcpurple.so}
+%{?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so}
+%{!?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so}
 
-%files devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpurple.so
-%{_libdir}/libpurple.la
-%{_includedir}/libpurple
-%{_includedir}/pidgin
-%{_pkgconfigdir}/pidgin.pc
-%{_pkgconfigdir}/purple.pc
-%{_aclocaldir}/purple.m4
+%{_datadir}/sounds/purple
+%{_datadir}/purple
 %if %{with dbus}
-%attr(755,root,root) %{_libdir}/libpurple-client.so
-%{_libdir}/libpurple-client.la
-%endif
-%if %{with text}
-%attr(755,root,root) %{_libdir}/libgnt.so
-%{_libdir}/libgnt.la
-%{_includedir}/finch
-%{_includedir}/gnt
-%{_pkgconfigdir}/finch.pc
-%{_pkgconfigdir}/gnt.pc
+%attr(755,root,root) %{_bindir}/purple-send
+%attr(755,root,root) %{_bindir}/purple-send-async
+%attr(755,root,root) %{_bindir}/purple-url-handler
 %endif
 
-%files perl
+%files -n libpurple-perl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/perl.so
-%dir %{_libdir}/pidgin/perl
-%{_libdir}/pidgin/perl/*.pm
-%dir %{_libdir}/pidgin/perl/auto
-%dir %{_libdir}/pidgin/perl/auto/Pidgin
-%{_libdir}/pidgin/perl/auto/Pidgin/*.bs
-%attr(755,root,root) %{_libdir}/pidgin/perl/auto/Pidgin/*.so
 %dir %{_libdir}/purple-2/perl
 %{_libdir}/purple-2/perl/*.pm
 %dir %{_libdir}/purple-2/perl/auto
@@ -632,10 +644,65 @@ fi
 %{_libdir}/purple-2/perl/auto/Purple/*.bs
 %{_libdir}/purple-2/perl/auto/Purple/*.ix
 %attr(755,root,root) %{_libdir}/purple-2/perl/auto/Purple/*.so
+%{_mandir}/man3/Purple.3pm*
 
-%files tcl
+%files -n libpurple-tcl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/tcl.so
+
+%files -n libpurple-devel
+%defattr(644,root,root,755)
+%{_aclocaldir}/purple.m4
+%attr(755,root,root) %{_libdir}/libpurple.so
+%{_libdir}/libpurple.la
+%{_includedir}/libpurple
+%{_pkgconfigdir}/purple.pc
+%if %{with dbus}
+%attr(755,root,root) %{_libdir}/libpurple-client.so
+%{_libdir}/libpurple-client.la
+%endif
+
+%if %{with text}
+%files -n finch
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/finch
+%attr(755,root,root) %{_libdir}/libgnt.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgnt.so.0
+%dir %{_libdir}/finch
+%attr(755,root,root) %{_libdir}/finch/gntclipboard.so
+%attr(755,root,root) %{_libdir}/finch/gntgf.so
+%attr(755,root,root) %{_libdir}/finch/gnthistory.so
+%attr(755,root,root) %{_libdir}/finch/gntlastlog.so
+%attr(755,root,root) %{_libdir}/finch/gnttinyurl.so
+%attr(755,root,root) %{_libdir}/finch/grouping.so
+%dir %{_libdir}/gnt
+%attr(755,root,root) %{_libdir}/gnt/*.so
+%{_mandir}/man1/finch.*
+
+%files -n finch-devel
+%defattr(644,root,root,755)
+%{_includedir}/finch
+%{_includedir}/gnt
+%attr(755,root,root) %{_libdir}/libgnt.so
+%{_libdir}/libgnt.la
+%{_pkgconfigdir}/finch.pc
+%{_pkgconfigdir}/gnt.pc
+%endif
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/pidgin
+%{_pkgconfigdir}/pidgin.pc
+
+%files perl
+%defattr(644,root,root,755)
+%dir %{_libdir}/pidgin/perl
+%{_libdir}/pidgin/perl/*.pm
+%dir %{_libdir}/pidgin/perl/auto
+%dir %{_libdir}/pidgin/perl/auto/Pidgin
+%{_libdir}/pidgin/perl/auto/Pidgin/*.bs
+%attr(755,root,root) %{_libdir}/pidgin/perl/auto/Pidgin/*.so
+%{_mandir}/man3/Pidgin.3pm*
 
 %if %{with evolution}
 %files plugin-evolution
@@ -648,10 +715,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/purple-remote
 %endif
-
-%files -n libpurple-protocol-dir
-%defattr(644,root,root,755)
-%dir %{_libdir}/purple-2
 
 %files -n libpurple-protocol-aim
 %defattr(644,root,root,755)
