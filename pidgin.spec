@@ -10,12 +10,13 @@
 # - subpackage libpurple and it's plugins
 #   http://developer.pidgin.im/wiki/WhatIsLibpurple
 # - update pl description
+# - restore e-d-s if http://developer.pidgin.im/ticket/10852 fixed
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without D-BUS (for pidgin-remote and others)
 %bcond_without	doc		# do not generate and include documentation
 %bcond_with	dotnet		# build with mono support
-%bcond_without	evolution	# compile without the Pidgin-Evolution plugin
+%bcond_with	evolution	# compile without the Pidgin-Evolution plugin
 %bcond_with	gnutls		# use GnuTLS instead of NSS
 %bcond_without	gtkspell	# without gtkspell support
 %bcond_without	meanwhile	# without meanwhile support
@@ -32,7 +33,7 @@
 %ifarch i386
 %undefine	with_dotnet
 %endif
-#
+
 %include	/usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
 Summary(de.UTF-8):	Pidgin ist ein Instant Messenger
@@ -45,7 +46,7 @@ Version:	2.6.6
 Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
-Source0:	http://dl.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
 # Source0-md5:	b37ab6c52db8355e8c70c044c2ba17c1
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
@@ -693,9 +694,11 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libqq.so
 
+%if %{with meanwhile}
 %files -n libpurple-protocol-sametime
 %defattr(644,root,root,755)
-%{?with_meanwhile:%attr(755,root,root) %{_libdir}/purple-2/libsametime.so}
+%attr(755,root,root) %{_libdir}/purple-2/libsametime.so
+%endif
 
 %files -n libpurple-protocol-xmpp
 %defattr(644,root,root,755)
