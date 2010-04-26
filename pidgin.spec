@@ -42,7 +42,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.6.6
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -187,6 +187,8 @@ Group:		Applications/Networking
 %{?with_sasl:Requires:	cyrus-sasl-digest-md5}
 %{?with_sasl:Requires:	cyrus-sasl-plain}
 Requires:	glib2 >= 1:%{glib_ver}
+Obsoletes:	libpurple-protocol-dir < 2.6.6-2
+Obsoletes:	pidgin-libs < 2.6.6-2
 
 %description -n libpurple
 libpurple contains the core IM support for IM clients such as Pidgin
