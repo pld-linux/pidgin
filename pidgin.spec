@@ -31,7 +31,7 @@
 %endif
 
 %define		gtk2_ver	2.10.6
-%define		glib_ver	%(v=$(pkg-config --modversion glib-2.0 2>/dev/null | cut -d. -f 1,2); echo ${v:-ERROR})
+%define		glib2_ver	2.24.0
 
 %include	/usr/lib/rpm/macros.perl
 Summary:	A client compatible with AOL's 'Instant Messenger'
@@ -64,6 +64,7 @@ BuildRequires:	check >= 0.9.4
 %{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
 BuildRequires:	farsight2-devel
 BuildRequires:	gettext-devel
+BuildRequires:	glib2-devel >= 1:%{glib2_ver}
 %{?with_gnutls:BuildRequires:	gnutls-devel}
 BuildRequires:	gstreamer-devel >= 0.10.10
 BuildRequires:	gtk+2-devel >= 2:%{gtk2_ver}
@@ -186,7 +187,7 @@ Summary:	libpurple library for IM clients like Pidgin and Finch
 Group:		Applications/Networking
 %{?with_sasl:Requires:	cyrus-sasl-digest-md5}
 %{?with_sasl:Requires:	cyrus-sasl-plain}
-Requires:	glib2 >= 1:%{glib_ver}
+Requires:	glib2 >= 1:%{glib2_ver}
 Obsoletes:	libpurple-protocol-dir < 2.6.6-2
 Obsoletes:	pidgin-libs < 2.6.6-2
 
