@@ -1,5 +1,4 @@
 # TODO
-# - cleanup descs (it's not just about aol)
 # - subpackages for
 #  - huge deps (mono...)
 # - kerberos 4 with zephyr support?
@@ -34,7 +33,7 @@
 %define		glib2_ver	2.24.0
 
 %include	/usr/lib/rpm/macros.perl
-Summary:	A client compatible with AOL's 'Instant Messenger'
+Summary:	A Gtk+ based multiprotocol instant messaging client
 Summary(de.UTF-8):	Pidgin ist ein Instant Messenger
 Summary(hu.UTF-8):	Az AOL 'Instant Messenger'-ével kompatibilis kliens
 Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
@@ -42,7 +41,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.6.6
-Release:	4
+Release:	5
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -117,17 +116,18 @@ Obsoletes:	gaim-plugin-xmms-remote
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Pidgin allows you to talk to anyone using AOL's Instant Messenger
-service (you can sign up at http://www.aim.aol.com). It uses the TOC
-version of the AOL protocol, so your buddy list is stored on AOL's
-servers and can be retrieved from anywhere. It contains many of the
-same features as AOL's IM client while at the same time incorporating
-many new features. Pidgin also contains a multiple connection feature
-which consists of protocol plugins. These plugins allow you to use
-pidgin to connect to other chat services such as Yahoo!, ICQ, MSN,
-Jabber, Napster, Zephyr, IRC and Gadu-Gadu.
+Pidgin allows you to talk to anyone using a variety of messaging
+protocols including AIM, MSN, Yahoo!, Jabber, Bonjour, Gadu-Gadu,
+ICQ, IRC, Novell Groupwise, QQ, Lotus Sametime, SILC, Simple and
+Zephyr.
 
-The protocols are shipped by libpurple-protocol-foo.
+The protocol plugins are packaged as libpurple-protocol-foo.
+
+Pidgin supports many common features of other clients, as well as many
+unique features, such as perl scripting, TCL scripting and C plugins.
+
+Pidgin is not affiliated with or endorsed by America Online, Inc.,
+Microsoft Corporation, Yahoo! Inc., or ICQ Inc.
 
 %description -l hu.UTF-8
 A Pidgin-nel beszélhetsz bárkivel, aki az AOL Instant Messenger
