@@ -1,6 +1,6 @@
 # TODO
+# - cleanup descs (it's not just about aol)
 # - subpackages for
-#  - different protocols (like kopete) - working, needs some more protocol packages
 #  - huge deps (mono...)
 # - kerberos 4 with zephyr support?
 # - external zephyr?
@@ -326,132 +326,149 @@ külső alkalmazásokkal vagy a pidgin-remote eszközzel.
 Ten pakiet daje możliwość zdalnego sterowania Pidginem przez inne
 aplikacje albo narzędzie pidgin-remote.
 
-%package -n libpurple-protocol-aim
-Summary:	Yahoo protocol support for AIM
+%package -n libpurple-protocol-oscar
+Summary:	Oscar protocol (AIM/ICQ Networks) support for Purple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
+Obsoletes:	libpurple-protocol-aim
+Obsoletes:	libpurple-protocol-icq
 
-%description -n libpurple-protocol-aim
-AIM protocol support for pidgin.
+%description -n libpurple-protocol-oscar
+Oscar protocol (AIM/ICQ Networks) support for Purple.
 
 %package -n libpurple-protocol-bonjour
-Summary:	Yahoo protocol support for Bonjour
+Summary:	Bonjour Protocol Plugin
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-bonjour
-Bonjour protocol support for pidgin.
+Bonjour Protocol Plugin.
 
 %package -n libpurple-protocol-gg
-Summary:	Yahoo protocol support for Gadu-Gadu
+Summary:	Gadu-Gadu protocol plugin
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-gg
-Gadu-Gadu protocol support for pidgin.
+Gadu-Gadu protocol plugin
 
+%package -n libpurple-protocol-groupwise
+Summary:	Novell GroupWise Messenger Protocol Plugin
+Group:		Applications/Communications
+Requires:	libpurple = %{version}-%{release}
+Provides:	libpurple-protocol
+
+%description -n libpurple-protocol-groupwise
+Novell GroupWise Messenger Protocol Plugin.
 
 %package -n libpurple-protocol-irc
-Summary:	Yahoo protocol support for IRC
+Summary:	IRC Protocol Plugin
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-irc
-IRC protocol support for pidgin.
-
-%package -n libpurple-protocol-icq
-Summary:	Yahoo protocol support for ICQ
-Group:		Applications/Communications
-Requires:	libpurple = %{version}-%{release}
-Provides:	libpurple-protocol
-
-%description -n libpurple-protocol-icq
-ICQ protocol support for pidgin.
-
-%package -n libpurple-protocol-jabber
-Summary:	Jabber protocol support for pidgin
-Group:		Applications/Communications
-Requires:	libpurple = %{version}-%{release}
-Provides:	libpurple-protocol
-
-%description -n libpurple-protocol-jabber
-Jabber protocol support for pidgin.
+IRC Protocol Plugin.
 
 %package -n libpurple-protocol-msn
-Summary:	MSN protocol support for pidgin
+Summary:	MSN Protocol Plugin
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-msn
-MSN protocol support for pidgin.
+MSN Protocol Plugin.
 
-%package -n libpurple-protocol-mtix
-Summary:	MTix protocol support for pidgin
+%package -n libpurple-protocol-mxit
+Summary:	MXit Protocol Plugin
 Group:		Applications/Communications
+URL:		http://www.mxitlifestyle.com/
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
+Obsoletes:	libpurple-protocol-mtix
 
-%description -n libpurple-protocol-mtix
-MTix protocol support for pidgin.
+%description -n libpurple-protocol-mxit
+MXit Protocol Plugin.
 
 %package -n libpurple-protocol-myspace
-Summary:	MySpace protocol support for pidgin
+Summary:	MySpaceIM Protocol Plugin
 Group:		Applications/Communications
+URL:		http://developer.pidgin.im/wiki/MySpaceIM
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-myspace
-MySpace protocol support for pidgin.
+MySpaceIM Protocol Plugin.
+
+%package -n libpurple-protocol-simple
+Summary:	SIP/SIMPLE Protocol Plugin
+Group:		Applications/Communications
+Requires:	libpurple = %{version}-%{release}
+Provides:	libpurple-protocol
+
+%description -n libpurple-protocol-simple
+SIP/SIMPLE Protocol Plugin.
 
 %package -n libpurple-protocol-qq
-Summary:	QQ protocol support for pidgin
+Summary:	QQ Protocol Plugin
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-qq
-QQ protocol support for pidgin.
+QQ Protocol Plugin.
 
 %package -n libpurple-protocol-sametime
-Summary:	Sametime protocol support for pidgin
+Summary:	Lotus Sametime Protocol Plugin
 Group:		Applications/Communications
+URL:		http://meanwhile.sourceforge.net/
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-sametime
-Sametime protocol support for pidgin.
+Adds Lotus Sametime support to Purple using the Meanwhile library.
+
+%package -n libpurple-protocol-silc
+Summary:	SILC Protocol Plugin
+Group:		Applications/Communications
+URL:		http://silcnet.org/
+Requires:	libpurple = %{version}-%{release}
+Provides:	libpurple-protocol
+
+%description -n libpurple-protocol-silc
+Secure Internet Live Conferencing (SILC) Protocol
 
 %package -n libpurple-protocol-yahoo
-Summary:	Yahoo protocol support for pidgin
+Summary:	Yahoo! Protocol Plugin
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-yahoo
-Yahoo protocol support for pidgin.
+Yahoo! and Yahoo! JAPAN Protocol Plugin.
 
 %package -n libpurple-protocol-xmpp
-Summary:	XMPP protocol support for pidgin (e.g. GTalk)
+Summary:	XMPP Protocol Plugin (Jabber, GTalk)
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
+Obsoletes:	libpurple-protocol-jabber
 
 %description -n libpurple-protocol-xmpp
-XMPP protocol support for pidgin (e.g. GTalk).
+Extensible Messaging and Presence Protocol (XMPP) Protocol Plugin
+(e.g. Jabber, GTalk).
 
 %package -n libpurple-protocol-zephyr
-Summary:	Zephyr protocol support for pidgin
+Summary:	Zephyr Protocol Plugin
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-zephyr
-Zephyr protocol support for pidgin.
+Zephyr Protocol Plugin.
 
 %package doc
 Summary:	Pidgin documentation for developers (HTML format)
@@ -527,7 +544,18 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/purple/ca-certs
 
 %if %{with dbus}
 rm $RPM_BUILD_ROOT%{_bindir}/purple-client-example
+rm $RPM_BUILD_ROOT%{_libdir}/purple-2/dbus-example.so
 %endif
+
+# resolve soname symlinks, affected plugins have rpath pointing there
+for a in $RPM_BUILD_ROOT%{_libdir}/purple-2/lib*.so.*.*.*; do
+	soname=$(objdump -p $a | awk '/SONAME/{print $2}')
+	mv $a $(dirname $a)/$soname
+	rm ${a%.*.*.*}
+done
+rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/liboscar.so
+rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/libjabber.so
+rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/libymsg.so
 
 # no svg icons
 rm $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/pidgin.svg
@@ -612,24 +640,18 @@ fi
 %attr(755,root,root) %{_libdir}/purple-2/buddynote.so
 %attr(755,root,root) %{_libdir}/purple-2/idle.so
 %attr(755,root,root) %{_libdir}/purple-2/joinpart.so
-%attr(755,root,root) %{_libdir}/purple-2/libnovell.so
-%attr(755,root,root) %{_libdir}/purple-2/liboscar.so.*
-%attr(755,root,root) %{_libdir}/purple-2/liboscar.so
-%attr(755,root,root) %{_libdir}/purple-2/libsimple.so
 %attr(755,root,root) %{_libdir}/purple-2/log_reader.so
 %attr(755,root,root) %{_libdir}/purple-2/newline.so
 %attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
 %attr(755,root,root) %{_libdir}/purple-2/psychic.so
 %attr(755,root,root) %{_libdir}/purple-2/ssl.so
+%{?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so}
+%{!?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so}
 %attr(755,root,root) %{_libdir}/purple-2/statenotify.so
 %if %{with dotnet}
 %attr(755,root,root) %{_libdir}/purple-2/*.dll
 %attr(755,root,root) %{_libdir}/purple-2/mono.so
 %endif
-%{?with_dbus:%attr(755,root,root) %{_libdir}/purple-2/dbus-example.so}
-%{?with_silc:%attr(755,root,root) %{_libdir}/purple-2/libsilcpurple.so}
-%{?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so}
-%{!?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so}
 
 %{_datadir}/sounds/purple
 %{_datadir}/purple
@@ -721,9 +743,12 @@ fi
 %attr(755,root,root) %{_bindir}/purple-remote
 %endif
 
-%files -n libpurple-protocol-aim
+%files -n libpurple-protocol-oscar
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libicq.so
 %attr(755,root,root) %{_libdir}/purple-2/libaim.so
+# shared library for aim/icq protocols
+%attr(755,root,root) %{_libdir}/purple-2/liboscar.so.0
 
 %files -n libpurple-protocol-bonjour
 %defattr(644,root,root,755)
@@ -733,18 +758,13 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libgg.so
 
+%files -n libpurple-protocol-groupwise
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libnovell.so
+
 %files -n libpurple-protocol-irc
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libirc.so
-
-%files -n libpurple-protocol-icq
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/purple-2/libicq.so
-
-%files -n libpurple-protocol-jabber
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/purple-2/libjabber.so.*
-%attr(755,root,root) %{_libdir}/purple-2/libjabber.so
 
 %files -n libpurple-protocol-msn
 %defattr(644,root,root,755)
@@ -752,15 +772,26 @@ fi
 
 %files -n libpurple-protocol-myspace
 %defattr(644,root,root,755)
+%doc libpurple/protocols/myspace/README
 %attr(755,root,root) %{_libdir}/purple-2/libmyspace.so
 
-%files -n libpurple-protocol-mtix
+%files -n libpurple-protocol-mxit
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libmxit.so
+
+%files -n libpurple-protocol-simple
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libsimple.so
 
 %files -n libpurple-protocol-qq
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libqq.so
+
+%if %{with silc}
+%files -n libpurple-protocol-silc
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libsilcpurple.so
+%endif
 
 %if %{with meanwhile}
 %files -n libpurple-protocol-sametime
@@ -771,6 +802,7 @@ fi
 %files -n libpurple-protocol-xmpp
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
+%attr(755,root,root) %{_libdir}/purple-2/libjabber.so.0
 
 %files -n libpurple-protocol-zephyr
 %defattr(644,root,root,755)
@@ -779,10 +811,8 @@ fi
 %files -n libpurple-protocol-yahoo
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
-%{_libdir}/purple-2/libyahoojp.so
-%{_libdir}/purple-2/libymsg.so
+%attr(755,root,root) %{_libdir}/purple-2/libyahoojp.so
 %attr(755,root,root) %{_libdir}/purple-2/libymsg.so.0
-%attr(755,root,root) %{_libdir}/purple-2/libymsg.so.0.0.0
 
 %if %{with doc}
 %files doc
