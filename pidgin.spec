@@ -501,7 +501,7 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %setup -q
 %patch0 -p1
 %patch1 -p1
-# %patch2 -p1
+#patch2 -p1
 
 %build
 %if %{with dotnet}
@@ -522,13 +522,14 @@ fi
 	%{?with_gnutls:--enable-nss=no} \
 	%{?with_doc:--enable-dot --enable-devhelp} \
 	%{!?with_silc:--with-silc-includes=not_existent_directory} \
-	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
 	%{?with_sasl:--enable-cyrus-sasl} \
+	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
 	--%{?with_dbus:en}%{!?with_dbus:dis}able-dbus \
 	--%{?with_nm:en}%{!?with_nm:dis}able-nm \
 	--%{?with_evolution:en}%{!?with_evolution:dis}able-gevolution \
-	%{!?with_gtkspell:--disable-gtkspell} \
-	%{?with_dotnet:--enable-mono} \
+	--%{!?with_gtkspell:dis}%{?with_gtkspell:en}able-gtkspell \
+	--%{!?with_dotnet:dis}%{?with_dotnet:en}able-mono \
+	--%{!?with_perl:dis}%{?with_perl:en}able-perl \
 	--%{?with_text:en}%{!?with_text:dis}able-consoleui
 
 %{__make}
