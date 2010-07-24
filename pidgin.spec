@@ -12,14 +12,13 @@
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
 # - update pl descriptions
-# - restore e-d-s if http://developer.pidgin.im/ticket/10852 fixed
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without D-BUS (for pidgin-remote and others)
 %bcond_without	doc		# do not generate and include documentation
 %bcond_with	dotnet		# build with mono support
 %bcond_without	perl		# build without Perl support
-%bcond_with	evolution	# compile without the Pidgin-Evolution plugin
+%bcond_without	evolution	# compile without the Pidgin-Evolution plugin
 %bcond_with	gnutls		# use GnuTLS instead of NSS
 %bcond_without	gtkspell	# without gtkspell support
 %bcond_without	meanwhile	# without meanwhile support
