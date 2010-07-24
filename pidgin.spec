@@ -1,4 +1,11 @@
 # TODO
+# - fix broken linking, see filterout_ld
+# - fix unref symbols:
+#   Unresolved symbols found in: /usr/lib64/purple-2/libjabber.so.0
+#   Unresolved symbols found in: /usr/lib64/purple-2/liboscar.so.0
+#   Unresolved symbols found in: /usr/lib64/purple-2/libymsg.so.0
+# - perl is installed to wrong dir on x8664:
+#   /usr/lib/perl5/x86_64-pld-linux-thread-multi/perllocal.pod
 # - subpackages for
 #  - huge deps (mono...)
 # - kerberos 4 with zephyr support?
@@ -11,6 +18,7 @@
 %bcond_without	dbus		# without D-BUS (for pidgin-remote and others)
 %bcond_without	doc		# do not generate and include documentation
 %bcond_with	dotnet		# build with mono support
+%bcond_without	perl		# build without Perl support
 %bcond_with	evolution	# compile without the Pidgin-Evolution plugin
 %bcond_with	gnutls		# use GnuTLS instead of NSS
 %bcond_without	gtkspell	# without gtkspell support
@@ -32,7 +40,7 @@
 %define		gtk2_ver	2.10.6
 %define		glib2_ver	2.24.0
 
-%include	/usr/lib/rpm/macros.perl
+%{?with_perl:%include	/usr/lib/rpm/macros.perl}
 Summary:	A Gtk+ based multiprotocol instant messaging client
 Summary(de.UTF-8):	Pidgin ist ein Instant Messenger
 Summary(hu.UTF-8):	Az AOL 'Instant Messenger'-ével kompatibilis kliens
@@ -81,10 +89,10 @@ BuildRequires:	libxml2-devel >= 2.6.26
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %endif
-BuildRequires:	perl-devel
+%{?with_perl:BuildRequires:	perl-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	python-modules >= 1:2.4
-BuildRequires:	rpm-perlprov
+%{?with_perl:BuildRequires:	rpm-perlprov}
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.311
 %{?with_silc:BuildRequires:	silc-toolkit-devel >= 1.1}
@@ -115,11 +123,15 @@ Obsoletes:	gaim-plugin-tlen
 Obsoletes:	gaim-plugin-xmms-remote
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# /usr/bin/ld: gntaccount.o: undefined reference to symbol 'cur_term'
+# /usr/bin/ld: note: 'cur_term' is defined in DSO /lib64/libtinfow.so.6 so try adding it to the linker command line
+# /lib64/libtinfow.so.6: could not read symbols: Invalid operation
+%define		filterout_ld	-Wl,--no-copy-dt-needed-entries
+
 %description
 Pidgin allows you to talk to anyone using a variety of messaging
-protocols including AIM, MSN, Yahoo!, Jabber, Bonjour, Gadu-Gadu,
-ICQ, IRC, Novell Groupwise, QQ, Lotus Sametime, SILC, Simple and
-Zephyr.
+protocols including AIM, MSN, Yahoo!, Jabber, Bonjour, Gadu-Gadu, ICQ,
+IRC, Novell Groupwise, QQ, Lotus Sametime, SILC, Simple and Zephyr.
 
 The protocol plugins are packaged as libpurple-protocol-foo.
 
@@ -530,17 +542,23 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/ca@valencia
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
+%find_lang %{name} --with-gnome
+
 rm -f $RPM_BUILD_ROOT%{_libdir}/finch/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnt/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/pidgin/{,private}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/*.la
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/ca@valencia
-%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
-%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
 
-%find_lang %{name} --with-gnome
-rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Pidgin/{,GtkUI}/.packlist}
 rm -rf $RPM_BUILD_ROOT%{_datadir}/purple/ca-certs
+
+%if %{with perl}
+rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Pidgin/{,GtkUI}/.packlist}
+rm -f $RPM_BUILD_ROOT%{_libdir}/pidgin/perl/auto/Pidgin/.packlist
+rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/perl/auto/Purple/.packlist
+%endif
 
 %if %{with dbus}
 rm $RPM_BUILD_ROOT%{_bindir}/purple-client-example
@@ -661,6 +679,7 @@ fi
 %attr(755,root,root) %{_bindir}/purple-url-handler
 %endif
 
+%if %{with perl}
 %files -n libpurple-perl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/perl.so
@@ -672,6 +691,7 @@ fi
 %{_libdir}/purple-2/perl/auto/Purple/*.ix
 %attr(755,root,root) %{_libdir}/purple-2/perl/auto/Purple/*.so
 %{_mandir}/man3/Purple.3pm*
+%endif
 
 %files -n libpurple-tcl
 %defattr(644,root,root,755)
@@ -721,6 +741,7 @@ fi
 %{_includedir}/pidgin
 %{_pkgconfigdir}/pidgin.pc
 
+%if %{with perl}
 %files perl
 %defattr(644,root,root,755)
 %dir %{_libdir}/pidgin/perl
@@ -730,6 +751,7 @@ fi
 %{_libdir}/pidgin/perl/auto/Pidgin/*.bs
 %attr(755,root,root) %{_libdir}/pidgin/perl/auto/Pidgin/*.so
 %{_mandir}/man3/Pidgin.3pm*
+%endif
 
 %if %{with evolution}
 %files plugin-evolution
