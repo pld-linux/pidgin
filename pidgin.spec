@@ -47,12 +47,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.7.2
+Version:	2.7.3
 Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	c23d85bb6a197dd841d1b5585148327d
+# Source0-md5:	e4bbadadae85e5e008690b52dd51f102
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
