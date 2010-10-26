@@ -47,12 +47,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.7.3
-Release:	2
+Version:	2.7.4
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	e4bbadadae85e5e008690b52dd51f102
+# Source0-md5:	2960d3e78e50d5bbcf4533c09ba467d8
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
@@ -93,7 +93,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	python-modules >= 1:2.4
 %{?with_perl:BuildRequires:	rpm-perlprov}
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	rpmbuild(macros) >= 1.583
 %{?with_silc:BuildRequires:	silc-toolkit-devel >= 1.1}
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcl-devel
@@ -126,6 +126,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # /usr/bin/ld: note: 'cur_term' is defined in DSO /lib64/libtinfow.so.6 so try adding it to the linker command line
 # /lib64/libtinfow.so.6: could not read symbols: Invalid operation
 %define		filterout_ld	-Wl,--no-copy-dt-needed-entries
+
+# lots of purple and libxml syms
+%define         skip_post_check_so      libjabber.so.0 libymsg.so.0 liboscar.so.0
 
 %description
 Pidgin allows you to talk to anyone using a variety of messaging
@@ -556,6 +559,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/purple/ca-certs
 
 %if %{with perl}
 rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Pidgin/{,GtkUI}/.packlist}
+rm -f $RPM_BUILD_ROOT%{_prefix}/lib/perl5/*/perllocal.pod
 rm -f $RPM_BUILD_ROOT%{_libdir}/pidgin/perl/auto/Pidgin/.packlist
 rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/perl/auto/Purple/.packlist
 %endif
