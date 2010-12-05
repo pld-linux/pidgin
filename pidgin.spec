@@ -48,7 +48,7 @@ Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.7.7
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -84,6 +84,7 @@ BuildRequires:	libxml2-devel >= 2.6.26
 %{?with_dotnet:BuildRequires:	mono-csharp}
 %{?with_dotnet:BuildRequires:	mono-devel}
 %{?with_text:BuildRequires:	ncurses-ext-devel}
+BuildRequires:	rpm >= 4.4.9-56
 %if %{without gnutls}
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
@@ -122,13 +123,20 @@ Obsoletes:	gaim-plugin-tlen
 Obsoletes:	gaim-plugin-xmms-remote
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# keep in sync ca-certificates
+%if "%{pld_release}" == "th"
+%define		openssldir	/etc/openssl/certs
+%else
+%define		openssldir	/var/lib/openssl/certs
+%endif
+
 # /usr/bin/ld: gntaccount.o: undefined reference to symbol 'cur_term'
 # /usr/bin/ld: note: 'cur_term' is defined in DSO /lib64/libtinfow.so.6 so try adding it to the linker command line
 # /lib64/libtinfow.so.6: could not read symbols: Invalid operation
 %define		filterout_ld	-Wl,--no-copy-dt-needed-entries
 
 # lots of purple and libxml syms
-%define         skip_post_check_so      libjabber.so.0 libymsg.so.0 liboscar.so.0
+%define		skip_post_check_so	libjabber.so.0 libymsg.so.0 liboscar.so.0
 
 %description
 Pidgin allows you to talk to anyone using a variety of messaging
@@ -199,6 +207,7 @@ Pliki programistyczne biblioteki Pidgina.
 %package -n libpurple
 Summary:	libpurple library for IM clients like Pidgin and Finch
 Group:		Applications/Networking
+Requires:	ca-certificates
 %{?with_sasl:Requires:	cyrus-sasl-digest-md5}
 %{?with_sasl:Requires:	cyrus-sasl-plain}
 Requires:	glib2 >= 1:%{glib2_ver}
@@ -521,6 +530,9 @@ fi
 %{__autoconf}
 %{__automake}
 %configure \
+	--with-extraversion=%{release} \
+	--with-system-ssl-certs=%{openssldir} \
+	--disable-schemas-install \
 	%{!?with_gnutls:--enable-gnutls=no} \
 	%{?with_gnutls:--enable-nss=no} \
 	%{?with_doc:--enable-dot --enable-devhelp} \
@@ -676,7 +688,7 @@ fi
 %endif
 
 %{_datadir}/sounds/purple
-%{_datadir}/purple
+%dir %{_datadir}/purple
 %if %{with dbus}
 %attr(755,root,root) %{_bindir}/purple-send
 %attr(755,root,root) %{_bindir}/purple-send-async
