@@ -47,12 +47,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.7.8
-Release:	3
+Version:	2.7.9
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	737d6a2a5bc04fe11eb0c3e0958d29fe
+# Source0-md5:	9bc6cf953ed7d383b215fa8487bf8829
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
@@ -557,29 +557,28 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/ca@valencia
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/mhr
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ca@valencia
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/mhr
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
 %find_lang %{name} --with-gnome
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/finch/*.la
-rm -f $RPM_BUILD_ROOT%{_libdir}/gnt/*.la
-rm -f $RPM_BUILD_ROOT%{_libdir}/pidgin/{,private}/*.la
-rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/finch/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnt/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/pidgin/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/purple-2/*.la
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/purple/ca-certs
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/purple/ca-certs
 
 %if %{with perl}
-rm -f $RPM_BUILD_ROOT{%{perl_archlib}/perllocal.pod,%{perl_vendorarch}/auto/Pidgin/{,GtkUI}/.packlist}
-rm -f $RPM_BUILD_ROOT%{_prefix}/lib/perl5/*/perllocal.pod
-rm -f $RPM_BUILD_ROOT%{_libdir}/pidgin/perl/auto/Pidgin/.packlist
-rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/perl/auto/Purple/.packlist
+%{__rm} $RPM_BUILD_ROOT%{_prefix}/lib/perl5/*/perllocal.pod
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/pidgin/perl/auto/Pidgin/.packlist
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/purple-2/perl/auto/Purple/.packlist
 %endif
 
 %if %{with dbus}
-rm $RPM_BUILD_ROOT%{_bindir}/purple-client-example
-rm $RPM_BUILD_ROOT%{_libdir}/purple-2/dbus-example.so
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/purple-client-example
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/purple-2/dbus-example.so
 %endif
 
 # resolve soname symlinks, affected plugins have rpath pointing there
@@ -588,16 +587,13 @@ for a in $RPM_BUILD_ROOT%{_libdir}/purple-2/lib*.so.*.*.*; do
 	mv $a $(dirname $a)/$soname
 	rm ${a%.*.*.*}
 done
-rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/liboscar.so
-rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/libjabber.so
-rm -f $RPM_BUILD_ROOT%{_libdir}/purple-2/libymsg.so
 
 # no svg icons
-rm $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/pidgin.svg
-rm -r $RPM_BUILD_ROOT%{_pixmapsdir}/pidgin/*/scalable
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/pidgin.svg
+%{__rm} -r $RPM_BUILD_ROOT%{_pixmapsdir}/pidgin/*/scalable
 
 # rm windows icons
-rm $RPM_BUILD_ROOT%{_pixmapsdir}/pidgin/tray/*/*.ico
+%{__rm} $RPM_BUILD_ROOT%{_pixmapsdir}/pidgin/tray/*/*.ico
 
 %clean
 rm -rf $RPM_BUILD_ROOT
