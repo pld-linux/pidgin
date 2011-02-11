@@ -47,12 +47,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.7.9
-Release:	2
+Version:	2.7.10
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	9bc6cf953ed7d383b215fa8487bf8829
+# Source0-md5:	7514a5e25cc0061e7e1b7a1928c99247
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
@@ -677,8 +677,8 @@ fi
 %attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
 %attr(755,root,root) %{_libdir}/purple-2/psychic.so
 %attr(755,root,root) %{_libdir}/purple-2/ssl.so
-%attr(755,root,root) %{?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so}
-%attr(755,root,root) %{!?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so}
+%{?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so}
+%{!?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so}
 %attr(755,root,root) %{_libdir}/purple-2/statenotify.so
 %if %{with dotnet}
 %attr(755,root,root) %{_libdir}/purple-2/*.dll
