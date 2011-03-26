@@ -11,7 +11,6 @@
 # - kerberos 4 with zephyr support?
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
-# - update pl descriptions
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without D-BUS (for pidgin-remote and others)
@@ -40,11 +39,11 @@
 %define		glib2_ver	2.24.0
 
 %{?with_perl:%include	/usr/lib/rpm/macros.perl}
-Summary:	A Gtk+ based multiprotocol instant messaging client
+Summary:	A GTK+ based multiprotocol instant messaging client
 Summary(de.UTF-8):	Pidgin ist ein Instant Messenger
 Summary(hu.UTF-8):	Az AOL 'Instant Messenger'-ével kompatibilis kliens
 Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
-Summary(pl.UTF-8):	Klient kompatybilny z AOL Instant Messenger
+Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.7.11
@@ -166,14 +165,18 @@ MSN, Jabber, Napster, Zephyr, IRC és Gadu-Gadu.
 A protokollokat a libpurple-protocol-foo csomagok szállítják.
 
 %description -l pl.UTF-8
-Pidgin pozwala na rozmowy z dowolną osobą używającą usługi AOL Instant
-Messenger (można się zarejestrować pod adresem
-http://www.aim.aol.com/). Program używa wersji TOC protokołu AOL więc
-Twoja lista kontaktów jest zapisana na serwerze AOL i może być
-przesłana gdziekolwiek. Pidgin zawiera wiele udogodnień dostępnych w
-kliencie AOL IM jak również dodaje własne. Pidgin umożliwia także
-dostęp do usług takich jak Yahoo!, ICQ, MSN, Jabber, Napster, Zephyr,
-IRC oraz Gadu-Gadu.
+Pidgin pozwala na rozmowy z osobami używającymi różnych protokołów
+komunikatorów, w tym: AIM, MSN, Yahoo!, Jabber, Bonjour, Gadu-Gadu,
+ICQ, IRC, Novell Groupwise, QQ, Lotus Sametime, SILC, Simple i Zephyr.
+
+Wtyczki dla protokołów znajdują się w pakietach libpurple-protocol-*.
+
+Pidgin obsługuje wiele popularnych funkcji innych klientów, a także
+wiele własnych, takich jak obsługa skryptów perla i Tcl-a oraz wtyczek
+w C.
+
+Pidgin nie jest powiązany ani autoryzowany przez firmy America Online
+Inc., Microsoft Corporation, Yahoo! Inc ani ICQ Inc.
 
 %description -l pt_BR.UTF-8
 Pidgin é um cliente para o AOL Instant Messenger (AIM) que usa o
@@ -207,6 +210,7 @@ Pliki programistyczne biblioteki Pidgina.
 
 %package -n libpurple
 Summary:	libpurple library for IM clients like Pidgin and Finch
+Summary(pl.UTF-8):	Biblioteka libpurple dla klientów komunikatorów, takich jak Pidgin czy Finch
 Group:		Applications/Networking
 Requires:	ca-certificates
 %{?with_sasl:Requires:	cyrus-sasl-digest-md5}
@@ -223,8 +227,17 @@ libpurple supports a variety of messaging protocols including AIM,
 MSN, Yahoo!, Jabber, Bonjour, Gadu-Gadu, ICQ, IRC, Novell Groupwise,
 QQ, Lotus Sametime, SILC, Simple and Zephyr.
 
+%description -n libpurple -l pl.UTF-8
+libpurple zawiera podstawową obsługę komunikacji dla klientów
+komunikatorów takich jak Pidgin czy Finch.
+
+libpurple obsługuje wiele protokołów komunikatorów, w tym AIM, MSN,
+Yahoo!, Jabber, Bonjour, Gadu-Gadu, ICQ, IRC, Novell Groupwise, QQ,
+Lotus Sametime, SILC, Simple i Zephyr.
+
 %package -n libpurple-devel
-Summary:	Development headers, documentation, and libraries for libpurple
+Summary:	Development headers and other files libpurple
+Summary(pl.UTF-8):	Pliki nagłówkowe i inne programistyczne do biblioteki libpurple
 Group:		Applications/Networking
 Requires:	libpurple = %{version}-%{release}
 %if %{with dbus}
@@ -234,13 +247,18 @@ Requires:	dbus-glib-devel >= 0.70
 Obsoletes:	pidgin-devel < 2.6.6-2
 
 %description -n libpurple-devel
-The libpurple-devel package contains the header files, developer
-documentation, and libraries required for development of libpurple
-based instant messaging clients or plugins for any libpurple based
-client.
+The libpurple-devel package contains the header files and other
+development files required for development of libpurple based instant
+messaging clients or plugins for any libpurple based client.
+
+%description -n libpurple-devel -l pl.UTF-8
+Ten pakiet zawiera pliki nagłówkowe oraz inne niezbędne do
+programowania komunikatorów opartych na bibliotece libpurple oraz
+wtyczek dla tej biblioteki.
 
 %package -n libpurple-perl
 Summary:	Perl scripting support for libpurple
+Summary(pl.UTF-8):	Obsługa skryptów Perla dla libpurple
 Group:		Applications/Networking
 Requires:	libpurple = %{version}-%{release}
 
@@ -248,10 +266,14 @@ Requires:	libpurple = %{version}-%{release}
 Perl plugin loader for libpurple. This package will allow you to write
 or use libpurple plugins written in the Perl programming language.
 
+%description -n libpurple-perl -l pl.UTF-8
+Moduł wczytujący wtyczki perlowe dla libpurple. Umożliwia tworzenie
+oraz wykorzystywanie wtyczek dla libpurple napisanych w języku Perl.
+
 %package -n libpurple-tcl
 Summary:	Tcl scripting support for libpurple
 Summary(hu.UTF-8):	Pidgin fájlok Tcl szkriptekhez
-Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Tcl-u
+Summary(pl.UTF-8):	Obsługa skryptów Tcl-a dla libpurple
 Group:		Libraries
 Requires:	libpurple = %{version}-%{release}
 Obsoletes:	gaim-tcl
@@ -266,31 +288,43 @@ Ezzel a csomaggal lehetőséged nyílik a Pidgin lehetőségeit bővíteni
 Tcl szkriptekkel.
 
 %description -n libpurple-tcl -l pl.UTF-8
-Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za
-pomocą skryptów w Tcl-u.
+Moduł wczytujący wtyczki Tcl-a dla libpurple. Umożliwia tworzenie oraz
+wykorzystywanie wtyczek dla libpurple napisanych w języku Tcl.
 
 %package -n finch
 Summary:	A text-based user interface for Pidgin
+Summary(pl.UTF-8):	Tekstowy interfejs użytkownika dla Pidgina
 Group:		Applications/Networking
 Requires:	libpurple = %{version}-%{release}
 
 %description -n finch
 A text-based user interface for using libpurple. This can be run from
-a standard text console or from a terminal within X Windows. It uses
-ncurses and our homegrown gnt library for drawing windows and text.
+a standard text console or from a terminal within X Window System. It
+uses ncurses and our homegrown gnt library for drawing windows and
+text.
+
+%description -n finch -l pl.UTF-8
+Tekstowy interfejs użytkownika wykorzystujący libpurple. Może być
+uruchamiany na standardowej konsoli tekstowej lub z poziomu terminala
+w systemi X Window. Wykorzystuje ncurses oraz własną bibliotekę gnt do
+rysowania okien i wyświetlania tekstu.
 
 %package -n finch-devel
-Summary:	Headers etc. for finch stuffs
+Summary:	Header files and similar for Finch stuffs
+Summary(pl.UTF-8):	Pliki nagłówkowe do elementów Fincha
 Group:		Applications/Networking
 Requires:	finch = %{version}-%{release}
 Requires:	libpurple-devel = %{version}-%{release}
 Requires:	ncurses-devel
-Requires:	pkgconfig
 
 %description -n finch-devel
-The finch-devel package contains the header files, developer
-documentation, and libraries required for development of Finch scripts
-and plugins.
+The finch-devel package contains the header files and other
+development files required for development of Finch scripts and
+plugins.
+
+%description -n finch-devel -l pl.UTF-8
+Ten pakiet zwiera pliki nagłówkowe oraz inne niezbędne do
+programowania skryptów oraz wtyczek do Fincha.
 
 %package perl
 Summary:	Pidgin files for Perl scripts
@@ -351,7 +385,8 @@ Ten pakiet daje możliwość zdalnego sterowania Pidginem przez inne
 aplikacje albo narzędzie pidgin-remote.
 
 %package -n libpurple-protocol-oscar
-Summary:	Oscar protocol (AIM/ICQ Networks) support for Purple
+Summary:	Oscar protocol (AIM/ICQ Networks) support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu Oscar (sieci AIM/ICQ) dla biblioteki libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
@@ -359,55 +394,80 @@ Obsoletes:	libpurple-protocol-aim
 Obsoletes:	libpurple-protocol-icq
 
 %description -n libpurple-protocol-oscar
-Oscar protocol (AIM/ICQ Networks) support for Purple.
+Oscar protocol (AIM/ICQ Networks) support for libpurple.
+
+%description -n libpurple-protocol-oscar -l pl.UTF-8
+Obsługa protokołu Oscar (sieci AIM/ICQ) dla biblioteki libpurple.
 
 %package -n libpurple-protocol-bonjour
-Summary:	Bonjour Protocol Plugin
+Summary:	Bonjour protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu Bonjour dla biblioteki libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-bonjour
-Bonjour Protocol Plugin.
+Bonjour protocol support for libpurple.
+
+%description -n libpurple-protocol-bonjour -l pl.UTF-8
+Obsługa protokołu Bonjour dla biblioteki libpurple.
 
 %package -n libpurple-protocol-gg
-Summary:	Gadu-Gadu protocol plugin
+Summary:	Gadu-Gadu protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu Gadu-Gadu dla biblioteki libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-gg
-Gadu-Gadu protocol plugin
+Gadu-Gadu protocol support for libpurple.
+
+%description -n libpurple-protocol-gg -l pl.UTF-8
+Obsługa protokołu Gadu-Gadu dla biblioteki libpurple.
 
 %package -n libpurple-protocol-groupwise
-Summary:	Novell GroupWise Messenger Protocol Plugin
+Summary:	Novell GroupWise Messenger protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu aplikacji Novell GroupWise Messenger dla biblioteki libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-groupwise
-Novell GroupWise Messenger Protocol Plugin.
+Novell GroupWise Messenger protocol support for libpurple.
+
+%description -n libpurple-protocol-groupwise -l pl.UTF-8
+Obsługa protokołu aplikacji Novell GroupWise Messenger dla biblioteki
+libpurple.
 
 %package -n libpurple-protocol-irc
-Summary:	IRC Protocol Plugin
+Summary:	IRC protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu IRC dla biblioteki libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-irc
-IRC Protocol Plugin.
+IRC protocol support for libpurple.
+
+%description -n libpurple-protocol-irc -l pl.UTF-8
+Obsługa protokołu IRC dla biblioteki libpurple.
 
 %package -n libpurple-protocol-msn
-Summary:	MSN Protocol Plugin
+Summary:	MSN protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu MSN dla biblioteki libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-msn
-MSN Protocol Plugin.
+MSN protocol support for libpurple.
+
+%description -n libpurple-protocol-msn -l pl.UTF-8
+Obsługa protokołu MSN dla biblioteki libpurple.
 
 %package -n libpurple-protocol-mxit
-Summary:	MXit Protocol Plugin
+Summary:	MXit protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu MXit dla libpurple
 Group:		Applications/Communications
 URL:		http://www.mxitlifestyle.com/
 Requires:	libpurple = %{version}-%{release}
@@ -415,84 +475,125 @@ Provides:	libpurple-protocol
 Obsoletes:	libpurple-protocol-mtix
 
 %description -n libpurple-protocol-mxit
-MXit Protocol Plugin.
+MXit protocol support for libpurple.
+
+%description -n libpurple-protocol-mxit -l pl.UTF-8
+Obsługa protokołu MXit dla libpurple.
 
 %package -n libpurple-protocol-myspace
-Summary:	MySpaceIM Protocol Plugin
+Summary:	MySpaceIM protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu MySpaceIM dla libpurple
 Group:		Applications/Communications
 URL:		http://developer.pidgin.im/wiki/MySpaceIM
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-myspace
-MySpaceIM Protocol Plugin.
+MySpaceIM protocol support for libpurple.
+
+%description -n libpurple-protocol-myspace -l pl.UTF-8
+Obsługa protokołu MySpaceIM dla libpurple.
 
 %package -n libpurple-protocol-simple
-Summary:	SIP/SIMPLE Protocol Plugin
+Summary:	SIP/SIMPLE protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu SIP/SIMPLE dla libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-simple
-SIP/SIMPLE Protocol Plugin.
+SIP/SIMPLE protocol support for libpurple.
+
+%description -n libpurple-protocol-simple -l pl.UTF-8
+Obsługa protokołu SIP/SIMPLE dla libpurple.
 
 %package -n libpurple-protocol-qq
-Summary:	QQ Protocol Plugin
+Summary:	QQ protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu QQ dla libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-qq
-QQ Protocol Plugin.
+QQ protocol support for libpurple.
+
+%description -n libpurple-protocol-qq -l pl.UTF-8
+Obsługa protokołu QQ dla libpurple.
 
 %package -n libpurple-protocol-sametime
-Summary:	Lotus Sametime Protocol Plugin
+Summary:	Lotus Sametime protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu Lotus Sametime dla libpurple
 Group:		Applications/Communications
 URL:		http://meanwhile.sourceforge.net/
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-sametime
-Adds Lotus Sametime support to Purple using the Meanwhile library.
+Lotus Sametime protocol support for libpurple. This plugin relies on
+MeanWhile library.
+
+%description -n libpurple-protocol-sametime -l pl.UTF-8
+Obsługa protokołu Lotus Sametime dla libpurple. Ta wtyczka
+wykorzystuje bibliotekę MeanWhile.
 
 %package -n libpurple-protocol-silc
-Summary:	SILC Protocol Plugin
+Summary:	SILC protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu SILC dla libpurple
 Group:		Applications/Communications
 URL:		http://silcnet.org/
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-silc
-Secure Internet Live Conferencing (SILC) Protocol
+Secure Internet Live Conferencing (SILC) protocol support for
+libpurple.
+
+%description -n libpurple-protocol-silc -l pl.UTF-8
+Obsługa protokołu SILC (Secure Internet Live Conferencing) dla
+libpurple.
 
 %package -n libpurple-protocol-yahoo
-Summary:	Yahoo! Protocol Plugin
+Summary:	Yahoo! protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu Yahoo! dla libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-yahoo
-Yahoo! and Yahoo! JAPAN Protocol Plugin.
+Yahoo! and Yahoo! JAPAN protocol support for libpurple.
+
+%description -n libpurple-protocol-yahoo -l pl.UTF-8
+Obsługa protokołów Yahoo! i Yahoo! JAPAN dla libpurple.
 
 %package -n libpurple-protocol-xmpp
-Summary:	XMPP Protocol Plugin (Jabber, GTalk)
+Summary:	XMPP (Jabber, GTalk) protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu XMPP (Jabber, GTalk) dla libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 Obsoletes:	libpurple-protocol-jabber
 
 %description -n libpurple-protocol-xmpp
-Extensible Messaging and Presence Protocol (XMPP) Protocol Plugin
-(e.g. Jabber, GTalk).
+Extensible Messaging and Presence Protocol (XMPP) protocol support for
+libpurple. This protocol is used by e.g. Jabber or GTalk.
+
+%description -n libpurple-protocol-xmpp -l pl.UTF-8
+Obsługa protokołu XMPP (Extensible Messaging and Presence Protocol)
+dla biblioteki libpurple. Protokół ten jest wykorzystywany m.in. przez
+Jabbera i GTalk.
 
 %package -n libpurple-protocol-zephyr
-Summary:	Zephyr Protocol Plugin
+Summary:	Zephyr protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu Zephyr dla libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-zephyr
-Zephyr Protocol Plugin.
+Zephyr protocol support for libpurple.
+
+%description -n libpurple-protocol-zephyr -l pl.UTF-8
+Obsługa protokołu Zephyr dla libpurple.
 
 %package doc
 Summary:	Pidgin documentation for developers (HTML format)
@@ -558,7 +659,6 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ca@valencia
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/mhr
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
@@ -693,6 +793,18 @@ fi
 %attr(755,root,root) %{_bindir}/purple-url-handler
 %endif
 
+%files -n libpurple-devel
+%defattr(644,root,root,755)
+%{_aclocaldir}/purple.m4
+%attr(755,root,root) %{_libdir}/libpurple.so
+%{_libdir}/libpurple.la
+%{_includedir}/libpurple
+%{_pkgconfigdir}/purple.pc
+%if %{with dbus}
+%attr(755,root,root) %{_libdir}/libpurple-client.so
+%{_libdir}/libpurple-client.la
+%endif
+
 %if %{with perl}
 %files -n libpurple-perl
 %defattr(644,root,root,755)
@@ -710,18 +822,6 @@ fi
 %files -n libpurple-tcl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/tcl.so
-
-%files -n libpurple-devel
-%defattr(644,root,root,755)
-%{_aclocaldir}/purple.m4
-%attr(755,root,root) %{_libdir}/libpurple.so
-%{_libdir}/libpurple.la
-%{_includedir}/libpurple
-%{_pkgconfigdir}/purple.pc
-%if %{with dbus}
-%attr(755,root,root) %{_libdir}/libpurple-client.so
-%{_libdir}/libpurple-client.la
-%endif
 
 %if %{with text}
 %files -n finch
