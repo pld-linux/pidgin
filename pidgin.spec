@@ -46,14 +46,15 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.7.11
-Release:	2
+Version:	2.8.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	07c2a2535b4d7436b5ec7685fe063fec
+# Source0-md5:	d1656c443a5d91f4aa0d95915f1f50c3
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
+Patch2:		%{name}-gtk_policy_automatic.patch
 # Patch2:		%{name}-libgadu.patch
 URL:		http://www.pidgin.im/
 BuildRequires:	GConf2
@@ -615,7 +616,7 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %setup -q
 %patch0 -p1
 %patch1 -p1
-#patch2 -p1
+%patch2 -p1
 
 %build
 %if %{with dotnet}
@@ -647,7 +648,9 @@ fi
 	--%{!?with_gtkspell:dis}%{?with_gtkspell:en}able-gtkspell \
 	--%{!?with_dotnet:dis}%{?with_dotnet:en}able-mono \
 	--%{!?with_perl:dis}%{?with_perl:en}able-perl \
-	--%{?with_text:en}%{!?with_text:dis}able-consoleui
+	--%{?with_text:en}%{!?with_text:dis}able-consoleui \
+	--with-gadu-libs=%{_libdir} \
+	--with-gadu-includes=%{_includedir}
 
 %{__make}
 %{?with_doc:%{__make} docs}
@@ -918,10 +921,6 @@ fi
 %files -n libpurple-protocol-simple
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libsimple.so
-
-%files -n libpurple-protocol-qq
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/purple-2/libqq.so
 
 %if %{with silc}
 %files -n libpurple-protocol-silc
