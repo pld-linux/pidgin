@@ -636,6 +636,7 @@ fi
 	--with-extraversion=%{release} \
 	--with-system-ssl-certs=%{openssldir} \
 	--disable-schemas-install \
+	--disable-silent-rules \
 	%{!?with_gnutls:--enable-gnutls=no} \
 	%{?with_gnutls:--enable-nss=no} \
 	%{?with_doc:--enable-dot --enable-devhelp} \
@@ -691,10 +692,6 @@ for a in $RPM_BUILD_ROOT%{_libdir}/purple-2/lib*.so.*.*.*; do
 	mv $a $(dirname $a)/$soname
 	rm ${a%.*.*.*}
 done
-
-# no svg icons
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/pidgin.svg
-%{__rm} -r $RPM_BUILD_ROOT%{_pixmapsdir}/pidgin/*/scalable
 
 # rm windows icons
 %{__rm} $RPM_BUILD_ROOT%{_pixmapsdir}/pidgin/tray/*/*.ico
@@ -758,6 +755,7 @@ fi
 %{_desktopdir}/pidgin.desktop
 %{_pixmapsdir}/pidgin
 %{_iconsdir}/hicolor/*/apps/pidgin.png
+%{_iconsdir}/hicolor/*/apps/pidgin.svg
 
 %files -n libpurple
 %defattr(644,root,root,755)
