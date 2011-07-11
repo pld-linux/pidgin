@@ -722,6 +722,7 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO README*
+%{_sysconfdir}/gconf/schemas/purple.schemas
 %attr(755,root,root) %{_bindir}/pidgin
 %dir %{_libdir}/pidgin
 %if %{with cap}
@@ -760,7 +761,6 @@ fi
 %defattr(644,root,root,755)
 %doc libpurple/purple-notifications-example
 %dir %{_sysconfdir}/purple
-%{_sysconfdir}/gconf/schemas/purple.schemas
 %attr(755,root,root) %{_libdir}/libpurple.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libpurple.so.0
 %if %{with dbus}
