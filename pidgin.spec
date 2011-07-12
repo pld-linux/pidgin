@@ -507,19 +507,6 @@ SIP/SIMPLE protocol support for libpurple.
 %description -n libpurple-protocol-simple -l pl.UTF-8
 Obsługa protokołu SIP/SIMPLE dla libpurple.
 
-%package -n libpurple-protocol-qq
-Summary:	QQ protocol support for libpurple
-Summary(pl.UTF-8):	Obsługa protokołu QQ dla libpurple
-Group:		Applications/Communications
-Requires:	libpurple = %{version}-%{release}
-Provides:	libpurple-protocol
-
-%description -n libpurple-protocol-qq
-QQ protocol support for libpurple.
-
-%description -n libpurple-protocol-qq -l pl.UTF-8
-Obsługa protokołu QQ dla libpurple.
-
 %package -n libpurple-protocol-sametime
 Summary:	Lotus Sametime protocol support for libpurple
 Summary(pl.UTF-8):	Obsługa protokołu Lotus Sametime dla libpurple
