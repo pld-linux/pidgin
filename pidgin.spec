@@ -11,6 +11,7 @@
 # - kerberos 4 with zephyr support?
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
+# - gtk3 status: http://developer.pidgin.im/wiki/GTK3
 #
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without D-BUS (for pidgin-remote and others)
@@ -46,12 +47,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.9.0
+Version:	2.10.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	2cd285c7a40f93b7a51bfe733971d3a6
+# Source0-md5:	e1453c9093c4f32beec19abd14069a3f
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
