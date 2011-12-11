@@ -47,12 +47,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.10.0
-Release:	3
+Version:	2.10.1
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	e1453c9093c4f32beec19abd14069a3f
+# Source0-md5:	eafb06b4083a201fe22d310e897a19dd
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
@@ -769,8 +769,8 @@ fi
 %{!?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so}
 %attr(755,root,root) %{_libdir}/purple-2/statenotify.so
 %if %{with dotnet}
-%attr(755,root,root) %{_libdir}/purple-2/*.dll
-%attr(755,root,root) %{_libdir}/purple-2/mono.so
+#%attr(755,root,root) %{_libdir}/purple-2/*.dll
+#%attr(755,root,root) %{_libdir}/purple-2/mono.so
 %endif
 
 %{_datadir}/sounds/purple
