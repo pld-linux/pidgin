@@ -48,7 +48,7 @@ Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele prot
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.10.2
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -56,6 +56,8 @@ Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
+# http://developer.pidgin.im/ticket/14936
+Patch3:		%{name}-port-to-farstream.patch
 URL:		http://www.pidgin.im/
 BuildRequires:	GConf2
 BuildRequires:	GConf2-devel >= 2.16.0
@@ -68,7 +70,7 @@ BuildRequires:	check >= 0.9.4
 %{?with_sasl:BuildRequires:	cyrus-sasl-devel}
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
 %{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
-BuildRequires:	farsight2-devel
+BuildRequires:	farstream-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:%{glib2_ver}
 %{?with_gnutls:BuildRequires:	gnutls-devel}
@@ -604,6 +606,7 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %patch0 -p1
 %patch1 -p1
 #%%patch2 -p1
+%patch3 -p1
 
 %build
 %if %{with dotnet}
