@@ -18,7 +18,7 @@
 %bcond_without	doc		# do not generate and include documentation
 %bcond_with	dotnet		# build with mono support
 %bcond_without	perl		# build without Perl support
-%bcond_without	evolution	# compile without the Pidgin-Evolution plugin
+%bcond_with	evolution	# compile without the Pidgin-Evolution plugin
 %bcond_with	gnutls		# use GnuTLS instead of NSS
 %bcond_without	gtkspell	# without gtkspell support
 %bcond_without	meanwhile	# without meanwhile support
@@ -26,6 +26,7 @@
 %bcond_without	text		# don't build text UI (finch)
 %bcond_without 	silc		# Build without SILC libraries
 %bcond_without 	nm		# NetworkManager support (requires D-Bus)
+%bcond_with	vv		# Voice and Video support
 
 %if %{without dbus}
 %undefine	with_nm
@@ -74,7 +75,7 @@ BuildRequires:	farstream-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:%{glib2_ver}
 %{?with_gnutls:BuildRequires:	gnutls-devel}
-BuildRequires:	gstreamer-devel >= 0.10.10
+BuildRequires:	gstreamer0.10-devel >= 0.10.10
 BuildRequires:	gtk+2-devel >= 2:%{gtk2_ver}
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 1:2.0.16-2}
 BuildRequires:	intltool
@@ -627,6 +628,7 @@ fi
 	--with-system-ssl-certs=%{openssldir} \
 	--disable-schemas-install \
 	--disable-silent-rules \
+	--%{?with_vv:en}%{!?with_vv:dis}able-vv \
 	%{!?with_gnutls:--enable-gnutls=no} \
 	%{?with_gnutls:--enable-nss=no} \
 	%{?with_doc:--enable-dot --enable-devhelp} \
@@ -733,7 +735,7 @@ fi
 %attr(755,root,root) %{_libdir}/pidgin/ticker.so
 %attr(755,root,root) %{_libdir}/pidgin/timestamp.so
 %attr(755,root,root) %{_libdir}/pidgin/timestamp_format.so
-%attr(755,root,root) %{_libdir}/pidgin/vvconfig.so
+%{?with_vv:%attr(755,root,root) %{_libdir}/pidgin/vvconfig.so}
 %attr(755,root,root) %{_libdir}/pidgin/xmppconsole.so
 %attr(755,root,root) %{_libdir}/pidgin/sendbutton.so
 %attr(755,root,root) %{_libdir}/pidgin/themeedit.so
