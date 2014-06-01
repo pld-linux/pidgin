@@ -49,7 +49,7 @@ Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele prot
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.10.9
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
