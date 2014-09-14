@@ -24,8 +24,8 @@
 %bcond_without	meanwhile	# without meanwhile support
 %bcond_without	sasl		# disable SASL support
 %bcond_without	text		# don't build text UI (finch)
-%bcond_without 	silc		# Build without SILC libraries
-%bcond_without 	nm		# NetworkManager support (requires D-Bus)
+%bcond_without	silc		# Build without SILC libraries
+%bcond_without	nm		# NetworkManager support (requires D-Bus)
 %bcond_with	vv		# Voice and Video support
 
 %if %{without dbus}
@@ -806,7 +806,6 @@ fi
 %{_libdir}/purple-2/perl/*.pm
 %dir %{_libdir}/purple-2/perl/auto
 %dir %{_libdir}/purple-2/perl/auto/Purple
-%{_libdir}/purple-2/perl/auto/Purple/*.bs
 %{_libdir}/purple-2/perl/auto/Purple/*.ix
 %attr(755,root,root) %{_libdir}/purple-2/perl/auto/Purple/*.so
 %{_mandir}/man3/Purple.3pm*
@@ -855,7 +854,6 @@ fi
 %{_libdir}/pidgin/perl/*.pm
 %dir %{_libdir}/pidgin/perl/auto
 %dir %{_libdir}/pidgin/perl/auto/Pidgin
-%{_libdir}/pidgin/perl/auto/Pidgin/*.bs
 %attr(755,root,root) %{_libdir}/pidgin/perl/auto/Pidgin/*.so
 %{_mandir}/man3/Pidgin.3pm*
 %endif
