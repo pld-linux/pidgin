@@ -48,12 +48,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.10.9
-Release:	3
+Version:	2.10.11
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	10a4a69d077893f6dd3438cd8af94e81
+# Source0-md5:	7c8bb6f997e05e7929104439872c2844
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
@@ -657,7 +657,9 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/mhr
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
-%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
+#%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
+%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/locale/ku_IQ
+
 %find_lang %{name} --with-gnome
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/finch/*.la
@@ -745,6 +747,7 @@ fi
 %endif
 %{_mandir}/man1/pidgin.1*
 
+%{_datadir}/appdata/pidgin.appdata.xml
 %{_desktopdir}/pidgin.desktop
 %{_pixmapsdir}/pidgin
 %{_iconsdir}/hicolor/*/apps/pidgin.png
@@ -770,6 +773,7 @@ fi
 %attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
 %attr(755,root,root) %{_libdir}/purple-2/psychic.so
 %attr(755,root,root) %{_libdir}/purple-2/ssl.so
+%attr(755,root,root) %{_libdir}/purple-2/nss-prefs.so
 %{?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so}
 %{!?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so}
 %attr(755,root,root) %{_libdir}/purple-2/statenotify.so
