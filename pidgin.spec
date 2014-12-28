@@ -72,7 +72,7 @@ BuildRequires:	check >= 0.9.4
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
 %{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
 BuildRequires:	farstream-devel
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:%{glib2_ver}
 %{?with_gnutls:BuildRequires:	gnutls-devel}
 BuildRequires:	gstreamer0.10-devel >= 0.10.10
