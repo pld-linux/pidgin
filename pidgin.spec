@@ -48,12 +48,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.10.11
-Release:	3
+Version:	2.10.12
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	7c8bb6f997e05e7929104439872c2844
+# Source0-md5:	14e0f5cfb2ed065e4dc80391a806ac76
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
@@ -660,7 +660,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/mhr
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
-#%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
 %{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/locale/ku_IQ
 
 %find_lang %{name} --with-gnome
