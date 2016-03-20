@@ -49,7 +49,7 @@ Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele prot
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.10.12
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -199,6 +199,7 @@ Plugins stark erweitert werden kann.
 Summary:	Development files for Pidgin client library
 Summary(pl.UTF-8):	Pliki programistyczne biblioteki klienta Pidgina
 Group:		Development/Libraries
+Requires:	farstream-devel
 Requires:	gtk+2-devel >= 2:%{gtk2_ver}
 Requires:	libpurple-devel = %{version}-%{release}
 Obsoletes:	gaim-devel
@@ -217,8 +218,8 @@ Summary:	libpurple library for IM clients like Pidgin and Finch
 Summary(pl.UTF-8):	Biblioteka libpurple dla klientów komunikatorów, takich jak Pidgin czy Finch
 Group:		Applications/Networking
 Requires:	ca-certificates
-%{?with_sasl:Requires:	cyrus-sasl-digest-md5}
-%{?with_sasl:Requires:	cyrus-sasl-plain}
+%{?with_sasl:Requires: cyrus-sasl-digest-md5}
+%{?with_sasl:Requires: cyrus-sasl-plain}
 Requires:	glib2 >= 1:%{glib2_ver}
 Obsoletes:	libpurple-protocol-dir < 2.6.6-2
 Obsoletes:	pidgin-libs < 2.6.6-2
@@ -658,10 +659,10 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/mhr
-%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/my{_MM,}
-%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/ms{_MY,}
-%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/locale/ku_IQ
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/mhr
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/my{_MM,}
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/ms{_MY,}
+%{__rm} -rf $RPM_BUILD_ROOT%{_localedir}/ku_IQ
 
 %find_lang %{name} --with-gnome
 
