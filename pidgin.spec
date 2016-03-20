@@ -199,7 +199,6 @@ Plugins stark erweitert werden kann.
 Summary:	Development files for Pidgin client library
 Summary(pl.UTF-8):	Pliki programistyczne biblioteki klienta Pidgina
 Group:		Development/Libraries
-Requires:	farstream-devel
 Requires:	gtk+2-devel >= 2:%{gtk2_ver}
 Requires:	libpurple-devel = %{version}-%{release}
 Obsoletes:	gaim-devel
@@ -249,6 +248,7 @@ Requires:	libpurple = %{version}-%{release}
 Requires:	dbus-devel >= 0.60
 %endif
 Requires:	dbus-glib-devel >= 0.70
+Requires:	farstream-devel
 Obsoletes:	pidgin-devel < 2.6.6-2
 
 %description -n libpurple-devel
