@@ -26,7 +26,7 @@
 %bcond_without	text		# don't build text UI (finch)
 %bcond_without	silc		# Build without SILC libraries
 %bcond_without	nm		# NetworkManager support (requires D-Bus)
-%bcond_with	vv		# Voice and Video support
+%bcond_without	vv		# Voice and Video support
 
 %if %{without dbus}
 %undefine	with_nm
@@ -49,7 +49,7 @@ Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele prot
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.10.12
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
