@@ -49,7 +49,7 @@ Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele prot
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.10.12
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -94,6 +94,7 @@ BuildRequires:	nss-devel
 %endif
 %{?with_perl:BuildRequires:	perl-devel}
 BuildRequires:	pkgconfig
+BuildRequires:	protobuf-c-devel
 BuildRequires:	python-modules >= 1:2.4
 %{?with_perl:BuildRequires:	rpm-perlprov}
 BuildRequires:	rpm-pythonprov
