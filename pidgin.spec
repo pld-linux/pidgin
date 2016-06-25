@@ -48,12 +48,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.10.12
-Release:	4
+Version:	2.11.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	14e0f5cfb2ed065e4dc80391a806ac76
+# Source0-md5:	7b167474db669aab2f71fa46835fb83f
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
@@ -672,8 +672,6 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/pidgin/*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/purple-2/*.la
 
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/purple/ca-certs
-
 %if %{with perl}
 %{__rm} $RPM_BUILD_ROOT%{_prefix}/lib/perl5/*/perllocal.pod
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/pidgin/perl/auto/Pidgin/.packlist
@@ -788,7 +786,6 @@ fi
 %endif
 
 %{_datadir}/sounds/purple
-%dir %{_datadir}/purple
 %if %{with dbus}
 %attr(755,root,root) %{_bindir}/purple-send
 %attr(755,root,root) %{_bindir}/purple-send-async
