@@ -48,12 +48,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.11.0
-Release:	2
+Version:	2.12.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	7b167474db669aab2f71fa46835fb83f
+# Source0-md5:	8287400c4e5663e0e7844e868d5152af
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
@@ -126,6 +126,10 @@ Obsoletes:	gaim-ui-gtk
 Obsoletes:	gaim-encryption
 Obsoletes:	gaim-plugin-tlen
 Obsoletes:	gaim-plugin-xmms-remote
+Obsoletes:	libpurple-protocol-msn
+Obsoletes:	libpurple-protocol-mxit
+Obsoletes:	libpurple-protocol-myspace
+Obsoletes:	libpurple-protocol-yahoo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # keep in sync ca-certificates
@@ -458,48 +462,6 @@ IRC protocol support for libpurple.
 %description -n libpurple-protocol-irc -l pl.UTF-8
 Obsługa protokołu IRC dla biblioteki libpurple.
 
-%package -n libpurple-protocol-msn
-Summary:	MSN protocol support for libpurple
-Summary(pl.UTF-8):	Obsługa protokołu MSN dla biblioteki libpurple
-Group:		Applications/Communications
-Requires:	libpurple = %{version}-%{release}
-Provides:	libpurple-protocol
-
-%description -n libpurple-protocol-msn
-MSN protocol support for libpurple.
-
-%description -n libpurple-protocol-msn -l pl.UTF-8
-Obsługa protokołu MSN dla biblioteki libpurple.
-
-%package -n libpurple-protocol-mxit
-Summary:	MXit protocol support for libpurple
-Summary(pl.UTF-8):	Obsługa protokołu MXit dla libpurple
-Group:		Applications/Communications
-URL:		http://www.mxitlifestyle.com/
-Requires:	libpurple = %{version}-%{release}
-Provides:	libpurple-protocol
-Obsoletes:	libpurple-protocol-mtix
-
-%description -n libpurple-protocol-mxit
-MXit protocol support for libpurple.
-
-%description -n libpurple-protocol-mxit -l pl.UTF-8
-Obsługa protokołu MXit dla libpurple.
-
-%package -n libpurple-protocol-myspace
-Summary:	MySpaceIM protocol support for libpurple
-Summary(pl.UTF-8):	Obsługa protokołu MySpaceIM dla libpurple
-Group:		Applications/Communications
-URL:		http://developer.pidgin.im/wiki/MySpaceIM
-Requires:	libpurple = %{version}-%{release}
-Provides:	libpurple-protocol
-
-%description -n libpurple-protocol-myspace
-MySpaceIM protocol support for libpurple.
-
-%description -n libpurple-protocol-myspace -l pl.UTF-8
-Obsługa protokołu MySpaceIM dla libpurple.
-
 %package -n libpurple-protocol-simple
 Summary:	SIP/SIMPLE protocol support for libpurple
 Summary(pl.UTF-8):	Obsługa protokołu SIP/SIMPLE dla libpurple
@@ -544,19 +506,6 @@ libpurple.
 %description -n libpurple-protocol-silc -l pl.UTF-8
 Obsługa protokołu SILC (Secure Internet Live Conferencing) dla
 libpurple.
-
-%package -n libpurple-protocol-yahoo
-Summary:	Yahoo! protocol support for libpurple
-Summary(pl.UTF-8):	Obsługa protokołu Yahoo! dla libpurple
-Group:		Applications/Communications
-Requires:	libpurple = %{version}-%{release}
-Provides:	libpurple-protocol
-
-%description -n libpurple-protocol-yahoo
-Yahoo! and Yahoo! JAPAN protocol support for libpurple.
-
-%description -n libpurple-protocol-yahoo -l pl.UTF-8
-Obsługa protokołów Yahoo! i Yahoo! JAPAN dla libpurple.
 
 %package -n libpurple-protocol-xmpp
 Summary:	XMPP (Jabber, GTalk) protocol support for libpurple
@@ -899,19 +848,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libirc.so
 
-%files -n libpurple-protocol-msn
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/purple-2/libmsn.so
-
-%files -n libpurple-protocol-myspace
-%defattr(644,root,root,755)
-%doc libpurple/protocols/myspace/README
-%attr(755,root,root) %{_libdir}/purple-2/libmyspace.so
-
-%files -n libpurple-protocol-mxit
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/purple-2/libmxit.so
-
 %files -n libpurple-protocol-simple
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libsimple.so
@@ -936,12 +872,6 @@ fi
 %files -n libpurple-protocol-zephyr
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libzephyr.so
-
-%files -n libpurple-protocol-yahoo
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/purple-2/libyahoo.so
-%attr(755,root,root) %{_libdir}/purple-2/libyahoojp.so
-%attr(755,root,root) %{_libdir}/purple-2/libymsg.so.0
 
 %if %{with doc}
 %files doc
