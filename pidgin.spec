@@ -49,7 +49,7 @@ Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele prot
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
 Version:	2.13.0
-Release:	6
+Release:	7
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
@@ -59,6 +59,8 @@ Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
 # http://developer.pidgin.im/ticket/14936
 Patch3:		%{name}-port-to-farstream.patch
+Patch4:		nm-1.0.patch
+Patch5:		python-3.8.patch
 URL:		http://www.pidgin.im/
 BuildRequires:	GConf2
 BuildRequires:	GConf2-devel >= 2.16.0
@@ -562,6 +564,8 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %patch1 -p1
 #%%patch2 -p1
 #%patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 %build
 %if %{with dotnet}
