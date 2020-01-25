@@ -40,7 +40,6 @@
 %define		gtk2_ver	2.10.6
 %define		glib2_ver	2.24.0
 
-%{?with_perl:%include	/usr/lib/rpm/macros.perl}
 Summary:	A GTK+ based multiprotocol instant messaging client
 Summary(de.UTF-8):	Pidgin ist ein Instant Messenger
 Summary(hu.UTF-8):	Az AOL 'Instant Messenger'-ével kompatibilis kliens
