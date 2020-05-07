@@ -587,6 +587,7 @@ fi
 	--disable-silent-rules \
 	--%{?with_vv:en}%{!?with_vv:dis}able-vv \
 	%{!?with_gnutls:--enable-gnutls=no} \
+	%{!?with_meanwhile:--enable-meanwhile=no} \
 	%{?with_gnutls:--enable-nss=no} \
 	%{?with_doc:--enable-dot --enable-devhelp} \
 	%{!?with_silc:--with-silc-includes=not_existent_directory} \
