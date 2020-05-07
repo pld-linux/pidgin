@@ -566,6 +566,8 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %patch4 -p1
 %patch5 -p1
 
+%{__sed} -i -e '1s|#!/usr/bin/env python$|#!%{__python}|'  libpurple/purple-{remote,url-handler}
+
 %build
 %if %{with dotnet}
 if [ ! -f /proc/cpuinfo ]; then
