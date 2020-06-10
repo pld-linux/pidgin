@@ -81,13 +81,13 @@ BuildRequires:	gtk+2-devel >= 2:%{gtk2_ver}
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 1:2.0.16-2}
 BuildRequires:	intltool
 BuildRequires:	libgadu-devel
+%{?with_text:BuildRequires:	libgnt-devel >= 2.14.0}
 BuildRequires:	libidn-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.26
 %{?with_meanwhile:BuildRequires:	meanwhile-devel >= 1.0.0}
 %{?with_dotnet:BuildRequires:	mono-csharp}
 %{?with_dotnet:BuildRequires:	mono-devel}
-%{?with_text:BuildRequires:	ncurses-ext-devel}
 BuildRequires:	rpm >= 4.4.9-56
 %if %{without gnutls}
 BuildRequires:	nspr-devel
@@ -307,6 +307,7 @@ Summary:	A text-based user interface for Pidgin
 Summary(pl.UTF-8):	Tekstowy interfejs użytkownika dla Pidgina
 Group:		Applications/Networking
 Requires:	libpurple = %{version}-%{release}
+Requires:	libgnt >= 2.14.0
 
 %description -n finch
 A text-based user interface for using libpurple. This can be run from
@@ -624,7 +625,6 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 
 %if %{with text}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/finch/*.la
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnt/*.la
 %endif
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/pidgin/*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/purple-2/*.la
@@ -783,8 +783,6 @@ fi
 %files -n finch
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/finch
-%attr(755,root,root) %{_libdir}/libgnt.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgnt.so.0
 %dir %{_libdir}/finch
 %attr(755,root,root) %{_libdir}/finch/gntclipboard.so
 %attr(755,root,root) %{_libdir}/finch/gntgf.so
@@ -792,18 +790,12 @@ fi
 %attr(755,root,root) %{_libdir}/finch/gntlastlog.so
 %attr(755,root,root) %{_libdir}/finch/gnttinyurl.so
 %attr(755,root,root) %{_libdir}/finch/grouping.so
-%dir %{_libdir}/gnt
-%attr(755,root,root) %{_libdir}/gnt/*.so
 %{_mandir}/man1/finch.*
 
 %files -n finch-devel
 %defattr(644,root,root,755)
 %{_includedir}/finch
-%{_includedir}/gnt
-%attr(755,root,root) %{_libdir}/libgnt.so
-%{_libdir}/libgnt.la
 %{_pkgconfigdir}/finch.pc
-%{_pkgconfigdir}/gnt.pc
 %endif
 
 %files devel
