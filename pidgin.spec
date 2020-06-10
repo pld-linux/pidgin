@@ -38,7 +38,7 @@
 %endif
 
 %define		gtk2_ver	2.10.6
-%define		glib2_ver	2.24.0
+%define		glib2_ver	2.26.0
 
 Summary:	A GTK+ based multiprotocol instant messaging client
 Summary(de.UTF-8):	Pidgin ist ein Instant Messenger
@@ -47,19 +47,17 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.13.0
-Release:	8
+Version:	2.14.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	423403494fe1951e47cc75231f743bb0
+# Source0-md5:	e0afa39c63b7b0e7eccaab254e276e35
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 # Patch2:		%{name}-libgadu.patch
 # http://developer.pidgin.im/ticket/14936
 Patch3:		%{name}-port-to-farstream.patch
-Patch4:		nm-1.0.patch
-Patch5:		python-3.8.patch
 URL:		http://www.pidgin.im/
 BuildRequires:	GConf2
 BuildRequires:	GConf2-devel >= 2.16.0
@@ -72,11 +70,11 @@ BuildRequires:	check >= 0.9.4
 %{?with_sasl:BuildRequires:	cyrus-sasl-devel}
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
 %{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
-BuildRequires:	farstream-devel
+BuildRequires:	farstream-devel >= 0.2.7
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:%{glib2_ver}
 %{?with_gnutls:BuildRequires:	gnutls-devel}
-BuildRequires:	gstreamer0.10-devel >= 0.10.10
+BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gtk+2-devel >= 2:%{gtk2_ver}
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 1:2.0.16-2}
 BuildRequires:	intltool
@@ -88,7 +86,12 @@ BuildRequires:	libxml2-devel >= 2.6.26
 %{?with_meanwhile:BuildRequires:	meanwhile-devel >= 1.0.0}
 %{?with_dotnet:BuildRequires:	mono-csharp}
 %{?with_dotnet:BuildRequires:	mono-devel}
+BuildRequires:	pango-devel >= 1.4.0
 BuildRequires:	rpm >= 4.4.9-56
+%if %{with text}
+BuildRequires:	ncurses-devel
+BuildRequires:	ncurses-ext-devel
+%endif
 %if %{without gnutls}
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
@@ -108,6 +111,7 @@ BuildRequires:	tk-devel
 BuildRequires:	sqlite3-devel >= 3.3
 %endif
 BuildRequires:	xorg-lib-libSM-devel
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 %if %{with doc}
 BuildRequires:	doxygen
@@ -225,6 +229,7 @@ Group:		Applications/Networking
 Requires:	ca-certificates
 %{?with_sasl:Requires: cyrus-sasl-digest-md5}
 %{?with_sasl:Requires: cyrus-sasl-plain}
+Requires:	farstream >= 0.2.7
 Requires:	glib2 >= 1:%{glib2_ver}
 Obsoletes:	libpurple-protocol-dir < 2.6.6-2
 Obsoletes:	pidgin-libs < 2.6.6-2
@@ -254,7 +259,7 @@ Requires:	libpurple = %{version}-%{release}
 Requires:	dbus-devel >= 0.60
 %endif
 Requires:	dbus-glib-devel >= 0.70
-Requires:	farstream-devel
+Requires:	farstream-devel >= 0.2.7
 Obsoletes:	pidgin-devel < 2.6.6-2
 
 %description -n libpurple-devel
@@ -306,8 +311,8 @@ wykorzystywanie wtyczek dla libpurple napisanych w języku Tcl.
 Summary:	A text-based user interface for Pidgin
 Summary(pl.UTF-8):	Tekstowy interfejs użytkownika dla Pidgina
 Group:		Applications/Networking
-Requires:	libpurple = %{version}-%{release}
 Requires:	libgnt >= 2.14.0
+Requires:	libpurple = %{version}-%{release}
 
 %description -n finch
 A text-based user interface for using libpurple. This can be run from
@@ -564,8 +569,6 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %patch1 -p1
 #%%patch2 -p1
 #%patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 %{__sed} -i -e '1s|#!/usr/bin/env python$|#!%{__python}|'  libpurple/purple-{remote,url-handler}
 
@@ -616,6 +619,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ar_SA
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/mhr
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/my{_MM,}
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/ms{_MY,}
