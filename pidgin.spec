@@ -55,9 +55,6 @@ Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
 # Source0-md5:	e0afa39c63b7b0e7eccaab254e276e35
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
-# Patch2:		%{name}-libgadu.patch
-# http://developer.pidgin.im/ticket/14936
-Patch3:		%{name}-port-to-farstream.patch
 URL:		http://www.pidgin.im/
 BuildRequires:	GConf2
 BuildRequires:	GConf2-devel >= 2.16.0
@@ -567,8 +564,6 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %setup -q
 %patch0 -p1
 %patch1 -p1
-#%%patch2 -p1
-#%patch3 -p1
 
 %{__sed} -i -e '1s|#!/usr/bin/env python$|#!%{__python}|'  libpurple/purple-{remote,url-handler}
 
@@ -580,7 +575,6 @@ if [ ! -f /proc/cpuinfo ]; then
 fi
 %endif
 
-# %{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4macros
 %{__autoheader}
