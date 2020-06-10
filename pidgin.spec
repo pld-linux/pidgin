@@ -622,8 +622,10 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 
 %find_lang %{name} --with-gnome
 
+%if %{with text}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/finch/*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/gnt/*.la
+%endif
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/pidgin/*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/purple-2/*.la
 
