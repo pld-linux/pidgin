@@ -16,7 +16,6 @@
 %bcond_without	cap		# without Contact Availability Prediction
 %bcond_without	dbus		# without D-BUS (for pidgin-remote and others)
 %bcond_without	doc		# do not generate and include documentation
-%bcond_with	dotnet		# build with mono support
 %bcond_without	perl		# build without Perl support
 %bcond_with	evolution	# compile without the Pidgin-Evolution plugin
 %bcond_with	gnutls		# use GnuTLS instead of NSS
@@ -30,11 +29,6 @@
 
 %if %{without dbus}
 %undefine	with_nm
-%endif
-
-# plain i386 is not supported; mono uses cmpxchg/xadd which require i486
-%ifarch i386
-%undefine	with_dotnet
 %endif
 
 %define		gtk2_ver	2.10.6
@@ -81,8 +75,6 @@ BuildRequires:	libidn-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.26
 %{?with_meanwhile:BuildRequires:	meanwhile-devel >= 1.0.0}
-%{?with_dotnet:BuildRequires:	mono-csharp}
-%{?with_dotnet:BuildRequires:	mono-devel}
 BuildRequires:	pango-devel >= 1.4.0
 BuildRequires:	rpm >= 4.4.9-56
 %if %{with text}
@@ -568,13 +560,6 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %{__sed} -i -e '1s|#!/usr/bin/env python$|#!%{__python}|'  libpurple/purple-{remote,url-handler}
 
 %build
-%if %{with dotnet}
-if [ ! -f /proc/cpuinfo ]; then
-	echo >&2 "Mono requires /proc to be mounted."
-	exit 1
-fi
-%endif
-
 %{__libtoolize}
 %{__aclocal} -I m4macros
 %{__autoheader}
@@ -597,7 +582,6 @@ fi
 	--%{?with_nm:en}%{!?with_nm:dis}able-nm \
 	--%{?with_evolution:en}%{!?with_evolution:dis}able-gevolution \
 	--%{!?with_gtkspell:dis}%{?with_gtkspell:en}able-gtkspell \
-	--%{!?with_dotnet:dis}%{?with_dotnet:en}able-mono \
 	--%{!?with_perl:dis}%{?with_perl:en}able-perl \
 	--%{?with_text:en}%{!?with_text:dis}able-consoleui \
 	--with-gadu-libs=%{_libdir} \
@@ -736,10 +720,6 @@ fi
 %{?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so}
 %{!?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so}
 %attr(755,root,root) %{_libdir}/purple-2/statenotify.so
-%if %{with dotnet}
-#%attr(755,root,root) %{_libdir}/purple-2/*.dll
-#%attr(755,root,root) %{_libdir}/purple-2/mono.so
-%endif
 
 %{_datadir}/sounds/purple
 %if %{with dbus}
