@@ -41,12 +41,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.14.0
+Version:	2.14.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	http://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	e0afa39c63b7b0e7eccaab254e276e35
+# Source0-md5:	e135798bcf952ddb3c9e030c4b160c3e
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 URL:		http://www.pidgin.im/
