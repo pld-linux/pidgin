@@ -1,0 +1,69 @@
+diff --color -urN pidgin-2.14.1.orig/libpurple/certificate.c pidgin-2.14.1/libpurple/certificate.c
+--- pidgin-2.14.1.orig/libpurple/certificate.c	2020-06-10 04:41:32.000000000 +0200
++++ pidgin-2.14.1/libpurple/certificate.c	2020-10-22 17:55:33.752632736 +0200
+@@ -845,6 +845,7 @@
+ 	GPatternSpec *pempat, *crtpat;
+ 	GList *iter = NULL;
+ 	GSList *crts = NULL;
++	gboolean is_ca_file;
+ 
+ 	if (x509_ca_initialized) return TRUE;
+ 
+@@ -864,13 +865,16 @@
+ 
+ 	/* Populate the certificates pool from the search path(s) */
+ 	for (iter = x509_ca_paths; iter; iter = iter->next) {
+-		certdir = g_dir_open(iter->data, 0, NULL);
+-		if (!certdir) {
+-			purple_debug_error("certificate/x509/ca", "Couldn't open location '%s'\n", (const char *)iter->data);
+-			continue;
++		is_ca_file = g_file_test(iter->data, G_FILE_TEST_IS_REGULAR);
++		if (!is_ca_file) {
++			certdir = g_dir_open(iter->data, 0, NULL);
++			if (!certdir) {
++				purple_debug_error("certificate/x509/ca", "Couldn't open location '%s'\n", (const char *)iter->data);
++				continue;
++			}
+ 		}
+ 
+-		while ( (entry = g_dir_read_name(certdir)) ) {
++		while ((is_ca_file && (entry = iter->data)) || (entry = g_dir_read_name(certdir)) ) {
+ 			gchar *fullpath;
+ 			PurpleCertificate *crt;
+ 
+@@ -878,7 +882,7 @@
+ 				continue;
+ 			}
+ 
+-			fullpath = g_build_filename(iter->data, entry, NULL);
++			fullpath = is_ca_file ? g_strdup(entry) : g_build_filename(iter->data, entry, NULL);
+ 
+ 			/* TODO: Respond to a failure in the following? */
+ 			crts = purple_certificates_import(x509, fullpath);
+@@ -902,8 +906,14 @@
+ 			}
+ 
+ 			g_free(fullpath);
++
++			if (is_ca_file) {
++				break;
++			}
++		}
++		if (!is_ca_file) {
++			g_dir_close(certdir);
+ 		}
+-		g_dir_close(certdir);
+ 	}
+ 
+ 	g_pattern_spec_free(pempat);
+@@ -924,8 +934,9 @@
+ 		x509_ca_paths = g_list_append(NULL, g_build_filename(DATADIR,
+ 						   "ca-certs", NULL));
+ #else
++		x509_ca_paths = g_list_append(x509_ca_paths, g_strdup("/etc/certs/ca-certificates.crt"));
+ # ifdef SSL_CERTIFICATES_DIR
+-		x509_ca_paths = g_list_append(NULL, g_strdup(SSL_CERTIFICATES_DIR));
++		x509_ca_paths = g_list_append(x509_ca_paths, g_strdup(SSL_CERTIFICATES_DIR));
+ # endif
+ 		x509_ca_paths = g_list_append(x509_ca_paths,
+ 			g_build_filename(DATADIR, "purple", "ca-certs", NULL));
