@@ -716,9 +716,11 @@ fi
 %attr(755,root,root) %{_libdir}/purple-2/offlinemsg.so
 %attr(755,root,root) %{_libdir}/purple-2/psychic.so
 %attr(755,root,root) %{_libdir}/purple-2/ssl.so
+%if %{without gnutls}
 %attr(755,root,root) %{_libdir}/purple-2/nss-prefs.so
+%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so
+%endif
 %{?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-gnutls.so}
-%{!?with_gnutls:%attr(755,root,root) %{_libdir}/purple-2/ssl-nss.so}
 %attr(755,root,root) %{_libdir}/purple-2/statenotify.so
 
 %{_datadir}/sounds/purple
