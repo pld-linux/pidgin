@@ -11,6 +11,7 @@
 # - kerberos 4 with zephyr support?
 # - external zephyr?
 #   http://packages.qa.debian.org/z/zephyr.html
+# - unity? (unity >= 6.8, messaging-menu >= 12.10)
 # - gtk3 status: http://developer.pidgin.im/wiki/GTK3
 #
 %bcond_without	cap		# without Contact Availability Prediction
@@ -60,8 +61,10 @@ BuildRequires:	avahi-devel
 BuildRequires:	avahi-glib-devel
 BuildRequires:	check >= 0.9.4
 %{?with_sasl:BuildRequires:	cyrus-sasl-devel}
+%{?with_dbus:BuildRequires:	dbus-devel >= 0.60}
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
 %{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
+%{?with_evolution:BuildRequires:	evolution-data-server-devel < 3.6}
 BuildRequires:	farstream-devel >= 0.2.7
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:%{glib2_ver}
@@ -70,14 +73,14 @@ BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gtk+2-devel >= 2:%{gtk2_ver}
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 1:2.0.16-2}
 BuildRequires:	intltool
-BuildRequires:	libgadu-devel
+BuildRequires:	libgadu-devel >= 4:1.12.0
 %{?with_text:BuildRequires:	libgnt-devel >= 2.14.0}
 BuildRequires:	libidn-devel
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 2.6.26
+BuildRequires:	libxml2-devel >= 1:2.6.26
 %{?with_meanwhile:BuildRequires:	meanwhile-devel >= 1.0.0}
-BuildRequires:	pango-devel >= 1.4.0
-BuildRequires:	rpm >= 4.4.9-56
+BuildRequires:	pango-devel >= 1:1.4.0
+BuildRequires:	rpm-build >= 4.6
 %if %{with text}
 BuildRequires:	ncurses-devel
 BuildRequires:	ncurses-ext-devel
@@ -95,13 +98,14 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.583
 %{?with_silc:BuildRequires:	silc-toolkit-devel >= 1.1}
 BuildRequires:	startup-notification-devel >= 0.5
-BuildRequires:	tcl-devel
-BuildRequires:	tk-devel
+BuildRequires:	tcl-devel >= 8.3
+BuildRequires:	tk-devel >= 8.3
 %if %{with cap}
 BuildRequires:	sqlite3-devel >= 3.3
 %endif
 BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 %if %{with doc}
 BuildRequires:	doxygen
@@ -110,9 +114,11 @@ BuildRequires:	graphviz
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2 >= 2.16.0
+Requires:	gtk+2 >= 2:%{gtk2_ver}
 Requires:	hicolor-icon-theme
 Requires:	libpurple = %{version}-%{release}
 Requires:	libpurple-protocol
+Requires:	pango >= 1:1.4.0
 Suggests:	enchant-myspell
 Obsoletes:	gaim
 Obsoletes:	gaim-ui
@@ -217,10 +223,11 @@ Summary:	libpurple library for IM clients like Pidgin and Finch
 Summary(pl.UTF-8):	Biblioteka libpurple dla klientów komunikatorów, takich jak Pidgin czy Finch
 Group:		Applications/Networking
 Requires:	ca-certificates
-%{?with_sasl:Requires: cyrus-sasl-digest-md5}
-%{?with_sasl:Requires: cyrus-sasl-plain}
+%{?with_sasl:Requires:	cyrus-sasl-digest-md5}
+%{?with_sasl:Requires:	cyrus-sasl-plain}
 Requires:	farstream >= 0.2.7
 Requires:	glib2 >= 1:%{glib2_ver}
+Requires:	libxml2 >= 1:2.6.26
 Obsoletes:	libpurple-protocol-dir < 2.6.6-2
 Obsoletes:	pidgin-libs < 2.6.6-2
 
@@ -247,9 +254,10 @@ Group:		Applications/Networking
 Requires:	libpurple = %{version}-%{release}
 %if %{with dbus}
 Requires:	dbus-devel >= 0.60
-%endif
 Requires:	dbus-glib-devel >= 0.70
+%endif
 Requires:	farstream-devel >= 0.2.7
+Requires:	libxml2-devel >= 1:2.6.26
 Obsoletes:	pidgin-devel < 2.6.6-2
 
 %description -n libpurple-devel
@@ -423,6 +431,7 @@ Obsługa protokołu Bonjour dla biblioteki libpurple.
 Summary:	Gadu-Gadu protocol support for libpurple
 Summary(pl.UTF-8):	Obsługa protokołu Gadu-Gadu dla biblioteki libpurple
 Group:		Applications/Communications
+Requires:	libgadu >= 4:1.12.0
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
 
@@ -478,6 +487,7 @@ Summary(pl.UTF-8):	Obsługa protokołu Lotus Sametime dla libpurple
 Group:		Applications/Communications
 URL:		http://meanwhile.sourceforge.net/
 Requires:	libpurple = %{version}-%{release}
+Requires:	meanwhile>= 1.0.0}
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-sametime
