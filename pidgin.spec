@@ -540,9 +540,7 @@ Summary(hu.UTF-8):	Pidgin dokumentáció fejlesztőknek (HTML formában)
 Summary(pl.UTF-8):	Dokumentacja Pidgina dla programistów (format HTML)
 Group:		Documentation
 Obsoletes:	gaim-doc
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description doc
 Pidgin documentation for developers (HTML format).
