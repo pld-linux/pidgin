@@ -14,19 +14,19 @@
 # - unity? (unity >= 6.8, messaging-menu >= 12.10)
 # - gtk3 status: http://developer.pidgin.im/wiki/GTK3
 #
-%bcond_without	cap		# without Contact Availability Prediction
-%bcond_without	dbus		# without D-BUS (for pidgin-remote and others)
-%bcond_without	doc		# do not generate and include documentation
-%bcond_without	perl		# build without Perl support
-%bcond_with	evolution	# compile without the Pidgin-Evolution plugin
+%bcond_without	doc		# Doxygen generated documentation
+%bcond_without	cap		# Contact Availability Prediction plugin
+%bcond_without	dbus		# D-Bus support (for pidgin-remote and others)
 %bcond_with	gnutls		# use GnuTLS instead of NSS
-%bcond_without	gtkspell	# without gtkspell support
-%bcond_without	meanwhile	# without meanwhile support
-%bcond_without	sasl		# disable SASL support
-%bcond_without	text		# don't build text UI (finch)
-%bcond_without	silc		# Build without SILC libraries
+%bcond_without	gtkspell	# GtkSpell automatic spell checking
 %bcond_without	nm		# NetworkManager support (requires D-Bus)
+%bcond_without	perl		# Perl scripting support
+%bcond_without	sasl		# Cyrus SASL support
+%bcond_without	text		# text UI (finch)
 %bcond_without	vv		# Voice and Video support
+%bcond_without	meanwhile	# meanwhile (Sametime protocol) support
+%bcond_without	silc		# SILC protocol support
+%bcond_with	evolution	# Pidgin-Evolution plugin
 
 %if %{without dbus}
 %undefine	with_nm
@@ -572,32 +572,33 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %build
 %{__libtoolize}
 %{__aclocal} -I m4macros
-%{__autoheader}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
-	--with-extraversion=%{release} \
-	--with-system-ssl-certs=%{openssldir} \
+	--enable-cap%{!?with_cap:=no} \
+	--enable-consoleui%{!?with_text:=no} \
+	%{?with_sasl:--enable-cyrus-sasl} \
+	--enable-dbus%{!?with_dbus:=no} \
+	%{?with_doc:--enable-devhelp --enable-dot} \
+	--enable-gevolution%{!?with_evolution:=no} \
+	%{!?with_gnutls:--disable-gnutls} \
+	--enable-gtkspell%{!?with_gtkspell:=no} \
+	%{!?with_meanwhile:--disable-meanwhile} \
+	--enable-nm%{!?with_nm:=no} \
+	%{?with_gnutls:--disable-nss} \
+	--enable-perl%{!?with_perl:=no} \
 	--disable-schemas-install \
 	--disable-silent-rules \
-	--%{?with_vv:en}%{!?with_vv:dis}able-vv \
-	%{!?with_gnutls:--enable-gnutls=no} \
-	%{!?with_meanwhile:--enable-meanwhile=no} \
-	%{?with_gnutls:--enable-nss=no} \
-	%{?with_doc:--enable-dot --enable-devhelp} \
-	%{!?with_silc:--with-silc-includes=not_existent_directory} \
-	%{?with_sasl:--enable-cyrus-sasl} \
-	--%{?with_cap:en}%{!?with_cap:dis}able-cap \
-	--%{?with_dbus:en}%{!?with_dbus:dis}able-dbus \
-	--%{?with_nm:en}%{!?with_nm:dis}able-nm \
-	--%{?with_evolution:en}%{!?with_evolution:dis}able-gevolution \
-	--%{!?with_gtkspell:dis}%{?with_gtkspell:en}able-gtkspell \
-	--%{!?with_perl:dis}%{?with_perl:en}able-perl \
-	--%{?with_text:en}%{!?with_text:dis}able-consoleui \
+	--enable-vv%{!?with_vv:=no} \
+	--with-extraversion=%{release} \
 	--with-gadu-libs=%{_libdir} \
-	--with-gadu-includes=%{_includedir}
+	--with-gadu-includes=%{_includedir} \
+	%{!?with_silc:--with-silc-includes=not_existent_directory} \
+	--with-system-ssl-certs=%{openssldir}
 
 %{__make}
+
 %{?with_doc:%{__make} docs}
 
 %install
