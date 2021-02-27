@@ -559,7 +559,7 @@ Dokumentacja Pidgina dla programistów (format HTML).
 %patch1 -p1
 %patch2 -p1
 
-%{__sed} -i -e '1s|#!/usr/bin/env python$|#!%{__python}|'  libpurple/purple-{remote,url-handler}
+%{__sed} -i -e '1s|#!/usr/bin/env python$|#!%{__python3}|'  libpurple/purple-{remote,url-handler}
 
 %build
 %{__libtoolize}
