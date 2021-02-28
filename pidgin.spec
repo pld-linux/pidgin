@@ -1,4 +1,5 @@
 # TODO
+# - revise Requires for cyrus-sasl plugins (what is used in 2021? use Suggests instead?)
 # - fix broken linking, see filterout_ld
 # - fix unref symbols:
 #   Unresolved symbols found in: /usr/lib64/purple-2/libjabber.so.0
@@ -330,8 +331,6 @@ Summary:	libpurple library for IM clients like Pidgin and Finch
 Summary(pl.UTF-8):	Biblioteka libpurple dla klientów komunikatorów, takich jak Pidgin czy Finch
 Group:		Applications/Networking
 Requires:	ca-certificates
-%{?with_sasl:Requires:	cyrus-sasl-digest-md5}
-%{?with_sasl:Requires:	cyrus-sasl-plain}
 Requires:	farstream >= 0.2.7
 Requires:	glib2 >= 1:%{glib2_ver}
 Requires:	libxml2 >= 1:2.6.26
@@ -464,6 +463,11 @@ Summary:	IRC protocol support for libpurple
 Summary(pl.UTF-8):	Obsługa protokołu IRC dla biblioteki libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
+%if %{with sasl}
+# most common SASL mechanisms for IRC are EXTERNAL (not supported), PLAIN and SCRAM-SHA-256
+Requires:	cyrus-sasl-plain
+Requires:	cyrus-sasl-scram
+%endif
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-irc
@@ -538,6 +542,12 @@ Summary:	XMPP (Jabber, GTalk) protocol support for libpurple
 Summary(pl.UTF-8):	Obsługa protokołu XMPP (Jabber, GTalk) dla libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
+%if %{with sasl}
+# most common SASL mechanisms for XMPP (beside EXTERNAL, which is not supported)
+# (is it up to date? DIGEST-MD5 is obsolete SASL mechanism now)
+Requires:	cyrus-sasl-digest-md5
+Requires:	cyrus-sasl-plain
+%endif
 Provides:	libpurple-protocol
 Obsoletes:	libpurple-protocol-jabber < 2.6.6-5
 
