@@ -90,7 +90,7 @@ BuildRequires:	protobuf-c-devel
 BuildRequires:	python-modules >= 1:2.4
 %{?with_perl:BuildRequires:	rpm-perlprov}
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.583
+BuildRequires:	rpmbuild(macros) >= 1.745
 %{?with_silc:BuildRequires:	silc-toolkit-devel >= 1.1}
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcl-devel >= 8.3
