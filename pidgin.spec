@@ -120,17 +120,13 @@ Requires:	libpurple = %{version}-%{release}
 Requires:	libpurple-protocol
 Requires:	pango >= 1:1.4.0
 Suggests:	enchant-myspell
-Obsoletes:	gaim
-Obsoletes:	gaim-ui
-Obsoletes:	gaim-ui-gtk
+Obsoletes:	gaim < 2.0.1
+Obsoletes:	gaim-ui < 2.0.0
+Obsoletes:	gaim-ui-gtk < 2.0.1
 # discontinued gaim plugins
-Obsoletes:	gaim-encryption
-Obsoletes:	gaim-plugin-tlen
-Obsoletes:	gaim-plugin-xmms-remote
-Obsoletes:	libpurple-protocol-msn
-Obsoletes:	libpurple-protocol-mxit
-Obsoletes:	libpurple-protocol-myspace
-Obsoletes:	libpurple-protocol-yahoo
+Obsoletes:	gaim-encryption < 2.0.1
+Obsoletes:	gaim-plugin-tlen < 2.0.1
+Obsoletes:	gaim-plugin-xmms-remote < 2.0.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # keep in sync ca-certificates
@@ -207,7 +203,7 @@ Summary(pl.UTF-8):	Pliki programistyczne biblioteki klienta Pidgina
 Group:		Development/Libraries
 Requires:	gtk+2-devel >= 2:%{gtk2_ver}
 Requires:	libpurple-devel = %{version}-%{release}
-Obsoletes:	gaim-devel
+Obsoletes:	gaim-devel < 2.0.1
 
 %description devel
 Development files for Pidgin.
@@ -223,7 +219,7 @@ Summary:	Pidgin documentation for developers (HTML format)
 Summary(hu.UTF-8):	Pidgin dokumentáció fejlesztőknek (HTML formában)
 Summary(pl.UTF-8):	Dokumentacja Pidgina dla programistów (format HTML)
 Group:		Documentation
-Obsoletes:	gaim-doc
+Obsoletes:	gaim-doc < 2.0.1
 BuildArch:	noarch
 
 %description doc
@@ -242,7 +238,7 @@ Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Perlu
 Group:		Libraries
 Requires:	libpurple = %{version}-%{release}
 Requires:	libpurple-perl = %{version}-%{release}
-Obsoletes:	gaim-perl
+Obsoletes:	gaim-perl < 2.0.1
 
 %description perl
 This package gives you ability to extend Pidgin functionality with
@@ -262,7 +258,7 @@ Summary(hu.UTF-8):	Plugin az Evolution-ba beépítéséhez
 Summary(pl.UTF-8):	Wtyczka do integracji z Evolution
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
-Obsoletes:	gaim-plugin-evolution
+Obsoletes:	gaim-plugin-evolution < 2.0.1
 
 %description plugin-evolution
 Provides integration with Ximian Evolution.
@@ -279,7 +275,7 @@ Summary(hu.UTF-8):	Pidgin távoli irányítása
 Summary(pl.UTF-8):	Zdalne sterowanie Pidginem
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
-Obsoletes:	gaim-plugin-remote
+Obsoletes:	gaim-plugin-remote < 2.0.1
 
 %description plugin-remote
 This package gives Pidgin the ability to be remote-controlled through
@@ -340,6 +336,12 @@ Requires:	farstream >= 0.2.7
 Requires:	glib2 >= 1:%{glib2_ver}
 Requires:	libxml2 >= 1:2.6.26
 Obsoletes:	libpurple-protocol-dir < 2.6.6-2
+Obsoletes:	libpurple-protocol-msn < 2.12
+Obsoletes:	libpurple-protocol-mtix < 2.6.6-5
+Obsoletes:	libpurple-protocol-mxit < 2.12
+Obsoletes:	libpurple-protocol-myspace < 2.12
+Obsoletes:	libpurple-protocol-qq < 2.8
+Obsoletes:	libpurple-protocol-yahoo < 2.12
 Obsoletes:	pidgin-libs < 2.6.6-2
 
 %description -n libpurple
@@ -401,8 +403,8 @@ Summary(hu.UTF-8):	Pidgin fájlok Tcl szkriptekhez
 Summary(pl.UTF-8):	Obsługa skryptów Tcl-a dla libpurple
 Group:		Libraries
 Requires:	libpurple = %{version}-%{release}
-Obsoletes:	gaim-tcl
-Obsoletes:	pidgin-tcl
+Obsoletes:	gaim-tcl < 2.0.1
+Obsoletes:	pidgin-tcl < 2.6.6-2
 
 %description -n libpurple-tcl
 Tcl plugin loader for libpurple. This package will allow you to write
@@ -476,8 +478,8 @@ Summary(pl.UTF-8):	Obsługa protokołu Oscar (sieci AIM/ICQ) dla biblioteki libp
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
-Obsoletes:	libpurple-protocol-aim
-Obsoletes:	libpurple-protocol-icq
+Obsoletes:	libpurple-protocol-aim < 2.6.6-5
+Obsoletes:	libpurple-protocol-icq < 2.6.6-5
 
 %description -n libpurple-protocol-oscar
 Oscar protocol (AIM/ICQ Networks) support for libpurple.
@@ -537,7 +539,7 @@ Summary(pl.UTF-8):	Obsługa protokołu XMPP (Jabber, GTalk) dla libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
-Obsoletes:	libpurple-protocol-jabber
+Obsoletes:	libpurple-protocol-jabber < 2.6.6-5
 
 %description -n libpurple-protocol-xmpp
 Extensible Messaging and Presence Protocol (XMPP) protocol support for
