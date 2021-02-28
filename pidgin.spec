@@ -592,8 +592,6 @@ Obsługa protokołu Zephyr dla libpurple.
 	--disable-silent-rules \
 	--enable-vv%{!?with_vv:=no} \
 	--with-extraversion=%{release} \
-	--with-gadu-libs=%{_libdir} \
-	--with-gadu-includes=%{_includedir} \
 	%{!?with_silc:--with-silc-includes=not_existent_directory} \
 	--with-system-ssl-certs=%{openssldir}
 
