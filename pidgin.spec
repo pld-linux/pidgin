@@ -218,6 +218,117 @@ Fejléc fájlok Pidginhez.
 %description devel -l pl.UTF-8
 Pliki programistyczne biblioteki Pidgina.
 
+%package doc
+Summary:	Pidgin documentation for developers (HTML format)
+Summary(hu.UTF-8):	Pidgin dokumentáció fejlesztőknek (HTML formában)
+Summary(pl.UTF-8):	Dokumentacja Pidgina dla programistów (format HTML)
+Group:		Documentation
+Obsoletes:	gaim-doc
+BuildArch:	noarch
+
+%description doc
+Pidgin documentation for developers (HTML format).
+
+%description doc -l hu.UTF-8
+Pidgin dokumentáció fejlesztőknek (HTML formátumban).
+
+%description doc -l pl.UTF-8
+Dokumentacja Pidgina dla programistów (format HTML).
+
+%package perl
+Summary:	Pidgin files for Perl scripts
+Summary(hu.UTF-8):	Pidgin fájlok Perl szkriptekhez
+Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Perlu
+Group:		Libraries
+Requires:	libpurple = %{version}-%{release}
+Requires:	libpurple-perl = %{version}-%{release}
+Obsoletes:	gaim-perl
+
+%description perl
+This package gives you ability to extend Pidgin functionality with
+Perl scripts.
+
+%description perl -l hu.UTF-8
+Ezzel a csomaggal lehetőséged nyílik a Pidgin lehetőségeit bővíteni
+Perl szkriptekkel.
+
+%description perl -l pl.UTF-8
+Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za
+pomocą skryptów Perla.
+
+%package plugin-evolution
+Summary:	Plugin for Ximian Evolution integration
+Summary(hu.UTF-8):	Plugin az Evolution-ba beépítéséhez
+Summary(pl.UTF-8):	Wtyczka do integracji z Evolution
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+Obsoletes:	gaim-plugin-evolution
+
+%description plugin-evolution
+Provides integration with Ximian Evolution.
+
+%description plugin-evolution -l hu.UTF-8
+Plugin az Evolution-ba beépítéséhez.
+
+%description plugin-evolution -l pl.UTF-8
+Wtyczka do integracji z Evolution.
+
+%package plugin-remote
+Summary:	Pidgin Remote Control
+Summary(hu.UTF-8):	Pidgin távoli irányítása
+Summary(pl.UTF-8):	Zdalne sterowanie Pidginem
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+Obsoletes:	gaim-plugin-remote
+
+%description plugin-remote
+This package gives Pidgin the ability to be remote-controlled through
+third-party applications or through the pidgin-remote tool.
+
+%description plugin-remote -l hu.UTF-8
+Ezzel a csomaggal lehetőséged nyílik a Pidgint távolról irányítani
+külső alkalmazásokkal vagy a pidgin-remote eszközzel.
+
+%description plugin-remote -l pl.UTF-8
+Ten pakiet daje możliwość zdalnego sterowania Pidginem przez inne
+aplikacje albo narzędzie pidgin-remote.
+
+%package -n finch
+Summary:	A text-based user interface for Pidgin
+Summary(pl.UTF-8):	Tekstowy interfejs użytkownika dla Pidgina
+Group:		Applications/Networking
+Requires:	libgnt >= 2.14.0
+Requires:	libpurple = %{version}-%{release}
+
+%description -n finch
+A text-based user interface for using libpurple. This can be run from
+a standard text console or from a terminal within X Window System. It
+uses ncurses and our homegrown gnt library for drawing windows and
+text.
+
+%description -n finch -l pl.UTF-8
+Tekstowy interfejs użytkownika wykorzystujący libpurple. Może być
+uruchamiany na standardowej konsoli tekstowej lub z poziomu terminala
+w systemi X Window. Wykorzystuje ncurses oraz własną bibliotekę gnt do
+rysowania okien i wyświetlania tekstu.
+
+%package -n finch-devel
+Summary:	Header files and similar for Finch stuffs
+Summary(pl.UTF-8):	Pliki nagłówkowe do elementów Fincha
+Group:		Applications/Networking
+Requires:	finch = %{version}-%{release}
+Requires:	libpurple-devel = %{version}-%{release}
+Requires:	ncurses-devel
+
+%description -n finch-devel
+The finch-devel package contains the header files and other
+development files required for development of Finch scripts and
+plugins.
+
+%description -n finch-devel -l pl.UTF-8
+Ten pakiet zwiera pliki nagłówkowe oraz inne niezbędne do
+programowania skryptów oraz wtyczek do Fincha.
+
 %package -n libpurple
 Summary:	libpurple library for IM clients like Pidgin and Finch
 Summary(pl.UTF-8):	Biblioteka libpurple dla klientów komunikatorów, takich jak Pidgin czy Finch
@@ -305,115 +416,6 @@ Tcl szkriptekkel.
 Moduł wczytujący wtyczki Tcl-a dla libpurple. Umożliwia tworzenie oraz
 wykorzystywanie wtyczek dla libpurple napisanych w języku Tcl.
 
-%package -n finch
-Summary:	A text-based user interface for Pidgin
-Summary(pl.UTF-8):	Tekstowy interfejs użytkownika dla Pidgina
-Group:		Applications/Networking
-Requires:	libgnt >= 2.14.0
-Requires:	libpurple = %{version}-%{release}
-
-%description -n finch
-A text-based user interface for using libpurple. This can be run from
-a standard text console or from a terminal within X Window System. It
-uses ncurses and our homegrown gnt library for drawing windows and
-text.
-
-%description -n finch -l pl.UTF-8
-Tekstowy interfejs użytkownika wykorzystujący libpurple. Może być
-uruchamiany na standardowej konsoli tekstowej lub z poziomu terminala
-w systemi X Window. Wykorzystuje ncurses oraz własną bibliotekę gnt do
-rysowania okien i wyświetlania tekstu.
-
-%package -n finch-devel
-Summary:	Header files and similar for Finch stuffs
-Summary(pl.UTF-8):	Pliki nagłówkowe do elementów Fincha
-Group:		Applications/Networking
-Requires:	finch = %{version}-%{release}
-Requires:	libpurple-devel = %{version}-%{release}
-Requires:	ncurses-devel
-
-%description -n finch-devel
-The finch-devel package contains the header files and other
-development files required for development of Finch scripts and
-plugins.
-
-%description -n finch-devel -l pl.UTF-8
-Ten pakiet zwiera pliki nagłówkowe oraz inne niezbędne do
-programowania skryptów oraz wtyczek do Fincha.
-
-%package perl
-Summary:	Pidgin files for Perl scripts
-Summary(hu.UTF-8):	Pidgin fájlok Perl szkriptekhez
-Summary(pl.UTF-8):	Pliki Pidgina dla skryptów w Perlu
-Group:		Libraries
-Requires:	libpurple = %{version}-%{release}
-Requires:	libpurple-perl = %{version}-%{release}
-Obsoletes:	gaim-perl
-
-%description perl
-This package gives you ability to extend Pidgin functionality with
-Perl scripts.
-
-%description perl -l hu.UTF-8
-Ezzel a csomaggal lehetőséged nyílik a Pidgin lehetőségeit bővíteni
-Perl szkriptekkel.
-
-%description perl -l pl.UTF-8
-Ten pakiet daje możliwość rozszerzania funkcjonalności Pidgina za
-pomocą skryptów Perla.
-
-%package plugin-evolution
-Summary:	Plugin for Ximian Evolution integration
-Summary(hu.UTF-8):	Plugin az Evolution-ba beépítéséhez
-Summary(pl.UTF-8):	Wtyczka do integracji z Evolution
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-Obsoletes:	gaim-plugin-evolution
-
-%description plugin-evolution
-Provides integration with Ximian Evolution.
-
-%description plugin-evolution -l hu.UTF-8
-Plugin az Evolution-ba beépítéséhez.
-
-%description plugin-evolution -l pl.UTF-8
-Wtyczka do integracji z Evolution.
-
-%package plugin-remote
-Summary:	Pidgin Remote Control
-Summary(hu.UTF-8):	Pidgin távoli irányítása
-Summary(pl.UTF-8):	Zdalne sterowanie Pidginem
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-Obsoletes:	gaim-plugin-remote
-
-%description plugin-remote
-This package gives Pidgin the ability to be remote-controlled through
-third-party applications or through the pidgin-remote tool.
-
-%description plugin-remote -l hu.UTF-8
-Ezzel a csomaggal lehetőséged nyílik a Pidgint távolról irányítani
-külső alkalmazásokkal vagy a pidgin-remote eszközzel.
-
-%description plugin-remote -l pl.UTF-8
-Ten pakiet daje możliwość zdalnego sterowania Pidginem przez inne
-aplikacje albo narzędzie pidgin-remote.
-
-%package -n libpurple-protocol-oscar
-Summary:	Oscar protocol (AIM/ICQ Networks) support for libpurple
-Summary(pl.UTF-8):	Obsługa protokołu Oscar (sieci AIM/ICQ) dla biblioteki libpurple
-Group:		Applications/Communications
-Requires:	libpurple = %{version}-%{release}
-Provides:	libpurple-protocol
-Obsoletes:	libpurple-protocol-aim
-Obsoletes:	libpurple-protocol-icq
-
-%description -n libpurple-protocol-oscar
-Oscar protocol (AIM/ICQ Networks) support for libpurple.
-
-%description -n libpurple-protocol-oscar -l pl.UTF-8
-Obsługa protokołu Oscar (sieci AIM/ICQ) dla biblioteki libpurple.
-
 %package -n libpurple-protocol-bonjour
 Summary:	Bonjour protocol support for libpurple
 Summary(pl.UTF-8):	Obsługa protokołu Bonjour dla biblioteki libpurple
@@ -468,18 +470,20 @@ IRC protocol support for libpurple.
 %description -n libpurple-protocol-irc -l pl.UTF-8
 Obsługa protokołu IRC dla biblioteki libpurple.
 
-%package -n libpurple-protocol-simple
-Summary:	SIP/SIMPLE protocol support for libpurple
-Summary(pl.UTF-8):	Obsługa protokołu SIP/SIMPLE dla libpurple
+%package -n libpurple-protocol-oscar
+Summary:	Oscar protocol (AIM/ICQ Networks) support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu Oscar (sieci AIM/ICQ) dla biblioteki libpurple
 Group:		Applications/Communications
 Requires:	libpurple = %{version}-%{release}
 Provides:	libpurple-protocol
+Obsoletes:	libpurple-protocol-aim
+Obsoletes:	libpurple-protocol-icq
 
-%description -n libpurple-protocol-simple
-SIP/SIMPLE protocol support for libpurple.
+%description -n libpurple-protocol-oscar
+Oscar protocol (AIM/ICQ Networks) support for libpurple.
 
-%description -n libpurple-protocol-simple -l pl.UTF-8
-Obsługa protokołu SIP/SIMPLE dla libpurple.
+%description -n libpurple-protocol-oscar -l pl.UTF-8
+Obsługa protokołu Oscar (sieci AIM/ICQ) dla biblioteki libpurple.
 
 %package -n libpurple-protocol-sametime
 Summary:	Lotus Sametime protocol support for libpurple
@@ -514,6 +518,19 @@ libpurple.
 Obsługa protokołu SILC (Secure Internet Live Conferencing) dla
 libpurple.
 
+%package -n libpurple-protocol-simple
+Summary:	SIP/SIMPLE protocol support for libpurple
+Summary(pl.UTF-8):	Obsługa protokołu SIP/SIMPLE dla libpurple
+Group:		Applications/Communications
+Requires:	libpurple = %{version}-%{release}
+Provides:	libpurple-protocol
+
+%description -n libpurple-protocol-simple
+SIP/SIMPLE protocol support for libpurple.
+
+%description -n libpurple-protocol-simple -l pl.UTF-8
+Obsługa protokołu SIP/SIMPLE dla libpurple.
+
 %package -n libpurple-protocol-xmpp
 Summary:	XMPP (Jabber, GTalk) protocol support for libpurple
 Summary(pl.UTF-8):	Obsługa protokołu XMPP (Jabber, GTalk) dla libpurple
@@ -543,23 +560,6 @@ Zephyr protocol support for libpurple.
 
 %description -n libpurple-protocol-zephyr -l pl.UTF-8
 Obsługa protokołu Zephyr dla libpurple.
-
-%package doc
-Summary:	Pidgin documentation for developers (HTML format)
-Summary(hu.UTF-8):	Pidgin dokumentáció fejlesztőknek (HTML formában)
-Summary(pl.UTF-8):	Dokumentacja Pidgina dla programistów (format HTML)
-Group:		Documentation
-Obsoletes:	gaim-doc
-BuildArch:	noarch
-
-%description doc
-Pidgin documentation for developers (HTML format).
-
-%description doc -l hu.UTF-8
-Pidgin dokumentáció fejlesztőknek (HTML formátumban).
-
-%description doc -l pl.UTF-8
-Dokumentacja Pidgina dla programistów (format HTML).
 
 %prep
 %setup -q
@@ -609,10 +609,10 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ar_SA
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ku_IQ
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/mhr
-%{__mv} $RPM_BUILD_ROOT%{_localedir}/my{_MM,}
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/ms{_MY,}
-%{__rm} -rf $RPM_BUILD_ROOT%{_localedir}/ku_IQ
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/my{_MM,}
 
 %find_lang %{name} --with-gnome
 
@@ -636,8 +636,8 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/purple
 # resolve soname symlinks, affected plugins have rpath pointing there
 for a in $RPM_BUILD_ROOT%{_libdir}/purple-2/lib*.so.*.*.*; do
 	soname=$(objdump -p $a | awk '/SONAME/{print $2}')
-	mv $a $(dirname $a)/$soname
-	rm ${a%.*.*.*}
+	%{__mv} $a $(dirname $a)/$soname
+	%{__rm} ${a%.*.*.*}
 done
 
 # rm windows icons
@@ -684,28 +684,83 @@ fi
 %attr(755,root,root) %{_libdir}/pidgin/history.so
 %attr(755,root,root) %{_libdir}/pidgin/iconaway.so
 %attr(755,root,root) %{_libdir}/pidgin/markerline.so
+%if %{with dbus}
+%attr(755,root,root) %{_libdir}/pidgin/musicmessaging.so
+%endif
 %attr(755,root,root) %{_libdir}/pidgin/notify.so
 %attr(755,root,root) %{_libdir}/pidgin/relnot.so
+%attr(755,root,root) %{_libdir}/pidgin/sendbutton.so
 %attr(755,root,root) %{_libdir}/pidgin/spellchk.so
+%attr(755,root,root) %{_libdir}/pidgin/themeedit.so
 %attr(755,root,root) %{_libdir}/pidgin/ticker.so
 %attr(755,root,root) %{_libdir}/pidgin/timestamp.so
 %attr(755,root,root) %{_libdir}/pidgin/timestamp_format.so
 %attr(755,root,root) %{_libdir}/pidgin/transparency.so
-%{?with_vv:%attr(755,root,root) %{_libdir}/pidgin/vvconfig.so}
-%attr(755,root,root) %{_libdir}/pidgin/xmppconsole.so
-%attr(755,root,root) %{_libdir}/pidgin/sendbutton.so
-%attr(755,root,root) %{_libdir}/pidgin/themeedit.so
-%attr(755,root,root) %{_libdir}/pidgin/xmppdisco.so
-%if %{with dbus}
-%attr(755,root,root) %{_libdir}/pidgin/musicmessaging.so
+%if %{with vv}
+%attr(755,root,root) %{_libdir}/pidgin/vvconfig.so
 %endif
+%attr(755,root,root) %{_libdir}/pidgin/xmppconsole.so
+%attr(755,root,root) %{_libdir}/pidgin/xmppdisco.so
 %{_mandir}/man1/pidgin.1*
 
 %{_datadir}/appdata/pidgin.appdata.xml
 %{_desktopdir}/pidgin.desktop
 %{_pixmapsdir}/pidgin
-%{_iconsdir}/hicolor/*/apps/pidgin.png
-%{_iconsdir}/hicolor/*/apps/pidgin.svg
+%{_iconsdir}/hicolor/*x*/apps/pidgin.png
+%{_iconsdir}/hicolor/scalable/apps/pidgin.svg
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/pidgin
+%{_pkgconfigdir}/pidgin.pc
+
+%if %{with doc}
+%files doc
+%defattr(644,root,root,755)
+%doc doc/html/*.{html,png,css}
+%endif
+
+%if %{with perl}
+%files perl
+%defattr(644,root,root,755)
+%dir %{_libdir}/pidgin/perl
+%{_libdir}/pidgin/perl/*.pm
+%dir %{_libdir}/pidgin/perl/auto
+%dir %{_libdir}/pidgin/perl/auto/Pidgin
+%attr(755,root,root) %{_libdir}/pidgin/perl/auto/Pidgin/*.so
+%{_mandir}/man3/Pidgin.3pm*
+%endif
+
+%if %{with evolution}
+%files plugin-evolution
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/pidgin/gevolution.so
+%endif
+
+%if %{with dbus}
+%files plugin-remote
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/purple-remote
+%endif
+
+%if %{with text}
+%files -n finch
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/finch
+%dir %{_libdir}/finch
+%attr(755,root,root) %{_libdir}/finch/gntclipboard.so
+%attr(755,root,root) %{_libdir}/finch/gntgf.so
+%attr(755,root,root) %{_libdir}/finch/gnthistory.so
+%attr(755,root,root) %{_libdir}/finch/gntlastlog.so
+%attr(755,root,root) %{_libdir}/finch/gnttinyurl.so
+%attr(755,root,root) %{_libdir}/finch/grouping.so
+%{_mandir}/man1/finch.*
+
+%files -n finch-devel
+%defattr(644,root,root,755)
+%{_includedir}/finch
+%{_pkgconfigdir}/finch.pc
+%endif
 
 %files -n libpurple
 %defattr(644,root,root,755)
@@ -770,60 +825,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/tcl.so
 
-%if %{with text}
-%files -n finch
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/finch
-%dir %{_libdir}/finch
-%attr(755,root,root) %{_libdir}/finch/gntclipboard.so
-%attr(755,root,root) %{_libdir}/finch/gntgf.so
-%attr(755,root,root) %{_libdir}/finch/gnthistory.so
-%attr(755,root,root) %{_libdir}/finch/gntlastlog.so
-%attr(755,root,root) %{_libdir}/finch/gnttinyurl.so
-%attr(755,root,root) %{_libdir}/finch/grouping.so
-%{_mandir}/man1/finch.*
-
-%files -n finch-devel
-%defattr(644,root,root,755)
-%{_includedir}/finch
-%{_pkgconfigdir}/finch.pc
-%endif
-
-%files devel
-%defattr(644,root,root,755)
-%{_includedir}/pidgin
-%{_pkgconfigdir}/pidgin.pc
-
-%if %{with perl}
-%files perl
-%defattr(644,root,root,755)
-%dir %{_libdir}/pidgin/perl
-%{_libdir}/pidgin/perl/*.pm
-%dir %{_libdir}/pidgin/perl/auto
-%dir %{_libdir}/pidgin/perl/auto/Pidgin
-%attr(755,root,root) %{_libdir}/pidgin/perl/auto/Pidgin/*.so
-%{_mandir}/man3/Pidgin.3pm*
-%endif
-
-%if %{with evolution}
-%files plugin-evolution
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/pidgin/gevolution.so
-%endif
-
-%if %{with dbus}
-%files plugin-remote
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/purple-remote
-%endif
-
-%files -n libpurple-protocol-oscar
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/purple-2/libicq.so
-%attr(755,root,root) %{_libdir}/purple-2/libaim.so
-# shared library for aim/icq protocols
-%attr(755,root,root) %{_libdir}/purple-2/liboscar.so.0
-
 %files -n libpurple-protocol-bonjour
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libbonjour.so
@@ -840,15 +841,12 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libirc.so
 
-%files -n libpurple-protocol-simple
+%files -n libpurple-protocol-oscar
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/purple-2/libsimple.so
-
-%if %{with silc}
-%files -n libpurple-protocol-silc
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/purple-2/libsilcpurple.so
-%endif
+%attr(755,root,root) %{_libdir}/purple-2/libaim.so
+%attr(755,root,root) %{_libdir}/purple-2/libicq.so
+# shared library for aim/icq protocols
+%attr(755,root,root) %{_libdir}/purple-2/liboscar.so.0
 
 %if %{with meanwhile}
 %files -n libpurple-protocol-sametime
@@ -856,17 +854,21 @@ fi
 %attr(755,root,root) %{_libdir}/purple-2/libsametime.so
 %endif
 
+%if %{with silc}
+%files -n libpurple-protocol-silc
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libsilcpurple.so
+%endif
+
+%files -n libpurple-protocol-simple
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/purple-2/libsimple.so
+
 %files -n libpurple-protocol-xmpp
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
 %attr(755,root,root) %{_libdir}/purple-2/libjabber.so.0
+%attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
 
 %files -n libpurple-protocol-zephyr
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libzephyr.so
-
-%if %{with doc}
-%files doc
-%defattr(644,root,root,755)
-%doc doc/html/*.{html,png,css}
-%endif
