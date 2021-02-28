@@ -302,9 +302,8 @@ rysowania okien i wyświetlania tekstu.
 Summary:	Header files and similar for Finch stuffs
 Summary(pl.UTF-8):	Pliki nagłówkowe do elementów Fincha
 Group:		Applications/Networking
-Requires:	finch = %{version}-%{release}
+Requires:	libgnt-devel >= 2.14.0
 Requires:	libpurple-devel = %{version}-%{release}
-Requires:	ncurses-devel
 
 %description -n finch-devel
 The finch-devel package contains the header files and other
@@ -757,7 +756,7 @@ fi
 %attr(755,root,root) %{_libdir}/finch/gntlastlog.so
 %attr(755,root,root) %{_libdir}/finch/gnttinyurl.so
 %attr(755,root,root) %{_libdir}/finch/grouping.so
-%{_mandir}/man1/finch.*
+%{_mandir}/man1/finch.1*
 
 %files -n finch-devel
 %defattr(644,root,root,755)
