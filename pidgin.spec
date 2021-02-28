@@ -1,7 +1,5 @@
 # TODO
 # - revise Requires for cyrus-sasl plugins (what is used in 2021? use Suggests instead?)
-# - perl is installed to wrong dir on x8664:
-#   /usr/lib/perl5/x86_64-pld-linux-thread-multi/perllocal.pod
 # - subpackages for
 #  - huge deps (mono...)
 # - kerberos 4 with zephyr support?
@@ -724,10 +722,10 @@ fi
 %files perl
 %defattr(644,root,root,755)
 %dir %{_libdir}/pidgin/perl
-%{_libdir}/pidgin/perl/*.pm
+%{_libdir}/pidgin/perl/Pidgin.pm
 %dir %{_libdir}/pidgin/perl/auto
 %dir %{_libdir}/pidgin/perl/auto/Pidgin
-%attr(755,root,root) %{_libdir}/pidgin/perl/auto/Pidgin/*.so
+%attr(755,root,root) %{_libdir}/pidgin/perl/auto/Pidgin/Pidgin.so
 %{_mandir}/man3/Pidgin.3pm*
 %endif
 
@@ -813,11 +811,11 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/perl.so
 %dir %{_libdir}/purple-2/perl
-%{_libdir}/purple-2/perl/*.pm
+%{_libdir}/purple-2/perl/Purple.pm
 %dir %{_libdir}/purple-2/perl/auto
 %dir %{_libdir}/purple-2/perl/auto/Purple
-%{_libdir}/purple-2/perl/auto/Purple/*.ix
-%attr(755,root,root) %{_libdir}/purple-2/perl/auto/Purple/*.so
+%{_libdir}/purple-2/perl/auto/Purple/autosplit.ix
+%attr(755,root,root) %{_libdir}/purple-2/perl/auto/Purple/Purple.so
 %{_mandir}/man3/Purple.3pm*
 %endif
 
