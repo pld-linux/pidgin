@@ -1,10 +1,5 @@
 # TODO
 # - revise Requires for cyrus-sasl plugins (what is used in 2021? use Suggests instead?)
-# - fix broken linking, see filterout_ld
-# - fix unref symbols:
-#   Unresolved symbols found in: /usr/lib64/purple-2/libjabber.so.0
-#   Unresolved symbols found in: /usr/lib64/purple-2/liboscar.so.0
-#   Unresolved symbols found in: /usr/lib64/purple-2/libymsg.so.0
 # - perl is installed to wrong dir on x8664:
 #   /usr/lib/perl5/x86_64-pld-linux-thread-multi/perllocal.pod
 # - subpackages for
@@ -137,13 +132,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		openssldir	/var/lib/openssl/certs
 %endif
 
-# /usr/bin/ld: gntaccount.o: undefined reference to symbol 'cur_term'
-# /usr/bin/ld: note: 'cur_term' is defined in DSO /lib64/libtinfow.so.6 so try adding it to the linker command line
-# /lib64/libtinfow.so.6: could not read symbols: Invalid operation
-%define		filterout_ld	-Wl,--no-copy-dt-needed-entries
-
-# lots of purple and libxml syms
-%define		skip_post_check_so	libjabber.so.0 libymsg.so.0 liboscar.so.0
+# internal libraries for plugins loaded by libpurple, use libpurple symbols (purple_*, xmlnode_*)
+%define		skip_post_check_so	libjabber.so.0 liboscar.so.0
 
 %description
 Pidgin allows you to talk to anyone using a variety of messaging
