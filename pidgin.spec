@@ -265,6 +265,7 @@ Summary(hu.UTF-8):	Pidgin távoli irányítása
 Summary(pl.UTF-8):	Zdalne sterowanie Pidginem
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	python3-dbus
 Obsoletes:	gaim-plugin-remote < 2.0.1
 
 %description plugin-remote
