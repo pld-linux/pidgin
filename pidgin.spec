@@ -64,6 +64,7 @@ BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:%{glib2_ver}
 %{?with_gnutls:BuildRequires:	gnutls-devel}
 BuildRequires:	gstreamer-devel >= 1.0
+BuildRequires:	gstreamer-plugins-base-devel >= 1.0
 BuildRequires:	gtk+2-devel >= 2:%{gtk2_ver}
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 1:2.0.16-2}
 BuildRequires:	intltool
@@ -357,6 +358,10 @@ Requires:	dbus-devel >= 0.60
 Requires:	dbus-glib-devel >= 0.70
 %endif
 Requires:	farstream-devel >= 0.2.7
+Requires:	glib2-devel >= 1:%{glib2_ver}
+Requires:	gstreamer-devel >= 1.0
+Requires:	gstreamer-plugins-base-devel >= 1.0
+Requires:	libidn-devel
 Requires:	libxml2-devel >= 1:2.6.26
 Obsoletes:	pidgin-devel < 2.6.6-2
 
