@@ -490,7 +490,7 @@ Summary(pl.UTF-8):	Obsługa protokołu Lotus Sametime dla libpurple
 Group:		Applications/Communications
 URL:		http://meanwhile.sourceforge.net/
 Requires:	libpurple = %{version}-%{release}
-Requires:	meanwhile>= 1.0.0}
+Requires:	meanwhile >= 1.0.0
 Provides:	libpurple-protocol
 
 %description -n libpurple-protocol-sametime
