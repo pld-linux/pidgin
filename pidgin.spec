@@ -2,9 +2,6 @@
 # - revise Requires for cyrus-sasl plugins (what is used in 2021? use Suggests instead?)
 # - subpackages for
 #  - huge deps (mono...)
-# - kerberos 4 with zephyr support?
-# - external zephyr?
-#   http://packages.qa.debian.org/z/zephyr.html
 # - unity? (unity >= 6.8, messaging-menu >= 12.10)
 # - gtk3 status: http://developer.pidgin.im/wiki/GTK3
 #
@@ -102,6 +99,7 @@ BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXScrnSaver-devel
+BuildRequires:	zephyr-devel
 %if %{with doc}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
@@ -598,7 +596,8 @@ Obsługa protokołu Zephyr dla libpurple.
 	--enable-vv%{!?with_vv:=no} \
 	--with-extraversion=%{release} \
 	%{!?with_silc:--with-silc-includes=not_existent_directory} \
-	--with-system-ssl-certs=%{openssldir}
+	--with-system-ssl-certs=%{openssldir} \
+	--with-zephyr
 
 %{__make}
 
