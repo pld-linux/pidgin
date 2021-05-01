@@ -18,7 +18,7 @@
 %bcond_without	meanwhile	# meanwhile (Sametime protocol) support
 %bcond_without	silc		# SILC protocol support
 %bcond_with	evolution	# Pidgin-Evolution plugin
-%bcond_without	zephyr		# Zephyr protocol support
+%bcond_without	system_zephyr	# system installed Zephyr
 
 %if %{without dbus}
 %undefine	with_nm
@@ -100,7 +100,7 @@ BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXScrnSaver-devel
-%{?with_zephyr:BuildRequires:	zephyr-devel}
+%{?with_system_zephyr:BuildRequires:	zephyr-devel}
 %if %{with doc}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
@@ -583,7 +583,7 @@ Obsługa protokołu Zephyr dla libpurple.
 	--with-extraversion=%{release} \
 	%{!?with_silc:--with-silc-includes=not_existent_directory} \
 	--with-system-ssl-certs=%{openssldir} \
-	--with-zephyr%{!?with_zephyr:=no}
+	--with-zephyr%{!?with_system_zephyr:=no}
 
 %{__make}
 
@@ -850,8 +850,6 @@ fi
 %attr(755,root,root) %{_libdir}/purple-2/libjabber.so.0
 %attr(755,root,root) %{_libdir}/purple-2/libxmpp.so
 
-%if %{with zephyr}
 %files -n libpurple-protocol-zephyr
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libzephyr.so
-%endif
