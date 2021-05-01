@@ -34,12 +34,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.14.1
-Release:	4
+Version:	2.14.4
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	https://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	e135798bcf952ddb3c9e030c4b160c3e
+# Source0-md5:	9c25da082df1bd42bd1f345fe01d83d1
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-ca_file.patch
@@ -131,7 +131,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %endif
 
 # internal libraries for plugins loaded by libpurple, use libpurple symbols (purple_*, xmlnode_*)
-%define		skip_post_check_so	libjabber.so.0 liboscar.so.0
+%define		skip_post_check_so	libjabber.so.0
 
 %description
 Pidgin allows you to talk to anyone using a variety of messaging
@@ -468,21 +468,6 @@ IRC protocol support for libpurple.
 %description -n libpurple-protocol-irc -l pl.UTF-8
 Obsługa protokołu IRC dla biblioteki libpurple.
 
-%package -n libpurple-protocol-oscar
-Summary:	Oscar protocol (AIM/ICQ Networks) support for libpurple
-Summary(pl.UTF-8):	Obsługa protokołu Oscar (sieci AIM/ICQ) dla biblioteki libpurple
-Group:		Applications/Communications
-Requires:	libpurple = %{version}-%{release}
-Provides:	libpurple-protocol
-Obsoletes:	libpurple-protocol-aim < 2.6.6-5
-Obsoletes:	libpurple-protocol-icq < 2.6.6-5
-
-%description -n libpurple-protocol-oscar
-Oscar protocol (AIM/ICQ Networks) support for libpurple.
-
-%description -n libpurple-protocol-oscar -l pl.UTF-8
-Obsługa protokołu Oscar (sieci AIM/ICQ) dla biblioteki libpurple.
-
 %package -n libpurple-protocol-sametime
 Summary:	Lotus Sametime protocol support for libpurple
 Summary(pl.UTF-8):	Obsługa protokołu Lotus Sametime dla libpurple
@@ -571,7 +556,7 @@ Obsługa protokołu Zephyr dla libpurple.
 %patch1 -p1
 %patch2 -p1
 
-%{__sed} -i -e '1s|#!/usr/bin/env python$|#!%{__python3}|'  libpurple/purple-{remote,url-handler}
+%{__sed} -i -e '1s|#!/usr/bin/env python3$|#!%{__python3}|'  libpurple/purple-{remote,url-handler}
 
 %build
 %{__libtoolize}
@@ -706,7 +691,7 @@ fi
 %attr(755,root,root) %{_libdir}/pidgin/xmppdisco.so
 %{_mandir}/man1/pidgin.1*
 
-%{_datadir}/appdata/pidgin.appdata.xml
+%{_datadir}/metainfo/pidgin.appdata.xml
 %{_desktopdir}/pidgin.desktop
 %{_pixmapsdir}/pidgin
 %{_iconsdir}/hicolor/*x*/apps/pidgin.png
@@ -843,13 +828,6 @@ fi
 %files -n libpurple-protocol-irc
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/purple-2/libirc.so
-
-%files -n libpurple-protocol-oscar
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/purple-2/libaim.so
-%attr(755,root,root) %{_libdir}/purple-2/libicq.so
-# shared library for aim/icq protocols
-%attr(755,root,root) %{_libdir}/purple-2/liboscar.so.0
 
 %if %{with meanwhile}
 %files -n libpurple-protocol-sametime
