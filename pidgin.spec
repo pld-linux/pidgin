@@ -2,7 +2,6 @@
 # - revise Requires for cyrus-sasl plugins (what is used in 2021? use Suggests instead?)
 # - subpackages for
 #  - huge deps (mono...)
-# - unity? (unity >= 6.8, messaging-menu >= 12.10)
 # - gtk3 status: http://developer.pidgin.im/wiki/GTK3
 #
 %bcond_without	doc		# Doxygen generated documentation
@@ -19,6 +18,7 @@
 %bcond_without	silc		# SILC protocol support
 %bcond_with	evolution	# Pidgin-Evolution plugin
 %bcond_without	system_zephyr	# system installed Zephyr
+%bcond_with	unity		# Unity interface
 
 %if %{without dbus}
 %undefine	with_nm
@@ -65,11 +65,13 @@ BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0
 BuildRequires:	gtk+2-devel >= 2:%{gtk2_ver}
 %{?with_gtkspell:BuildRequires:	gtkspell-devel >= 1:2.0.16-2}
+%{?with_unity:BuildRequires:	indicator-messages-devel >= 12.10}
 BuildRequires:	intltool
 BuildRequires:	libgadu-devel >= 4:1.12.0
 %{?with_text:BuildRequires:	libgnt-devel >= 2.14.0}
 BuildRequires:	libidn-devel
 BuildRequires:	libtool
+%{?with_unity:BuildRequires:	libunity-devel >= 6.8}
 BuildRequires:	libxml2-devel >= 1:2.6.26
 %{?with_meanwhile:BuildRequires:	meanwhile-devel >= 1.0.0}
 BuildRequires:	pango-devel >= 1:1.4.0
@@ -327,6 +329,7 @@ Obsoletes:	libpurple-protocol-msn < 2.12
 Obsoletes:	libpurple-protocol-mtix < 2.6.6-5
 Obsoletes:	libpurple-protocol-mxit < 2.12
 Obsoletes:	libpurple-protocol-myspace < 2.12
+Obsoletes:	libpurple-protocol-oscar < 2.14.4
 Obsoletes:	libpurple-protocol-qq < 2.8
 Obsoletes:	libpurple-protocol-yahoo < 2.12
 Obsoletes:	pidgin-libs < 2.6.6-2
@@ -579,6 +582,7 @@ Obsługa protokołu Zephyr dla libpurple.
 	--enable-perl%{!?with_perl:=no} \
 	--disable-schemas-install \
 	--disable-silent-rules \
+	%{?with_unity:--enable-unity} \
 	--enable-vv%{!?with_vv:=no} \
 	--with-extraversion=%{release} \
 	%{!?with_silc:--with-silc-includes=not_existent_directory} \
@@ -684,6 +688,9 @@ fi
 %attr(755,root,root) %{_libdir}/pidgin/timestamp.so
 %attr(755,root,root) %{_libdir}/pidgin/timestamp_format.so
 %attr(755,root,root) %{_libdir}/pidgin/transparency.so
+%if %{with unity}
+%attr(755,root,root) %{_libdir}/pidgin/unity.so
+%endif
 %if %{with vv}
 %attr(755,root,root) %{_libdir}/pidgin/vvconfig.so
 %endif
