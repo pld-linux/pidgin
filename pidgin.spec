@@ -16,7 +16,7 @@
 %bcond_without	vv		# Voice and Video support
 %bcond_without	meanwhile	# meanwhile (Sametime protocol) support
 %bcond_without	silc		# SILC protocol support
-%bcond_with	evolution	# Pidgin-Evolution plugin
+%bcond_without	evolution	# Pidgin-Evolution plugin
 %bcond_without	system_zephyr	# system installed Zephyr
 %bcond_with	unity		# Unity interface
 
@@ -55,8 +55,7 @@ BuildRequires:	check >= 0.9.4
 %{?with_sasl:BuildRequires:	cyrus-sasl-devel}
 %{?with_dbus:BuildRequires:	dbus-devel >= 0.60}
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.71}
-%{?with_evolution:BuildRequires:	evolution-data-server-devel >= 1.8.1}
-%{?with_evolution:BuildRequires:	evolution-data-server-devel < 3.6}
+%{?with_evolution:BuildRequires:	evolution-data-server-devel >= 3.6}
 BuildRequires:	farstream-devel >= 0.2.7
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:%{glib2_ver}
@@ -87,7 +86,7 @@ BuildRequires:	nss-devel
 %{?with_perl:BuildRequires:	perl-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	protobuf-c-devel
-BuildRequires:	python-modules >= 1:2.4
+BuildRequires:	python3-modules >= 1:3.2
 %{?with_perl:BuildRequires:	rpm-perlprov}
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.745
@@ -249,6 +248,7 @@ Summary(hu.UTF-8):	Plugin az Evolution-ba beépítéséhez
 Summary(pl.UTF-8):	Wtyczka do integracji z Evolution
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	evolution-data-server >= 3.6
 Obsoletes:	gaim-plugin-evolution < 2.0.1
 
 %description plugin-evolution
