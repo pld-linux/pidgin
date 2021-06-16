@@ -7,6 +7,7 @@
 %bcond_without	doc		# Doxygen generated documentation
 %bcond_without	cap		# Contact Availability Prediction plugin
 %bcond_without	dbus		# D-Bus support (for pidgin-remote and others)
+%bcond_without	gconf		# URL handler registration via GConf2
 %bcond_with	gnutls		# use GnuTLS instead of NSS
 %bcond_without	gtkspell	# GtkSpell automatic spell checking
 %bcond_without	nm		# NetworkManager support (requires D-Bus)
@@ -44,8 +45,10 @@ Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-ca_file.patch
 URL:		http://www.pidgin.im/
+%if %{with gconf}
 BuildRequires:	GConf2
 BuildRequires:	GConf2-devel >= 2.16.0
+%endif
 %{?with_nm:BuildRequires:	NetworkManager-devel}
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.9
@@ -108,7 +111,7 @@ BuildRequires:	graphviz
 %endif
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
-Requires(post,preun):	GConf2 >= 2.16.0
+%{?with_gconf:Requires(post,preun):	GConf2 >= 2.16.0}
 Requires:	gtk+2 >= 2:%{gtk2_ver}
 Requires:	hicolor-icon-theme
 Requires:	libpurple = %{version}-%{release}
@@ -568,6 +571,7 @@ Obsługa protokołu Zephyr dla libpurple.
 %{__autoheader}
 %{__automake}
 %configure \
+	%{!?with_gconf:ac_cv_path_GCONFTOOL=no} \
 	--enable-cap%{!?with_cap:=no} \
 	--enable-consoleui%{!?with_text:=no} \
 	%{?with_sasl:--enable-cyrus-sasl} \
@@ -639,7 +643,7 @@ done
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%gconf_schema_install purple.schemas
+%{?with_gconf:%gconf_schema_install purple.schemas}
 %update_icon_cache hicolor
 if [ "$1" = 1 ]; then
 %banner %{name} -e <<-EOF
@@ -648,7 +652,7 @@ EOF
 fi
 
 %preun
-%gconf_schema_uninstall purple.schemas
+%{?with_gconf:%gconf_schema_uninstall purple.schemas}
 
 %postun
 %update_icon_cache hicolor
@@ -662,7 +666,7 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog{,.API} HACKING NEWS PLUGIN_HOWTO README*
-%{_sysconfdir}/gconf/schemas/purple.schemas
+%{?with_gconf:%{_sysconfdir}/gconf/schemas/purple.schemas}
 %attr(755,root,root) %{_bindir}/pidgin
 %dir %{_libdir}/pidgin
 %if %{with cap}
