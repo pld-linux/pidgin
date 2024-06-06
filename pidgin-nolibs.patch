@@ -16,7 +16,7 @@
  
  if test "x$have_libgadu" = "xyes"; then
 +	save_LIBS="$LIBS"
- 	AC_CHECK_LIB(gadu, gg_is_gpl_compliant, , [
+ 	AC_CHECK_LIB(gadu, gg_is_gpl_compliant, [:], [
  		LIBGADU_LIBS=""
  		LIBGADU_CFLAGS=""
 @@ -1112,6 +1113,7 @@
