@@ -109,6 +109,7 @@ BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
+Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 %{?with_gconf:Requires(post,preun):	GConf2 >= 2.16.0}
@@ -650,12 +651,14 @@ if [ "$1" = 1 ]; then
 	Please do not forget to install libpurple-protocols what do you need!
 EOF
 fi
+%update_desktop_database_post
 
 %preun
 %{?with_gconf:%gconf_schema_uninstall purple.schemas}
 
 %postun
 %update_icon_cache hicolor
+%update_desktop_database_postun
 
 %post	-n libpurple -p /sbin/ldconfig
 %postun	-n libpurple -p /sbin/ldconfig
