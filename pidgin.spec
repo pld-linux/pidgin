@@ -35,12 +35,12 @@ Summary(ko.UTF-8):	AOL 인스턴트 메신저와 호환되는 클라이언트
 Summary(pl.UTF-8):	Oparty na GTK+ klient komunikatorów obsługujący wiele protokołów
 Summary(pt_BR.UTF-8):	Um cliente para o AOL Instant Messenger (AIM)
 Name:		pidgin
-Version:	2.14.13
-Release:	2
+Version:	2.14.14
+Release:	1
 License:	GPL v2+
 Group:		Applications/Communications
 Source0:	https://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.bz2
-# Source0-md5:	7fa88c8734d22c96ef298b25cd0db0c4
+# Source0-md5:	7236376927d423e8a0243b8fdf02c1e1
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-dbus-dir.patch
 Patch2:		%{name}-ca_file.patch
@@ -62,7 +62,7 @@ BuildRequires:	check >= 0.9.4
 BuildRequires:	farstream-devel >= 0.2.7
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:%{glib2_ver}
-%{?with_gnutls:BuildRequires:	gnutls-devel}
+%{?with_gnutls:BuildRequires:	gnutls-devel >= 2.10.0}
 BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0
 BuildRequires:	gtk+2-devel >= 2:%{gtk2_ver}
